@@ -1,0 +1,3 @@
+AcmePruebaBundle_homepage:
+    pattern:  /prueba/
+    defaults: { _controller: AcmePruebaBundle:Default:index }
