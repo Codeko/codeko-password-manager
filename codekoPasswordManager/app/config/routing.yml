@@ -1,3 +1,7 @@
+AcmeLoginBundle:
+    resource: "@AcmeLoginBundle/Resources/config/routing.yml"
+    prefix:   /
+
 AcmeUsersDBBundle:
     resource: "@AcmeUsersDBBundle/Controller/"
     type:     annotation

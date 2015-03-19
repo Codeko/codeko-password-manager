@@ -1,0 +1,3 @@
+AcmeLoginBundle_homepage:
+    pattern:  /login/
+    defaults: { _controller: AcmeLoginBundle:Default:login }
