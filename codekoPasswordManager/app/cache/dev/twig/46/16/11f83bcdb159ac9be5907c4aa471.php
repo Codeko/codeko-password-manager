@@ -1,7 +1,7 @@
 <?php
 
 /* AcmePruebaBundle:Default:index.html.twig */
-class __TwigTemplate_916dc82056ab3423ea90e72787749366 extends Twig_Template
+class __TwigTemplate_461611f83bcdb159ac9be5907c4aa471 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {

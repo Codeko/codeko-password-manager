@@ -33,6 +33,15 @@ class appdevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
        '_configurator_home' => true,
        '_configurator_step' => true,
        '_configurator_final' => true,
+       'AcmeLoginBundle_homepage' => true,
+       'usuarios' => true,
+       'usuarios_show' => true,
+       'usuarios_new' => true,
+       'usuarios_create' => true,
+       'usuarios_edit' => true,
+       'usuarios_update' => true,
+       'usuarios_delete' => true,
+       'acme_usersdb_default_index' => true,
        'AcmePruebaBundle_homepage' => true,
     );
 
@@ -155,6 +164,51 @@ class appdevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
     private function get_configurator_finalRouteInfo()
     {
         return array(array (), array (  '_controller' => 'Sensio\\Bundle\\DistributionBundle\\Controller\\ConfiguratorController::finalAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/_configurator/final',  ),));
+    }
+
+    private function getAcmeLoginBundle_homepageRouteInfo()
+    {
+        return array(array (), array (  '_controller' => 'Acme\\LoginBundle\\Controller\\DefaultController::loginAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/login/',  ),));
+    }
+
+    private function getusuariosRouteInfo()
+    {
+        return array(array (), array (  '_controller' => 'Acme\\UsersDBBundle\\Controller\\UsuariosController::indexAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/usuarios/',  ),));
+    }
+
+    private function getusuarios_showRouteInfo()
+    {
+        return array(array (  0 => 'id',), array (  '_controller' => 'Acme\\UsersDBBundle\\Controller\\UsuariosController::showAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/show',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/usuarios',  ),));
+    }
+
+    private function getusuarios_newRouteInfo()
+    {
+        return array(array (), array (  '_controller' => 'Acme\\UsersDBBundle\\Controller\\UsuariosController::newAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/usuarios/new',  ),));
+    }
+
+    private function getusuarios_createRouteInfo()
+    {
+        return array(array (), array (  '_controller' => 'Acme\\UsersDBBundle\\Controller\\UsuariosController::createAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/usuarios/create',  ),));
+    }
+
+    private function getusuarios_editRouteInfo()
+    {
+        return array(array (  0 => 'id',), array (  '_controller' => 'Acme\\UsersDBBundle\\Controller\\UsuariosController::editAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/edit',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/usuarios',  ),));
+    }
+
+    private function getusuarios_updateRouteInfo()
+    {
+        return array(array (  0 => 'id',), array (  '_controller' => 'Acme\\UsersDBBundle\\Controller\\UsuariosController::updateAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/update',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/usuarios',  ),));
+    }
+
+    private function getusuarios_deleteRouteInfo()
+    {
+        return array(array (  0 => 'id',), array (  '_controller' => 'Acme\\UsersDBBundle\\Controller\\UsuariosController::deleteAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/delete',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/usuarios',  ),));
+    }
+
+    private function getacme_usersdb_default_indexRouteInfo()
+    {
+        return array(array (  0 => 'name',), array (  '_controller' => 'Acme\\UsersDBBundle\\Controller\\DefaultController::indexAction',), array (), array (  0 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'name',  ),  1 =>   array (    0 => 'text',    1 => '/hello',  ),));
     }
 
     private function getAcmePruebaBundle_homepageRouteInfo()

@@ -143,6 +143,72 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
+        // AcmeLoginBundle_homepage
+        if (rtrim($pathinfo, '/') === '/login') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'AcmeLoginBundle_homepage');
+            }
+            return array (  '_controller' => 'Acme\\LoginBundle\\Controller\\DefaultController::loginAction',  '_route' => 'AcmeLoginBundle_homepage',);
+        }
+
+        // usuarios
+        if (rtrim($pathinfo, '/') === '/usuarios') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'usuarios');
+            }
+            return array (  '_controller' => 'Acme\\UsersDBBundle\\Controller\\UsuariosController::indexAction',  '_route' => 'usuarios',);
+        }
+
+        // usuarios_show
+        if (0 === strpos($pathinfo, '/usuarios') && preg_match('#^/usuarios/(?P<id>[^/]+?)/show$#s', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Acme\\UsersDBBundle\\Controller\\UsuariosController::showAction',)), array('_route' => 'usuarios_show'));
+        }
+
+        // usuarios_new
+        if ($pathinfo === '/usuarios/new') {
+            return array (  '_controller' => 'Acme\\UsersDBBundle\\Controller\\UsuariosController::newAction',  '_route' => 'usuarios_new',);
+        }
+
+        // usuarios_create
+        if ($pathinfo === '/usuarios/create') {
+            if ($this->context->getMethod() != 'POST') {
+                $allow[] = 'POST';
+                goto not_usuarios_create;
+            }
+            return array (  '_controller' => 'Acme\\UsersDBBundle\\Controller\\UsuariosController::createAction',  '_route' => 'usuarios_create',);
+        }
+        not_usuarios_create:
+
+        // usuarios_edit
+        if (0 === strpos($pathinfo, '/usuarios') && preg_match('#^/usuarios/(?P<id>[^/]+?)/edit$#s', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Acme\\UsersDBBundle\\Controller\\UsuariosController::editAction',)), array('_route' => 'usuarios_edit'));
+        }
+
+        // usuarios_update
+        if (0 === strpos($pathinfo, '/usuarios') && preg_match('#^/usuarios/(?P<id>[^/]+?)/update$#s', $pathinfo, $matches)) {
+            if ($this->context->getMethod() != 'POST') {
+                $allow[] = 'POST';
+                goto not_usuarios_update;
+            }
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Acme\\UsersDBBundle\\Controller\\UsuariosController::updateAction',)), array('_route' => 'usuarios_update'));
+        }
+        not_usuarios_update:
+
+        // usuarios_delete
+        if (0 === strpos($pathinfo, '/usuarios') && preg_match('#^/usuarios/(?P<id>[^/]+?)/delete$#s', $pathinfo, $matches)) {
+            if ($this->context->getMethod() != 'POST') {
+                $allow[] = 'POST';
+                goto not_usuarios_delete;
+            }
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Acme\\UsersDBBundle\\Controller\\UsuariosController::deleteAction',)), array('_route' => 'usuarios_delete'));
+        }
+        not_usuarios_delete:
+
+        // acme_usersdb_default_index
+        if (0 === strpos($pathinfo, '/hello') && preg_match('#^/hello/(?P<name>[^/]+?)$#s', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Acme\\UsersDBBundle\\Controller\\DefaultController::indexAction',)), array('_route' => 'acme_usersdb_default_index'));
+        }
+
         // AcmePruebaBundle_homepage
         if (rtrim($pathinfo, '/') === '/prueba') {
             if (substr($pathinfo, -1) !== '/') {
