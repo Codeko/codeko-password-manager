@@ -12,7 +12,7 @@ class DefaultController extends Controller {
      * @Route("/hello/{name}")
      * @Template()
      */
-    public function indexAction($name) {
-        return array('name' => $name);
+    public function indexAction() {
+        return $this->render('FOSUserBundle:Security:login.html.twig');
     }
 }

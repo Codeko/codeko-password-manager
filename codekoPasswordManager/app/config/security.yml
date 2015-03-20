@@ -12,6 +12,11 @@ security:
             form_login:
                 provider: custom
                 csrf_provider: form.csrf_provider
+                #default_target_path: default_security_target
+                #always_use_default_target_path: true
+                #use_referer:        true
+                #target_path_parameter: redirect_url
+                failure_path: 
             logout:       true
             anonymous:    true
 
