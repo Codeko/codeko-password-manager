@@ -1,0 +1,6 @@
+services:
+    acme_user.my_provider:
+        class: Acme\UserBundle\Security\Provider\MyProvider
+        public: false
+        arguments: ["@fos_user.user_manager"]
+        

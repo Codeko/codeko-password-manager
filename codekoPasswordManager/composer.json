@@ -1,0 +1,8 @@
+{
+    "require": {
+        "symfony/security": "~2.6",
+        "symfony/security-core": "~2.6",
+        "jms/security-extra-bundle": "~1.5",
+        "friendsofsymfony/user-bundle": "~2.0@dev"
+    }
+}
