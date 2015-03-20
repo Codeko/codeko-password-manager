@@ -1,8 +1,8 @@
 # Cache and logs (Symfony2)
-/app/cache/*
-/app/logs/*
-!app/cache/.gitkeep
-!app/logs/.gitkeep
+/codekoPasswordManager/app/cache/*
+/codekoPasswordManager/app/logs/*
+!codekoPasswordManager/app/cache/.gitkeep
+!codekoPasswordManager/app/logs/.gitkeep
 
 # Cache and logs (Symfony3)
 /var/cache/*
@@ -11,24 +11,27 @@
 !var/logs/.gitkeep
 
 # Parameters
-/app/config/parameters.yml
-/app/config/parameters.ini
+/codekoPasswordManager/app/config/parameters.yml
+/codekoPasswordManager/app/config/parameters.ini
 
 # Managed by Composer
-/app/bootstrap.php.cache
+/codekoPasswordManager/app/bootstrap.php.cache
 /var/bootstrap.php.cache
-/bin/*
-!bin/console
-!bin/symfony_requirements
-/vendor/
+/codekoPasswordManager/bin/*
+!codekoPasswordManager/bin/console
+!codekoPasswordManager/bin/symfony_requirements
+/codekoPasswordManager/vendor/
 
 # Assets and user uploads
-/web/bundles/
-/web/uploads/
+/codekoPasswordManager/web/bundles/
+/codekoPasswordManager/web/uploads/
 
 # PHPUnit
-/app/phpunit.xml
+/codekoPasswordManager/app/phpunit.xml
 /phpunit.xml
 
 # Composer PHAR
 /composer.phar
+
+# Netbeans config
+nbproject

@@ -1,7 +1,0 @@
-parameters:
-#    acme_prueba.example.class: Acme\PruebaBundle\Example
-
-services:
-#    acme_prueba.example:
-#        class: %acme_prueba.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
