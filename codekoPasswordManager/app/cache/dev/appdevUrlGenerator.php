@@ -33,16 +33,21 @@ class appdevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
        '_configurator_home' => true,
        '_configurator_step' => true,
        '_configurator_final' => true,
-       'AcmeLoginBundle_homepage' => true,
-       'usuarios' => true,
-       'usuarios_show' => true,
-       'usuarios_new' => true,
-       'usuarios_create' => true,
-       'usuarios_edit' => true,
-       'usuarios_update' => true,
-       'usuarios_delete' => true,
-       'acme_usersdb_default_index' => true,
-       'AcmePruebaBundle_homepage' => true,
+       'acme_user_default_index' => true,
+       'fos_user_security_login' => true,
+       'fos_user_security_check' => true,
+       'fos_user_security_logout' => true,
+       'fos_user_profile_show' => true,
+       'fos_user_profile_edit' => true,
+       'fos_user_registration_register' => true,
+       'fos_user_registration_check_email' => true,
+       'fos_user_registration_confirm' => true,
+       'fos_user_registration_confirmed' => true,
+       'fos_user_resetting_request' => true,
+       'fos_user_resetting_send_email' => true,
+       'fos_user_resetting_check_email' => true,
+       'fos_user_resetting_reset' => true,
+       'fos_user_change_password' => true,
     );
 
     /**
@@ -166,53 +171,78 @@ class appdevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
         return array(array (), array (  '_controller' => 'Sensio\\Bundle\\DistributionBundle\\Controller\\ConfiguratorController::finalAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/_configurator/final',  ),));
     }
 
-    private function getAcmeLoginBundle_homepageRouteInfo()
+    private function getacme_user_default_indexRouteInfo()
     {
-        return array(array (), array (  '_controller' => 'Acme\\LoginBundle\\Controller\\DefaultController::loginAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/login/',  ),));
+        return array(array (  0 => 'name',), array (  '_controller' => 'Acme\\UserBundle\\Controller\\DefaultController::indexAction',), array (), array (  0 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'name',  ),  1 =>   array (    0 => 'text',    1 => '/hello',  ),));
     }
 
-    private function getusuariosRouteInfo()
+    private function getfos_user_security_loginRouteInfo()
     {
-        return array(array (), array (  '_controller' => 'Acme\\UsersDBBundle\\Controller\\UsuariosController::indexAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/usuarios/',  ),));
+        return array(array (), array (  '_controller' => 'FOS\\UserBundle\\Controller\\SecurityController::loginAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/login',  ),));
     }
 
-    private function getusuarios_showRouteInfo()
+    private function getfos_user_security_checkRouteInfo()
     {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Acme\\UsersDBBundle\\Controller\\UsuariosController::showAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/show',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/usuarios',  ),));
+        return array(array (), array (  '_controller' => 'FOS\\UserBundle\\Controller\\SecurityController::checkAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/login_check',  ),));
     }
 
-    private function getusuarios_newRouteInfo()
+    private function getfos_user_security_logoutRouteInfo()
     {
-        return array(array (), array (  '_controller' => 'Acme\\UsersDBBundle\\Controller\\UsuariosController::newAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/usuarios/new',  ),));
+        return array(array (), array (  '_controller' => 'FOS\\UserBundle\\Controller\\SecurityController::logoutAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/logout',  ),));
     }
 
-    private function getusuarios_createRouteInfo()
+    private function getfos_user_profile_showRouteInfo()
     {
-        return array(array (), array (  '_controller' => 'Acme\\UsersDBBundle\\Controller\\UsuariosController::createAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/usuarios/create',  ),));
+        return array(array (), array (  '_controller' => 'FOS\\UserBundle\\Controller\\ProfileController::showAction',), array (  '_method' => 'GET',), array (  0 =>   array (    0 => 'text',    1 => '/profile/',  ),));
     }
 
-    private function getusuarios_editRouteInfo()
+    private function getfos_user_profile_editRouteInfo()
     {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Acme\\UsersDBBundle\\Controller\\UsuariosController::editAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/edit',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/usuarios',  ),));
+        return array(array (), array (  '_controller' => 'FOS\\UserBundle\\Controller\\ProfileController::editAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/profile/edit',  ),));
     }
 
-    private function getusuarios_updateRouteInfo()
+    private function getfos_user_registration_registerRouteInfo()
     {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Acme\\UsersDBBundle\\Controller\\UsuariosController::updateAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/update',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/usuarios',  ),));
+        return array(array (), array (  '_controller' => 'FOS\\UserBundle\\Controller\\RegistrationController::registerAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/register/',  ),));
     }
 
-    private function getusuarios_deleteRouteInfo()
+    private function getfos_user_registration_check_emailRouteInfo()
     {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Acme\\UsersDBBundle\\Controller\\UsuariosController::deleteAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/delete',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/usuarios',  ),));
+        return array(array (), array (  '_controller' => 'FOS\\UserBundle\\Controller\\RegistrationController::checkEmailAction',), array (  '_method' => 'GET',), array (  0 =>   array (    0 => 'text',    1 => '/register/check-email',  ),));
     }
 
-    private function getacme_usersdb_default_indexRouteInfo()
+    private function getfos_user_registration_confirmRouteInfo()
     {
-        return array(array (  0 => 'name',), array (  '_controller' => 'Acme\\UsersDBBundle\\Controller\\DefaultController::indexAction',), array (), array (  0 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'name',  ),  1 =>   array (    0 => 'text',    1 => '/hello',  ),));
+        return array(array (  0 => 'token',), array (  '_controller' => 'FOS\\UserBundle\\Controller\\RegistrationController::confirmAction',), array (  '_method' => 'GET',), array (  0 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'token',  ),  1 =>   array (    0 => 'text',    1 => '/register/confirm',  ),));
     }
 
-    private function getAcmePruebaBundle_homepageRouteInfo()
+    private function getfos_user_registration_confirmedRouteInfo()
     {
-        return array(array (), array (  '_controller' => 'Acme\\PruebaBundle\\Controller\\DefaultController::indexAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/prueba/',  ),));
+        return array(array (), array (  '_controller' => 'FOS\\UserBundle\\Controller\\RegistrationController::confirmedAction',), array (  '_method' => 'GET',), array (  0 =>   array (    0 => 'text',    1 => '/register/confirmed',  ),));
+    }
+
+    private function getfos_user_resetting_requestRouteInfo()
+    {
+        return array(array (), array (  '_controller' => 'FOS\\UserBundle\\Controller\\ResettingController::requestAction',), array (  '_method' => 'GET',), array (  0 =>   array (    0 => 'text',    1 => '/resetting/request',  ),));
+    }
+
+    private function getfos_user_resetting_send_emailRouteInfo()
+    {
+        return array(array (), array (  '_controller' => 'FOS\\UserBundle\\Controller\\ResettingController::sendEmailAction',), array (  '_method' => 'POST',), array (  0 =>   array (    0 => 'text',    1 => '/resetting/send-email',  ),));
+    }
+
+    private function getfos_user_resetting_check_emailRouteInfo()
+    {
+        return array(array (), array (  '_controller' => 'FOS\\UserBundle\\Controller\\ResettingController::checkEmailAction',), array (  '_method' => 'GET',), array (  0 =>   array (    0 => 'text',    1 => '/resetting/check-email',  ),));
+    }
+
+    private function getfos_user_resetting_resetRouteInfo()
+    {
+        return array(array (  0 => 'token',), array (  '_controller' => 'FOS\\UserBundle\\Controller\\ResettingController::resetAction',), array (  '_method' => 'GET|POST',), array (  0 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'token',  ),  1 =>   array (    0 => 'text',    1 => '/resetting/reset',  ),));
+    }
+
+    private function getfos_user_change_passwordRouteInfo()
+    {
+        return array(array (), array (  '_controller' => 'FOS\\UserBundle\\Controller\\ChangePasswordController::changePasswordAction',), array (  '_method' => 'GET|POST',), array (  0 =>   array (    0 => 'text',    1 => '/profile/change-password',  ),));
     }
 }

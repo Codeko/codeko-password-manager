@@ -80,10 +80,9 @@ class appDevDebugProjectContainer extends Container
         $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'DoctrineBundle', '/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/app/Resources/DoctrineBundle/views', '/^[^.]+\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'DoctrineBundle', '/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/vendor/symfony/src/Symfony/Bundle/DoctrineBundle/Resources/views', '/^[^.]+\\.[^.]+\\.twig$/'))), 'twig');
         $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'AsseticBundle', '/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/app/Resources/AsseticBundle/views', '/^[^.]+\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'AsseticBundle', '/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/vendor/bundles/Symfony/Bundle/AsseticBundle/Resources/views', '/^[^.]+\\.[^.]+\\.twig$/'))), 'twig');
         $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'SensioFrameworkExtraBundle', '/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/app/Resources/SensioFrameworkExtraBundle/views', '/^[^.]+\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'SensioFrameworkExtraBundle', '/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/vendor/bundles/Sensio/Bundle/FrameworkExtraBundle/Resources/views', '/^[^.]+\\.[^.]+\\.twig$/'))), 'twig');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'FOSUserBundle', '/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/app/Resources/FOSUserBundle/views', '/^[^.]+\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'FOSUserBundle', '/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/vendor/bundles/FOS/UserBundle/Resources/views', '/^[^.]+\\.[^.]+\\.twig$/'))), 'twig');
         $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'JMSSecurityExtraBundle', '/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/app/Resources/JMSSecurityExtraBundle/views', '/^[^.]+\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'JMSSecurityExtraBundle', '/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/vendor/bundles/JMS/SecurityExtraBundle/Resources/views', '/^[^.]+\\.[^.]+\\.twig$/'))), 'twig');
-        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'AcmePruebaBundle', '/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/app/Resources/AcmePruebaBundle/views', '/^[^.]+\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'AcmePruebaBundle', '/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/src/Acme/PruebaBundle/Resources/views', '/^[^.]+\\.[^.]+\\.twig$/'))), 'twig');
-        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'AcmeUsersDBBundle', '/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/app/Resources/AcmeUsersDBBundle/views', '/^[^.]+\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'AcmeUsersDBBundle', '/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/src/Acme/UsersDBBundle/Resources/views', '/^[^.]+\\.[^.]+\\.twig$/'))), 'twig');
-        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'AcmeLoginBundle', '/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/app/Resources/AcmeLoginBundle/views', '/^[^.]+\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'AcmeLoginBundle', '/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/src/Acme/LoginBundle/Resources/views', '/^[^.]+\\.[^.]+\\.twig$/'))), 'twig');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'AcmeUserBundle', '/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/app/Resources/AcmeUserBundle/views', '/^[^.]+\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'AcmeUserBundle', '/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/src/Acme/UserBundle/Resources/views', '/^[^.]+\\.[^.]+\\.twig$/'))), 'twig');
         $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'AcmeDemoBundle', '/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/app/Resources/AcmeDemoBundle/views', '/^[^.]+\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'AcmeDemoBundle', '/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/src/Acme/DemoBundle/Resources/views', '/^[^.]+\\.[^.]+\\.twig$/'))), 'twig');
         $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'WebProfilerBundle', '/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/app/Resources/WebProfilerBundle/views', '/^[^.]+\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'WebProfilerBundle', '/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/vendor/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views', '/^[^.]+\\.[^.]+\\.twig$/'))), 'twig');
         $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'SensioDistributionBundle', '/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/app/Resources/SensioDistributionBundle/views', '/^[^.]+\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'SensioDistributionBundle', '/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/vendor/bundles/Sensio/Bundle/DistributionBundle/Resources/views', '/^[^.]+\\.[^.]+\\.twig$/'))), 'twig');
@@ -214,6 +213,7 @@ class appDevDebugProjectContainer extends Container
 
         $b = new \Doctrine\Common\EventManager();
         $b->addEventSubscriber(new \Doctrine\DBAL\Event\Listeners\MysqlSessionInit('UTF8'));
+        $b->addEventSubscriber(new \FOS\UserBundle\Entity\UserListener($this));
 
         return $this->services['doctrine.dbal.default_connection'] = $this->get('doctrine.dbal.connection_factory')->createConnection(array('dbname' => 'symfony', 'host' => 'localhost', 'port' => '', 'user' => 'root', 'password' => 'codeko', 'driver' => 'pdo_mysql', 'driverOptions' => array()), $a, $b, array());
     }
@@ -237,21 +237,26 @@ class appDevDebugProjectContainer extends Container
         $c = new \Doctrine\Common\Cache\ArrayCache();
         $c->setNamespace('sf2orm_default_ab3f92117cd2ed3b586d51d939014948');
 
-        $d = new \Doctrine\ORM\Mapping\Driver\DriverChain();
-        $d->addDriver(new \Doctrine\ORM\Mapping\Driver\AnnotationDriver(new \Symfony\Bridge\Doctrine\Annotations\IndexedReader($this->get('annotation_reader')), array(0 => '/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/src/Acme/UsersDBBundle/Entity')), 'Acme\\UsersDBBundle\\Entity');
+        $d = new \Symfony\Bridge\Doctrine\Mapping\Driver\XmlDriver(array(0 => '/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/vendor/bundles/FOS/UserBundle/Resources/config/doctrine'));
+        $d->setNamespacePrefixes(array('/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/vendor/bundles/FOS/UserBundle/Resources/config/doctrine' => 'FOS\\UserBundle\\Entity'));
+        $d->setGlobalBasename('mapping');
 
-        $e = new \Doctrine\ORM\Configuration();
-        $e->setEntityNamespaces(array('AcmeUsersDBBundle' => 'Acme\\UsersDBBundle\\Entity'));
-        $e->setMetadataCacheImpl($a);
-        $e->setQueryCacheImpl($b);
-        $e->setResultCacheImpl($c);
-        $e->setMetadataDriverImpl($d);
-        $e->setProxyDir('/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/app/cache/dev/doctrine/orm/Proxies');
-        $e->setProxyNamespace('Proxies');
-        $e->setAutoGenerateProxyClasses(true);
-        $e->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
+        $e = new \Doctrine\ORM\Mapping\Driver\DriverChain();
+        $e->addDriver($d, 'FOS\\UserBundle\\Entity');
+        $e->addDriver(new \Doctrine\ORM\Mapping\Driver\AnnotationDriver(new \Symfony\Bridge\Doctrine\Annotations\IndexedReader($this->get('annotation_reader')), array(0 => '/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/src/Acme/UserBundle/Entity')), 'Acme\\UserBundle\\Entity');
 
-        return $this->services['doctrine.orm.default_entity_manager'] = call_user_func(array('Doctrine\\ORM\\EntityManager', 'create'), $this->get('doctrine.dbal.default_connection'), $e);
+        $f = new \Doctrine\ORM\Configuration();
+        $f->setEntityNamespaces(array('FOSUserBundle' => 'FOS\\UserBundle\\Entity', 'AcmeUserBundle' => 'Acme\\UserBundle\\Entity'));
+        $f->setMetadataCacheImpl($a);
+        $f->setQueryCacheImpl($b);
+        $f->setResultCacheImpl($c);
+        $f->setMetadataDriverImpl($e);
+        $f->setProxyDir('/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/app/cache/dev/doctrine/orm/Proxies');
+        $f->setProxyNamespace('Proxies');
+        $f->setAutoGenerateProxyClasses(true);
+        $f->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
+
+        return $this->services['doctrine.orm.default_entity_manager'] = call_user_func(array('Doctrine\\ORM\\EntityManager', 'create'), $this->get('doctrine.dbal.default_connection'), $f);
     }
 
     /**
@@ -310,6 +315,7 @@ class appDevDebugProjectContainer extends Container
         $instance->addListenerService('kernel.controller', array(0 => 'sensio_framework_extra.view.listener', 1 => 'onKernelController'), 0);
         $instance->addListenerService('kernel.view', array(0 => 'sensio_framework_extra.view.listener', 1 => 'onKernelView'), 0);
         $instance->addListenerService('kernel.response', array(0 => 'sensio_framework_extra.cache.listener', 1 => 'onKernelResponse'), 0);
+        $instance->addListenerService('security.interactive_login', array(0 => 'fos_user.security.interactive_login_listener', 1 => 'onSecurityInteractiveLogin'), 0);
         $instance->addListenerService('kernel.controller', array(0 => 'security.extra.controller_listener', 1 => 'onCoreController'), -255);
         $instance->addListenerService('kernel.controller', array(0 => 'acme.demo.listener', 1 => 'onKernelController'), 0);
         $instance->addListenerService('kernel.response', array(0 => 'web_profiler.debug_toolbar', 1 => 'onKernelResponse'), -128);
@@ -366,7 +372,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getForm_FactoryService()
     {
-        return $this->services['form.factory'] = new \Symfony\Component\Form\FormFactory(array(0 => new \Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension($this, array('field' => 'form.type.field', 'form' => 'form.type.form', 'birthday' => 'form.type.birthday', 'checkbox' => 'form.type.checkbox', 'choice' => 'form.type.choice', 'collection' => 'form.type.collection', 'country' => 'form.type.country', 'date' => 'form.type.date', 'datetime' => 'form.type.datetime', 'email' => 'form.type.email', 'file' => 'form.type.file', 'hidden' => 'form.type.hidden', 'integer' => 'form.type.integer', 'language' => 'form.type.language', 'locale' => 'form.type.locale', 'money' => 'form.type.money', 'number' => 'form.type.number', 'password' => 'form.type.password', 'percent' => 'form.type.percent', 'radio' => 'form.type.radio', 'repeated' => 'form.type.repeated', 'search' => 'form.type.search', 'textarea' => 'form.type.textarea', 'text' => 'form.type.text', 'time' => 'form.type.time', 'timezone' => 'form.type.timezone', 'url' => 'form.type.url', 'csrf' => 'form.type.csrf', 'entity' => 'form.type.entity'), array('field' => array(0 => 'form.type_extension.field'), 'form' => array(0 => 'form.type_extension.csrf')), array(0 => 'form.type_guesser.validator', 1 => 'form.type_guesser.doctrine'))));
+        return $this->services['form.factory'] = new \Symfony\Component\Form\FormFactory(array(0 => new \Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension($this, array('field' => 'form.type.field', 'form' => 'form.type.form', 'birthday' => 'form.type.birthday', 'checkbox' => 'form.type.checkbox', 'choice' => 'form.type.choice', 'collection' => 'form.type.collection', 'country' => 'form.type.country', 'date' => 'form.type.date', 'datetime' => 'form.type.datetime', 'email' => 'form.type.email', 'file' => 'form.type.file', 'hidden' => 'form.type.hidden', 'integer' => 'form.type.integer', 'language' => 'form.type.language', 'locale' => 'form.type.locale', 'money' => 'form.type.money', 'number' => 'form.type.number', 'password' => 'form.type.password', 'percent' => 'form.type.percent', 'radio' => 'form.type.radio', 'repeated' => 'form.type.repeated', 'search' => 'form.type.search', 'textarea' => 'form.type.textarea', 'text' => 'form.type.text', 'time' => 'form.type.time', 'timezone' => 'form.type.timezone', 'url' => 'form.type.url', 'csrf' => 'form.type.csrf', 'entity' => 'form.type.entity', 'fos_user_username' => 'fos_user.username_form_type', 'fos_user_profile' => 'fos_user.profile.form.type', 'fos_user_registration' => 'fos_user.registration.form.type', 'fos_user_change_password' => 'fos_user.change_password.form.type', 'fos_user_resetting' => 'fos_user.resetting.form.type'), array('field' => array(0 => 'form.type_extension.field'), 'form' => array(0 => 'form.type_extension.csrf')), array(0 => 'form.type_guesser.validator', 1 => 'form.type_guesser.doctrine'))));
     }
 
     /**
@@ -799,6 +805,301 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'fos_user.change_password.form' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Form A Symfony\Component\Form\Form instance.
+     */
+    protected function getFosUser_ChangePassword_FormService()
+    {
+        return $this->services['fos_user.change_password.form'] = $this->get('form.factory')->createNamed('fos_user_change_password', 'fos_user_change_password_form', '', array('validation_groups' => array(0 => 'ChangePassword', 1 => 'Default')));
+    }
+
+    /**
+     * Gets the 'fos_user.change_password.form.handler.default' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return FOS\UserBundle\Form\Handler\ChangePasswordFormHandler A FOS\UserBundle\Form\Handler\ChangePasswordFormHandler instance.
+     */
+    protected function getFosUser_ChangePassword_Form_Handler_DefaultService()
+    {
+        if (!isset($this->scopedServices['request'])) {
+            throw new InactiveScopeException('fos_user.change_password.form.handler.default', 'request');
+        }
+
+        return $this->services['fos_user.change_password.form.handler.default'] = $this->scopedServices['request']['fos_user.change_password.form.handler.default'] = new \FOS\UserBundle\Form\Handler\ChangePasswordFormHandler($this->get('fos_user.change_password.form'), $this->get('request'), $this->get('fos_user.user_manager'));
+    }
+
+    /**
+     * Gets the 'fos_user.change_password.form.type' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return FOS\UserBundle\Form\Type\ChangePasswordFormType A FOS\UserBundle\Form\Type\ChangePasswordFormType instance.
+     */
+    protected function getFosUser_ChangePassword_Form_TypeService()
+    {
+        return $this->services['fos_user.change_password.form.type'] = new \FOS\UserBundle\Form\Type\ChangePasswordFormType();
+    }
+
+    /**
+     * Gets the 'fos_user.mailer' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return FOS\UserBundle\Mailer\Mailer A FOS\UserBundle\Mailer\Mailer instance.
+     */
+    protected function getFosUser_MailerService()
+    {
+        return $this->services['fos_user.mailer'] = new \FOS\UserBundle\Mailer\Mailer($this->get('mailer'), $this->get('router'), $this->get('templating'), array('confirmation.template' => 'FOSUserBundle:Registration:email.txt.twig', 'resetting.template' => 'FOSUserBundle:Resetting:email.txt.twig', 'from_email' => array('confirmation' => array('webmaster@example.com' => 'webmaster'), 'resetting' => array('webmaster@example.com' => 'webmaster'))));
+    }
+
+    /**
+     * Gets the 'fos_user.profile.form' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Form A Symfony\Component\Form\Form instance.
+     */
+    protected function getFosUser_Profile_FormService()
+    {
+        return $this->services['fos_user.profile.form'] = $this->get('form.factory')->createNamed('fos_user_profile', 'fos_user_profile_form', '', array('validation_groups' => array(0 => 'Profile', 1 => 'Default')));
+    }
+
+    /**
+     * Gets the 'fos_user.profile.form.handler' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return FOS\UserBundle\Form\Handler\ProfileFormHandler A FOS\UserBundle\Form\Handler\ProfileFormHandler instance.
+     */
+    protected function getFosUser_Profile_Form_HandlerService()
+    {
+        if (!isset($this->scopedServices['request'])) {
+            throw new InactiveScopeException('fos_user.profile.form.handler', 'request');
+        }
+
+        return $this->services['fos_user.profile.form.handler'] = $this->scopedServices['request']['fos_user.profile.form.handler'] = new \FOS\UserBundle\Form\Handler\ProfileFormHandler($this->get('fos_user.profile.form'), $this->get('request'), $this->get('fos_user.user_manager'));
+    }
+
+    /**
+     * Gets the 'fos_user.profile.form.type' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return FOS\UserBundle\Form\Type\ProfileFormType A FOS\UserBundle\Form\Type\ProfileFormType instance.
+     */
+    protected function getFosUser_Profile_Form_TypeService()
+    {
+        return $this->services['fos_user.profile.form.type'] = new \FOS\UserBundle\Form\Type\ProfileFormType('Acme\\UserBundle\\Entity\\User');
+    }
+
+    /**
+     * Gets the 'fos_user.registration.form' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Form A Symfony\Component\Form\Form instance.
+     */
+    protected function getFosUser_Registration_FormService()
+    {
+        return $this->services['fos_user.registration.form'] = $this->get('form.factory')->createNamed('fos_user_registration', 'fos_user_registration_form', '', array('validation_groups' => array(0 => 'Registration', 1 => 'Default')));
+    }
+
+    /**
+     * Gets the 'fos_user.registration.form.handler' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return FOS\UserBundle\Form\Handler\RegistrationFormHandler A FOS\UserBundle\Form\Handler\RegistrationFormHandler instance.
+     */
+    protected function getFosUser_Registration_Form_HandlerService()
+    {
+        if (!isset($this->scopedServices['request'])) {
+            throw new InactiveScopeException('fos_user.registration.form.handler', 'request');
+        }
+
+        return $this->services['fos_user.registration.form.handler'] = $this->scopedServices['request']['fos_user.registration.form.handler'] = new \FOS\UserBundle\Form\Handler\RegistrationFormHandler($this->get('fos_user.registration.form'), $this->get('request'), $this->get('fos_user.user_manager'), $this->get('fos_user.mailer'));
+    }
+
+    /**
+     * Gets the 'fos_user.registration.form.type' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return FOS\UserBundle\Form\Type\RegistrationFormType A FOS\UserBundle\Form\Type\RegistrationFormType instance.
+     */
+    protected function getFosUser_Registration_Form_TypeService()
+    {
+        return $this->services['fos_user.registration.form.type'] = new \FOS\UserBundle\Form\Type\RegistrationFormType('Acme\\UserBundle\\Entity\\User');
+    }
+
+    /**
+     * Gets the 'fos_user.resetting.form' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Form A Symfony\Component\Form\Form instance.
+     */
+    protected function getFosUser_Resetting_FormService()
+    {
+        return $this->services['fos_user.resetting.form'] = $this->get('form.factory')->createNamed('fos_user_resetting', 'fos_user_resetting_form', '', array('validation_groups' => array(0 => 'ResetPassword', 1 => 'Default')));
+    }
+
+    /**
+     * Gets the 'fos_user.resetting.form.handler' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return FOS\UserBundle\Form\Handler\ResettingFormHandler A FOS\UserBundle\Form\Handler\ResettingFormHandler instance.
+     */
+    protected function getFosUser_Resetting_Form_HandlerService()
+    {
+        if (!isset($this->scopedServices['request'])) {
+            throw new InactiveScopeException('fos_user.resetting.form.handler', 'request');
+        }
+
+        return $this->services['fos_user.resetting.form.handler'] = $this->scopedServices['request']['fos_user.resetting.form.handler'] = new \FOS\UserBundle\Form\Handler\ResettingFormHandler($this->get('fos_user.resetting.form'), $this->get('request'), $this->get('fos_user.user_manager'));
+    }
+
+    /**
+     * Gets the 'fos_user.resetting.form.type' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return FOS\UserBundle\Form\Type\ResettingFormType A FOS\UserBundle\Form\Type\ResettingFormType instance.
+     */
+    protected function getFosUser_Resetting_Form_TypeService()
+    {
+        return $this->services['fos_user.resetting.form.type'] = new \FOS\UserBundle\Form\Type\ResettingFormType();
+    }
+
+    /**
+     * Gets the 'fos_user.security.interactive_login_listener' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return FOS\UserBundle\Security\InteractiveLoginListener A FOS\UserBundle\Security\InteractiveLoginListener instance.
+     */
+    protected function getFosUser_Security_InteractiveLoginListenerService()
+    {
+        return $this->services['fos_user.security.interactive_login_listener'] = new \FOS\UserBundle\Security\InteractiveLoginListener($this->get('fos_user.user_manager'));
+    }
+
+    /**
+     * Gets the 'fos_user.user_checker' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Security\Core\User\UserChecker A Symfony\Component\Security\Core\User\UserChecker instance.
+     */
+    protected function getFosUser_UserCheckerService()
+    {
+        return $this->services['fos_user.user_checker'] = new \Symfony\Component\Security\Core\User\UserChecker();
+    }
+
+    /**
+     * Gets the 'fos_user.user_manager' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return FOS\UserBundle\Entity\UserManager A FOS\UserBundle\Entity\UserManager instance.
+     */
+    protected function getFosUser_UserManagerService()
+    {
+        $a = $this->get('fos_user.util.email_canonicalizer');
+
+        return $this->services['fos_user.user_manager'] = new \FOS\UserBundle\Entity\UserManager($this->get('security.encoder_factory'), $a, $a, $this->get('doctrine')->getEntityManager(NULL), 'Acme\\UserBundle\\Entity\\User');
+    }
+
+    /**
+     * Gets the 'fos_user.username_form_type' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return FOS\UserBundle\Form\Type\UsernameFormType A FOS\UserBundle\Form\Type\UsernameFormType instance.
+     */
+    protected function getFosUser_UsernameFormTypeService()
+    {
+        return $this->services['fos_user.username_form_type'] = new \FOS\UserBundle\Form\Type\UsernameFormType(new \FOS\UserBundle\Form\DataTransformer\UserToUsernameTransformer($this->get('fos_user.user_manager')));
+    }
+
+    /**
+     * Gets the 'fos_user.util.email_canonicalizer' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return FOS\UserBundle\Util\Canonicalizer A FOS\UserBundle\Util\Canonicalizer instance.
+     */
+    protected function getFosUser_Util_EmailCanonicalizerService()
+    {
+        return $this->services['fos_user.util.email_canonicalizer'] = new \FOS\UserBundle\Util\Canonicalizer();
+    }
+
+    /**
+     * Gets the 'fos_user.util.user_manipulator' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return FOS\UserBundle\Util\UserManipulator A FOS\UserBundle\Util\UserManipulator instance.
+     */
+    protected function getFosUser_Util_UserManipulatorService()
+    {
+        return $this->services['fos_user.util.user_manipulator'] = new \FOS\UserBundle\Util\UserManipulator($this->get('fos_user.user_manager'));
+    }
+
+    /**
+     * Gets the 'fos_user.validator.password' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return FOS\UserBundle\Validator\PasswordValidator A FOS\UserBundle\Validator\PasswordValidator instance.
+     */
+    protected function getFosUser_Validator_PasswordService()
+    {
+        $this->services['fos_user.validator.password'] = $instance = new \FOS\UserBundle\Validator\PasswordValidator();
+
+        $instance->setEncoderFactory($this->get('security.encoder_factory'));
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'fos_user.validator.unique' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return FOS\UserBundle\Validator\UniqueValidator A FOS\UserBundle\Validator\UniqueValidator instance.
+     */
+    protected function getFosUser_Validator_UniqueService()
+    {
+        return $this->services['fos_user.validator.unique'] = new \FOS\UserBundle\Validator\UniqueValidator($this->get('fos_user.user_manager'));
+    }
+
+    /**
      * Gets the 'http_kernel' service.
      *
      * This service is shared.
@@ -1192,7 +1493,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_EncoderFactoryService()
     {
-        return $this->services['security.encoder_factory'] = new \Symfony\Component\Security\Core\Encoder\EncoderFactory(array('Symfony\\Component\\Security\\Core\\User\\User' => array('class' => 'Symfony\\Component\\Security\\Core\\Encoder\\PlaintextPasswordEncoder', 'arguments' => array(0 => false))));
+        return $this->services['security.encoder_factory'] = new \Symfony\Component\Security\Core\Encoder\EncoderFactory(array('FOS\\UserBundle\\Model\\UserInterface' => array('class' => 'Symfony\\Component\\Security\\Core\\Encoder\\MessageDigestPasswordEncoder', 'arguments' => array(0 => 'sha512', 1 => true, 2 => 5000))));
     }
 
     /**
@@ -1218,44 +1519,18 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_FirewallService()
     {
-        return $this->services['security.firewall'] = new \Symfony\Component\Security\Http\Firewall(new \Symfony\Bundle\SecurityBundle\Security\FirewallMap($this, array('security.firewall.map.context.dev' => new \Symfony\Component\HttpFoundation\RequestMatcher('^/(_(profiler|wdt)|css|images|js)/'), 'security.firewall.map.context.login' => new \Symfony\Component\HttpFoundation\RequestMatcher('^/demo/secured/login$'), 'security.firewall.map.context.secured_area' => new \Symfony\Component\HttpFoundation\RequestMatcher('^/demo/secured/'))), $this->get('event_dispatcher'));
+        return $this->services['security.firewall'] = new \Symfony\Component\Security\Http\Firewall(new \Symfony\Bundle\SecurityBundle\Security\FirewallMap($this, array('security.firewall.map.context.main' => new \Symfony\Component\HttpFoundation\RequestMatcher('^/'))), $this->get('event_dispatcher'));
     }
 
     /**
-     * Gets the 'security.firewall.map.context.dev' service.
+     * Gets the 'security.firewall.map.context.main' service.
      *
      * This service is shared.
      * This method always returns the same instance of the service.
      *
      * @return Symfony\Bundle\SecurityBundle\Security\FirewallContext A Symfony\Bundle\SecurityBundle\Security\FirewallContext instance.
      */
-    protected function getSecurity_Firewall_Map_Context_DevService()
-    {
-        return $this->services['security.firewall.map.context.dev'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(), NULL);
-    }
-
-    /**
-     * Gets the 'security.firewall.map.context.login' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * @return Symfony\Bundle\SecurityBundle\Security\FirewallContext A Symfony\Bundle\SecurityBundle\Security\FirewallContext instance.
-     */
-    protected function getSecurity_Firewall_Map_Context_LoginService()
-    {
-        return $this->services['security.firewall.map.context.login'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(), NULL);
-    }
-
-    /**
-     * Gets the 'security.firewall.map.context.secured_area' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * @return Symfony\Bundle\SecurityBundle\Security\FirewallContext A Symfony\Bundle\SecurityBundle\Security\FirewallContext instance.
-     */
-    protected function getSecurity_Firewall_Map_Context_SecuredAreaService()
+    protected function getSecurity_Firewall_Map_Context_MainService()
     {
         $a = $this->get('monolog.logger.security');
         $b = $this->get('security.context');
@@ -1263,14 +1538,26 @@ class appDevDebugProjectContainer extends Container
         $d = $this->get('router');
         $e = $this->get('security.authentication.manager');
 
-        $f = new \Symfony\Component\Security\Http\AccessMap();
+        $f = new \Symfony\Component\HttpFoundation\RequestMatcher('^/login$');
 
-        $g = new \Symfony\Component\Security\Http\HttpUtils($d);
+        $g = new \Symfony\Component\HttpFoundation\RequestMatcher('^/register');
 
-        $h = new \Symfony\Component\Security\Http\Firewall\LogoutListener($b, $g, '/demo/secured/logout', '/demo/', NULL);
-        $h->addHandler(new \Symfony\Component\Security\Http\Logout\SessionLogoutHandler());
+        $h = new \Symfony\Component\HttpFoundation\RequestMatcher('^/resetting');
 
-        return $this->services['security.firewall.map.context.secured_area'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($f, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => $this->get('security.user.provider.concrete.in_memory')), 'secured_area', $a, $c), 2 => $h, 3 => new \Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener($b, $e, new \Symfony\Component\Security\Http\Session\SessionAuthenticationStrategy('migrate'), $g, 'secured_area', array('check_path' => '/demo/secured/login_check', 'login_path' => '/demo/secured/login', 'use_forward' => false, 'always_use_default_target_path' => false, 'default_target_path' => '/', 'target_path_parameter' => '_target_path', 'use_referer' => false, 'failure_path' => NULL, 'failure_forward' => false, 'username_parameter' => '_username', 'password_parameter' => '_password', 'csrf_parameter' => '_csrf_token', 'intention' => 'authenticate', 'post_only' => true), NULL, NULL, $a, $c), 4 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $f, $e, $a)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), $g, new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($this->get('http_kernel'), $g, '/demo/secured/login', false), NULL, NULL, $a));
+        $i = new \Symfony\Component\HttpFoundation\RequestMatcher('^/admin/');
+
+        $j = new \Symfony\Component\Security\Http\AccessMap();
+        $j->add($f, array(0 => 'IS_AUTHENTICATED_ANONYMOUSLY'), NULL);
+        $j->add($g, array(0 => 'IS_AUTHENTICATED_ANONYMOUSLY'), NULL);
+        $j->add($h, array(0 => 'IS_AUTHENTICATED_ANONYMOUSLY'), NULL);
+        $j->add($i, array(0 => 'ROLE_ADMIN'), NULL);
+
+        $k = new \Symfony\Component\Security\Http\HttpUtils($d);
+
+        $l = new \Symfony\Component\Security\Http\Firewall\LogoutListener($b, $k, '/logout', '/', NULL);
+        $l->addHandler(new \Symfony\Component\Security\Http\Logout\SessionLogoutHandler());
+
+        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($j, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => $this->get('acme_user.my_provider')), 'main', $a, $c), 2 => $l, 3 => new \Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener($b, $e, new \Symfony\Component\Security\Http\Session\SessionAuthenticationStrategy('migrate'), $k, 'main', array('check_path' => '/login_check', 'login_path' => '/login', 'use_forward' => false, 'always_use_default_target_path' => false, 'default_target_path' => '/', 'target_path_parameter' => '_target_path', 'use_referer' => false, 'failure_path' => NULL, 'failure_forward' => false, 'username_parameter' => '_username', 'password_parameter' => '_password', 'csrf_parameter' => '_csrf_token', 'intention' => 'authenticate', 'post_only' => true), NULL, NULL, $a, $c, $this->get('form.csrf_provider')), 4 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '550bfe0e9b8d7', $a), 5 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $j, $e, $a)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), $k, new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($this->get('http_kernel'), $k, '/login', false), NULL, NULL, $a));
     }
 
     /**
@@ -1803,7 +2090,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getValidatorService()
     {
-        return $this->services['validator'] = new \Symfony\Component\Validator\Validator($this->get('validator.mapping.class_metadata_factory'), new \Symfony\Bundle\FrameworkBundle\Validator\ConstraintValidatorFactory($this, array('doctrine.orm.validator.unique' => 'doctrine.orm.validator.unique')), array(0 => $this->get('doctrine.orm.validator_initializer')));
+        return $this->services['validator'] = new \Symfony\Component\Validator\Validator($this->get('validator.mapping.class_metadata_factory'), new \Symfony\Bundle\FrameworkBundle\Validator\ConstraintValidatorFactory($this, array('doctrine.orm.validator.unique' => 'doctrine.orm.validator.unique', 'fos_user.validator.unique' => 'fos_user.validator.unique', 'fos_user.validator.password' => 'fos_user.validator.password')), array(0 => $this->get('doctrine.orm.validator_initializer')));
     }
 
     /**
@@ -1847,6 +2134,43 @@ class appDevDebugProjectContainer extends Container
     protected function getDoctrine_Orm_EntityManagerService()
     {
         return $this->get('doctrine.orm.default_entity_manager');
+    }
+
+    /**
+     * Gets the fos_user.change_password.form.handler service alias.
+     *
+     * @return FOS\UserBundle\Form\Handler\ChangePasswordFormHandler An instance of the fos_user.change_password.form.handler.default service
+     */
+    protected function getFosUser_ChangePassword_Form_HandlerService()
+    {
+        return $this->get('fos_user.change_password.form.handler.default');
+    }
+
+    /**
+     * Gets the fos_user.util.username_canonicalizer service alias.
+     *
+     * @return FOS\UserBundle\Util\Canonicalizer An instance of the fos_user.util.email_canonicalizer service
+     */
+    protected function getFosUser_Util_UsernameCanonicalizerService()
+    {
+        return $this->get('fos_user.util.email_canonicalizer');
+    }
+
+    /**
+     * Gets the 'acme_user.my_provider' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * This service is private.
+     * If you want to be able to request this service from the container directly,
+     * make it public, otherwise you might end up with broken code.
+     *
+     * @return Acme\UserBundle\Security\Provider\MyProvider A Acme\UserBundle\Security\Provider\MyProvider instance.
+     */
+    protected function getAcmeUser_MyProviderService()
+    {
+        return $this->services['acme_user.my_provider'] = new \Acme\UserBundle\Security\Provider\MyProvider($this->get('fos_user.user_manager'));
     }
 
     /**
@@ -1935,7 +2259,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_Access_DecisionManagerService()
     {
-        return $this->services['security.access.decision_manager'] = new \Symfony\Component\Security\Core\Authorization\AccessDecisionManager(array(0 => new \Symfony\Component\Security\Core\Authorization\Voter\RoleHierarchyVoter(new \Symfony\Component\Security\Core\Role\RoleHierarchy(array('ROLE_ADMIN' => array(0 => 'ROLE_USER'), 'ROLE_SUPER_ADMIN' => array(0 => 'ROLE_USER', 1 => 'ROLE_ADMIN', 2 => 'ROLE_ALLOWED_TO_SWITCH')))), 1 => new \Symfony\Component\Security\Core\Authorization\Voter\AuthenticatedVoter($this->get('security.authentication.trust_resolver'))), 'affirmative', false, true);
+        return $this->services['security.access.decision_manager'] = new \Symfony\Component\Security\Core\Authorization\AccessDecisionManager(array(0 => new \Symfony\Component\Security\Core\Authorization\Voter\RoleHierarchyVoter(new \Symfony\Component\Security\Core\Role\RoleHierarchy(array('ROLE_ADMIN' => array(0 => 'ROLE_USER'), 'ROLE_SUPER_ADMIN' => array(0 => 'ROLE_ADMIN')))), 1 => new \Symfony\Component\Security\Core\Authorization\Voter\AuthenticatedVoter($this->get('security.authentication.trust_resolver'))), 'affirmative', false, true);
     }
 
     /**
@@ -1952,7 +2276,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_Authentication_ManagerService()
     {
-        return $this->services['security.authentication.manager'] = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('security.user.provider.concrete.in_memory'), new \Symfony\Component\Security\Core\User\UserChecker(), 'secured_area', $this->get('security.encoder_factory'), true)));
+        return $this->services['security.authentication.manager'] = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('acme_user.my_provider'), $this->get('fos_user.user_checker'), 'main', $this->get('security.encoder_factory'), true), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('550bfe0e9b8d7')));
     }
 
     /**
@@ -1970,28 +2294,6 @@ class appDevDebugProjectContainer extends Container
     protected function getSecurity_Authentication_TrustResolverService()
     {
         return $this->services['security.authentication.trust_resolver'] = new \Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolver('Symfony\\Component\\Security\\Core\\Authentication\\Token\\AnonymousToken', 'Symfony\\Component\\Security\\Core\\Authentication\\Token\\RememberMeToken');
-    }
-
-    /**
-     * Gets the 'security.user.provider.concrete.in_memory' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * This service is private.
-     * If you want to be able to request this service from the container directly,
-     * make it public, otherwise you might end up with broken code.
-     *
-     * @return Symfony\Component\Security\Core\User\InMemoryUserProvider A Symfony\Component\Security\Core\User\InMemoryUserProvider instance.
-     */
-    protected function getSecurity_User_Provider_Concrete_InMemoryService()
-    {
-        $this->services['security.user.provider.concrete.in_memory'] = $instance = new \Symfony\Component\Security\Core\User\InMemoryUserProvider();
-
-        $instance->createUser(new \Symfony\Component\Security\Core\User\User('user', 'userpass', array(0 => 'ROLE_USER')));
-        $instance->createUser(new \Symfony\Component\Security\Core\User\User('admin', 'adminpass', array(0 => 'ROLE_ADMIN')));
-
-        return $instance;
     }
 
     /**
@@ -2059,7 +2361,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getValidator_Mapping_ClassMetadataFactoryService()
     {
-        return $this->services['validator.mapping.class_metadata_factory'] = new \Symfony\Component\Validator\Mapping\ClassMetadataFactory(new \Symfony\Component\Validator\Mapping\Loader\LoaderChain(array(0 => new \Symfony\Component\Validator\Mapping\Loader\AnnotationLoader($this->get('annotation_reader')), 1 => new \Symfony\Component\Validator\Mapping\Loader\StaticMethodLoader(), 2 => new \Symfony\Component\Validator\Mapping\Loader\XmlFilesLoader(array(0 => '/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/vendor/symfony/src/Symfony/Component/Form/Resources/config/validation.xml')), 3 => new \Symfony\Component\Validator\Mapping\Loader\YamlFilesLoader(array()))), NULL);
+        return $this->services['validator.mapping.class_metadata_factory'] = new \Symfony\Component\Validator\Mapping\ClassMetadataFactory(new \Symfony\Component\Validator\Mapping\Loader\LoaderChain(array(0 => new \Symfony\Component\Validator\Mapping\Loader\AnnotationLoader($this->get('annotation_reader')), 1 => new \Symfony\Component\Validator\Mapping\Loader\StaticMethodLoader(), 2 => new \Symfony\Component\Validator\Mapping\Loader\XmlFilesLoader(array(0 => '/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/vendor/symfony/src/Symfony/Component/Form/Resources/config/validation.xml', 1 => '/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/vendor/bundles/FOS/UserBundle/Resources/config/validation.xml')), 3 => new \Symfony\Component\Validator\Mapping\Loader\YamlFilesLoader(array()))), NULL);
     }
 
     /**
@@ -2126,10 +2428,9 @@ class appDevDebugProjectContainer extends Container
                 'DoctrineBundle' => 'Symfony\\Bundle\\DoctrineBundle\\DoctrineBundle',
                 'AsseticBundle' => 'Symfony\\Bundle\\AsseticBundle\\AsseticBundle',
                 'SensioFrameworkExtraBundle' => 'Sensio\\Bundle\\FrameworkExtraBundle\\SensioFrameworkExtraBundle',
+                'FOSUserBundle' => 'FOS\\UserBundle\\FOSUserBundle',
                 'JMSSecurityExtraBundle' => 'JMS\\SecurityExtraBundle\\JMSSecurityExtraBundle',
-                'AcmePruebaBundle' => 'Acme\\PruebaBundle\\AcmePruebaBundle',
-                'AcmeUsersDBBundle' => 'Acme\\UsersDBBundle\\AcmeUsersDBBundle',
-                'AcmeLoginBundle' => 'Acme\\LoginBundle\\AcmeLoginBundle',
+                'AcmeUserBundle' => 'Acme\\UserBundle\\AcmeUserBundle',
                 'AcmeDemoBundle' => 'Acme\\DemoBundle\\AcmeDemoBundle',
                 'WebProfilerBundle' => 'Symfony\\Bundle\\WebProfilerBundle\\WebProfilerBundle',
                 'SensioDistributionBundle' => 'Sensio\\Bundle\\DistributionBundle\\SensioDistributionBundle',
@@ -2194,6 +2495,7 @@ class appDevDebugProjectContainer extends Container
             'validator.validator_factory.class' => 'Symfony\\Bundle\\FrameworkBundle\\Validator\\ConstraintValidatorFactory',
             'validator.mapping.loader.xml_files_loader.mapping_files' => array(
                 0 => '/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/vendor/symfony/src/Symfony/Component/Form/Resources/config/validation.xml',
+                1 => '/home/abex/NetBeansProjects/codekopasswordmanager/codekoPasswordManager/vendor/bundles/FOS/UserBundle/Resources/config/validation.xml',
             ),
             'validator.mapping.loader.yaml_files_loader.mapping_files' => array(
 
@@ -2327,9 +2629,7 @@ class appDevDebugProjectContainer extends Container
                     0 => 'ROLE_USER',
                 ),
                 'ROLE_SUPER_ADMIN' => array(
-                    0 => 'ROLE_USER',
-                    1 => 'ROLE_ADMIN',
-                    2 => 'ROLE_ALLOWED_TO_SWITCH',
+                    0 => 'ROLE_ADMIN',
                 ),
             ),
             'twig.class' => 'Twig_Environment',
@@ -2477,6 +2777,48 @@ class appDevDebugProjectContainer extends Container
             'sensio_framework_extra.converter.manager.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\Request\\ParamConverter\\ParamConverterManager',
             'sensio_framework_extra.converter.doctrine.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\Request\\ParamConverter\\DoctrineParamConverter',
             'sensio_framework_extra.view.listener.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\EventListener\\TemplateListener',
+            'fos_user.validator.password.class' => 'FOS\\UserBundle\\Validator\\PasswordValidator',
+            'fos_user.validator.unique.class' => 'FOS\\UserBundle\\Validator\\UniqueValidator',
+            'fos_user.security.interactive_login_listener.class' => 'FOS\\UserBundle\\Security\\InteractiveLoginListener',
+            'fos_user.resetting.email.template' => 'FOSUserBundle:Resetting:email.txt.twig',
+            'fos_user.registration.confirmation.template' => 'FOSUserBundle:Registration:email.txt.twig',
+            'fos_user.firewall_name' => 'main',
+            'fos_user.model_manager_name' => NULL,
+            'fos_user.model.user.class' => 'Acme\\UserBundle\\Entity\\User',
+            'fos_user.template.engine' => 'twig',
+            'fos_user.template.theme' => 'FOSUserBundle::form.html.twig',
+            'fos_user.profile.form.type' => 'fos_user_profile',
+            'fos_user.profile.form.name' => 'fos_user_profile_form',
+            'fos_user.profile.form.validation_groups' => array(
+                0 => 'Profile',
+                1 => 'Default',
+            ),
+            'fos_user.registration.confirmation.from_email' => array(
+                'webmaster@example.com' => 'webmaster',
+            ),
+            'fos_user.registration.confirmation.enabled' => false,
+            'fos_user.registration.form.type' => 'fos_user_registration',
+            'fos_user.registration.form.name' => 'fos_user_registration_form',
+            'fos_user.registration.form.validation_groups' => array(
+                0 => 'Registration',
+                1 => 'Default',
+            ),
+            'fos_user.change_password.form.type' => 'fos_user_change_password',
+            'fos_user.change_password.form.name' => 'fos_user_change_password_form',
+            'fos_user.change_password.form.validation_groups' => array(
+                0 => 'ChangePassword',
+                1 => 'Default',
+            ),
+            'fos_user.resetting.email.from_email' => array(
+                'webmaster@example.com' => 'webmaster',
+            ),
+            'fos_user.resetting.token_ttl' => 86400,
+            'fos_user.resetting.form.type' => 'fos_user_resetting',
+            'fos_user.resetting.form.name' => 'fos_user_resetting_form',
+            'fos_user.resetting.form.validation_groups' => array(
+                0 => 'ResetPassword',
+                1 => 'Default',
+            ),
             'security.secured_services' => array(
 
             ),
