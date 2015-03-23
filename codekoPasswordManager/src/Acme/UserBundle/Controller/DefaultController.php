@@ -13,6 +13,6 @@ class DefaultController extends Controller {
      * @Template()
      */
     public function indexAction() {
-        return $this->render('FOSUserBundle:Security:login.html.twig');
+        return $this->render('AcmeUserBundle:Default:index.html.twig');
     }
 }
