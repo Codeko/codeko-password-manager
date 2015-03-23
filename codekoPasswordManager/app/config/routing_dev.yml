@@ -1,7 +1,7 @@
 _login:
     pattern:  /
-    defaults: { _controller: FOSUserBundle:Security:login }
-   #defaults: {_controller: AcmeUserBundle:Default:index }
+    #defaults: { _controller: FOSUserBundle:Security:login }
+    defaults: {_controller: AcmeUserBundle:Security:login }
 
 _demo_secured:
     resource: "@AcmeDemoBundle/Controller/SecuredController.php"
