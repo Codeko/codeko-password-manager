@@ -2,6 +2,21 @@ AcmeUserBundle:
     resource: "@AcmeUserBundle/Controller/"
     type:     annotation
     prefix:   /
+    
+## Security Routes
+default:
+    pattern:   /
+    defaults:  { _controller: SecurityBundle:Security:login }
+
+login:
+    pattern:   /login
+    defaults:  { _controller: SecurityBundle:Security:login }
+
+login_check:
+    pattern:   /login_check
+
+logout:
+    pattern: /logout
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
