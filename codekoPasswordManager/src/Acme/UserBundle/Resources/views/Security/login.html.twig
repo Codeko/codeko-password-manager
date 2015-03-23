@@ -1,0 +1,22 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+{% block fos_user_content %}
+    <div id="page-wrapper">
+        <div id="main">
+            {% if error %}
+                <div id="login-error">{{ error.message|trans }}</div>
+            {% endif %}
+            <form action="{{ path('login_check') }}" method="post">
+                <input type="hidden" name="_csrf_token" value="{% render('AcmeUserBundle:Security:getToken') %}" />
+                <div class="form-item">
+                    <label for="username">Usuario</label>
+                    <input id="username" type="text" name="_username" value="{{ last_username }}" />
+                </div>
+                <div class="form-item">
+                    <label for="password">Contraseña</label>
+                    <input id="password" type="password" name="_password" />
+                </div>
+                <input type="submit" name="login" value="Iniciar sesión" />
+            </form>
+        </div>
+    </div>
+{% endblock fos_user_content %}
