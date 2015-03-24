@@ -34,6 +34,16 @@ body {
   -webkit-border-radius: 8px;
 }
 
+.alert-danger {
+  margin: auto;
+  max-width: 430px;
+  text-align: center !important;
+}
+
+div#login-error{
+    text-align: center !important;
+}
+
 .decoracionCabecera {
   height: 130px;
   border-radius: 8px 8px 0px 0px; 

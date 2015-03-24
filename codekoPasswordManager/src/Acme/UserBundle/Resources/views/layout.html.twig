@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %} 
+            <script>window.location.href = "{{ path('_principal') }}";</script>
+        {% endif %}
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,25 +26,6 @@
         <![endif]-->
     </head>
     <body>
-
-        <div>
-            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
-                <a href="{{ path('fos_user_security_logout') }}">
-                    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                </a>
-
-            {% endif %}
-        </div>
-        <!--{#
-        {% for type, messages in app.session.flashbag.all() %}
-            {% for message in messages %}
-                <div class="flash-{{ type }}">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endfor %}
-        #}-->
         <div>
             {% block fos_user_content %}
             {% endblock fos_user_content %}

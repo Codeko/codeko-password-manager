@@ -15,6 +15,10 @@ login:
 login_check:
     pattern:   /login_check
 
+principal:
+    pattern:    /principal
+    defaults:  { _controller: AcmeUserBundle:Principal:principal }
+
 logout:
     pattern: /logout
 
