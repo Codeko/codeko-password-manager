@@ -6,9 +6,9 @@ security:
     encoders:
         FOS\UserBundle\Model\UserInterface: sha512
 
-    firewalls:      
-        login:
-            pattern:  ^/login$
+    firewalls:         
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
         
         main:
@@ -18,11 +18,11 @@ security:
                 csrf_provider: form.csrf_provider
                 login_path: /login
                 check_path: /login_check
-                default_target_path: /secured
+                default_target_path: /
                 always_use_default_target_path: true
                 #use_referer:        true
                 #target_path_parameter: redirect_url
-                failure_path: 
+                failure_path: /
             logout:       true
             anonymous:    true
 
