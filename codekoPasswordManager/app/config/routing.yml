@@ -6,11 +6,11 @@ AcmeUserBundle:
 ## Security Routes
 default:
     pattern:   /
-    defaults:  { _controller: SecurityBundle:Security:login }
+    defaults:  { _controller: AcmeUserBundle:Security:login }
 
 login:
     pattern:   /login
-    defaults:  { _controller: SecurityBundle:Security:login }
+    defaults:  { _controller: AcmeUserBundle:Security:login }
 
 login_check:
     pattern:   /login_check
