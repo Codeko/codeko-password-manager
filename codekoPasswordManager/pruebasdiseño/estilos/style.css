@@ -37,11 +37,6 @@ body {
 .alert-danger {
   margin: auto;
   max-width: 430px;
-  text-align: center !important;
-}
-
-div#login-error{
-    text-align: center !important;
 }
 
 .decoracionCabecera {
