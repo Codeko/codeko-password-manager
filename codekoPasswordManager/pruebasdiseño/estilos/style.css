@@ -131,8 +131,27 @@ ul.nav-pills li {
   border: 1px solid #5cb85c;
 }
 
+.form-signin input[type="email"] {
+  background: #eeeeee;
+  padding: 15px 15px 15px 15px;
+  margin-bottom: 15px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="email"]:hover {
+  border: 1px solid #5cb85c;
+}
+
 .checkbox {
   padding-bottom: 3px;
+}
+
+.cuerpoFormulario h3 {
+  text-align: center;
+  color: #384943;
+  margin-top: -5px;
+  margin-bottom: 20px;
 }
 
 /*-------------ANIMACIÓN------------- */

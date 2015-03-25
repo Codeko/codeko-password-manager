@@ -19,7 +19,7 @@
         <body lang="es">
 
                 <main class="container">
-                    <div class="alert alert-danger">Error al logearte, bla bla bla</div>
+                    <div class="alert alert-danger" style="display:none">Error al logearte, bla bla bla</div>
                       <form class="form-signin bounceIn animated" action="paginas/principal.php" method="post">
                         <header class="decoracionCabecera"></header>
                             <section class="cuerpoFormulario">
@@ -32,7 +32,7 @@
                                     <button class="btn btn-lg btn-success btn-block" type="submit">Acceder</button>
                                 <div class="nuevoUsuario">
                                     <ul class="nav nav-pills">
-                                      <li><a href="#">Registrar nuevo usuario</a></li>
+                                      <li><a href="./paginas/registro.php">Registrar nuevo usuario</a></li>
                                     </ul>
                                 </div>
                             </section>
