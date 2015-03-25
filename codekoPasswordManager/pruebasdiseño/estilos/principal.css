@@ -64,7 +64,6 @@ ul.nav {
   margin: 0px;
   height: 500px;
   border-bottom: 12px solid #5cb85c;
-  padding: 20px;
 }
 
 .cajaContenido2 {
@@ -76,7 +75,6 @@ ul.nav {
   margin: 0px;
   height: 500px;
   border-bottom: 12px solid #5cb85c;
-  padding: 20px;
 }
 
 section.contenido1Menu {
@@ -91,14 +89,62 @@ section.contenido2Menu {
   display: none;
   padding: 0;
   margin: 0;
+  z-index: 100;
   box-sizing: border-box;
 }
+
+.decoracion {
+  background: none repeat scroll 0% 0% #ebebeb;
+  border-radius: 50%;
+  float: right;
+  width: 12px;
+  height: 12px;
+  margin-right: 6px;
+  margin-top: 20px;
+}
+
+.opciones {
+  text-align: center;
+  z-index: 0;
+}
+
+div.list-group > div.active {
+  background-color: #5cb85c;
+  border: 0px;
+  z-index: 0;
+}
+
+div.list-group > div.active:hover {
+  background-color: #5cb85c;
+}
+
+.opciones a {
+  color: white;
+}
+
+.opciones > a:hover {
+  color: #327732;
+  text-decoration: none;
+}
+
+#listaCategorias > select {
+  display: table;
+  width: 100%;
+  height: inherit;
+  overflow: auto;
+}
+
+#logout {
+  float: right;
+}
+
 
 /*-------------MENU MOVIL------------- */
 
 dropdown{
   display: relative; 
   text-align: center;
+  z-index: 100;
 }
 
 dropdown label, dropdown ul li{
@@ -120,7 +166,7 @@ dropdown label{
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
   position: relative;
-  z-index: 2;
+  z-index: 100;
 }
 
 dropdown input{
@@ -242,6 +288,10 @@ ul.animate {
     padding-top: 0px;
   }
 
+  #logout {
+    margin-top: 9px;
+  }
+
   .container{
     position: relative;
     top: -10px;
@@ -271,6 +321,10 @@ ul.animate {
 
   ul.nav-pills {
     display: none;
+  }
+
+  div.decoracion {
+    display: none;    
   }
 
   #menuMovil {

@@ -5,6 +5,10 @@ _login:
 _principal:
     pattern:    /principal
     defaults:  { _controller: AcmeUserBundle:Principal:principal }
+    
+_registro:
+    pattern:    /registro
+    defaults:  { _controller: AcmeUserBundle:Registro:registro }
 
 _assetic:
     resource: .

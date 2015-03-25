@@ -27,12 +27,13 @@
                                 <li role="presentation" class="active"><a role="button" src="#">Principal</a></li>
                                 <li role="presentation"><a role="button" src="#">Opcion 1</a></li>
                                 <li role="presentation"><a role="button" src="#">Opcion 2</a></li>
+                                    <div class="decoracion"></div><div class="decoracion"></div><div class="decoracion"></div>
                             </ul> 
 
                             <div id="menuMovil">
                                 <dropdown>
                                   <input id="toggle2" type="checkbox">
-                                      <label for="toggle2" class="animate">Menu</label>
+                                      <label for="toggle2" class="animate">☰</label>
                                           <ul class="animate">
                                             <li class="animate">Principal</li>
                                             <li class="animate">Opcion 1</li>
@@ -40,19 +41,39 @@
                                           </ul>
                                 </dropdown>
                             </div>
-
                         </nav>
 
                     </nav>
                     <div class="row">
-                        <section class="col-md-4 col-xs-5 contenido1Menu">
+                        <section class="col-md-4 col-xs-6 contenido1Menu">
                             <div class="cajaContenido1">
-
+                                <div class="list-group">
+                                    <div class="opciones list-group-item active">
+                                        <a href="#"><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a>
+                                        <a href="#"><span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a>
+                                        <a href="#"><span class="glyphicon glyphicon-file" aria-hidden="true"></span></a>
+                                        <a href="#"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+                                        <a href="#"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></a>
+                                        <a href="#"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                                    </div>
+                                    <div id="listaCategorias" >
+                                        <!--<select data-placeholder="Elige categoria" multiple>
+                                            <option class="list-group-item" value="Prueba categoria 1">Prueba categoria 1</option>
+                                            <option class="list-group-item" value="Prueba categoria 2">Prueba categoria 2</option>
+                                            <option class="list-group-item" value="Prueba categoria 3">Prueba categoria 3</option>
+                                            <option class="list-group-item" value="Prueba categoria 4">Prueba categoria 4</option>
+                                        </select>-->
+                                    </div>
+                                </div>
                             </div>
                         </section>
-                        <section class="col-md-8 col-xs-7 contenido2Menu">
+                        <section class="col-md-8 col-xs-6 contenido2Menu">
                             <div class="cajaContenido2">
-
+                                <div class="list-group">
+                                    <div class="opciones list-group-item active">
+                                        <a href="#">Claves</a>
+                                    </div>
+                                </div>
                             </div>
                         </section>
                     </div>

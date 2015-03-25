@@ -10,10 +10,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  * and open the template in the editor.
  */
 
-class PrincipalController extends Controller
+class RegistroController extends Controller
 {
-    public function principalAction()
+    public function registroAction()
     {
-        return $this->render('AcmeUserBundle:Principal:principal.html.twig');
+        return $this->render('AcmeUserBundle:Registro:registro.html.twig');
     }
 }
