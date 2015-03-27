@@ -1,0 +1,39 @@
+security:
+    providers:
+        custom:
+            id: acme_user.my_provider
+
+    encoders:
+        FOS\UserBundle\Model\UserInterface: sha512
+
+    firewalls:         
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        
+        main:
+            pattern: ^/
+            form_login:
+                provider: custom
+                csrf_provider: form.csrf_provider
+                login_path: /login
+                check_path: /login_check
+                default_target_path: /principal
+                always_use_default_target_path: true
+                #use_referer:        true
+                #target_path_parameter: redirect_url
+                failure_path: /
+            logout:       true
+            anonymous:    true
+
+    access_control:
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/registro, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/principal, role: ROLE_ADMIN, role: ROLE_USER}
+        - { path: ^/admin, role: ROLE_ADMIN }
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
