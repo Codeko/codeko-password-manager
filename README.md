@@ -19,15 +19,21 @@ Installing Symfony
 </li>
 <li>
 Opening the project
+
     If you use an IDE like Netbeans create a PHP application and configure it, then select Symfony2 as framework or download it from Netbeans Plugins.
+
     If you're using a command console: 
+
         - With Symfony:
+
             type: 
 ```
 symfony new 'my_project_name'
 ```
 , and paste the project in selected folder
+
         - With Composer:
+
             type: 
 ```
 $ composer create-project symfony/framework-standard-edition my_project_name
@@ -35,6 +41,7 @@ $ composer create-project symfony/framework-standard-edition my_project_name
 , and paste the project in selected folder
     
     Run in a terminal 
+
 ```
 composer install
 ```
