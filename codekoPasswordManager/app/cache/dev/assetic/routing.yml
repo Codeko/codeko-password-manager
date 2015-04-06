@@ -1,5 +1,0 @@
-_assetic:
-    resource: .
-    type: assetic
-_app:
-    resource: /home/abex/NetBeansProjects/codeko-password-manager/codekoPasswordManager/app/config/routing_dev.yml
