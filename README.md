@@ -7,14 +7,14 @@ A online password manager tool
 Download or clone the project from our repository
 </li>
 <li>
-Installing Symfony
+Installing Symfony.
 
-    >Open a command console and execute: 
-        $ sudo curl -LsS http://symfony.com/installer -o /usr/local/bin/symfony
-        $ sudo chmod a+x /usr/local/bin/symfony
+    Open a command console and execute: 
+        `$ sudo curl -LsS http://symfony.com/installer -o /usr/local/bin/symfony`
+        `$ sudo chmod a+x /usr/local/bin/symfony`
 </li>
 <li>
-Opening he project
+Opening the project
     If you use an IDE like Netbeans create a PHP application and configure it, then select Symfony2 as framework or download it from Netbeans Plugins.
     If you're using a command console: 
         - With Symfony:
