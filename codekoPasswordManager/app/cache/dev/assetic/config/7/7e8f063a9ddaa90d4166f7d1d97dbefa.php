@@ -1,0 +1,5 @@
+<?php
+
+// :SonataUserBundle/views/Form:form_admin_fields.html.twig
+return array (
+);
