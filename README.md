@@ -1,13 +1,14 @@
 # codeko-password-manager
 A online password manager tool
 
-- Installation
+- Installation.
 <ol>
 <li>
-Download or clone the project from our repository
+Download or clone the project from our repository.
 </li>
+
 <li>
-Installing Symfony
+Installing Symfony.
 
     Open a command console and execute: 
 ```
@@ -17,24 +18,21 @@ Installing Symfony
         $ sudo chmod a+x /usr/local/bin/symfony
 ```
 </li>
+
 <li>
-Opening the project
+Opening the project.
 
     If you use an IDE like Netbeans create a PHP application and configure it, then select Symfony2 as framework or download it from Netbeans Plugins.
 
     If you're using a command console: 
 
         - With Symfony:
-
-            type: 
 ```
 symfony new 'my_project_name'
 ```
 , and paste the project in selected folder
 
         - With Composer:
-
-            type: 
 ```
 $ composer create-project symfony/framework-standard-edition my_project_name
 ```
