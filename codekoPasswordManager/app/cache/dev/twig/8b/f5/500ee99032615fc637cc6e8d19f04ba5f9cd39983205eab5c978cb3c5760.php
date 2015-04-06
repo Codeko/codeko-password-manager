@@ -1,6 +1,6 @@
 <?php
 
-/* SonataUserBundle:Admin:Security/login.html.twig */
+/* SonataUserBundle:Admin/Security:login.html.twig */
 class __TwigTemplate_8bf5500ee99032615fc637cc6e8d19f04ba5f9cd39983205eab5c978cb3c5760 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
@@ -97,7 +97,7 @@ class __TwigTemplate_8bf5500ee99032615fc637cc6e8d19f04ba5f9cd39983205eab5c978cb3
 
     public function getTemplateName()
     {
-        return "SonataUserBundle:Admin:Security/login.html.twig";
+        return "SonataUserBundle:Admin/Security:login.html.twig";
     }
 
     public function isTraitable()
