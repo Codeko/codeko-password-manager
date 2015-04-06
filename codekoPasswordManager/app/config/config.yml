@@ -161,6 +161,9 @@ sonata_user:
     security_acl: true
     manager_type: orm 
     # can be orm or mongodb
+    google_authenticator:
+        enabled: true
+        server:  yourserver.com
 
 fos_user:
     db_driver:      orm 
@@ -198,3 +201,5 @@ jms_security_extra:
     # Allows you to specify access control rules for specific methods, such
     # as controller actions
     method_access_control: { }
+
+    
