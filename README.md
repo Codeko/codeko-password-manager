@@ -35,5 +35,10 @@ Opening the project.
 
 
         $ php app/console doctrine:database:create
+
+    Generate project's web folder typing in a terminal:
+
+
+        $ php app/console assets:install web --symlink
 </li>
 
