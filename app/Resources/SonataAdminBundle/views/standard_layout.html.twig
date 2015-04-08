@@ -31,6 +31,7 @@ file that was distributed with this source code.
 
             {% for stylesheet in admin_pool.getOption('stylesheets', []) %}
                 <link rel="stylesheet" href="{{ asset(stylesheet) }}">
+                <link rel="shortcut icon" type="image/x-icon" href="{{ asset('bundles/codekologinprincipal/images/favicon.ico') }}" />
             {% endfor %}
 
         {% endblock %}
@@ -101,7 +102,7 @@ file that was distributed with this source code.
                     {% spaceless %}
                     <a class="logo" href="{{ url('sonata_admin_dashboard') }}">
                         {% if 'single_image' == admin_pool.getOption('title_mode') or 'both' == admin_pool.getOption('title_mode') %}
-                            <img src="{{ asset('bundles/acmeuser/images/favicon.ico') }}" alt="{{ admin_pool.title }}">
+                            <img src="{{ asset('bundles/codekologinprincipal/images/favicon.ico') }}" alt="{{ admin_pool.title }}">
                         {% endif %}
                         {% if 'single_text' == admin_pool.getOption('title_mode') or 'both' == admin_pool.getOption('title_mode') %}
                             <span>{{ 'PasswordManager' }}</span>
@@ -176,7 +177,7 @@ file that was distributed with this source code.
         {% block sonata_wrapper %}
             <div class="wrapper row-offcanvas row-offcanvas-left">
                 {% block sonata_left_side %}
-                    <aside class="left-side sidebar-offcanvas">
+                    <aside class="left-side sidebar-offcanvas" style="background-color: #5CB85C; border: 0px">
                         <section class="sidebar">
                             {% block sonata_side_nav %}
                                 {% block sonata_sidebar_search %}
@@ -241,7 +242,24 @@ file that was distributed with this source code.
                                     {% endif %}
                                 {% endblock side_bar_nav %}
                                 {% block side_bar_after_nav %}
-                                    <p class="text-center small" style="border-top: 1px solid #444444; padding-top: 10px"><a href="http://www.passmanager/app_dev.php/admin/dashboard" rel="noreferrer" target="_blank">Principal</a></p>
+                                    <style>
+                                        .enlacesBarraAdmin{
+                                            color: black !important;
+                                            font-size: 18px;  
+                                            border: 0px;
+                                            
+                                        }
+                                     
+                                        .parrafoEnlaceAdmin{
+                                            padding-bottom: 10px;         
+                                            cursor: pointer;
+                                        }
+                                        
+                                        .parrafoEnlaceAdmin:hover{
+                                            background-color: #468746;
+                                        }
+                                    </style>
+                                    <p class="text-center small parrafoEnlaceAdmin" style="border-top: 1px solid #444444; padding-top: 10px" onclick="document.getElementById('enlPrincipal').click();"><a class="enlacesBarraAdmin" id="enlPrincipal" href="http://www.passmanager/app_dev.php/" rel="noreferrer">Principal</a></p>
                                 {% endblock %}
                             {% endblock sonata_side_nav %}
                         </section>
