@@ -53,12 +53,12 @@ Opening the project.
 Running the project
 
     Open the command console and execute:
-```
+
+
         $ cd my_project_name/
-```
-```
+
         $ php app/console server:run
-```
+
 
         If you haven't install apache server or php previously, you must do it before continue.
     
