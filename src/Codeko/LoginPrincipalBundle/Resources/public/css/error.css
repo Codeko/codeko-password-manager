@@ -30,7 +30,7 @@ body {
     text-shadow: 0 0 80px #ffffff, 0 0 30px #008000, 0 0 6px #0000ff;
 }
 
-p { 
+.board p { 
     line-height: 10%; 
 }
 
@@ -48,6 +48,6 @@ p#text{
 @media (max-width: 500px) {
     .board {       
         padding: 0px;
-        magin: 0px;
+        margin-left: -10px;
     }
 }
