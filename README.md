@@ -28,24 +28,26 @@ Opening the project.
 
         symfony new 'my_project_name'
 
-, and paste the project in selected folder
+    , and paste the project in selected folder.
 
-        - With Composer:
-```
-$ composer create-project symfony/framework-standard-edition my_project_name
-```
-, and paste the project in selected folder
+    With Composer:
+
+
+        $ composer create-project symfony/framework-standard-edition my_project_name
+
+    , and paste the project in selected folder.
     
     Run in a terminal 
 
-```
-composer install
-```
- or 
-```
-composer update
-```
-, third party bundles will be downloaded and installed into the project
+
+        composer install
+
+     or 
+
+
+        composer update
+
+    , third party bundles will be downloaded and installed into the project.
 </li>
 <li>
 Running the project
