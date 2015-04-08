@@ -58,11 +58,9 @@ Running the project
         $ cd my_project_name/
         
         $ php app/console server:run
-
         
     If you haven't install apache server or php previously, you must do it before continue.
     
     By default project's url is http://localhost:8000, but you can customize it creating a .conf file in /etc/apache2/sites-avaliable 
     You can directly open the project in Netbeans, first configure it in "project properties". 
 </li>
-</ol>
