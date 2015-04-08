@@ -53,7 +53,8 @@ Opening the project.
 Running the project
 
     Open the command console and execute:
-        ```
+        
+```
         $ cd my_project_name/
         ```
         ```
