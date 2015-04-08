@@ -31,6 +31,10 @@ login_check:
 principal:
     pattern:    /principal
     defaults:  { _controller: CodekoLoginPrincipalBundle:Principal:principal }
+    
+profile:
+    pattern:    /profile
+    defaults:  { _controller: CodekoLoginPrincipalBundle:Profile:profile }
 
 logout:
     pattern: /logout  

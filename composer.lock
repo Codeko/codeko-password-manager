@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d3ef8427ca7bd07d95a5c49b6ff0b4b4",
+    "hash": "f652393fc91a0b6e563271d28b6ee19c",
     "packages": [
         {
             "name": "cocur/slugify",
@@ -1802,6 +1802,54 @@
                 "psr-3"
             ],
             "time": "2012-12-21 11:40:51"
+        },
+        {
+            "name": "scheb/two-factor-bundle",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/scheb/two-factor-bundle.git",
+                "reference": "b93f8021cfc4d90e766e630e8886980fdc843572"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/scheb/two-factor-bundle/zipball/b93f8021cfc4d90e766e630e8886980fdc843572",
+                "reference": "b93f8021cfc4d90e766e630e8886980fdc843572",
+                "shasum": ""
+            },
+            "require": {
+                "sonata-project/google-authenticator": "~1.0",
+                "symfony/symfony": "~2.1"
+            },
+            "require-dev": {
+                "satooshi/php-coveralls": "~0.6",
+                "swiftmailer/swiftmailer": ">=4.3, <6.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Scheb\\TwoFactorBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Scheb",
+                    "email": "me@christianscheb.de"
+                }
+            ],
+            "description": "Provides two-factor authenticaton for Symfony2",
+            "homepage": "https://github.com/scheb/two-factor-bundle",
+            "keywords": [
+                "Authentication",
+                "Symfony2",
+                "two-factor",
+                "two-step"
+            ],
+            "time": "2014-12-23 10:30:50"
         },
         {
             "name": "sensio/distribution-bundle",
