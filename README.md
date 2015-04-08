@@ -5,8 +5,7 @@ A online password manager tool
 <ol>
 <li>
 Download or clone the project from our repository.
-
-
+</li>
 <li>
 Installing Symfony.
 
@@ -18,7 +17,6 @@ Installing Symfony.
         $ sudo chmod a+x /usr/local/bin/symfony
         ```
 </li>
-
 <li>
 Opening the project.
 
