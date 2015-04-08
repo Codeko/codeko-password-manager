@@ -35,3 +35,8 @@ _registro:
 _assetic:
     resource: .
     type:     assetic
+    
+_profile:
+    pattern:    /profile
+    defaults:  { _controller: CodekoLoginPrincipalBundle:Profile:profile }
+    
