@@ -58,6 +58,7 @@ Running the project
         $ cd my_project_name/
         
         $ php app/console server:run
+
         
     If you haven't install apache server or php previously, you must do it before continue.
     
