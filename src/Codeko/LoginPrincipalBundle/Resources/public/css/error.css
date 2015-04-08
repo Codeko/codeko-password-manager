@@ -48,7 +48,6 @@ p#text{
 @media (max-width: 500px) {
     .board {       
         padding: 0px;
-        magin: 0px;
         margin-left: -10px;
     }
 }
