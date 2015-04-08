@@ -48,6 +48,11 @@ Opening the project.
         composer update
 
     , third party bundles will be downloaded and installed into the project.
+
+    Generate project's database typing in a terminal:
+
+
+        $ php app/console doctrine:database:create
 </li>
 <li>
 Running the project
