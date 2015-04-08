@@ -22,10 +22,12 @@ Opening the project.
     If you use an IDE like Netbeans create a PHP application and configure it, then select Symfony2 as framework or download it from Netbeans Plugins.
 
     If you're using a command console: 
-        - With Symfony:
-```
-symfony new 'my_project_name'
-```
+        
+    With Symfony:
+
+
+        symfony new 'my_project_name'
+
 , and paste the project in selected folder
 
         - With Composer:
