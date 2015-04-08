@@ -163,6 +163,7 @@ sonata_user:
     # can be orm or mongodb
     google_authenticator:
         enabled: true
+        # REVISAR
         server:  yourserver.com
 
 fos_user:

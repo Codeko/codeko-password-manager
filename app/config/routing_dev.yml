@@ -17,24 +17,20 @@ _errors:
 _main:
     resource: routing.yml
 
-# AcmeDemoBundle routes (to be removed)
-#_acme_demo:
-#    resource: "@AcmeDemoBundle/Resources/config/routing.yml"
-
 _login_principal:
-    resource: "@AcmeLoginPrincipalBundle/Resources/config/routing.yml"
+    resource: "@CodekoLoginPrincipalBundle/Resources/config/routing.yml"
 
 _login:
     pattern:  /
-    defaults: {_controller: AcmeLoginPrincipalBundle:Security:login }
+    defaults: {_controller: CodekoLoginPrincipalBundle:Security:login }
     
 _principal:
     pattern:    /principal
-    defaults:  { _controller: AcmeLoginPrincipalBundle:Principal:principal }
+    defaults:  { _controller: CodekoLoginPrincipalBundle:Principal:principal }
     
 _registro:
     pattern:    /registro
-    defaults:  { _controller: AcmeLoginPrincipalBundle:Registro:registro }
+    defaults:  { _controller: CodekoLoginPrincipalBundle:Registro:registro }
 
 _assetic:
     resource: .

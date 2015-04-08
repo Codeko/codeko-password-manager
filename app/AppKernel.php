@@ -32,7 +32,7 @@ class AppKernel extends Kernel {
             new FOS\UserBundle\FOSUserBundle(),
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
             new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
-            new Acme\LoginPrincipalBundle\AcmeLoginPrincipalBundle(),
+            new Codeko\LoginPrincipalBundle\CodekoLoginPrincipalBundle(),
             // JMS
             new JMS\AopBundle\JMSAopBundle(),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),

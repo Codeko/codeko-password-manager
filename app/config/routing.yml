@@ -1,5 +1,5 @@
-acme_login_principal:
-    resource: "@AcmeLoginPrincipalBundle/Controller/"
+codeko_login_principal:
+    resource: "@CodekoLoginPrincipalBundle/Controller/"
     type: annotation
     prefix: /
 
@@ -15,22 +15,22 @@ _sonata_admin:
 ## Security Routes
 default:
     pattern:   /
-    defaults:  { _controller: AcmeLoginPrincipalBundle:Security:login }
+    defaults:  { _controller: CodekoLoginPrincipalBundle:Security:login }
 
 login:
     pattern:   /login
-    defaults:  { _controller: AcmeLoginPrincipalBundle:Security:login }
+    defaults:  { _controller: CodekoLoginPrincipalBundle:Security:login }
 
 registro:
     pattern:   /registro
-    defaults:  { _controller: AcmeLoginPrincipalBundle:Registro:registro }
+    defaults:  { _controller: CodekoLoginPrincipalBundle:Registro:registro }
     
 login_check:
     pattern:   /login_check
 
 principal:
     pattern:    /principal
-    defaults:  { _controller: AcmeLoginPrincipalBundle:Principal:principal }
+    defaults:  { _controller: CodekoLoginPrincipalBundle:Principal:principal }
 
 logout:
     pattern: /logout  
@@ -47,7 +47,7 @@ fos_user_profile:
     prefix: /profile
 
 fos_user_register:
-    resource: "@AcmeLoginPrincipalBundle/Resources/config/registration.xml"
+    resource: "@CodekoLoginPrincipalBundle/Resources/config/registration.xml"
     prefix: /registro
 
 fos_user_change_password:
