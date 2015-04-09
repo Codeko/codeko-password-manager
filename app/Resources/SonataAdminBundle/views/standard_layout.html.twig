@@ -100,7 +100,7 @@ file that was distributed with this source code.
                 {% endblock %}
                 {% block logo %}
                     {% spaceless %}
-                    <a class="logo" href="{{ url('sonata_admin_dashboard') }}">
+                    <a class="logo" style="background-color:#345c34" href="{{ url('sonata_admin_dashboard') }}">
                         {% if 'single_image' == admin_pool.getOption('title_mode') or 'both' == admin_pool.getOption('title_mode') %}
                             <img src="{{ asset('bundles/codekologinprincipal/images/favicon.ico') }}" alt="{{ admin_pool.title }}">
                         {% endif %}
