@@ -1,7 +1,7 @@
 {% extends base_template %}
 
 {% block content %}
-    <div class="connection">
+    <div class="connection" style="background-color: white">
         <form action="{{ path("sonata_user_admin_security_check") }}" method="post">
 
             {% if error %}
@@ -22,7 +22,7 @@
                 <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
 
                 <div class="controls">
-                    <input type="password" id="password" name="_password" class="big sonata-medium" />
+                    <input type="password" id="password" name="_password" class="big sonata-medium"/>
                 </div>
             </div>
 
@@ -38,4 +38,19 @@
             </div>
         </form>
     </div>
+
+    <style>
+        @media (max-width: 500px) {
+            .connection {
+                position: relative !important;
+                top: 100px !important;
+                left: 240px !important;
+                max-width: 310px;
+            }
+            .sonata-medium{
+                max-width: 265px;
+                padding: auto;
+            }
+        }
+    </style>
 {% endblock content %}
