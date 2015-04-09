@@ -22,6 +22,17 @@ file that was distributed with this source code.
         {% endfor %}
     {% endif %}
 
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %} 
+        <style>
+            body{
+                background: #eeeeee !important;
+            }
+        </style>
+        <script>
+            window.location.href = "{{ path('_principal') }}";
+        </script>
+    {% endif %}
+
     <main class="container">
         <form class="form-signin bounceIn animated" action="{{ path('login_check') }}" method="post">
             <header class="decoracionCabecera"></header>

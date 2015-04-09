@@ -34,7 +34,7 @@ principal:
     
 profile:
     pattern:    /profile
-    defaults:  { _controller: CodekoLoginPrincipalBundle:Profile:profile }
+    defaults:  { _controller: CodekoLoginPrincipalBundle:Profile:show }
 
 logout:
     pattern: /logout  
@@ -46,6 +46,7 @@ fos_user_resetting:
     resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
     prefix: /resetting
 
+# REVISAR ROUTING PROFILE
 fos_user_profile:
     resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
     prefix: /profile
@@ -61,3 +62,7 @@ fos_user_change_password:
 sonata_user:
     resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
     prefix: /admin
+    
+profile_edit:
+    pattern:    /profile/edit
+    defaults:  { _controller: CodekoLoginPrincipalBundle:Profile:edit }

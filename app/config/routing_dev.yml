@@ -38,5 +38,5 @@ _assetic:
     
 _profile:
     pattern:    /profile
-    defaults:  { _controller: CodekoLoginPrincipalBundle:Profile:profile }
+    defaults:  { _controller: CodekoLoginPrincipalBundle:Profile:show }
     
