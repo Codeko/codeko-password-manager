@@ -88,6 +88,12 @@ file that was distributed with this source code.
     </title>
 </head>
 <body {% block body_attributes %}class="sonata-bc skin-black fixed"{% endblock %}>
+    <style>
+        .editable-submit{
+            background-color: #5CB85C !important;
+            border: 0px !important;
+        }
+    </style>
     {% block sonata_header %}
         <header class="header">
             {% block sonata_header_noscript_warning %}
