@@ -165,6 +165,14 @@ sonata_user:
         enabled: true
         # REVISAR
         server:  yourserver.com
+        
+    profile:    
+    # Profile Form (firstname, lastname, etc ...)
+        form:
+            type:               sonata_user_profile
+            handler:            sonata.user.profile.form.handler.default
+            name:               sonata_user_profile_form
+            validation_groups:  [Profile]
 
 fos_user:
     db_driver:      orm 
@@ -180,6 +188,15 @@ fos_user:
     service:
         user_manager: sonata.user.orm.user_manager                      
         # If you're using doctrine orm (use sonata.user.mongodb.group_manager for mongodb)
+        
+    profile:  
+    # Authentication Form
+        form:
+            type:               fos_user_profile
+            handler:            fos_user.profile.form.handler.default
+            name:               fos_user_profile_form
+            validation_groups:  [Authentication] 
+            # Please note : this is not the default value
 
 jms_security_extra:
     # Whether you want to secure all services (true), or only secure specific

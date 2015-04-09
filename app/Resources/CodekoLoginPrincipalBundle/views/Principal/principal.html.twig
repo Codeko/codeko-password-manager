@@ -30,7 +30,7 @@
                 <nav class="col-md-12 col-xs-12 navegadorMenu">
                     <ul class="nav nav-pills">
                         <li role="presentation" class="active"><a role="button" src="#">Principal</a></li>
-                        <li role="presentation"><a role="button" src="#">Opcion 1</a></li>
+                        <li role="presentation"><a role="button" href="{{ path('profile') }}">Ver perfil</a></li>
                         <li role="presentation"><a role="button" src="#">Opcion 2</a></li>
                         <div class="decoracion"></div><div class="decoracion"></div><div class="decoracion"></div>
                     </ul>
@@ -40,7 +40,7 @@
                             <label for="toggle2" class="animate">☰</label>
                             <ul class="animate">
                                 <li class="animate">Principal</li>
-                                <li class="animate">Opcion 1</li>
+                                <li class="animate" role="presentation"><a role="button" href="{{ path('profile') }}">Ver perfil</a></li>
                                 <li class="animate">Opcion 2</li>
                             </ul>
                         </dropdown>

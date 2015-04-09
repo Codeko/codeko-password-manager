@@ -12,6 +12,28 @@
     width: 100%;
 }
 
+#fos_user_profile_form_username, #fos_user_profile_form_email, #fos_user_profile_form_current_password {
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 15px;
+    font-size: 16px;
+    width: 100%;
+}
+
+#fos_user_change_password_form_current_password, #fos_user_change_password_form_new_first, #fos_user_change_password_form_new_second {
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 15px;
+    font-size: 16px;
+    width: 100%;
+}
+
 root { 
     display: block;
 }

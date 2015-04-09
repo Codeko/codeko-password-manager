@@ -9,6 +9,17 @@
             {% endfor %}
         {% endfor %}
     {% endif %}
+    
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %} 
+        <style>
+            body{
+                background: #eeeeee !important;
+            }
+        </style>
+        <script>
+            window.location.href = "{{ path('_principal') }}";
+        </script>
+    {% endif %}
 
     <script type="text/javascript">
         function cargarInput() {

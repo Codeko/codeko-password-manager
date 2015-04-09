@@ -9,6 +9,17 @@
             {% endfor %}
         {% endfor %}
     {% endif %}
+    
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %} 
+        <style>
+            body{
+                background: #eeeeee !important;
+            }
+        </style>
+        <script>
+            window.location.href = "{{ path('_principal') }}";
+        </script>
+    {% endif %}
 
     <script type="text/javascript">
         function cargarInput() {
@@ -49,7 +60,7 @@
         <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register form-signin bounceIn animated" onsubmit="return comprobarClaves()">
             <header class="decoracionCabecera"></header>
             <section class="cuerpoFormulario">
-                <h2 class="form-signin-heading"><img id="headerLogo" src="{{ asset('bundles/Codeko/images/headerLogo.png') }}"/></h2>
+                <h2 class="form-signin-heading"><img id="headerLogo" src="{{ asset('bundles/codekologinprincipal/images/headerLogo.png') }}"/></h2>
                 <h3>Registro de usuario</h3>   
                 {{ form_widget(form) }}
                 <div class="checkbox"></div>

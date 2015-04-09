@@ -1,4 +1,19 @@
-<div class="fos_user_user_show">
-    <p>{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}: {{ user.username }}</p>
-    <p>{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}: {{ user.email }}</p>
-</div>
+<main class="container">
+    <div class="form-signin bounceIn animated">
+        <header class="decoracionCabecera"></header>
+        <section class="cuerpoFormulario">
+            <h2 class="form-signin-heading"><img id="headerLogo" src="{{ asset('bundles/codekologinprincipal/images/headerLogo.png') }}"/></h2>
+            <div class="fos_user_user_show">
+                <p>{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}: {{ user.username }}</p>
+                <p>{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}: {{ user.email }}</p>
+            </div>
+            <button class="btn btn-lg btn-success btn-block" type="button" onclick="window.location.href = '{{ path('profile_edit') }}'">Editar usuario</button>
+            <button class="btn btn-lg btn-success btn-block" type="button" onclick="window.location.href = '{{ path('fos_user_change_password') }}'">Editar contraseña</button>
+            <div class="nuevoUsuario">
+                <ul class="nav nav-pills">
+                    <li><a href="javascript:history.back();">Volver atrás</a></li>
+                </ul>
+            </div>
+        </section>          
+    </div>
+</main>
