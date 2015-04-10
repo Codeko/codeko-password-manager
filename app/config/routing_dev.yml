@@ -21,11 +21,11 @@ _login_principal:
     resource: "@CodekoLoginPrincipalBundle/Resources/config/routing.yml"
 
 _login:
-    pattern:  /
+    pattern:  /login
     defaults: {_controller: CodekoLoginPrincipalBundle:Security:login }
     
 _principal:
-    pattern:    /principal
+    pattern:    /
     defaults:  { _controller: CodekoLoginPrincipalBundle:Principal:principal }
     
 _registro:
