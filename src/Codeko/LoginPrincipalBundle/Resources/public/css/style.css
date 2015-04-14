@@ -419,7 +419,7 @@ ul.nav-pills li {
 
 /*-------------REGISTRO------------- */
 
-#fos_user_registration_form div label {
+#fos_user_registration_form div label, .fos_user_resetting_reset div div label {
     display:none;
 }
 

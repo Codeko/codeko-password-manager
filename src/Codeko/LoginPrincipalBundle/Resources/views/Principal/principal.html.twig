@@ -24,6 +24,10 @@
                         {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
                     </a>
                 {% endif %}
+
+                {% if is_granted('ROLE_PREVIOUS_ADMIN') %} |
+                    <a href="{{ path('_principal', {_switch_user: '_exit'}) }}">Finalizar impersonación</a>
+                {% endif %}
             </div>
             <header class="row"><section class="col-md-12 col-xs-12 cabereraMenu"><img id="headerMenu" src="{{ asset('bundles/codekologinprincipal/images/headerMenu.png') }}"/></section></header>
             <nav class="row">
