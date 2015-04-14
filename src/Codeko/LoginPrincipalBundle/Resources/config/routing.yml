@@ -1,7 +1,11 @@
 ## Security Routes
 default:
     pattern:   /
-    defaults:  { _controller: CodekoLoginPrincipalBundle:Security:login }
+    defaults:  { _controller: CodekoLoginPrincipalBundle:Principal:principal }
+
+principal:
+    pattern:   /principal
+    defaults:  { _controller: CodekoLoginPrincipalBundle:Principal:principal }
 
 login:
     pattern:   /login
