@@ -1,235 +1,153 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: services.yml }
+    - { resource: assetic.yml }
+
+    # Mopa Bootstrap
+    - { resource: mopa/mopa_bootstrap.yml }
+
+    # Knp Paginator
+    - { resource: knp/knp_paginator.yml }
+
+    # FriendOfSymfony Bundles
+    - { resource: fos/fos_comment.yml }
+    - { resource: fos/fos_rest.yml }
+    - { resource: fos/fos_user.yml }
+    #- { resource: fos/fos_elastica.yml }
+
+    #- { resource: bazinga/bazinga_hateos.yml }
+
+    # Sonata Core Bundles
+    - { resource: sonata/sonata_block.yml }
+    - { resource: sonata/sonata_formatter.yml }
+    - { resource: sonata/sonata_cache.yml }
+    - { resource: sonata/sonata_seo.yml }
+    - { resource: sonata/sonata_timeline.yml }
+    - { resource: sonata/sonata_intl.yml }
+    - { resource: sonata/sonata_core.yml }
+
+    # Sonata Feature Bundles
+    - { resource: sonata/sonata_admin.yml }
+    - { resource: sonata/sonata_comment.yml }
+    - { resource: sonata/sonata_page.yml }
+    - { resource: sonata/sonata_media.yml }
+    - { resource: sonata/sonata_news.yml }
+    - { resource: sonata/sonata_user.yml }
+    - { resource: sonata/sonata_notification.yml }
+
+    # Sonata e-commerce bundles
+    - { resource: sonata/sonata_price.yml }
+    - { resource: sonata/sonata_order.yml }
+    - { resource: sonata/sonata_payment.yml }
+    - { resource: sonata/sonata_product.yml }
+    - { resource: sonata/sonata_invoice.yml }
+    - { resource: sonata/sonata_delivery.yml }
+    - { resource: sonata/sonata_customer.yml }
+    - { resource: sonata/sonata_basket.yml }
 
 framework:
-    #esi:             ~
-    translator:      ~
-    secret:          "%secret%"
+    #esi:                   ~
+    translator:
+        fallback:           en
+    secret:                 %secret%
     router:
-        resource: "%kernel.root_dir%/config/routing.yml"
+        resource:           "%kernel.root_dir%/config/routing.yml"
         strict_requirements: ~
-    form:            ~
-    csrf_protection: ~
-    validation:      { enable_annotations: true }
+    form:                    true
+    csrf_protection:         true
+    validation:
+        enable_annotations:  true
     templating:
-        engines: ['twig']
-        #assets_version: SomeVersionScheme
-    default_locale:  "%locale%"
-    trusted_hosts:   ~
-    trusted_proxies: ~
+        engines:             ['twig']
+        #assets_version:      SomeVersionScheme
+
+    default_locale:          %locale%
     session:
-        # handler_id set to null will use default session handler from php.ini
-        handler_id:  ~
-    fragments:       ~
-    http_method_override: true
+        save_path:           %kernel.root_dir%/cache/sessions
+
+    fragments:               ~
+    trusted_proxies:         ~
+    http_method_override:    true
 
 # Twig Configuration
 twig:
-    debug:            "%kernel.debug%"
-    strict_variables: "%kernel.debug%"
+    debug:            %kernel.debug%
+    strict_variables: %kernel.debug%
 
-# Assetic Configuration
-assetic:
-    debug:          "%kernel.debug%"
-    use_controller: false
-    bundles:        [ ]
-    #java: /usr/bin/java
-    filters:
-        cssrewrite: ~
-        #closure:
-        #    jar: "%kernel.root_dir%/Resources/java/compiler.jar"
-        #yui_css:
-        #    jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
+    base_template_class: Sonata\CacheBundle\Twig\TwigTemplate14
+
+    form:
+        resources:
+            - 'SonataFormatterBundle:Form:formatter.html.twig'
+            - 'SonataMediaBundle:Form:media_widgets.html.twig'
+            - 'SonataCoreBundle:Form:datepicker.html.twig'
+
+    exception_controller: 'FOS\RestBundle\Controller\ExceptionController::showAction'
 
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver:   "%database_driver%"
-        host:     "%database_host%"
-        port:     "%database_port%"
-        dbname:   "%database_name%"
-        user:     "%database_user%"
-        password: "%database_password%"
-        charset:  UTF8
-        # if using pdo_sqlite as your database driver:
-        #   1. add the path in parameters.yml
-        #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
-        #   2. Uncomment database_path in parameters.yml.dist
-        #   3. Uncomment next line:
-        #     path:     "%database_path%"
+        default_connection: default
+
+        connections:
+            default:
+                driver:   %database_driver%
+                dbname:   %database_name%
+                user:     %database_user%
+                host:     %database_host%
+                password: %database_password%
+                charset:  UTF8
+
         types:
             json:     Sonata\Doctrine\Types\JsonType
+            currency: Sonata\Component\Currency\CurrencyDoctrineType
 
     orm:
-        auto_generate_proxy_classes: "%kernel.debug%"
-        auto_mapping: true
-        
+        auto_generate_proxy_classes: %kernel.debug%
+        default_entity_manager: default
+
+        entity_managers:
+            default:
+                auto_mapping: true
+                mappings: ~
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
-    spool:     { type: memory }        
-
-sonata_block:
-    default_contexts: [cms]
-    blocks:
-        # Enable the SonataAdminBundle block
-        sonata.admin.block.admin_list:
-            contexts:   [admin]
-        # Your other blocks
-        #sonata.admin_doctrine_orm.block.audit:
-        #    contexts:   [admin]
-
-        sonata.block.service.text:
-        sonata.block.service.rss:
-            
-        # used to display the menu in profile pages
-        sonata.user.block.menu:   
-        # used to display menu option (login option)
-        sonata.user.block.account: 
-
-        # Some specific block from the SonataMediaBundle
-        #sonata.media.block.media:
-        #sonata.media.block.gallery:
-        #sonata.media.block.feature_media:
-            
-sonata_doctrine_orm_admin:
-    # default value is null, so doctrine uses the value defined in the configuration
-    entity_manager: ~
-
-    audit:
-        force: true
-
-    templates:
-        form:
-            - SonataDoctrineORMAdminBundle:Form:form_admin_fields.html.twig
-        filter:
-            - SonataDoctrineORMAdminBundle:Form:filter_admin_fields.html.twig
-        types:
-            list:
-                array:      SonataAdminBundle:CRUD:list_array.html.twig
-                boolean:    SonataAdminBundle:CRUD:list_boolean.html.twig
-                date:       SonataAdminBundle:CRUD:list_date.html.twig
-                time:       SonataAdminBundle:CRUD:list_time.html.twig
-                datetime:   SonataAdminBundle:CRUD:list_datetime.html.twig
-                text:       SonataAdminBundle:CRUD:base_list_field.html.twig
-                trans:      SonataAdminBundle:CRUD:list_trans.html.twig
-                string:     SonataAdminBundle:CRUD:base_list_field.html.twig
-                smallint:   SonataAdminBundle:CRUD:base_list_field.html.twig
-                bigint:     SonataAdminBundle:CRUD:base_list_field.html.twig
-                integer:    SonataAdminBundle:CRUD:base_list_field.html.twig
-                decimal:    SonataAdminBundle:CRUD:base_list_field.html.twig
-                identifier: SonataAdminBundle:CRUD:base_list_field.html.twig
-                currency:   SonataAdminBundle:CRUD:list_currency.html.twig
-                percent:    SonataAdminBundle:CRUD:list_percent.html.twig
-                choice:     SonataAdminBundle:CRUD:list_choice.html.twig
-                url:        SonataAdminBundle:CRUD:list_url.html.twig
-
-            show:
-                array:      SonataAdminBundle:CRUD:show_array.html.twig
-                boolean:    SonataAdminBundle:CRUD:show_boolean.html.twig
-                date:       SonataAdminBundle:CRUD:show_date.html.twig
-                time:       SonataAdminBundle:CRUD:show_time.html.twig
-                datetime:   SonataAdminBundle:CRUD:show_datetime.html.twig
-                text:       SonataAdminBundle:CRUD:base_show_field.html.twig
-                trans:      SonataAdminBundle:CRUD:show_trans.html.twig
-                string:     SonataAdminBundle:CRUD:base_show_field.html.twig
-                smallint:   SonataAdminBundle:CRUD:base_show_field.html.twig
-                bigint:     SonataAdminBundle:CRUD:base_show_field.html.twig
-                integer:    SonataAdminBundle:CRUD:base_show_field.html.twig
-                decimal:    SonataAdminBundle:CRUD:base_show_field.html.twig
-                currency:   SonataAdminBundle:CRUD:base_currency.html.twig
-                percent:    SonataAdminBundle:CRUD:base_percent.html.twig
-                choice:     SonataAdminBundle:CRUD:show_choice.html.twig
-                url:        SonataAdminBundle:CRUD:show_url.html.twig
-                
-knp_menu:
-    # use "twig: false" to disable the Twig extension and the TwigRenderer
-    twig:
-        template: knp_menu.html.twig
-    #  if true, enables the helper for PHP templates
-    templating: false
-    # the renderer to use, list is also available by default
-    default_renderer: twig
-    
-sonata_user:
-    security_acl: true
-    manager_type: orm 
-    # can be orm or mongodb
-    google_authenticator:
-        enabled: true
-        # REVISAR
-        server:  yourserver.com
-        
-    profile:    
-    # Profile Form (firstname, lastname, etc ...)
-        form:
-            type:               sonata_user_profile
-            handler:            sonata.user.profile.form.handler.default
-            name:               sonata_user_profile_form
-            validation_groups:  [Profile]
-
-    admin:
-        user:
-            class: Application\Sonata\UserBundle\Admin\Model\UserAdmin
-            
-    impersonating_route: sonata_user_impersonating
-
-fos_user:
-    db_driver:      orm 
-    # can be orm or odm
-    firewall_name:  main
-    user_class:     Application\Sonata\UserBundle\Entity\User
-
-    group:
-        group_class:   Application\Sonata\UserBundle\Entity\Group
-        group_manager: sonata.user.orm.group_manager                    
-        # If you're using doctrine orm (use sonata.user.mongodb.user_manager for mongodb)
-
-    service:
-        user_manager: sonata.user.orm.user_manager                      
-        # If you're using doctrine orm (use sonata.user.mongodb.group_manager for mongodb)
-        
-    profile:  
-    # Authentication Form
-        form:
-            type:               fos_user_profile
-            handler:            fos_user.profile.form.handler.default
-            name:               fos_user_profile_form
-            validation_groups:  [Authentication] 
-            # Please note : this is not the default value
+    transport: %mailer_transport%
+    host:      %mailer_host%
+    username:  %mailer_user%
+    password:  %mailer_password%
 
 jms_security_extra:
-    # Whether you want to secure all services (true), or only secure specific
-    # services (false); see also below
     secure_all_services: false
 
-    # Enabling this setting will add an additional special attribute "ROLE_IDDQD".
-    # Anybody with this attribute will effectively bypass all security checks.
-    enable_iddqd_attribute: false
+jms_serializer:
+    metadata:
+        directories:
+            - { path: %kernel.root_dir%/../vendor/sonata-project/user-bundle/Resources/config/serializer/FOSUserBundle, namespace_prefix: 'FOS\UserBundle' }
+            - { path: %kernel.root_dir%/../vendor/sonata-project/ecommerce/src/BasketBundle/Resources/config/serializer/Component, namespace_prefix: 'Sonata\Component\Basket' }
+            - { path: %kernel.root_dir%/../vendor/sonata-project/datagrid-bundle/Resources/config/serializer, namespace_prefix: 'Sonata\DatagridBundle' }
 
-    # Enables expression language
-    expressions: false
+# Assetic Configuration
+#assetic:
+#    debug:          %kernel.debug%
+#    use_controller: false
+#    filters:
+#        cssrewrite: ~
+#        # closure:
+#        #     jar: %kernel.root_dir%/java/compiler.jar
+#        # yui_css:
+#        #     jar: %kernel.root_dir%/java/yuicompressor-2.4.2.jar
+#
+#        # Comment out those lines if you wish to use the less version of bootstrap
+#        less:
+#            node: /usr/local/bin/node
+#            node_paths: [/usr/local/node/node-v0.10.22/lib/node_modules]
+#            apply_to: "\.less$"
 
-    # Allows you to disable some, or all built-in voters
-    voters:
-        disable_authenticated: false
-        disable_role:          false
-        disable_acl:           false
+nelmio_api_doc: ~
 
-    # Allows you to specify access control rules for specific methods, such
-    # as controller actions
-    method_access_control: { }
-    
-parameters:
-    sonata.user.admin.user.class: Application\Sonata\UserBundle\Admin\Model\UserAdmin
-    sonata.user.admin.user.entity: Application\Sonata\UserBundle\Entity\User
-
-sonata_admin:
-    security:
-        handler: sonata.admin.security.handler.role
+sensio_framework_extra:
+    view:    { annotations: false }
+    router:  { annotations: true }
+    request: { converters:  true }
