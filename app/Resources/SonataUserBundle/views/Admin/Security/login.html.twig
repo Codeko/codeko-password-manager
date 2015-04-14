@@ -1,17 +1,17 @@
 {% extends base_template %}
 
 {% block content %}
-    <div class="connection" style="background-color: white">
+    <div class="connection">
         <form action="{{ path("sonata_user_admin_security_check") }}" method="post">
 
             {% if error %}
-                <div class="alert alert-error">{{ error|trans({}, 'SonataUserBundle') }}</div>
+                <div class="alert alert-error">{{ error|trans({}, 'FOSUserBundle') }}</div>
             {% endif %}
 
             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
             <div class="control-group">
-                <label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+                <label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }} / {{ 'form.email'|trans({}, 'FOSUserBundle') }}</label>
 
                 <div class="controls">
                     <input type="text" id="username" name="_username" value="{{ last_username }}" class="big sonata-medium"/>
@@ -22,7 +22,7 @@
                 <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
 
                 <div class="controls">
-                    <input type="password" id="password" name="_password" class="big sonata-medium"/>
+                    <input type="password" id="password" name="_password" class="big sonata-medium" />
                 </div>
             </div>
 
@@ -33,24 +33,9 @@
                 </label>
             </div>
 
-            <div class="form-actions" style="margin-bottom: 10px; text-align: center">
-                <input type="submit" style="background-color: #5CB85C; border: 0px" class="btn btn-primary" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
+            <div class="form-actions" style="text-align: center">
+                <input type="submit" class="btn btn-primary" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" style="background-color: #5CB85C; border: 0px; margin-bottom: 15px"/>
             </div>
         </form>
     </div>
-
-    <style>
-        @media (max-width: 500px) {
-            .connection {
-                position: relative !important;
-                top: 100px !important;
-                left: 240px !important;
-                max-width: 310px;
-            }
-            .sonata-medium{
-                max-width: 265px;
-                padding: auto;
-            }
-        }
-    </style>
 {% endblock content %}

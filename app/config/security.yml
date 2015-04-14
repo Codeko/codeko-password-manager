@@ -13,8 +13,8 @@ security:
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
-        SONATA:
-            - ROLE_SONATA_PAGE_ADMIN_PAGE_EDIT 
+        #SONATA:
+            #- ROLE_SONATA_PAGE_ADMIN_PAGE_EDIT 
             # if you are using acl then this line must be commented
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
@@ -26,10 +26,7 @@ security:
                     admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
                     
         fos_userbundle:
-            id: fos_user.user_manager
-            
-        #custom:
-            #id: codeko_loginprincipal.my_provider
+            id: fos_user.user_provider.username_email    
 
     # the main part of the security, where you can set up firewalls
     # for specific sections of your app
@@ -48,7 +45,7 @@ security:
                 login_path:     /admin/login
                 use_forward:    false
                 check_path:     /admin/login_check
-                failure_path:   null
+                failure_path:   /admin/login
             logout:
                 path:           /admin/logout
             anonymous:          true
@@ -73,7 +70,8 @@ security:
             logout:             
                 path: /logout
                 target: /login
-            anonymous:          true           
+            anonymous:          true      
+            switch_user: true
 
     # with these settings you can restrict or allow access for different parts
     # of your application based on roles, ip, host or methods
@@ -83,12 +81,12 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-
+        - { path: ^/_error, role: IS_AUTHENTICATED_ANONYMOUSLY }
+                
         #
         - { path: ^/registro, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/profile, role: [ROLE_ADMIN, ROLE_USER, ROLE_SONATA_ADMIN]}
         - { path: ^/principal, role: [ROLE_ADMIN, ROLE_USER, ROLE_SONATA_ADMIN]}
-        - { path: ^/, role: [ROLE_ADMIN, ROLE_USER, ROLE_SONATA_ADMIN]}
 
         # Admin login page needs to be access without credential
         - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
@@ -99,8 +97,7 @@ security:
         # This config requires being logged for the whole site and having the admin role for the admin part.
         # Change these rules to adapt them to your needs
         - { path: ^/admin/, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
-        - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/.*, role: [ROLE_ADMIN, ROLE_USER, ROLE_SONATA_ADMIN]}
         - { path: ^/profile/.*, role: [ROLE_ADMIN, ROLE_USER, ROLE_SONATA_ADMIN]}
-
-
-        
+     
+    

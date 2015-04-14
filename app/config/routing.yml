@@ -46,7 +46,6 @@ fos_user_resetting:
     resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
     prefix: /resetting
 
-# REVISAR ROUTING PROFILE
 fos_user_profile:
     resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
     prefix: /profile
@@ -66,3 +65,8 @@ sonata_user:
 profile_edit:
     pattern:    /profile/edit
     defaults:  { _controller: CodekoLoginPrincipalBundle:Profile:edit }
+    
+# REVISAR SUPLANTACION
+sonata_user_impersonating:
+    pattern:  /admin/dashboard
+    defaults: { _controller: SonataPageBundle:Page:catchAll } 

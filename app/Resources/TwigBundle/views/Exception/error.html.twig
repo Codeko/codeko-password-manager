@@ -13,10 +13,10 @@
     <body>
         <div class="board">
             <p id="error">error</p>
-            <p id="code">{{ status_code }}</p>
-            
+            <p id="code">{{ status_code }}</p>           
         </div>
-            <p id="text">An Error Occurred: {{ status_text }}</p>
+        <p id="text">{{ 'error.ocurred'|trans({}, 'FOSUserBundle') }}: {{ status_text|trans({}, 'FOSUserBundle') }}
+            </br><a id="atras" href="javascript:history.back();">Volver atrás</a></p>
         <script src="{{ asset('bundles/codekologinprincipal/js/error.js') }}" type="text/javascript"></script>
     </body>
 </html>
