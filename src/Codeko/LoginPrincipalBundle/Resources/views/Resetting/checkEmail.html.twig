@@ -1,0 +1,21 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+    <main class="container">
+        <form class="form-signin bounceIn animated">
+            <header class="decoracionCabecera"></header>
+            <section class="cuerpoFormulario">
+                <h2 class="form-signin-heading"><img id="headerLogo" src="{{ asset('bundles/codekologinprincipal/images/headerLogo.png') }}"/></h2>    
+                <p>{{ 'resetting.check_email'|trans({'%email%': email}, 'FOSUserBundle') }}</p>
+                <div class="checkbox">               
+                </div>           
+                <div class="nuevoUsuario">
+                    <ul class="nav nav-pills">
+                        <li><a href="{{ path('_login') }}">Volver atrás</a></li>
+                    </ul>
+                </div>
+            </section>          
+        </form>
+    </main>
+{% endblock %}
+

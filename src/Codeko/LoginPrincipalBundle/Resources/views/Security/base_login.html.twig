@@ -1,0 +1,65 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends "CodekoLoginPrincipalBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+    {% if session is defined %}
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash-{{ type }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %} 
+        <style>
+            body{
+                background: #eeeeee !important;
+            }
+        </style>
+        <script>
+            window.location.href = "{{ path('_principal') }}";
+        </script>
+    {% endif %}
+
+    <main class="container">
+        <form class="form-signin bounceIn animated" action="{{ path('login_check') }}" method="post">
+            <header class="decoracionCabecera"></header>
+            <section class="cuerpoFormulario">
+                <h2 class="form-signin-heading"><img id="headerLogo" src="{{ asset('bundles/codekologinprincipal/images/headerLogo.png') }}"/></h2>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />    
+                <label for="inputUsuario" class="sr-only">Usuario</label>
+                <input type="text" id="inputUsuario" class="form-control" name="_username" placeholder="{{ 'security.login.username'|trans({}, 'FOSUserBundle') }} / {{ 'form.email'|trans({}, 'FOSUserBundle') }}" maxlength="30" title="Introduzca un nombre de usuario" alt = "Nombre de usuario" required>
+                <label for="inputPassword" class="sr-only">Contraseña</label>
+                <input type="password" id="inputPassword" class="form-control" name="_password" placeholder="Contraseña" maxlength="30" title="Introduzca una contraseña" alt = "Contraseña" required>
+                <div class="checkbox">
+                    <a href="{{ path('fos_user_resetting_request') }}">{{ "security.login.forgot"|trans({}, 'FOSUserBundle') }}</a>
+                </div>
+                {% if error %} 
+                    <div id="login-error" class="alert alert-danger">
+                        {{ error.message|trans({}, 'FOSUserBundle') }}
+                    </div>
+                {% endif %}
+                <button class="btn btn-lg btn-success btn-block" type="submit">Acceder</button>
+                <div class="nuevoUsuario">
+                    <ul class="nav nav-pills">
+                        <li><a href="{{ path('_registro') }}">Registrar nuevo usuario</a></li>
+                    </ul>
+                </div>
+            </section>          
+        </form>
+    </main>
+{% endblock fos_user_content %}
+
+
