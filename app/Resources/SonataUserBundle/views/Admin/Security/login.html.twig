@@ -1,41 +1,52 @@
 {% extends base_template %}
 
 {% block content %}
-    <div class="connection">
-        <form action="{{ path("sonata_user_admin_security_check") }}" method="post">
 
-            {% if error %}
-                <div class="alert alert-error">{{ error|trans({}, 'FOSUserBundle') }}</div>
-            {% endif %}
-
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-
-            <div class="control-group">
-                <label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }} / {{ 'form.email'|trans({}, 'FOSUserBundle') }}</label>
-
-                <div class="controls">
-                    <input type="text" id="username" name="_username" value="{{ last_username }}" class="big sonata-medium"/>
+    {% if session is defined %}
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash-{{ type }}">
+                    {{ message }}
                 </div>
-            </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
 
-            <div class="control-group">
-                <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
-
-                <div class="controls">
-                    <input type="password" id="password" name="_password" class="big sonata-medium" />
+    <main class="container">
+        <form class="form-signin bounceIn animated" action="{{ path("sonata_user_admin_security_check") }}" method="post">
+            <header class="decoracionCabecera"></header>
+            <section class="cuerpoFormulario">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                <h2 class="form-signin-heading"><img id="headerLogo" src="{{ asset('bundles/codekologinprincipal/images/headerLogo.png') }}"/></h2> 
+                <div class="control-group">
+                    <label for="username" class="sr-only">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }} / {{ 'form.email'|trans({}, 'FOSUserBundle') }}</label>
+                    <div class="controls">
+                        <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" placeholder="{{ 'security.login.username'|trans({}, 'FOSUserBundle') }} / {{ 'form.email'|trans({}, 'FOSUserBundle') }}" maxlength="30" title="Introduzca un nombre de usuario" alt = "Nombre de usuario" required/>
+                    </div>
                 </div>
-            </div>
-
-            <div class="control-group">
-                <label for="remember_me">
-                    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-                    {{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}
-                </label>
-            </div>
-
-            <div class="form-actions" style="text-align: center">
-                <input type="submit" class="btn btn-primary" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" style="background-color: #5CB85C; border: 0px; margin-bottom: 15px"/>
-            </div>
+                <div class="control-group">
+                    <label for="password" class="sr-only">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+                    <div class="controls">
+                        <input type="password" id="password" name="_password" class="form-control" placeholder="Contraseña" maxlength="30" title="Introduzca una contraseña" alt = "Contraseña" required/>
+                    </div>
+                </div>
+                <div class="control-group checkbox">
+                    <label for="remember_me">
+                        <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                        {{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <a href="{{ path('fos_user_resetting_request') }}">{{ "security.login.forgot"|trans({}, 'FOSUserBundle') }}</a>
+                </div>
+                {% if error %} 
+                    <div id="login-error" class="alert alert-danger">
+                        {{ error.message|trans({}, 'FOSUserBundle') }}
+                    </div>
+                {% endif %}
+                <input type="submit" class="btn btn-lg btn-success btn-block" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}"/>
+            </section> 
         </form>
-    </div>
+    </main>
+
 {% endblock content %}
