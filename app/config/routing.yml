@@ -1,46 +1,36 @@
-codeko_login_principal:
-    resource: "@CodekoLoginPrincipalBundle/Controller/"
-    type: annotation
-    prefix: /
+#codeko_login_principal:
+ #   resource: "@CodekoLoginPrincipalBundle/Controller/"
+  #  type: annotation
+   # prefix: /
 
 admin:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
-    prefix: /admin
+    prefix: /
 
-_sonata_admin:
-    resource: .
-    type: sonata_admin
-    prefix: /admin
+
     
 ## Security Routes
 default:
     pattern:   /
-    defaults:  { _controller: CodekoLoginPrincipalBundle:Pincipal:principal }
+    #defaults:  { _controller: CodekoLoginPrincipalBundle:Pincipal:principal }
 
-login:
-    pattern:   /login
-    defaults:  { _controller: CodekoLoginPrincipalBundle:Security:login }
+#registro:
+ #   pattern:   /registro
+  #  defaults:  { _controller: CodekoLoginPrincipalBundle:Registro:registro }
 
-registro:
-    pattern:   /registro
-    defaults:  { _controller: CodekoLoginPrincipalBundle:Registro:registro }
+#principal:
+ #   pattern:    /principal
+  #  defaults:  { _controller: CodekoLoginPrincipalBundle:Principal:principal }
     
-login_check:
-    pattern:   /login_check
-
-principal:
-    pattern:    /principal
-    defaults:  { _controller: CodekoLoginPrincipalBundle:Principal:principal }
-    
-profile:
-    pattern:    /profile
-    defaults:  { _controller: CodekoLoginPrincipalBundle:Profile:show }
+#profile:
+ #   pattern:    /profile
+  #  defaults:  { _controller: CodekoLoginPrincipalBundle:Profile:show }
 
 logout:
     pattern: /logout  
   
 fos_user_security:
-    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+    resource: "@SonataUserBundle/Resources/config/routing/admin_security.xml"
 
 fos_user_resetting:
     resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
@@ -60,13 +50,17 @@ fos_user_change_password:
     
 sonata_user:
     resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
-    prefix: /admin
+    prefix: /
     
-profile_edit:
-    pattern:    /profile/edit
-    defaults:  { _controller: CodekoLoginPrincipalBundle:Profile:edit }
+#login:
+ #   pattern: /login
+  #  defaults: { _controller: SonataUserBundle:AdminSecurity:login }
+    
+#profile_edit:
+ #   pattern:    /profile/edit
+  #  defaults:  { _controller: CodekoLoginPrincipalBundle:Profile:edit }
     
 # REVISAR SUPLANTACION
 sonata_user_impersonating:
-    pattern:  /admin/dashboard
+    pattern:  /dashboard
     defaults: { _controller: SonataPageBundle:Page:catchAll } 
