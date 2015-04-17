@@ -11,6 +11,7 @@ security:
 
     # http://symfony.com/doc/current/book/security.html#hierarchical-roles
     role_hierarchy:
+        ROLE_USER:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
         #SONATA:
@@ -42,12 +43,12 @@ security:
             context:            user
             form_login:
                 provider:       fos_userbundle
-                csrf_provider: form.csrf_provider
+                csrf_provider:  form.csrf_provider
                 login_path:     /login
                 use_forward:    false
                 check_path:     /login_check
                 failure_path:   /login
-                default_target_path: /dashboard
+                default_target_path: /
             logout:
                 path:           /logout
                 target:         /login
@@ -75,21 +76,18 @@ security:
                 path: /logout
                 target: /login
             anonymous:          true      
-            switch_user: true
 
     # with these settings you can restrict or allow access for different parts
     # of your application based on roles, ip, host or methods
     # http://symfony.com/doc/current/cookbook/security/access_control.html
     access_control:
         # URL of FOSUserBundle which need to be available to anonymous users
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/_error, role: IS_AUTHENTICATED_ANONYMOUSLY }
                 
         #
         - { path: ^/registro, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/profile, role: [ROLE_ADMIN, ROLE_USER, ROLE_SONATA_ADMIN]}
-        - { path: ^/principal, role: [ROLE_ADMIN, ROLE_USER, ROLE_SONATA_ADMIN]}
 
         # Admin login page needs to be access without credential
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
@@ -99,8 +97,8 @@ security:
         # Secured part of the site
         # This config requires being logged for the whole site and having the admin role for the admin part.
         # Change these rules to adapt them to your needs
-        - { path: ^/dashboard, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN, ROLE_USER] }
-        - { path: ^/.*, role: [ROLE_ADMIN, ROLE_USER, ROLE_SONATA_ADMIN]}
         - { path: ^/profile/.*, role: [ROLE_ADMIN, ROLE_USER, ROLE_SONATA_ADMIN]}
+        - { path: ^/, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN, ROLE_USER] }
+        - { path: ^/.*, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN, ROLE_USER] }
      
     

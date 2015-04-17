@@ -17,24 +17,9 @@ _errors:
 _main:
     resource: routing.yml
 
-#_login_principal:
-#    resource: "@CodekoLoginPrincipalBundle/Resources/config/routing.yml"
-    
-#_principal:
-#    pattern:    /
-#    defaults:  { _controller: CodekoLoginPrincipalBundle:Principal:principal }
-    
-#_registro:
-#    pattern:    /registro
-#    defaults:  { _controller: CodekoLoginPrincipalBundle:Registro:registro }
-
 _assetic:
     resource: .
     type:     assetic
-    
-#_profile:
-#    pattern:    /profile
-#    defaults:  { _controller: CodekoLoginPrincipalBundle:Profile:show }
     
 _sonata_admin:
     resource: .

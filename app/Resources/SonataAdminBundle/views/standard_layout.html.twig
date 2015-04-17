@@ -34,8 +34,8 @@ file that was distributed with this source code.
             {% for stylesheet in admin_pool.getOption('stylesheets', []) %}
                 <link rel="stylesheet" href="{{ asset(stylesheet) }}">                             
             {% endfor %}
-            <link rel="shortcut icon" type="image/x-icon" href="{{ asset('bundles/codekologinprincipal/images/favicon.ico') }}" />
-            <link href="{{ asset('bundles/codekologinprincipal/css/style.css') }}" rel="stylesheet">
+            <link rel="shortcut icon" type="image/x-icon" href="{{ asset('bundles/applicationsonatauser/images/favicon.ico') }}" />
+            <link href="{{ asset('bundles/applicationsonatauser/css/style.css') }}" rel="stylesheet">
             <!-- Bootstrap core CSS -->
             <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
         {% endblock %}
@@ -117,9 +117,9 @@ file that was distributed with this source code.
             {% endblock %}
             {% block logo %}
                 {% spaceless %}
-                    <a class="logo" href="{{ url('sonata_admin_dashboard') }}">
+                    <a class="logo" href="{{ url('sonata_admin_redirect') }}">
                         {% if 'single_image' == admin_pool.getOption('title_mode') or 'both' == admin_pool.getOption('title_mode') %}
-                            <img src="{{ asset('bundles/codekologinprincipal/images/favicon.ico') }}" alt="{{ admin_pool.title }}">
+                            <img src="{{ asset('bundles/applicationsonatauser/images/favicon.ico') }}" alt="{{ admin_pool.title }}">
                         {% endif %}
                         {% if 'single_text' == admin_pool.getOption('title_mode') or 'both' == admin_pool.getOption('title_mode') %}
                             <span>{{ 'PasswordManager' }}</span>
@@ -154,7 +154,7 @@ file that was distributed with this source code.
                                                     {% if not loop.last  %}
                                                         <li>
                                                             {% if menu.uri is not empty %}
-                                                                <a href="{{ menu.uri }}">{{ menu.label|raw }}</a>
+                                                                <a href="{{ url('sonata_admin_redirect') }}">{{ menu.label|raw }}</a>
                                                             {% else %}
                                                                 {{ menu.label }}
                                                             {% endif %}
@@ -184,10 +184,12 @@ file that was distributed with this source code.
                                     <li class="dropdown user-menu">
                                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                             <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                                        </a>
+                                        </a>                                       
                                         <ul class="dropdown-menu dropdown-user">
+                                            <li><a href="{{ path('fos_user_profile_show') }}">Ver Perfil</a></li>      
+                                            <li><a href="{{ path('fos_user_profile_edit') }}">Editar Perfil</a></li>  
                                             {% include admin_pool.getTemplate('user_block') %}
-                                        </ul>
+                                        </ul>                                       
                                     </li>
                                 </ul>
                             </div>
@@ -266,26 +268,7 @@ file that was distributed with this source code.
                                 {% endif %}
                             {% endblock side_bar_nav %}
                             {% block side_bar_after_nav %}
-                                <style>
-                                    .enlacesBarraAdmin{
-                                        color: black !important;
-                                        font-size: 18px;  
-                                        border: 0px;
-
-                                    }
-
-                                    .parrafoEnlaceAdmin{
-                                        padding-bottom: 10px;         
-                                        cursor: pointer;
-                                        border: 0px;
-                                    }
-
-                                    .parrafoEnlaceAdmin:hover{
-                                        background-color: #468746;
-                                        border: 0px;
-                                    }
-                                </style>
-                                <p class="text-center small parrafoEnlaceAdmin" style="border-top: 1px solid #444444; padding-top: 10px" onclick="document.getElementById('enlPrincipal').click();"><a class="enlacesBarraAdmin" id="enlPrincipal" href="http://www.passmanager/app_dev.php/" rel="noreferrer">Principal</a></p>
+                                Barrica
                             {% endblock %}
                         {% endblock sonata_side_nav %}
                     </section>

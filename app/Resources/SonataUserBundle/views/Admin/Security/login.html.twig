@@ -1,50 +1,93 @@
 {% extends base_template %}
 
-{% block content %}
-
-    {% if session is defined %}
-        {% for type, messages in app.session.flashbag.all() %}
-            {% for message in messages %}
-                <div class="flash-{{ type }}">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endfor %}
-    {% endif %}
-
+{% block content %} 
+    
+    <style>
+        .btn-success {
+            color: #FFF !important;
+            background-color: #5CB85C !important;
+            border-color: #4CAE4C !important;
+        }
+        .nav.nav-pills > li > a {
+            color: #337AB7 !important;
+            border-radius: 4px !important;
+        }
+        .header {
+            display: none !important;
+        }
+        .left-side {
+            display: none !important;
+        }
+        .content {
+            background: #eeeeee !important; /* Old browsers */
+            background: -moz-linear-gradient(top,  #f8f8f8 0%, #c6c6c6 100%) !important; /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f8f8f8), color-stop(100%,#c6c6c6)) !important; /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top,  #f8f8f8 0%,#c6c6c6 100%) !important; /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top,  #f8f8f8 0%,#c6c6c6 100%) !important; /* Opera 11.10+ */
+            background: -ms-linear-gradient(top,  #f8f8f8 0%,#c6c6c6 100%) !important; /* IE10+ */
+            background: linear-gradient(to bottom,  #f8f8f8 0%,#c6c6c6 100%) !important; /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8f8f8', endColorstr='#c6c6c6',GradientType=0 ) !important; /* IE6-9 */
+        }
+        .right-side {
+            position: fixed;
+            top: 0px !important;
+            left: 0px !important;
+            margin:0px !important;
+            width: 100% !important;
+            height: 100% !important;
+        }
+        .forgot {
+            float:right;
+        }
+        div.hover {
+            border-color: #5CB85C !important;
+        }
+        @media (max-width: 500px) {
+            .container {
+                margin-top: -20px;
+                padding-right: 0px;
+                padding-left: 0px;
+                height: 100%;
+            }
+            .right-side{
+                position: absolute;
+            }
+            .remember {
+                margin-left: -30px;
+            }
+            .forgot {
+                margin-right: -10px;
+            }
+        }
+    </style>
     <main class="container">
         <form class="form-signin bounceIn animated" action="{{ path("sonata_user_admin_security_check") }}" method="post">
             <header class="decoracionCabecera"></header>
             <section class="cuerpoFormulario">
+                <h2 class="form-signin-heading"><img id="headerLogo" src="{{ asset('bundles/applicationsonatauser/images/headerLogo.png') }}"/></h2> 
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-                <h2 class="form-signin-heading"><img id="headerLogo" src="{{ asset('bundles/codekologinprincipal/images/headerLogo.png') }}"/></h2> 
-                <div class="control-group">
-                    <label for="username" class="sr-only">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }} / {{ 'form.email'|trans({}, 'FOSUserBundle') }}</label>
-                    <div class="controls">
-                        <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" placeholder="{{ 'security.login.username'|trans({}, 'FOSUserBundle') }} / {{ 'form.email'|trans({}, 'FOSUserBundle') }}" maxlength="30" title="Introduzca un nombre de usuario" alt = "Nombre de usuario" required/>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label for="password" class="sr-only">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
-                    <div class="controls">
-                        <input type="password" id="password" name="_password" class="form-control" placeholder="Contraseña" maxlength="30" title="Introduzca una contraseña" alt = "Contraseña" required/>
-                    </div>
-                </div>
-                <div class="control-group checkbox">
-                    <label for="remember_me">
+                <label for="username" class="sr-only">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }} / {{ 'form.email'|trans({}, 'FOSUserBundle') }}</label>
+                <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" placeholder="{{ 'security.login.username'|trans({}, 'FOSUserBundle') }} / {{ 'form.email'|trans({}, 'FOSUserBundle') }}" maxlength="30" title="Introduzca un nombre de usuario" alt = "Nombre de usuario" required/>
+                <label for="password" class="sr-only">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+                <input type="password" id="password" name="_password" class="form-control" placeholder="Contraseña" maxlength="30" title="Introduzca una contraseña" alt = "Contraseña" required/>
+                <div class="checkbox">
+                    <label class="remember" for="remember_me">
                         <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
                         {{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}
                     </label>
-                </div>
-                <div class="checkbox">
-                    <a href="{{ path('fos_user_resetting_request') }}">{{ "security.login.forgot"|trans({}, 'FOSUserBundle') }}</a>
+                    <a class="forgot" href="{{ path('fos_user_resetting_request') }}">{{ "security.login.forgot"|trans({}, 'FOSUserBundle') }}</a>
                 </div>
                 {% if error %} 
                     <div id="login-error" class="alert alert-danger">
-                        {{ error.message|trans({}, 'FOSUserBundle') }}
+                        {{ error|trans({}, 'FOSUserBundle') }}
                     </div>
                 {% endif %}
-                <input type="submit" class="btn btn-lg btn-success btn-block" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}"/>
+                <button type="submit" class="btn btn-lg btn-success btn-block" id="_submit" name="_submit">{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>
+                <div class="nuevoUsuario">
+                    <ul class="nav nav-pills">
+                        <li><a href="{{ path('fos_user_registration_register') }}">Registrar nuevo usuario</a></li>
+                    </ul>
+                </div>
             </section> 
         </form>
     </main>
