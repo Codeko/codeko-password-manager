@@ -233,3 +233,4 @@ parameters:
 #sonata_admin:
  #   security:
         #handler: sonata.admin.security.handler.role
+        
