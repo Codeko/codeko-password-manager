@@ -50,8 +50,7 @@ class AppKernel extends Kernel {
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             
             // BUNDLES PROPIOS
-            new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
-            new Codeko\LoginPrincipalBundle\CodekoLoginPrincipalBundle(),
+            new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),           
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

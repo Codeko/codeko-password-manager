@@ -1,49 +1,21 @@
-codeko_login_principal:
-    resource: "@CodekoLoginPrincipalBundle/Controller/"
-    type: annotation
-    prefix: /
-
 admin:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
-    prefix: /admin
+    prefix: /
+    defaults:  { _controller: SonataAdminBundle:Core:dashboard }
 
-_sonata_admin:
-    resource: .
-    type: sonata_admin
-    prefix: /admin
-    
 ## Security Routes
 default:
     pattern:   /
-    defaults:  { _controller: CodekoLoginPrincipalBundle:Pincipal:principal }
 
 login:
-    pattern:   /login
-    defaults:  { _controller: CodekoLoginPrincipalBundle:Security:login }
+    pattern: /login
+    defaults: { _controller: SonataUserBundle:AdminSecurity:login }    
 
-registro:
-    pattern:   /registro
-    defaults:  { _controller: CodekoLoginPrincipalBundle:Registro:registro }
-    
-login_check:
-    pattern:   /login_check
-
-principal:
-    pattern:    /principal
-    defaults:  { _controller: CodekoLoginPrincipalBundle:Principal:principal }
-    
-profile:
-    pattern:    /profile
-    defaults:  { _controller: CodekoLoginPrincipalBundle:Profile:show }
-
-logout:
-    pattern: /logout  
-  
 fos_user_security:
-    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+    resource: "@SonataUserBundle/Resources/config/routing/admin_security.xml"
 
 fos_user_resetting:
-    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    resource: "@SonataUserBundle/Resources/config/routing/sonata_resetting_1.xml"
     prefix: /resetting
 
 fos_user_profile:
@@ -51,22 +23,21 @@ fos_user_profile:
     prefix: /profile
 
 fos_user_register:
-    resource: "@CodekoLoginPrincipalBundle/Resources/config/registration.xml"
+    resource: "@SonataUserBundle/Resources/config/routing/sonata_registration_1.xml"
     prefix: /registro
+
+sonata_admin_dashboard:
+    path: /dashboard
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: sonata_admin_redirect
+        permanent: true
 
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
     
-sonata_user:
-    resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
-    prefix: /admin
-    
-profile_edit:
-    pattern:    /profile/edit
-    defaults:  { _controller: CodekoLoginPrincipalBundle:Profile:edit }
-    
 # REVISAR SUPLANTACION
 sonata_user_impersonating:
-    pattern:  /admin/dashboard
+    pattern:  /
     defaults: { _controller: SonataPageBundle:Page:catchAll } 

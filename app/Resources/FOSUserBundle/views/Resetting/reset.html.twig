@@ -1,0 +1,15 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %} 
+        <style>
+            body{
+                background: #eeeeee !important;
+            }
+        </style>
+        <script>
+            window.location.href = "{{ path('default') }}";
+        </script>
+    {% endif %}
+    {% include "FOSUserBundle:Resetting:reset_content.html.twig" %}
+{% endblock fos_user_content %}
