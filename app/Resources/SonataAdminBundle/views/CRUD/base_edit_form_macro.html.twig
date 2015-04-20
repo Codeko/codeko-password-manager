@@ -35,19 +35,39 @@
         function traducirRoles() {
             var elements = document.getElementsByTagName('span');
             for (var i = 0; i < elements.length; i++) {
-                if (elements[i].innerHTML.search("ROLE_SUPER_ADMIN: ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH") !== -1) {
-                    elements[i].innerHTML = " SUPER ADMINISTRADOR";
+                if (elements[i].innerHTML.search("ROLE_USER:") !== -1) {
+                    elements[i].innerHTML = " USUARIO";
                 } else if (elements[i].innerHTML.search("ROLE_ADMIN: ROLE_USER") !== -1) {
                     elements[i].innerHTML = " ADMINISTRADOR";
+                } else if (elements[i].innerHTML.search("ROLE_SUPER_ADMIN: ROLE_USER, ROLE_ADMIN, ROLE_SONATA_ADMIN, ROLE_ALLOWED_TO_SWITCH") !== -1) {
+                    elements[i].innerHTML = " SUPER ADMINISTRADOR";
+                } else if (elements[i].innerHTML.search("ROLE_SONATA_ADMIN") !== -1) {
+                    elements[i].innerHTML = " ADMINISTRADOR SONATA (Necesario para gestión panel)";
                 } else if (elements[i].innerHTML.search("ROLE_ALLOWED_TO_SWITCH") !== -1) {
                     elements[i].innerHTML = " PUEDE SUPLANTAR";
-                } else if (elements[i].innerHTML.search("ROLE_USER") !== -1) {
-                    elements[i].innerHTML = " USUARIO";
                 }
-                
+
             }
         }
 
         traducirRoles();
+    </script>
+
+    <script>
+        function traducirGenero() {
+            var elements = document.getElementsByTagName('option');
+            for (var i = 0; i < elements.length; i++) {
+                if (elements[i].innerHTML.search("gender_unknown") !== -1) {
+                    elements[i].innerHTML = " Desconocido";
+                } else if (elements[i].innerHTML.search("gender_male") !== -1) {
+                    elements[i].innerHTML = " Hombre";
+                } else if (elements[i].innerHTML.search("gender_female") !== -1) {
+                    elements[i].innerHTML = " Mujer";
+                }
+
+            }
+        }
+
+        traducirGenero();
     </script>
 {% endmacro %}
