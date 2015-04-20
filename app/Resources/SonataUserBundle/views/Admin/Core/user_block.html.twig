@@ -1,14 +1,46 @@
 {% block user_block %}
-    {% if app.user %}
-        
-        {% if is_granted('ROLE_PREVIOUS_ADMIN') and sonata_user.impersonating %}
-            {{ app.user.username }}
-            <a href="{{ url(sonata_user.impersonating.route, sonata_user.impersonating.parameters| merge({'_switch_user': '_exit'})) }}">(exit)</a>
-        {% else %}
-            {{ app.user }}
-        {% endif %}
-        
 
-        - <a href="{{ url('sonata_user_admin_security_logout') }}">{{ 'user_block_logout'|trans({}, 'SonataUserBundle') }}</a>
+    <link href="http://fonts.googleapis.com/css?family=Monoton" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bundles/applicationsonatauser/css/profile.css') }}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <link href='http://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('bundles/applicationsonatauser/images/favicon.ico') }}" />
+
+    {% if app.user %}
+        <div class="container altura">
+            <!--<div class="row profile">-->
+                <div class="col-md-3">
+                    <div class="profile-sidebar">
+                        <!-- SIDEBAR USERPIC -->
+                        <!--<div class="profile-userpic">
+                            <img src="http://keenthemes.com/preview/metronic/theme/assets/admin/pages/media/profile/profile_user.jpg" class="img-responsive" alt="">
+                        </div>-->
+                        <!-- END SIDEBAR USERPIC -->
+                        <!-- SIDEBAR USER TITLE -->
+                        <div class="profile-usertitle">
+                            <div class="profile-usertitle-name">
+                                {{ app.user.username }}
+                            </div>
+                        </div>
+                        <!-- END SIDEBAR USER TITLE -->
+                        <!-- SIDEBAR BUTTONS -->
+                        <div class="profile-userbuttons">    
+                            <button type="button" class="btn btn-success btn-sm" onclick="window.location.href = '{{ path('fos_user_profile_show') }}'">Perfil</button>
+                            <button type ="button" class="btn btn-danger btn-sm" onclick="window.location.href = '{{ url('sonata_user_admin_security_logout') }}'">{{ 'user_block_logout'|trans({}, 'SonataUserBundle') }}</button>
+                        </div>
+                        <!-- END SIDEBAR BUTTONS -->
+                        <div class="profile-userbuttons">                         
+                            {% if is_granted('ROLE_PREVIOUS_ADMIN') and sonata_user.impersonating %}
+                                Suplantando a {{ app.user.username }} </br>                             
+                                <button type ="button" class="btn btn-instagram btn-sm" onclick="window.location.href = '{{ url(sonata_user.impersonating.route, sonata_user.impersonating.parameters| merge({'_switch_user': '_exit'})) }}'">Desuplantar</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            <!--</div>-->
+        </div>
+        <br>
+        <br>
     {% endif %}
 {% endblock %}

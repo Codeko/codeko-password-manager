@@ -186,9 +186,8 @@ file that was distributed with this source code.
                                             <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                                         </a>                                       
                                         <ul class="dropdown-menu dropdown-user">
-                                            <li><a href="{{ path('fos_user_profile_show') }}">Ver Perfil</a></li>      
-                                            <li><a href="{{ path('fos_user_profile_edit') }}">Editar Perfil</a></li>  
-                                                {% include admin_pool.getTemplate('user_block') %}
+
+                                            {% include admin_pool.getTemplate('user_block') %}
                                         </ul>                                       
                                     </li>
                                 </ul>
@@ -268,17 +267,14 @@ file that was distributed with this source code.
                                 {% endif %}
                             {% endblock side_bar_nav %}
                             {% block side_bar_after_nav %}
-                                Barrica</br>
-                                {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
-                                    <a href="{{ path('default', {'_switch_user': '_exit'}) }}">Exit impersonation</a>
-                                {% endif %}
+
                             {% endblock %}
                         {% endblock sonata_side_nav %}
                     </section>
                 </aside>
             {% endblock sonata_left_side %}
 
-            <aside class="right-side">
+            <aside class="right-side" style="background-color: #eeeeee">
                 {% block sonata_page_content %}
                     <section class="content-header">
                         {% block sonata_page_content_header %}
@@ -317,7 +313,7 @@ file that was distributed with this source code.
                         {% endblock sonata_page_content_header %}
                     </section>
 
-                    <section class="content">
+                    <section class="content" style="background-color: #eeeeee">
                         {% block sonata_admin_content %}
 
                             {% block notice %}
