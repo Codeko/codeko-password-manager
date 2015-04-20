@@ -86,6 +86,7 @@ sonata_block:
         #    contexts:   [admin]
 
         sonata.block.service.text:
+            contexts: [admin]
         sonata.block.service.rss:
             
         # used to display the menu in profile pages
@@ -230,7 +231,24 @@ parameters:
     sonata.user.admin.user.class: Application\Sonata\UserBundle\Admin\Model\UserAdmin
     sonata.user.admin.user.entity: Application\Sonata\UserBundle\Entity\User
 
-#sonata_admin:
+sonata_admin:
  #   security:
         #handler: sonata.admin.security.handler.role
-        
+    dashboard:
+        blocks:
+            # display two dashboard blocks
+            -
+                position: left
+                type: sonata.admin.block.admin_list
+                
+                
+            -
+                position: right
+                type: sonata.block.service.text
+                settings:
+                    content: >
+                        <h2>PROBANDO BLOQUES</h2>
+                        <p>Bla bla <code>sonata.sonata</code> tiroriro</p> <br /> 
+                
+
+
