@@ -95,6 +95,8 @@ sonata_block:
         sonata.user.block.account: 
         #
         sonata.block.service.gridcategorias: ~
+        sonata.block.service.gridpasswords: ~
+        sonata.block.service.indexcat: ~
         # Some specific block from the SonataMediaBundle
         #sonata.media.block.media:
         #sonata.media.block.gallery:
@@ -237,22 +239,23 @@ sonata_admin:
         #handler: sonata.admin.security.handler.role
     dashboard:
         blocks:
-            # display two dashboard blocks
+            # display two dashboard blocks             
             -
-                position: left
-                type: sonata.admin.block.admin_list
-                
+                position: top
+                class: col-md-12
+                type: sonata.block.service.gridcategorias
                 
             -
-                position: right
-                type: sonata.block.service.text
-                settings:
-                    content: >
-                        <h2>PROBANDO BLOQUES</h2>
-                        <p>Bla bla <code>sonata.sonata</code> tiroriro</p> <br /> 
+                position: top
+                class: col-md-12
+                type: sonata.block.service.gridpasswords
+                
+            -
+                position: top
+                class: col-md-12
+                type: sonata.block.service.indexcat
                 
             -
                 position: bottom
-                type: sonata.block.service.gridcategorias
-
+                type: sonata.admin.block.admin_list
 

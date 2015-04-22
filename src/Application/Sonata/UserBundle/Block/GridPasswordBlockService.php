@@ -9,10 +9,10 @@ use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 
-class GridCategoriasBlockService extends BaseBlockService{
+class GridPasswordBlockService extends BaseBlockService{
 
     public function getName() {
-        return 'Categorias';
+        return 'Passwords';
     }
 
     public function getDefaultSettings() {
@@ -31,9 +31,9 @@ class GridCategoriasBlockService extends BaseBlockService{
         // merge settings
         $settings = array_merge($this->getDefaultSettings(), $blockContext->getSettings());       
         
-        return $this->renderResponse('ApplicationSonataUserBundle:CategoriaPass:bloquegrid.html.twig', array(
+        return $this->renderResponse('ApplicationSonataUserBundle:Password:bloquegrid.html.twig', array(
                     'block' => $blockContext->getBlock(),
-                    'settings' => $settings
+                    'settings' => $settings,
                         ), $response);
     }
 

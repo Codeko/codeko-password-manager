@@ -16,3 +16,14 @@ services:
         tags:
             - { name: sonata.block }
             
+    sonata.block.service.gridpasswords:
+        class: Application\Sonata\UserBundle\Block\GridPasswordBlockService
+        arguments: [ "sonata.block.service.gridpasswords", @templating ]
+        tags:
+            - { name: sonata.block }
+         
+    sonata.block.service.indexcat:
+        class: Application\Sonata\UserBundle\Block\indexCategoriasBlockService
+        arguments: [ "sonata.block.service.indexcat", @templating ]
+        tags:
+            - { name: sonata.block }
