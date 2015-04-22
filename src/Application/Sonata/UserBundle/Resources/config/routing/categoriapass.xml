@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="manageCategories" path="/">
+        <default key="_controller">ApplicationSonataUserBundle:CategoriaPass:index</default>
+    </route>
+
+    <route id="manageCategories_show" path="/{id}/show">
+        <default key="_controller">ApplicationSonataUserBundle:CategoriaPass:show</default>
+    </route>
+
+    <route id="manageCategories_new" path="/new">
+        <default key="_controller">ApplicationSonataUserBundle:CategoriaPass:new</default>
+    </route>
+
+    <route id="manageCategories_create" path="/create" methods="POST">
+        <default key="_controller">ApplicationSonataUserBundle:CategoriaPass:create</default>
+    </route>
+
+    <route id="manageCategories_edit" path="/{id}/edit">
+        <default key="_controller">ApplicationSonataUserBundle:CategoriaPass:edit</default>
+    </route>
+
+    <route id="manageCategories_update" path="/{id}/update" methods="POST|PUT">
+        <default key="_controller">ApplicationSonataUserBundle:CategoriaPass:update</default>
+    </route>
+
+    <route id="manageCategories_delete" path="/{id}/delete" methods="POST|DELETE">
+        <default key="_controller">ApplicationSonataUserBundle:CategoriaPass:delete</default>
+    </route>
+
+</routes>

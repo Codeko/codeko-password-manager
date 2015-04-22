@@ -10,3 +10,9 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    sonata.block.service.gridcategorias:
+        class: Application\Sonata\UserBundle\Block\GridCategoriasBlockService
+        arguments: [ "sonata.block.service.gridcategorias", @templating ]
+        tags:
+            - { name: sonata.block }
+            

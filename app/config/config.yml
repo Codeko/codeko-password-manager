@@ -93,7 +93,8 @@ sonata_block:
         sonata.user.block.menu:   
         # used to display menu option (login option)
         sonata.user.block.account: 
-
+        #
+        sonata.block.service.gridcategorias: ~
         # Some specific block from the SonataMediaBundle
         #sonata.media.block.media:
         #sonata.media.block.gallery:
@@ -250,5 +251,8 @@ sonata_admin:
                         <h2>PROBANDO BLOQUES</h2>
                         <p>Bla bla <code>sonata.sonata</code> tiroriro</p> <br /> 
                 
+            -
+                position: bottom
+                type: sonata.block.service.gridcategorias
 
 
