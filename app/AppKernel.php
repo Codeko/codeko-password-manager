@@ -52,9 +52,6 @@ class AppKernel extends Kernel {
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             
-            // DATAGRID
-            new APY\DataGridBundle\APYDataGridBundle(),
-            
             // BUNDLES PROPIOS
             new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
         );

@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Password
  */
-class Password
-{
+class Password {
+
     /**
      * @var integer
      */
@@ -58,9 +58,7 @@ class Password
      * @var \DateTime
      */
     private $fechaUltimoAcceso;
-
     private $categorias;
-    
     private $tipoPassword;
 
     /**
@@ -68,8 +66,7 @@ class Password
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -79,8 +76,7 @@ class Password
      * @param string $titulo
      * @return Password
      */
-    public function setTitulo($titulo)
-    {
+    public function setTitulo($titulo) {
         $this->titulo = $titulo;
 
         return $this;
@@ -91,8 +87,7 @@ class Password
      *
      * @return string 
      */
-    public function getTitulo()
-    {
+    public function getTitulo() {
         return $this->titulo;
     }
 
@@ -102,8 +97,7 @@ class Password
      * @param string $nombreUsuario
      * @return Password
      */
-    public function setNombreUsuario($nombreUsuario)
-    {
+    public function setNombreUsuario($nombreUsuario) {
         $this->nombreUsuario = $nombreUsuario;
 
         return $this;
@@ -114,8 +108,7 @@ class Password
      *
      * @return string 
      */
-    public function getNombreUsuario()
-    {
+    public function getNombreUsuario() {
         return $this->nombreUsuario;
     }
 
@@ -125,8 +118,7 @@ class Password
      * @param string $url
      * @return Password
      */
-    public function setUrl($url)
-    {
+    public function setUrl($url) {
         $this->url = $url;
 
         return $this;
@@ -137,8 +129,7 @@ class Password
      *
      * @return string 
      */
-    public function getUrl()
-    {
+    public function getUrl() {
         return $this->url;
     }
 
@@ -148,8 +139,7 @@ class Password
      * @param string $password
      * @return Password
      */
-    public function setPassword($password)
-    {
+    public function setPassword($password) {
         $this->password = $password;
 
         return $this;
@@ -160,8 +150,7 @@ class Password
      *
      * @return string 
      */
-    public function getPassword()
-    {
+    public function getPassword() {
         return $this->password;
     }
 
@@ -171,8 +160,7 @@ class Password
      * @param string $comentario
      * @return Password
      */
-    public function setComentario($comentario)
-    {
+    public function setComentario($comentario) {
         $this->comentario = $comentario;
 
         return $this;
@@ -183,8 +171,7 @@ class Password
      *
      * @return string 
      */
-    public function getComentario()
-    {
+    public function getComentario() {
         return $this->comentario;
     }
 
@@ -194,8 +181,7 @@ class Password
      * @param \DateTime $fechaExpira
      * @return Password
      */
-    public function setFechaExpira($fechaExpira)
-    {
+    public function setFechaExpira($fechaExpira) {
         $this->fechaExpira = $fechaExpira;
 
         return $this;
@@ -206,8 +192,7 @@ class Password
      *
      * @return \DateTime 
      */
-    public function getFechaExpira()
-    {
+    public function getFechaExpira() {
         return $this->fechaExpira;
     }
 
@@ -217,8 +202,7 @@ class Password
      * @param \DateTime $fechaCreacion
      * @return Password
      */
-    public function setFechaCreacion($fechaCreacion)
-    {
+    public function setFechaCreacion($fechaCreacion) {
         $this->fechaCreacion = $fechaCreacion;
 
         return $this;
@@ -229,8 +213,7 @@ class Password
      *
      * @return \DateTime 
      */
-    public function getFechaCreacion()
-    {
+    public function getFechaCreacion() {
         return $this->fechaCreacion;
     }
 
@@ -240,8 +223,7 @@ class Password
      * @param \DateTime $fechaModificacion
      * @return Password
      */
-    public function setFechaModificacion($fechaModificacion)
-    {
+    public function setFechaModificacion($fechaModificacion) {
         $this->fechaModificacion = $fechaModificacion;
 
         return $this;
@@ -252,8 +234,7 @@ class Password
      *
      * @return \DateTime 
      */
-    public function getFechaModificacion()
-    {
+    public function getFechaModificacion() {
         return $this->fechaModificacion;
     }
 
@@ -263,8 +244,7 @@ class Password
      * @param \DateTime $fechaUltimoAcceso
      * @return Password
      */
-    public function setFechaUltimoAcceso($fechaUltimoAcceso)
-    {
+    public function setFechaUltimoAcceso($fechaUltimoAcceso) {
         $this->fechaUltimoAcceso = $fechaUltimoAcceso;
 
         return $this;
@@ -275,17 +255,12 @@ class Password
      *
      * @return \DateTime 
      */
-    public function getFechaUltimoAcceso()
-    {
+    public function getFechaUltimoAcceso() {
         return $this->fechaUltimoAcceso;
     }
-    
+
     function getCategorias() {
         return $this->categorias;
-    }
-
-    function setCategorias($categorias) {
-        $this->categorias = $categorias;
     }
 
     function getTipoPassword() {
@@ -295,9 +270,22 @@ class Password
     function setTipoPassword($tipoPassword) {
         $this->tipoPassword = $tipoPassword;
     }
-    
+
     public function __construct() {
         $this->categorias = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+    public function addCategoria(CategoriaPass $categoria) {
+        $categoria->addPassword($this);
+        $this->categorias[] = $categoria;
+    }
+
+    public function removeCategoria(CategoriaPass $categoria) {
+        $this->categorias->removeElement($categoria);
+        $categoria->removePassword($this);
+    }
+
+    public function __toString() {
+        return $this->getTitulo();
+    }
 }

@@ -93,10 +93,7 @@ sonata_block:
         sonata.user.block.menu:   
         # used to display menu option (login option)
         sonata.user.block.account: 
-        #
-        sonata.block.service.gridcategorias: ~
-        sonata.block.service.gridpasswords: ~
-        sonata.block.service.indexcat: ~
+        
         # Some specific block from the SonataMediaBundle
         #sonata.media.block.media:
         #sonata.media.block.gallery:
@@ -180,7 +177,7 @@ sonata_user:
 
     admin:
         user:
-            class: Application\Sonata\UserBundle\Admin\Model\UserAdmin
+            class: Application\Sonata\UserBundle\Admin\Model\UserAdmin           
             
     impersonating_route: sonata_user_impersonating
 
@@ -243,19 +240,7 @@ sonata_admin:
             -
                 position: top
                 class: col-md-12
-                type: sonata.block.service.gridcategorias
-                
-            -
-                position: top
-                class: col-md-12
-                type: sonata.block.service.gridpasswords
-                
-            -
-                position: top
-                class: col-md-12
-                type: sonata.block.service.indexcat
-                
-            -
-                position: bottom
                 type: sonata.admin.block.admin_list
+
+
 

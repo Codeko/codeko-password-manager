@@ -10,20 +10,15 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
-    sonata.block.service.gridcategorias:
-        class: Application\Sonata\UserBundle\Block\GridCategoriasBlockService
-        arguments: [ "sonata.block.service.gridcategorias", @templating ]
-        tags:
-            - { name: sonata.block }
-            
-    sonata.block.service.gridpasswords:
-        class: Application\Sonata\UserBundle\Block\GridPasswordBlockService
-        arguments: [ "sonata.block.service.gridpasswords", @templating ]
-        tags:
-            - { name: sonata.block }
-         
-    sonata.block.service.indexcat:
-        class: Application\Sonata\UserBundle\Block\indexCategoriasBlockService
-        arguments: [ "sonata.block.service.indexcat", @templating ]
-        tags:
-            - { name: sonata.block }
+    categorias.pass.servicio:
+      class: Application\Sonata\UserBundle\Admin\CategoriaPassAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, group: Password Manager, label: Categorías }
+      arguments: [null, Application\Sonata\UserBundle\Entity\CategoriaPass, ApplicationSonataUserBundle:CategoriaPass]
+      
+    password.pass.servicio:
+      class: Application\Sonata\UserBundle\Admin\PasswordAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, group: Password Manager, label: Contraseñas }
+      arguments: [null, Application\Sonata\UserBundle\Entity\Password, ApplicationSonataUserBundle:Password]
+                

@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * CategoriaPass
  */
-class CategoriaPass
-{
+class CategoriaPass {
+
     /**
      * @var integer
      */
@@ -19,15 +19,17 @@ class CategoriaPass
      */
     private $nombreCategoria;
 
+    /**
+     * @var ArrayCollection $passwords
+     */
     private $passwords;
-    
+
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -37,8 +39,7 @@ class CategoriaPass
      * @param string $nombreCategoria
      * @return CategoriaPass
      */
-    public function setNombreCategoria($nombreCategoria)
-    {
+    public function setNombreCategoria($nombreCategoria) {
         $this->nombreCategoria = $nombreCategoria;
 
         return $this;
@@ -49,20 +50,28 @@ class CategoriaPass
      *
      * @return string 
      */
-    public function getNombreCategoria()
-    {
+    public function getNombreCategoria() {
         return $this->nombreCategoria;
     }
-    
+
     function getPasswords() {
         return $this->passwords;
-    }
-
-    function setPasswords($passwords) {
-        $this->passwords = $passwords;
     }
 
     public function __construct() {
         $this->passwords = new \Doctrine\Common\Collections\ArrayCollection();
     }
+
+    public function addPassword(Password $password) {
+        $this->passwords[] = $password;
+    }
+
+    public function removePassword(Password $password) {
+        $this->passwords->removeElement($password);
+    }
+
+    public function __toString() {
+        return $this->getNombreCategoria();
+    }
+
 }

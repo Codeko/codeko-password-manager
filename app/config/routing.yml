@@ -42,22 +42,3 @@ sonata_user_impersonating:
     pattern:  /
     defaults: { _controller: SonataPageBundle:Page:catchAll } 
     
-application_sonata_user_managePass:
-    resource: "@ApplicationSonataUserBundle/Resources/config/routing/password.xml"
-    prefix:   /managepass
-    
-application_sonata_user_manageCategories:
-    resource: "@ApplicationSonataUserBundle/Resources/config/routing/categoriapass.xml"
-    prefix:   /managecategories
-
-application_sonata_user_manageCategories_grid:
-    pattern: /managecategories/grid
-    defaults: { _controller: ApplicationSonataUserBundle:Default:grid } 
-
-application_sonata_user_managePasswords_grid:
-    pattern: /managepasswords/grid
-    defaults: { _controller: ApplicationSonataUserBundle:Default:grid2 } 
-
-application_sonata_user_managePasswords_grid2:
-    pattern: /managepasswords/grid2
-    defaults: { _controller: ApplicationSonataUserBundle:Default:grid3 } 
