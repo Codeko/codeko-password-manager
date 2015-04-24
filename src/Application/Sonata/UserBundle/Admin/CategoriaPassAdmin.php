@@ -55,7 +55,7 @@ class CategoriaPassAdmin extends Admin {
      */
     protected function configureFormFields(FormMapper $formMapper) {
         $formMapper
-                ->with('General')
+                ->with('CATEGORIAS')
                 ->add('nombreCategoria')
                 ->end()
         ;

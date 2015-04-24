@@ -20,10 +20,15 @@ class Password {
     private $titulo;
 
     /**
+     * @var User $user
+     */
+    private $user;
+
+    /**
      * @var string
      */
-    private $nombreUsuario;
-
+    private $usernamePass;
+    
     /**
      * @var string
      */
@@ -92,26 +97,35 @@ class Password {
     }
 
     /**
-     * Set nombreUsuario
+     * Set user
      *
-     * @param string $nombreUsuario
+     * @param User $user
      * @return Password
      */
-    public function setNombreUsuario($nombreUsuario) {
-        $this->nombreUsuario = $nombreUsuario;
+    public function setUser(User $user) {
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get nombreUsuario
+     * Get user
      *
      * @return string 
      */
-    public function getNombreUsuario() {
-        return $this->nombreUsuario;
+    public function getUser() {
+        return $this->user;
     }
 
+    function getUsernamePass() {
+        return $this->usernamePass;
+    }
+
+    function setUsernamePass($usernamePass) {
+        $this->usernamePass = $usernamePass;
+    }
+
+        
     /**
      * Set url
      *

@@ -10,6 +10,7 @@
             <generator strategy="AUTO" />
         </id>
 
+        <one-to-many field="passwords" target-entity="Password" mapped-by="user" />
     </entity>
 
 </doctrine-mapping>

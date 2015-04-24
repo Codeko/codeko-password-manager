@@ -21,21 +21,40 @@ use Sonata\UserBundle\Entity\BaseUser as BaseUser;
  *
  * @author <yourname> <youremail>
  */
-class User extends BaseUser
-{
+class User extends BaseUser {
+
     /**
      * @var integer $id
      */
     protected $id;
 
     /**
+     * @var ArrayCollection $passwords
+     */
+    protected $passwords;
+    
+    /**
      * Get id
      *
      * @return integer $id
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
+
+    public function __construct() {
+        $this->categorias = new \Doctrine\Common\Collections\ArrayCollection();
+    }
     
+    public function addPassword(Password $password) {
+        $this->passwords[] = $password;
+    }
+
+    public function removePassword(Password $password) {
+        $this->passwords->removeElement($password);
+    }
+
+    public function __toString() {
+        return $this->getUsername();
+    }
 }

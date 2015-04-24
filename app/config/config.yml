@@ -2,7 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-
+    
 framework:
     #esi:             ~
     translator:      ~
@@ -241,6 +241,7 @@ sonata_admin:
                 position: top
                 class: col-md-12
                 type: sonata.admin.block.admin_list
+    
 
 
 
