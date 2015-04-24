@@ -93,7 +93,7 @@ sonata_block:
         sonata.user.block.menu:   
         # used to display menu option (login option)
         sonata.user.block.account: 
-
+        
         # Some specific block from the SonataMediaBundle
         #sonata.media.block.media:
         #sonata.media.block.gallery:
@@ -177,7 +177,7 @@ sonata_user:
 
     admin:
         user:
-            class: Application\Sonata\UserBundle\Admin\Model\UserAdmin
+            class: Application\Sonata\UserBundle\Admin\Model\UserAdmin           
             
     impersonating_route: sonata_user_impersonating
 
@@ -236,19 +236,11 @@ sonata_admin:
         #handler: sonata.admin.security.handler.role
     dashboard:
         blocks:
-            # display two dashboard blocks
+            # display two dashboard blocks             
             -
-                position: left
+                position: top
+                class: col-md-12
                 type: sonata.admin.block.admin_list
-                
-                
-            -
-                position: right
-                type: sonata.block.service.text
-                settings:
-                    content: >
-                        <h2>PROBANDO BLOQUES</h2>
-                        <p>Bla bla <code>sonata.sonata</code> tiroriro</p> <br /> 
-                
+
 
 

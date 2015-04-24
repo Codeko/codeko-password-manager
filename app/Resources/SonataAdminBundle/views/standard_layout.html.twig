@@ -117,14 +117,14 @@ file that was distributed with this source code.
             {% endblock %}
             {% block logo %}
                 {% spaceless %}
-                    <a class="logo" href="{{ url('sonata_admin_redirect') }}">
+                    <p class="logo">
                         {% if 'single_image' == admin_pool.getOption('title_mode') or 'both' == admin_pool.getOption('title_mode') %}
                             <img src="{{ asset('bundles/applicationsonatauser/images/favicon.ico') }}" alt="{{ admin_pool.title }}">
                         {% endif %}
                         {% if 'single_text' == admin_pool.getOption('title_mode') or 'both' == admin_pool.getOption('title_mode') %}
                             <span>{{ 'PasswordManager' }}</span>
                         {% endif %}
-                    </a>
+                    </p>
                 {% endspaceless %}
             {% endblock %}
             {% block sonata_nav %}
@@ -154,7 +154,9 @@ file that was distributed with this source code.
                                                     {% if not loop.last  %}
                                                         <li>
                                                             {% if menu.uri is not empty %}
-                                                                <a href="{{ url('sonata_admin_redirect') }}">{{ menu.label|raw }}</a>
+                                                                <a href="{{ url('sonata_admin_redirect') }}">
+                                                                    {{ menu.label|raw }} 
+                                                                </a>
                                                             {% else %}
                                                                 {{ menu.label }} 
                                                             {% endif %}
@@ -207,8 +209,91 @@ file that was distributed with this source code.
                         {% block sonata_side_nav %}
                             {% block side_bar_before_nav %} {% endblock %}
                             {% block side_bar_nav %}
+
+                                <!--{#<ul class="sidebar-menu">
+                                    <li>
+                                        <a href="{{ url('sonata_admin_redirect') }}">
+                                            <i class="fa fa-home"></i> 
+                                            <span>Inicio</span>
+                                            <i class="fa pull-right fa-angle-left"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-key"></i>                                                        
+                                            <span>Contraseñas</span>
+                                            <i class="fa pull-right fa-angle-left"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-archive"></i>                                                        
+                                            <span>Categorías</span>
+                                            <i class="fa pull-right fa-angle-left"></i>
+                                        </a>
+                                    </li> 
+                                    {% if app.security.token and is_granted('ROLE_SONATA_ADMIN') %}
+
+                                        {% for group in admin_pool.dashboardgroups %}
+                                            {% set display = (group.roles is empty or is_granted('ROLE_SUPER_ADMIN') ) %}
+                                            {% for role in group.roles if not display %}
+                                                {% set display = is_granted(role) %}
+                                            {% endfor %}
+
+                                            {# Do not display the group label if no item in group is available #}
+                                {#{% set item_count = 0 %}
+                                {% if display %}
+                                    {% for admin in group.items if item_count == 0 %}
+                                        {% if admin.hasroute('list') and admin.isGranted('LIST') %}
+                                            {% set item_count = item_count+1 %}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+
+                                {% if display and (item_count > 0) %}
+                                    {% set active = false %}
+                                    {% for admin in group.items %}
+                                        {% if admin.hasroute('list') and admin.isGranted('LIST') and app.request.get('_sonata_admin') == admin.code %}
+                                            {% set active = true %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    <li class="treeview{% if active %} active{% endif %}">
+                                        <a href="#">
+                                            <i class="fa fa-cog"></i>    
+                                            <span>Administración</span>
+                                            <i class="fa pull-right fa-angle-left"></i>
+                                        </a>
+                                        <ul class="treeview-menu{% if active %} active{% endif %}">
+                                            {% for admin in group.items %}
+                                                {% if admin.hasroute('list') and admin.isGranted('LIST') %}
+                                                    <li{% if app.request.get('_sonata_admin') == admin.code %} class="active"{% endif %}>
+                                                        <a href="{{ admin.generateUrl('list')}}">
+                                                            {% if admin.label == 'users' %}
+                                                                <i class="fa fa-user"></i> 
+                                                            {% elseif admin.label == 'groups' %}
+                                                                <i class="fa fa-users"></i> 
+                                                            {% endif %}
+                                                            {{ admin.label|trans({}, admin.translationdomain) }}
+                                                        </a>
+                                                    </li>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </ul>#}-->
+
                                 {% if app.security.token and is_granted('ROLE_SONATA_ADMIN') %}
                                     <ul class="sidebar-menu">
+                                        <li>
+                                            <a href="{{ url('sonata_admin_redirect') }}">
+                                                <i class="fa fa-home"></i> 
+                                                <span>Inicio</span>
+                                                <i class="fa pull-right fa-angle-left"></i>
+                                            </a>
+                                        </li>
                                         {% for group in admin_pool.dashboardgroups %}
                                             {% set display = (group.roles is empty or is_granted('ROLE_SUPER_ADMIN') ) %}
                                             {% for role in group.roles if not display %}
@@ -241,7 +326,7 @@ file that was distributed with this source code.
                                                     <ul class="treeview-menu{% if active %} active{% endif %}">
                                                         {% for admin in group.items %}
                                                             {% if admin.hasroute('list') and admin.isGranted('LIST') %}
-                                                                <li{% if app.request.get('_sonata_admin') == admin.code %} class="active"{% endif %}><a href="{{ admin.generateUrl('list') }}"><i class="fa fa-angle-double-right"></i> {{ admin.label|trans({}, admin.translationdomain) }}</a></li>
+                                                                <li{% if app.request.get('_sonata_admin') == admin.code %} class="active"{% endif %}><a href="{{ admin.generateUrl('list')}}"><i class="fa fa-angle-double-right"></i> {{ admin.label|trans({}, admin.translationdomain) }}</a></li>
                                                                 {% endif %}
                                                             {% endfor %}
                                                     </ul>
@@ -249,8 +334,9 @@ file that was distributed with this source code.
                                             {% endif %}
                                         {% endfor %}
                                     </ul>
-                                {% endif %}
+                                {% endif %}                 
                             {% endblock side_bar_nav %}
+
                             {% block side_bar_after_nav %}
                                 {% block sonata_sidebar_search %}
                                     {% if app.security.token or is_granted('ROLE_SONATA_ADMIN') %}
@@ -298,7 +384,7 @@ file that was distributed with this source code.
                                                     <li class="dropdown sonata-actions">
                                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ 'link_actions'|trans({}, 'SonataAdminBundle') }} <b class="caret"></b></a>
                                                         <ul class="dropdown-menu" role="menu">
-                                                            {{ _actions|raw }}
+                                                            {{ _actions|raw }} 
                                                         </ul>
                                                     </li>
                                                 </ul>

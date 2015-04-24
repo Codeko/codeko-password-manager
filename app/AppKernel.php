@@ -28,7 +28,7 @@ class AppKernel extends Kernel {
             
             // Sonata Core y Block
             new Sonata\CoreBundle\SonataCoreBundle(),
-            new Sonata\BlockBundle\SonataBlockBundle(),
+            new Sonata\BlockBundle\SonataBlockBundle(),          
             
             // Sonata Admin y EasyExtends
             new Sonata\AdminBundle\SonataAdminBundle(),
@@ -53,7 +53,7 @@ class AppKernel extends Kernel {
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             
             // BUNDLES PROPIOS
-            new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),           
+            new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
