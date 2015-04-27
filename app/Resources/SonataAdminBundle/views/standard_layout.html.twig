@@ -37,7 +37,7 @@ file that was distributed with this source code.
             <link rel="shortcut icon" type="image/x-icon" href="{{ asset('bundles/applicationsonatauser/images/favicon.ico') }}" />
             <link href="{{ asset('bundles/applicationsonatauser/css/style.css') }}" rel="stylesheet">
             <!-- Bootstrap core CSS -->
-            <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+            <!--<link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">-->
         {% endblock %}
 
         {% block javascripts %}
@@ -135,7 +135,6 @@ file that was distributed with this source code.
                         }
                     </style>
 
-
                     <nav class="navbar navbar-static-top" role="navigation" style="background-color: grey; border-bottom: 2px">
                         <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
                             <span class="sr-only">Toggle navigation</span>
@@ -209,82 +208,6 @@ file that was distributed with this source code.
                         {% block sonata_side_nav %}
                             {% block side_bar_before_nav %} {% endblock %}
                             {% block side_bar_nav %}
-
-                                <!--{#<ul class="sidebar-menu">
-                                    <li>
-                                        <a href="{{ url('sonata_admin_redirect') }}">
-                                            <i class="fa fa-home"></i> 
-                                            <span>Inicio</span>
-                                            <i class="fa pull-right fa-angle-left"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-key"></i>                                                        
-                                            <span>Contraseñas</span>
-                                            <i class="fa pull-right fa-angle-left"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-archive"></i>                                                        
-                                            <span>Categorías</span>
-                                            <i class="fa pull-right fa-angle-left"></i>
-                                        </a>
-                                    </li> 
-                                    {% if app.security.token and is_granted('ROLE_SONATA_ADMIN') %}
-
-                                        {% for group in admin_pool.dashboardgroups %}
-                                            {% set display = (group.roles is empty or is_granted('ROLE_SUPER_ADMIN') ) %}
-                                            {% for role in group.roles if not display %}
-                                                {% set display = is_granted(role) %}
-                                            {% endfor %}
-
-                                            {# Do not display the group label if no item in group is available #}
-                                {#{% set item_count = 0 %}
-                                {% if display %}
-                                    {% for admin in group.items if item_count == 0 %}
-                                        {% if admin.hasroute('list') and admin.isGranted('LIST') %}
-                                            {% set item_count = item_count+1 %}
-                                        {% endif %}
-                                    {% endfor %}
-                                {% endif %}
-
-                                {% if display and (item_count > 0) %}
-                                    {% set active = false %}
-                                    {% for admin in group.items %}
-                                        {% if admin.hasroute('list') and admin.isGranted('LIST') and app.request.get('_sonata_admin') == admin.code %}
-                                            {% set active = true %}
-                                        {% endif %}
-                                    {% endfor %}
-                                    <li class="treeview{% if active %} active{% endif %}">
-                                        <a href="#">
-                                            <i class="fa fa-cog"></i>    
-                                            <span>Administración</span>
-                                            <i class="fa pull-right fa-angle-left"></i>
-                                        </a>
-                                        <ul class="treeview-menu{% if active %} active{% endif %}">
-                                            {% for admin in group.items %}
-                                                {% if admin.hasroute('list') and admin.isGranted('LIST') %}
-                                                    <li{% if app.request.get('_sonata_admin') == admin.code %} class="active"{% endif %}>
-                                                        <a href="{{ admin.generateUrl('list')}}">
-                                                            {% if admin.label == 'users' %}
-                                                                <i class="fa fa-user"></i> 
-                                                            {% elseif admin.label == 'groups' %}
-                                                                <i class="fa fa-users"></i> 
-                                                            {% endif %}
-                                                            {{ admin.label|trans({}, admin.translationdomain) }}
-                                                        </a>
-                                                    </li>
-                                                {% endif %}
-                                            {% endfor %}
-                                        </ul>
-                                    </li>
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %}
-                    </ul>#}-->
-
                                 {% if app.security.token and is_granted('ROLE_SONATA_ADMIN') %}
                                     <ul class="sidebar-menu">
                                         <li>
@@ -326,9 +249,23 @@ file that was distributed with this source code.
                                                     <ul class="treeview-menu{% if active %} active{% endif %}">
                                                         {% for admin in group.items %}
                                                             {% if admin.hasroute('list') and admin.isGranted('LIST') %}
-                                                                <li{% if app.request.get('_sonata_admin') == admin.code %} class="active"{% endif %}><a href="{{ admin.generateUrl('list')}}"><i class="fa fa-angle-double-right"></i> {{ admin.label|trans({}, admin.translationdomain) }}</a></li>
-                                                                {% endif %}
-                                                            {% endfor %}
+                                                                <li{% if app.request.get('_sonata_admin') == admin.code %} class="active"{% endif %}>
+                                                                    <a href="{{ admin.generateUrl('list')}}">
+                                                                        {% if admin.label == 'users' %}
+                                                                            <i class="fa fa-user"></i> 
+                                                                        {% elseif admin.label == 'groups' %}
+                                                                            <i class="fa fa-users"></i> 
+                                                                        {% elseif admin.label == 'Categorías' %}
+                                                                            <i class="fa fa-bars"></i> 
+                                                                        {% elseif admin.label == 'Contraseñas' %}
+                                                                            <i class="fa fa-key"></i> 
+                                                                        {% endif %}
+                                                                        <!--<i class="fa fa-angle-double-right"></i> -->
+                                                                        {{ admin.label|trans({}, admin.translationdomain) }}
+                                                                    </a>
+                                                                </li>
+                                                            {% endif %}
+                                                        {% endfor %}
                                                     </ul>
                                                 </li>
                                             {% endif %}
