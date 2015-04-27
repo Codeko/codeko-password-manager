@@ -15,6 +15,11 @@ class PasswordType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
                 ->add('titulo')
+                ->add('user', null, array(
+                    'class' => 'ApplicationSonataUserBundle:User',
+                    'property' => 'user',
+                    'allow_add' => true,
+                    'allow_delete' => true))
                 ->add('nombreUsuario')
                 ->add('url')
                 ->add('password')
