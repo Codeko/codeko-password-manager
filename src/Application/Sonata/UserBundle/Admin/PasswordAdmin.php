@@ -27,8 +27,9 @@ class PasswordAdmin extends Admin {
     protected function configureListFields(ListMapper $listMapper) {
         $listMapper
                 ->addIdentifier('titulo')
-                ->add('nombreUsuario')
-                ->add('url')
+                ->add('user')
+                ->add('usernamePass')
+                ->add('url','url')
                 ->add('password')
                 ->add('comentario')
                 ->add('fechaExpira')
@@ -37,6 +38,7 @@ class PasswordAdmin extends Admin {
                 ->add('fechaUltimoAcceso')
                 ->add('categorias')
                 ->add('tipoPassword')
+                
         ;
     }
 
@@ -46,9 +48,9 @@ class PasswordAdmin extends Admin {
     protected function configureDatagridFilters(DatagridMapper $filterMapper) {
         $filterMapper
                 ->add('titulo')
-                ->add('nombreUsuario')
+                ->add('user')
+                ->add('usernamePass')
                 ->add('url')
-                ->add('password')
                 ->add('comentario')
                 ->add('fechaExpira')
                 ->add('fechaCreacion')
@@ -66,7 +68,8 @@ class PasswordAdmin extends Admin {
         $showMapper
                 ->with('General')
                 ->add('titulo')
-                ->add('nombreUsuario')
+                ->add('user')
+                ->add('usernamePass')
                 ->add('url')
                 ->add('password')
                 ->add('comentario')
@@ -87,7 +90,8 @@ class PasswordAdmin extends Admin {
         $formMapper
                 ->with('General')
                 ->add('titulo')
-                ->add('nombreUsuario')
+                ->add('user')
+                ->add('usernamePass')
                 ->add('url')
                 ->add('password')
                 ->add('comentario')
@@ -100,7 +104,7 @@ class PasswordAdmin extends Admin {
                 ->with('Categorias')
                 ->add('categorias', null, array('label' => 'Categorias', 'expanded' => true, 'by_reference' => false, 'multiple' => true))
                 ->end()
-                
+
         ;
     }
 
