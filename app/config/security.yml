@@ -95,7 +95,7 @@ security:
         - { path: ^/profile, role: [ROLE_ADMIN, ROLE_USER, ROLE_SONATA_ADMIN]}
 
         # Admin login page needs to be access without credential
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY, }
         - { path: ^/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
