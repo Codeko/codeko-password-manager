@@ -2,7 +2,7 @@
 
 {% block field %}
     {%- if value is empty -%}
-        &nbsp;
+        -
     {% else %}
         {%- if field_description.options.truncate is defined -%}
             {% set truncate = field_description.options.truncate %}
