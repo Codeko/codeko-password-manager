@@ -2,6 +2,13 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: sonata/fos_user.yml }
+    - { resource: sonata/sonata_admin.yml }
+    - { resource: sonata/sonata_block.yml }
+    - { resource: sonata/sonata_doctrine_orm_admin.yml }
+    - { resource: sonata/sonata_user.yml }
+    - { resource: sonata/sonata_timeline.yml }
+    - { resource: sonata/sonata_intl.yml }
     
 framework:
     #esi:             ~
@@ -65,7 +72,6 @@ doctrine:
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
-        
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -73,81 +79,7 @@ swiftmailer:
     host:      "%mailer_host%"
     username:  "%mailer_user%"
     password:  "%mailer_password%"
-    spool:     { type: memory }        
-
-sonata_block:
-    default_contexts: [cms]
-    blocks:
-        # Enable the SonataAdminBundle block
-        sonata.admin.block.admin_list:
-            contexts:   [admin]
-        # Your other blocks
-        #sonata.admin_doctrine_orm.block.audit:
-        #    contexts:   [admin]
-
-        sonata.block.service.text:
-            contexts: [admin]
-        sonata.block.service.rss:
-            
-        # used to display the menu in profile pages
-        sonata.user.block.menu:   
-        # used to display menu option (login option)
-        sonata.user.block.account: 
-        
-        # Some specific block from the SonataMediaBundle
-        #sonata.media.block.media:
-        #sonata.media.block.gallery:
-        #sonata.media.block.feature_media:
-            
-sonata_doctrine_orm_admin:
-    # default value is null, so doctrine uses the value defined in the configuration
-    entity_manager: ~
-
-    audit:
-        force: true
-
-    templates:
-        form:
-            - SonataDoctrineORMAdminBundle:Form:form_admin_fields.html.twig
-        filter:
-            - SonataDoctrineORMAdminBundle:Form:filter_admin_fields.html.twig
-        types:
-            list:
-                array:      SonataAdminBundle:CRUD:list_array.html.twig
-                boolean:    SonataAdminBundle:CRUD:list_boolean.html.twig
-                date:       SonataAdminBundle:CRUD:list_date.html.twig
-                time:       SonataAdminBundle:CRUD:list_time.html.twig
-                datetime:   SonataAdminBundle:CRUD:list_datetime.html.twig
-                text:       SonataAdminBundle:CRUD:base_list_field.html.twig
-                trans:      SonataAdminBundle:CRUD:list_trans.html.twig
-                string:     SonataAdminBundle:CRUD:base_list_field.html.twig
-                smallint:   SonataAdminBundle:CRUD:base_list_field.html.twig
-                bigint:     SonataAdminBundle:CRUD:base_list_field.html.twig
-                integer:    SonataAdminBundle:CRUD:base_list_field.html.twig
-                decimal:    SonataAdminBundle:CRUD:base_list_field.html.twig
-                identifier: SonataAdminBundle:CRUD:base_list_field.html.twig
-                currency:   SonataAdminBundle:CRUD:list_currency.html.twig
-                percent:    SonataAdminBundle:CRUD:list_percent.html.twig
-                choice:     SonataAdminBundle:CRUD:list_choice.html.twig
-                url:        SonataAdminBundle:CRUD:list_url.html.twig
-
-            show:
-                array:      SonataAdminBundle:CRUD:show_array.html.twig
-                boolean:    SonataAdminBundle:CRUD:show_boolean.html.twig
-                date:       SonataAdminBundle:CRUD:show_date.html.twig
-                time:       SonataAdminBundle:CRUD:show_time.html.twig
-                datetime:   SonataAdminBundle:CRUD:show_datetime.html.twig
-                text:       SonataAdminBundle:CRUD:base_show_field.html.twig
-                trans:      SonataAdminBundle:CRUD:show_trans.html.twig
-                string:     SonataAdminBundle:CRUD:base_show_field.html.twig
-                smallint:   SonataAdminBundle:CRUD:base_show_field.html.twig
-                bigint:     SonataAdminBundle:CRUD:base_show_field.html.twig
-                integer:    SonataAdminBundle:CRUD:base_show_field.html.twig
-                decimal:    SonataAdminBundle:CRUD:base_show_field.html.twig
-                currency:   SonataAdminBundle:CRUD:base_currency.html.twig
-                percent:    SonataAdminBundle:CRUD:base_percent.html.twig
-                choice:     SonataAdminBundle:CRUD:show_choice.html.twig
-                url:        SonataAdminBundle:CRUD:show_url.html.twig
+    spool:     { type: memory }                  
                 
 knp_menu:
     # use "twig: false" to disable the Twig extension and the TwigRenderer
@@ -157,53 +89,6 @@ knp_menu:
     templating: false
     # the renderer to use, list is also available by default
     default_renderer: twig
-    
-sonata_user:
-    security_acl: true
-    manager_type: orm 
-    # can be orm or mongodb
-    google_authenticator:
-        enabled: true
-        # REVISAR
-        server:  yourserver.com
-        
-    profile:    
-    # Profile Form (firstname, lastname, etc ...)
-        form:
-            type:               sonata_user_profile
-            handler:            sonata.user.profile.form.handler.default
-            name:               sonata_user_profile_form
-            validation_groups:  [Profile]
-
-    admin:
-        user:
-            class: Application\Sonata\UserBundle\Admin\Model\UserAdmin           
-            
-    impersonating_route: sonata_user_impersonating
-
-fos_user:
-    db_driver:      orm 
-    # can be orm or odm
-    firewall_name:  main
-    user_class:     Application\Sonata\UserBundle\Entity\User
-
-    group:
-        group_class:   Application\Sonata\UserBundle\Entity\Group
-        group_manager: sonata.user.orm.group_manager                    
-        # If you're using doctrine orm (use sonata.user.mongodb.user_manager for mongodb)
-
-    service:
-        user_manager: sonata.user.orm.user_manager                      
-        # If you're using doctrine orm (use sonata.user.mongodb.group_manager for mongodb)
-        
-    profile:  
-    # Authentication Form
-        form:
-            type:               fos_user_profile
-            handler:            fos_user.profile.form.handler.default
-            name:               fos_user_profile_form
-            validation_groups:  [Authentication] 
-            # Please note : this is not the default value
 
 jms_security_extra:
     # Whether you want to secure all services (true), or only secure specific
@@ -231,17 +116,7 @@ parameters:
     sonata.user.admin.user.class: Application\Sonata\UserBundle\Admin\Model\UserAdmin
     sonata.user.admin.user.entity: Application\Sonata\UserBundle\Entity\User
 
-sonata_admin:
- #   security:
-        #handler: sonata.admin.security.handler.role
-    dashboard:
-        blocks:
-            # display two dashboard blocks             
-            -
-                position: top
-                class: col-md-12
-                type: sonata.admin.block.admin_list
-    
+
 
 
 

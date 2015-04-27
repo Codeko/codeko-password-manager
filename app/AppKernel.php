@@ -37,12 +37,18 @@ class AppKernel extends Kernel {
             // Most of the cases, you'll want to extend FOSUserBundle though ;)
             // extend the ``FOSUserBundle``     
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
+            // Sonata Timeline
+            new Spy\TimelineBundle\SpyTimelineBundle(),
+            new Sonata\TimelineBundle\SonataTimelineBundle(),
+            // Sonata Intl
+            new Sonata\IntlBundle\SonataIntlBundle(),
             // JMS EXTRAS SEGURIDAD
             new JMS\AopBundle\JMSAopBundle(),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             // BUNDLES PROPIOS
             new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
+            new Application\Sonata\TimelineBundle\ApplicationSonataTimelineBundle(), // easy extends integration
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
