@@ -42,6 +42,8 @@ class AppKernel extends Kernel {
             new JMS\AopBundle\JMSAopBundle(),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
+            // GEDMO DOCTRINE EXTENSIONS
+            
             // BUNDLES PROPIOS
             new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
             new Application\Sonata\TimelineBundle\ApplicationSonataTimelineBundle(), // easy extends integration
