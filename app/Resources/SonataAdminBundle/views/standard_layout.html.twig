@@ -38,6 +38,19 @@ file that was distributed with this source code.
             <link href="{{ asset('bundles/applicationsonatauser/css/style.css') }}" rel="stylesheet">
             <!-- Bootstrap core CSS -->
             <!--<link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">-->
+
+            <!-- AJUSTANDO FECHAS FORMULARIOS -->
+            <style>
+                div.sonata-medium-date {
+                    overflow: hidden;
+                }
+                div.sonata-medium-date .select2-container {
+                    width: 85px !important;
+                }
+                div.sonata-medium-date > div {
+                    float: left;
+                }
+            </style>
         {% endblock %}
 
         {% block javascripts %}
@@ -187,7 +200,6 @@ file that was distributed with this source code.
                                             <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                                         </a>                                       
                                         <ul class="dropdown-menu dropdown-user">
-
                                             {% include admin_pool.getTemplate('user_block') %}
                                         </ul>                                       
                                     </li>

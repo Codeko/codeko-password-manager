@@ -74,4 +74,5 @@ class CategoriaPass {
         return $this->getNombreCategoria();
     }
 
+    
 }

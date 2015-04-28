@@ -31,11 +31,7 @@ class AppKernel extends Kernel {
             // new Sonata\PageBundle\SonataPageBundle(),
             // FOS USER 
             new FOS\UserBundle\FOSUserBundle(),
-            // Sonata User
-            // You have 2 options to initialize the SonataUserBundle in your AppKernel,
-            // you can select which bundle SonataUserBundle extends
-            // Most of the cases, you'll want to extend FOSUserBundle though ;)
-            // extend the ``FOSUserBundle``     
+            // Sonata User     
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
             // Sonata Timeline
             new Spy\TimelineBundle\SpyTimelineBundle(),

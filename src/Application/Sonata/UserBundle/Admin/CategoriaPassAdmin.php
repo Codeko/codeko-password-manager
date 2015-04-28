@@ -21,12 +21,15 @@ use Application\Sonata\UserBundle\Entity\CategoriaPass;
 
 class CategoriaPassAdmin extends Admin {
 
+    public $supportsPreviewMode = true;
+
     /**
      * {@inheritdoc}
      */
     protected function configureListFields(ListMapper $listMapper) {
         $listMapper
                 ->addIdentifier('nombreCategoria')
+                ->add('passwords')
         ;
     }
 
@@ -44,7 +47,7 @@ class CategoriaPassAdmin extends Admin {
      */
     protected function configureShowFields(ShowMapper $showMapper) {
         $showMapper
-                ->with('General')
+                ->with('CATEGORIAS')
                 ->add('nombreCategoria')
                 ->end()
         ;
@@ -60,5 +63,5 @@ class CategoriaPassAdmin extends Admin {
                 ->end()
         ;
     }
-    
+
 }

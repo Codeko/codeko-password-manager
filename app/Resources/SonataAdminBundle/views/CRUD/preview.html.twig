@@ -55,5 +55,10 @@ file that was distributed with this source code.
 {% block form %}
     <div class="sonata-preview-form-container">
         {{ parent() }}
+        <style>
+            .sonata-preview-form-container .row {
+                display: none;
+            };
+        </style>
     </div>
 {% endblock %}
