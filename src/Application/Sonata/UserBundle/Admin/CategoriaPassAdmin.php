@@ -39,6 +39,8 @@ class CategoriaPassAdmin extends Admin {
     protected function configureDatagridFilters(DatagridMapper $filterMapper) {
         $filterMapper
                 ->add('nombreCategoria')
+                ->add('passwords')
+
         ;
     }
 

@@ -57,6 +57,11 @@ class CategoriaPass {
         return $this->nombreCategoria;
     }
 
+    /**
+     * Get passwords
+     *
+     * @return ArrayCollection 
+     */
     function getPasswords() {
         return $this->passwords;
     }
@@ -74,8 +79,7 @@ class CategoriaPass {
     }
 
     public function __toString() {
-        return $this->getNombreCategoria();
+        return $this->getNombreCategoria()?: 'n/a';
     }
 
-    
 }

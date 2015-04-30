@@ -300,6 +300,6 @@ class Password {
     }
 
     public function __toString() {
-        return $this->getTitulo();
+        return $this->getTitulo() ?: 'n/a';
     }
 }
