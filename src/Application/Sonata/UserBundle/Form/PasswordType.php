@@ -24,7 +24,7 @@ class PasswordType extends AbstractType {
                 ->add('url')
                 ->add('password')
                 ->add('comentario')
-                ->add('fechaExpira')
+                ->add('fechaExpira', null, array('class' => 'sonata-medium-date-custom'))
                 ->add('fechaCreacion')
                 ->add('fechaModificacion')
                 ->add('fechaUltimoAcceso')

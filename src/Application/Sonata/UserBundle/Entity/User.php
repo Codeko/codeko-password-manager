@@ -32,7 +32,7 @@ class User extends BaseUser {
      * @var ArrayCollection $passwords
      */
     protected $passwords;
-    
+
     /**
      * Get id
      *
@@ -42,10 +42,11 @@ class User extends BaseUser {
         return $this->id;
     }
 
+//
 //    public function __construct() {
 //        $this->passwords = new \Doctrine\Common\Collections\ArrayCollection();
 //    }
-    
+
     public function addPassword(Password $password) {
         $this->passwords[] = $password;
     }
@@ -55,6 +56,7 @@ class User extends BaseUser {
     }
 
     public function __toString() {
-        return $this->getUsername();
+        return $this->getUsername() ? : 'n/a';
     }
+
 }

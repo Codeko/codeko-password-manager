@@ -23,6 +23,8 @@ use FOS\UserBundle\Model\UserManagerInterface;
 class UserAdmin extends \Sonata\UserBundle\Admin\Model\UserAdmin
 {
 
+    public $supportsPreviewMode = true;
+    
     /**
      * {@inheritdoc}
      */

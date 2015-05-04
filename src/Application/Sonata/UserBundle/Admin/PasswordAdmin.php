@@ -21,6 +21,8 @@ use Application\Sonata\UserBundle\Entity\CategoriaPass;
 
 class PasswordAdmin extends Admin {
 
+    public $supportsPreviewMode = true;
+    
     /**
      * {@inheritdoc}
      */
@@ -95,7 +97,7 @@ class PasswordAdmin extends Admin {
                 ->add('url', null, array('required' => false))
                 ->add('password')
                 ->add('comentario', null, array('required' => false))
-                ->add('fechaExpira', null, array('required' => false))
+                ->add('fechaExpira', null, array('required' => false, 'format' =>  'dd MMM yyyy','widget' => 'choice'))
                 ->add('fechaCreacion', null, array('required' => false))
                 ->add('fechaModificacion', null, array('required' => false))
                 ->add('fechaUltimoAcceso', null, array('required' => false))
