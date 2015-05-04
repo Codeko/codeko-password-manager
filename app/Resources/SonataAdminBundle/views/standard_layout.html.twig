@@ -119,14 +119,15 @@ file that was distributed with this source code.
                 {% block logo %}
                     {% if admin_pool is defined %}
                         {% spaceless %}
-                            <a class="logo" href="{{ path('sonata_admin_dashboard') }}">
+                            <a class="logo" href="{{ path('sonata_admin_dashboard') }}"><img src="{{ asset('bundles/applicationsonatauser/images/headerMenu.png') }}"/></a>
+                            {#<a class="logo" href="{{ path('sonata_admin_dashboard') }}">
                                 {% if 'single_image' == admin_pool.getOption('title_mode') or 'both' == admin_pool.getOption('title_mode') %}
                                     <img src="{{ asset('bundles/applicationsonatauser/images/logo_title.png') }}" alt="{{ admin_pool.title }}">
                                 {% endif %}
                                 {% if 'single_text' == admin_pool.getOption('title_mode') or 'both' == admin_pool.getOption('title_mode') %}
                                     <span>Password Manager</span>
                                 {% endif %}
-                            </a>
+                            </a>#}
                         {% endspaceless %}
                     {% endif %}
                 {% endblock %}

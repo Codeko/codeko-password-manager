@@ -64,6 +64,16 @@ body {
 
 .bg-light-blue, .label-primary, .modal-primary .modal-body {
     background-color: #5CB85C !important;
+    border-color: #4CAE4C !important;
+}
+
+.logo img {
+    display: inline;
+    margin-top: -15px;
+    padding-bottom: 4px;
+    max-height: 120px !important;
+    max-width: 170px !important;
+    z-index: 10000;
 }
 
 .form-signin {
@@ -87,7 +97,8 @@ body {
 
 .main-header .logo {
     font-size: 17px !important;
-    padding-left: 5px !important;
+    padding-right: 30px !important;
+    z-index: 10000;
 }
 
 .logo img + span {

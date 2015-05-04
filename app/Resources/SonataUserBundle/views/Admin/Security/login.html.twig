@@ -14,7 +14,7 @@
         .main-header, .content-header, .main-sidebar {
             display: none !important;
         }
-        .content-wrapper {
+        .content-wrapper, .skin-black .main-sidebar, .skin-black .left-side, .skin-black .wrapper {
             background: #eeeeee !important; /* Old browsers */
             background: -moz-linear-gradient(top,  #f8f8f8 0%, #c6c6c6 100%) !important; /* FF3.6+ */
             background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f8f8f8), color-stop(100%,#c6c6c6)) !important; /* Chrome,Safari4+ */
@@ -29,7 +29,7 @@
         } 
         @media (max-width: 500px) {
             .container {
-                
+
                 margin-top: -110px;
                 padding-right: 0px;
                 padding-left: 0px;
@@ -45,9 +45,12 @@
                 margin-right: -10px;
             }
         }
+        body {
+            padding-top: 0px !important;
+        }
     </style>
     <script>
-        $('body').addClass( "sidebar-collapse" );
+        $('body').addClass("sidebar-collapse");
     </script>
     <main class="container">
         <form class="form-signin bounceIn animated" action="{{ path("sonata_user_admin_security_check") }}" method="post">
