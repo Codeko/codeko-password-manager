@@ -42,11 +42,14 @@ class AppKernel extends Kernel {
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             // Sonata Classification
-            // new Sonata\ClassificationBundle\SonataClassificationBundle(),
+            new Sonata\ClassificationBundle\SonataClassificationBundle(),
+            // Sonata Media
+            new Sonata\MediaBundle\SonataMediaBundle(),
             // BUNDLES PROPIOS
             new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
             new Application\Sonata\TimelineBundle\ApplicationSonataTimelineBundle(), // easy extends integration
-            // new Application\Sonata\ClassificationBundle\ApplicationSonataClassificationBundle()
+            new Application\Sonata\ClassificationBundle\ApplicationSonataClassificationBundle(),
+            new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
