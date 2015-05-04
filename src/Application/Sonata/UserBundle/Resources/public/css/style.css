@@ -80,6 +80,17 @@ body {
     border-top: 3px solid #5CB85C !important;
 }
 
+.content-wrapper, .right-side {
+    background: #eeeeee; /* Old browsers */
+    background: -moz-linear-gradient(top,  #f8f8f8 0%, #c6c6c6 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f8f8f8), color-stop(100%,#c6c6c6)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #f8f8f8 0%,#c6c6c6 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #f8f8f8 0%,#c6c6c6 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #f8f8f8 0%,#c6c6c6 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #f8f8f8 0%,#c6c6c6 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8f8f8', endColorstr='#c6c6c6',GradientType=0 ); /* IE6-9 */
+}
+
 .alert-danger {
     margin: auto;
     max-width: 430px;
