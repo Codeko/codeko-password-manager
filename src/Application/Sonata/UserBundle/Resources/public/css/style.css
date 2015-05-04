@@ -56,6 +56,10 @@ body {
     height: 100vh;
 }
 
+.bg-light-blue, .label-primary, .modal-primary .modal-body {
+    background-color: #5CB85C !important;
+}
+
 .form-signin {
     box-shadow: 0 0 10px #a6a6a6;
     max-width: 430px;
@@ -65,6 +69,15 @@ body {
     border-radius: 8px; 
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
+}
+
+.main-header .logo {
+    font-size: 16px !important;
+    padding-left: 5px !important;
+}
+
+.box {
+    border-top: 3px solid #5CB85C !important;
 }
 
 .alert-danger {

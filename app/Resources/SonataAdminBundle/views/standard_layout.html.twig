@@ -25,7 +25,6 @@ file that was distributed with this source code.
 <html {% block html_attributes %}class="no-js"{% endblock %}>
     <head>
          <link rel="shortcut icon" type="image/x-icon" href="{{ asset('bundles/applicationsonatauser/images/favicon.ico') }}" />
-         <link href="{{ asset('bundles/applicationsonatauser/css/style.css') }}" rel="stylesheet">
         {% block meta_tags %}
             <meta charset="UTF-8">
             <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
@@ -38,7 +37,7 @@ file that was distributed with this source code.
                 {% endfor %}
             {% endif %}
         {% endblock %}
-
+        <link href="{{ asset('bundles/applicationsonatauser/css/style.css') }}" rel="stylesheet">
         {% block javascripts %}
             <script>
                 window.SONATA_CONFIG = {
@@ -125,7 +124,7 @@ file that was distributed with this source code.
                                     <img src="{{ asset(admin_pool.titlelogo) }}" alt="{{ admin_pool.title }}">
                                 {% endif %}
                                 {% if 'single_text' == admin_pool.getOption('title_mode') or 'both' == admin_pool.getOption('title_mode') %}
-                                    <span>{{ admin_pool.title }}</span>
+                                    <span>Password Manager</span>
                                 {% endif %}
                             </a>
                         {% endspaceless %}
