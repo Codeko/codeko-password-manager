@@ -157,7 +157,7 @@ ul.nav-pills li {
 }
 
 .form-signin input[type="text"]:hover, .form-signin input[type="password"]:hover, .form-signin input[type="email"]:hover, .form-signin input[type="text"]:focus, .form-signin input[type="password"]:focus, .form-signin input[type="email"]:focus {
-    border: 1px solid #5cb85c;
+    border: 1px solid #5cb85c !important;
 }
 
 .form-signin input[type="email"] {
