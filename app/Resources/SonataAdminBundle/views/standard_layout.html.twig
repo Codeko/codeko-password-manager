@@ -121,7 +121,7 @@ file that was distributed with this source code.
                         {% spaceless %}
                             <a class="logo" href="{{ path('sonata_admin_dashboard') }}">
                                 {% if 'single_image' == admin_pool.getOption('title_mode') or 'both' == admin_pool.getOption('title_mode') %}
-                                    <img src="{{ asset(admin_pool.titlelogo) }}" alt="{{ admin_pool.title }}">
+                                    <img src="{{ asset('bundles/applicationsonatauser/images/logo_title.png') }}" alt="{{ admin_pool.title }}">
                                 {% endif %}
                                 {% if 'single_text' == admin_pool.getOption('title_mode') or 'both' == admin_pool.getOption('title_mode') %}
                                     <span>Password Manager</span>
