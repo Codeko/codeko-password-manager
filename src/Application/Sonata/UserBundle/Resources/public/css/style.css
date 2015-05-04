@@ -76,6 +76,14 @@ body {
     z-index: 10000;
 }
 
+.skin-black .main-header > .logo {
+    background-color: white !important;
+}
+
+.skin-black .main-header > .logo:hover {
+    background: none repeat scroll 0% 0% white !important;
+}
+
 .form-signin {
     box-shadow: 0 0 10px #a6a6a6;
     max-width: 430px;
