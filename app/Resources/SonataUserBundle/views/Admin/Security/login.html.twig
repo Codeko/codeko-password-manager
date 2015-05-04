@@ -1,7 +1,7 @@
 {% extends base_template %}
 
 {% block content %} 
-    
+    <link href="{{ asset('bundles/applicationsonatauser/css/style.css') }}" rel="stylesheet">
     <style>
         .btn-success {
             color: #FFF !important;
@@ -12,13 +12,10 @@
             color: #337AB7 !important;
             border-radius: 4px !important;
         }
-        .header {
+        .main-header, .content-header, .main-sidebar {
             display: none !important;
         }
-        .left-side {
-            display: none !important;
-        }
-        .content {
+        .content-wrapper {
             background: #eeeeee !important; /* Old browsers */
             background: -moz-linear-gradient(top,  #f8f8f8 0%, #c6c6c6 100%) !important; /* FF3.6+ */
             background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f8f8f8), color-stop(100%,#c6c6c6)) !important; /* Chrome,Safari4+ */
@@ -28,23 +25,13 @@
             background: linear-gradient(to bottom,  #f8f8f8 0%,#c6c6c6 100%) !important; /* W3C */
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8f8f8', endColorstr='#c6c6c6',GradientType=0 ) !important; /* IE6-9 */
         }
-        .right-side {
-            position: fixed;
-            top: 0px !important;
-            left: 0px !important;
-            margin:0px !important;
-            width: 100% !important;
-            height: 100% !important;
-        }
         .forgot {
             float:right;
-        }
-        div.hover {
-            border-color: #5CB85C !important;
-        }
+        } 
         @media (max-width: 500px) {
             .container {
-                margin-top: -20px;
+                
+                margin-top: -110px;
                 padding-right: 0px;
                 padding-left: 0px;
                 height: 100%;
@@ -60,6 +47,9 @@
             }
         }
     </style>
+    <script>
+        $('body').addClass( "sidebar-collapse" );
+    </script>
     <main class="container">
         <form class="form-signin bounceIn animated" action="{{ path("sonata_user_admin_security_check") }}" method="post">
             <header class="decoracionCabecera"></header>
