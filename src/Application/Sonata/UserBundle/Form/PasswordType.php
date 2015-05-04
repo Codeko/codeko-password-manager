@@ -29,12 +29,7 @@ class PasswordType extends AbstractType {
                 ->add('fechaModificacion')
                 ->add('fechaUltimoAcceso')
                 ->add('tipoPassword')
-                ->add('categorias', null, array(
-                    'class' => 'ApplicationSonataUserBundle:CategoriaPass',
-                    'property' => 'nombreCategoria',
-                    'allow_add' => true,
-                    'allow_delete' => true
-        ));
+        ;
     }
 
     /**

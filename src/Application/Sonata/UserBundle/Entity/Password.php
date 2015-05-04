@@ -28,7 +28,7 @@ class Password {
      * @var string
      */
     private $usernamePass;
-    
+
     /**
      * @var string
      */
@@ -63,8 +63,9 @@ class Password {
      * @var \DateTime
      */
     private $fechaUltimoAcceso;
-    private $categorias;
     private $tipoPassword;
+    
+    
 
     /**
      * Get id
@@ -125,7 +126,6 @@ class Password {
         $this->usernamePass = $usernamePass;
     }
 
-        
     /**
      * Set url
      *
@@ -273,10 +273,6 @@ class Password {
         return $this->fechaUltimoAcceso;
     }
 
-    function getCategorias() {
-        return $this->categorias;
-    }
-
     function getTipoPassword() {
         return $this->tipoPassword;
     }
@@ -285,21 +281,8 @@ class Password {
         $this->tipoPassword = $tipoPassword;
     }
 
-    public function __construct() {
-        $this->categorias = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    public function addCategoria(CategoriaPass $categoria) {
-        $categoria->addPassword($this);
-        $this->categorias[] = $categoria;
-    }
-
-    public function removeCategoria(CategoriaPass $categoria) {
-        $this->categorias->removeElement($categoria);
-        $categoria->removePassword($this);
-    }
-
     public function __toString() {
-        return $this->getTitulo() ?: 'n/a';
+        return $this->getTitulo() ? : 'n/a';
     }
+
 }

@@ -10,11 +10,6 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
-    categorias.pass.servicio:
-      class: Application\Sonata\UserBundle\Admin\CategoriaPassAdmin
-      tags:
-        - { name: sonata.admin, manager_type: orm, group: Password Manager, label: Categorías }
-      arguments: [null, Application\Sonata\UserBundle\Entity\CategoriaPass, ApplicationSonataUserBundle:CategoriaPass]
       
     password.pass.servicio:
       class: Application\Sonata\UserBundle\Admin\PasswordAdmin

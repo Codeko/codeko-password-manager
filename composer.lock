@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "13103153f21aabca5602b4ea9f78bebc",
+    "hash": "f097e4632191b8cff529f7917adbf4c9",
     "packages": [
         {
             "name": "cocur/slugify",
@@ -2602,17 +2602,17 @@
         },
         {
             "name": "sensio/distribution-bundle",
-            "version": "v3.0.21",
+            "version": "v3.0.22",
             "target-dir": "Sensio/Bundle/DistributionBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "da23c78093676a823a1ff43a214987ea3fbf83c8"
+                "reference": "0fe4ec86db57c232becb694e01cdabe3c4d9af7c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/da23c78093676a823a1ff43a214987ea3fbf83c8",
-                "reference": "da23c78093676a823a1ff43a214987ea3fbf83c8",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/0fe4ec86db57c232becb694e01cdabe3c4d9af7c",
+                "reference": "0fe4ec86db57c232becb694e01cdabe3c4d9af7c",
                 "shasum": ""
             },
             "require": {
@@ -2658,7 +2658,7 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2015-04-10 06:20:46"
+            "time": "2015-05-02 16:23:08"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -2814,12 +2814,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "4f23e1a30e49681bf8ebdbbae549848784be7699"
+                "reference": "dd1ef418b845b6dd169a95c712f643f7b656abeb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/4f23e1a30e49681bf8ebdbbae549848784be7699",
-                "reference": "4f23e1a30e49681bf8ebdbbae549848784be7699",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/dd1ef418b845b6dd169a95c712f643f7b656abeb",
+                "reference": "dd1ef418b845b6dd169a95c712f643f7b656abeb",
                 "shasum": ""
             },
             "require": {
@@ -2890,7 +2890,7 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2015-04-29 09:05:01"
+            "time": "2015-05-03 09:16:21"
         },
         {
             "name": "sonata-project/block-bundle",

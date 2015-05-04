@@ -27,8 +27,6 @@ class AppKernel extends Kernel {
             // Sonata Admin y EasyExtends
             new Sonata\AdminBundle\SonataAdminBundle(),
             new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
-            // Sonata Page
-            // new Sonata\PageBundle\SonataPageBundle(),
             // FOS USER 
             new FOS\UserBundle\FOSUserBundle(),
             // Sonata User     
@@ -42,9 +40,13 @@ class AppKernel extends Kernel {
             new JMS\AopBundle\JMSAopBundle(),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
+            new JMS\SerializerBundle\JMSSerializerBundle($this),
+            // Sonata Classification
+            // new Sonata\ClassificationBundle\SonataClassificationBundle(),
             // BUNDLES PROPIOS
             new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
             new Application\Sonata\TimelineBundle\ApplicationSonataTimelineBundle(), // easy extends integration
+            // new Application\Sonata\ClassificationBundle\ApplicationSonataClassificationBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
