@@ -38,7 +38,7 @@ class PasswordController extends Controller {
             throw new AccessDeniedException();
         }
 
-        if ($listMode = $request->get('_list_mode', 'mosaic')) {
+        if ($listMode = $request->get('_list_mode')) {
             $this->admin->setListMode($listMode);
         }
 

@@ -31,3 +31,5 @@ sonata_media:
         local:
             directory:  %kernel.root_dir%/../web/uploads/media
             create:     false   
+            
+    

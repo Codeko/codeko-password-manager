@@ -22,7 +22,7 @@ use Application\Sonata\ClassificationBundle\Entity\Category;
 class PasswordAdmin extends Admin {
 
     public $supportsPreviewMode = true;
-
+    
     /**
      * {@inheritdoc}
      */
@@ -60,11 +60,11 @@ class PasswordAdmin extends Admin {
                 ->add('fechaCreacion')
                 ->add('fechaModificacion')
                 ->add('fechaUltimoAcceso')
-                // ->add('categorias')
+                ->add('categorias')
                 // CONSEGUIR ENLAZAR CATEGORIAS CON PASSWORD!!!!!!!
-                ->add('categorias', null, array(
-                    'show_filter' => false,
-                ))
+//                ->add('categorias', null, array(
+//                    'show_filter' => false,
+//                ))
                 ->add('tipoPassword')
         ;
     }

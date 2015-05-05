@@ -20,9 +20,6 @@ file that was distributed with this source code.
             {% endif %}
 
             <div class="box-body">
-
-                {#{% sonata_template_box 'This is the timeline block.' %}#}
-
                 <div class="row">
                     <div class="col-md-12">
                         <ul class="timeline">
@@ -60,7 +57,7 @@ file that was distributed with this source code.
                                     <i class="{{ icon|trans({}, "SonataTimelineBundle") }}"></i>
                                     <div class="timeline-item" style="background: #f3f4f5;">
                                         <span class="time"><i class="fa fa-clock-o"></i> {{ entry.createdAt|format_time }}</span>
-                                        <h3 class="timeline-header" style="border-bottom: none; font-family: 'Source Sans Pro',sans-serif; font-size: 14px">{{ verb|trans({'%subject%': subject_text, '%target%': target_text}, "SonataTimelineBundle")|raw }}</h3>
+                                        <h3 class="timeline-header" style="border-bottom: none; font-family: 'Source Sans Pro',sans-serif; font-size: 12px">{{ verb|trans({'%subject%': subject_text, '%target%': target_text}, "SonataTimelineBundle")|raw }}</h3>
                                     </div>
                                 </li>
                             {% else %}
