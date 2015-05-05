@@ -7,14 +7,15 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class PasswordVoter implements VoterInterface {
 
-    const VER = 'ROLE_MOSTRAR_PASSWORD';
-    const EDITAR = 'ROLE_EDITAR_PASSWORD';
+    const VERPASSWORD = 'ROLE_MOSTRAR_PASSWORD';
+    const EDITARPASSWORD = 'ROLE_EDITAR_PASSWORD';
+    const BORRARPASSWORD = 'ROLE_BORRAR_PASSWORD';
 
     public function supportsAttribute($attribute) {
-//        return 'ROLE_EDITAR_PASSWORD' == $attribute;
         return in_array($attribute, array(
-            self::VER,
-            self::EDITAR,
+            self::VERPASSWORD,
+            self::EDITARPASSWORD,
+            self::BORRARPASSWORD,
         ));
     }
 
@@ -32,23 +33,24 @@ class PasswordVoter implements VoterInterface {
             }
 
             $vote = VoterInterface::ACCESS_DENIED;
-            
-            if ($attribute === 'ROLE_EDITAR_PASSWORD') {
+
+            if ($attribute === 'ROLE_EDITAR_PASSWORD' || $attribute === 'ROLE_BORRAR_PASSWORD') {
                 $user = $token->getUser();
-                $idpasswordPropietario = $object->getId();
-                
+                $iduser = $user->getId();
+                $idpasswordPropietario = $object->getUser()->getId();
+
                 if (!$user->isSuperAdmin()) {
 
-                    // comprobar que la PASSWORD que se edita fue publicada por mismo usuario
+                    // Comprobar que la PASSWORD que se edita fue publicada por mismo usuario
                     /* @var $idpassword type */
-                    if ($idpasswordPropietario != $user->getId()) {
+                    if ($idpasswordPropietario != $iduser) {
                         $vote = VoterInterface::ACCESS_DENIED;
                         throw new \InvalidArgumentException(
                         'No eres el propietario'
                         );
                     }
+                    
                 }
-                
             }
         }
 

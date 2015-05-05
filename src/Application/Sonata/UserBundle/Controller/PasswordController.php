@@ -155,6 +155,73 @@ class PasswordController extends Controller {
                     'csrf_token' => $this->getCsrfToken('sonata.batch'),
         ));
     }
+    
+        public function deleteAction($id, Request $request = null)
+    {
+        $request = $this->resolveRequest($request);
+        $id      = $request->get($this->admin->getIdParameter());
+        $object  = $this->admin->getObject($id);
+
+        if (!$object) {
+            throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
+        }
+        
+        if (false === $this->get('security.context')->isGranted('ROLE_BORRAR_PASSWORD', $object)) {
+            //Controlar Voters
+        }
+
+        if (false === $this->admin->isGranted('DELETE', $object)) {
+            throw new AccessDeniedException();
+        }
+
+        if ($this->getRestMethod($request) == 'DELETE') {
+            // check the csrf token
+            $this->validateCsrfToken('sonata.delete', $request);
+
+            $objectName = $this->admin->toString($object);
+            
+            try {
+                $this->admin->delete($object);
+
+                if ($this->isXmlHttpRequest($request)) {
+                    return $this->renderJson(array('result' => 'ok'), 200, array(), $request);
+                }
+
+                $this->addFlash(
+                    'sonata_flash_success',
+                    $this->admin->trans(
+                        'flash_delete_success',
+                        array('%name%' => $this->escapeHtml($objectName)),
+                        'SonataAdminBundle'
+                    )
+                );
+
+            } catch (ModelManagerException $e) {
+                $this->handleModelManagerException($e);
+
+                if ($this->isXmlHttpRequest($request)) {
+                    return $this->renderJson(array('result' => 'error'), 200, array(), $request);
+                }
+
+                $this->addFlash(
+                    'sonata_flash_error',
+                    $this->admin->trans(
+                        'flash_delete_error',
+                        array('%name%' => $this->escapeHtml($objectName)),
+                        'SonataAdminBundle'
+                    )
+                );
+            }
+
+            return $this->redirectTo($object, $request);
+        }
+
+        return $this->render($this->admin->getTemplate('delete'), array(
+            'object'     => $object,
+            'action'     => 'delete',
+            'csrf_token' => $this->getCsrfToken('sonata.delete')
+        ), null, $request);
+    }
 
     // FUNCION PRIVADA DE SONATAADMIN-CRUDCONTROLLER, HAY QUE LLAMARLA DESDE AQUI
     /**
