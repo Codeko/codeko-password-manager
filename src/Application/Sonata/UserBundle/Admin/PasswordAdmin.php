@@ -17,6 +17,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use FOS\UserBundle\Model\UserManagerInterface;
+use Application\Sonata\ClassificationBundle\Entity\Category;
 
 class PasswordAdmin extends Admin {
 
@@ -37,6 +38,7 @@ class PasswordAdmin extends Admin {
                 ->add('fechaCreacion')
                 ->add('fechaModificacion')
                 ->add('fechaUltimoAcceso')
+                ->add('categorias')
                 ->add('tipoPassword')
                 
         ;
@@ -56,6 +58,7 @@ class PasswordAdmin extends Admin {
                 ->add('fechaCreacion')
                 ->add('fechaModificacion')
                 ->add('fechaUltimoAcceso')
+                ->add('categorias')
                 ->add('tipoPassword')
         ;
     }
@@ -76,6 +79,7 @@ class PasswordAdmin extends Admin {
                 ->add('fechaCreacion')
                 ->add('fechaModificacion')
                 ->add('fechaUltimoAcceso')
+                ->add('categorias')
                 ->add('tipoPassword')
                 ->end()
         ;
@@ -99,6 +103,10 @@ class PasswordAdmin extends Admin {
                 ->add('fechaUltimoAcceso', null, array('required' => false))
                 ->add('tipoPassword', null, array('required' => false))
                 ->end()
+                ->with('Categorias')
+                ->add('categorias', null, array('label' => 'Categorias', 'expanded' => true, 'by_reference' => false, 'multiple' => true, 'required' => false))
+                ->end()
+
         ;
     }
 
