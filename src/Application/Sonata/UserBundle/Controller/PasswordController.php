@@ -117,9 +117,9 @@ class PasswordController extends Controller {
         $datagrid = $this->admin->getDatagrid();
         $filters = $request->get('filter');
 
-//        if (false === $this->get('security.context')->isGranted('ROLE_MOSTRAR_PASSWORD', $datagrid)) {
-//            //Controlar Voters
-//        }
+        if (false === $this->get('security.context')->isGranted('ROLE_MOSTRAR_PASSWORD', $datagrid)) {
+            //Controlar Voters
+        }
         
         if (!$filters || !array_key_exists('context', $filters)) {
             $context = $this->admin->getPersistentParameter('context', $this->get('sonata.media.pool')->getDefaultContext());
