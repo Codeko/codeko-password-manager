@@ -95,22 +95,6 @@ body {
     -webkit-border-radius: 8px;
 }
 
-.fixed .content-wrapper, .fixed .right-side {
-    padding-top: 0px !important;
-}
-
-@media (max-width: 750px) {
-   .fixed .content-wrapper, .fixed .right-side {
-        padding-top: 40px !important;
-    } 
-} 
-
-@media (max-width: 500px) {
-   .fixed .content-wrapper, .fixed .right-side {
-        padding-top: 80px !important;
-    } 
-}  
-
 .nav-tabs-custom > .nav-tabs > li.active {
     border-top-color: #5cb85c;
 }
