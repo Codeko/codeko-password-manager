@@ -31,7 +31,7 @@ class PasswordAdmin extends Admin {
                 ->addIdentifier('titulo')
                 ->add('user')
                 ->add('usernamePass')
-                ->add('url','url')
+                ->add('url', 'url')
                 ->add('password')
                 ->add('comentario')
                 ->add('fechaExpira')
@@ -40,10 +40,12 @@ class PasswordAdmin extends Admin {
                 ->add('fechaUltimoAcceso')
                 ->add('categorias')
                 ->add('tipoPassword')
-                
+
         ;
     }
 
+    // AQUI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    
     /**
      * {@inheritdoc}
      */
@@ -59,6 +61,10 @@ class PasswordAdmin extends Admin {
                 ->add('fechaModificacion')
                 ->add('fechaUltimoAcceso')
                 ->add('categorias')
+                // CONSEGUIR ENLAZAR CATEGORIAS CON PASSWORD!!!!!!!
+//                ->add('categorias', null, array(
+//                    'show_filter' => false,
+//                ))
                 ->add('tipoPassword')
         ;
     }
@@ -97,7 +103,7 @@ class PasswordAdmin extends Admin {
                 ->add('url', null, array('required' => false))
                 ->add('password')
                 ->add('comentario', null, array('required' => false))
-                ->add('fechaExpira', null, array('required' => false, 'format' =>  'dd MMM yyyy','widget' => 'choice'))
+                ->add('fechaExpira', null, array('required' => false, 'format' => 'dd MMM yyyy', 'widget' => 'choice'))
                 ->add('fechaCreacion', null, array('required' => false))
                 ->add('fechaModificacion', null, array('required' => false))
                 ->add('fechaUltimoAcceso', null, array('required' => false))
