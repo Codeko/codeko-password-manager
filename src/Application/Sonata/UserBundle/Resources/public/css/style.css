@@ -54,6 +54,7 @@ body {
 
 .container {
     height: 100vh;
+    padding-top: 50px;
 }
 
 .btn-success {
@@ -74,6 +75,18 @@ body {
     max-height: 120px !important;
     max-width: 170px !important;
     z-index: 10000;
+}
+
+@media (min-width: 501px) {
+    .fixed .content-wrapper, .fixed .right-side {
+        padding-top: 40px;
+    }
+}
+
+@media (min-width: 767px) {
+    .fixed .content-wrapper, .fixed .right-side {
+        padding-top: 0px;
+    }
 }
 
 .skin-black .main-header > .logo {
@@ -314,6 +327,10 @@ ul.nav-pills li {
 @media (max-width: 500px) {
     body {
         padding-top: 10px;
+    }
+    
+    .container {
+        padding-top: 0px;
     }
 }
 
