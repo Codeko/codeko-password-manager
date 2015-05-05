@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    # SONATA CONFIG
     - { resource: sonata/fos_user.yml }
     - { resource: sonata/sonata_admin.yml }
     - { resource: sonata/sonata_block.yml }
@@ -9,6 +10,8 @@ imports:
     - { resource: sonata/sonata_user.yml }
     - { resource: sonata/sonata_timeline.yml }
     - { resource: sonata/sonata_intl.yml }
+    - { resource: sonata/sonata_classification.yml }
+    - { resource: sonata/sonata_media.yml }
     
 framework:
     #esi:             ~

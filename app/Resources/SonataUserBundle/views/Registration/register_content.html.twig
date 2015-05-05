@@ -23,10 +23,10 @@
 
     <script type="text/javascript">
         function cargarInput() {
-            usuario = document.getElementById("fos_user_registration_form_username");
-            email = document.getElementById("fos_user_registration_form_email");
-            contraseña1 = document.getElementById("fos_user_registration_form_plainPassword_first");
-            contraseña2 = document.getElementById("fos_user_registration_form_plainPassword_second");
+            usuario = document.getElementById("sonata_user_registration_form_username");
+            email = document.getElementById("sonata_user_registration_form_email");
+            contraseña1 = document.getElementById("sonata_user_registration_form_plainPassword_first");
+            contraseña2 = document.getElementById("sonata_user_registration_form_plainPassword_second");
 
             usuario.placeholder = "Nombre de usuario";
             usuario.classList.add("form-control");
@@ -39,8 +39,8 @@
         }
 
         function comprobarClaves() {
-            clave1 = document.getElementById("fos_user_registration_form_plainPassword_first");
-            clave2 = document.getElementById("fos_user_registration_form_plainPassword_second");
+            clave1 = document.getElementById("sonata_user_registration_form_plainPassword_first");
+            clave2 = document.getElementById("sonata_user_registration_form_plainPassword_second");
 
             if (clave1.value === clave2.value) {
                 return true;

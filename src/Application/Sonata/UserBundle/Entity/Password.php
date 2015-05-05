@@ -3,6 +3,7 @@
 namespace Application\Sonata\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Application\Sonata\ClassificationBundle\Entity\Category;
 
 /**
  * Password
@@ -28,7 +29,7 @@ class Password {
      * @var string
      */
     private $usernamePass;
-    
+
     /**
      * @var string
      */
@@ -125,7 +126,6 @@ class Password {
         $this->usernamePass = $usernamePass;
     }
 
-        
     /**
      * Set url
      *
@@ -289,17 +289,18 @@ class Password {
         $this->categorias = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-    public function addCategoria(CategoriaPass $categoria) {
+    public function addCategoria(Category $categoria) {
         $categoria->addPassword($this);
         $this->categorias[] = $categoria;
     }
 
-    public function removeCategoria(CategoriaPass $categoria) {
+    public function removeCategoria(Category $categoria) {
         $this->categorias->removeElement($categoria);
         $categoria->removePassword($this);
     }
 
     public function __toString() {
-        return $this->getTitulo();
+        return $this->getTitulo() ? : 'n/a';
     }
+
 }

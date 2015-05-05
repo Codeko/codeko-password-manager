@@ -37,4 +37,8 @@ class Group extends BaseGroup
     {
         return $this->id;
     }
+    
+    public function __toString() {
+        return $this->getName()?: 'n/a';
+    }
 }

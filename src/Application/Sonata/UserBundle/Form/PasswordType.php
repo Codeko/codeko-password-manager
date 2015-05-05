@@ -24,14 +24,14 @@ class PasswordType extends AbstractType {
                 ->add('url')
                 ->add('password')
                 ->add('comentario')
-                ->add('fechaExpira')
+                ->add('fechaExpira', null, array('class' => 'sonata-medium-date-custom'))
                 ->add('fechaCreacion')
                 ->add('fechaModificacion')
                 ->add('fechaUltimoAcceso')
                 ->add('tipoPassword')
                 ->add('categorias', null, array(
-                    'class' => 'ApplicationSonataUserBundle:CategoriaPass',
-                    'property' => 'nombreCategoria',
+                    'class' => 'ApplicationSonataClassificationBundle:Category',
+                    'property' => 'name',
                     'allow_add' => true,
                     'allow_delete' => true
         ));
