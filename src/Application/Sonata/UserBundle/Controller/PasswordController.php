@@ -14,6 +14,12 @@ use Doctrine\ORM\EntityManager;
  *
  */
 class PasswordController extends Controller {
+    
+    /*
+     *
+     * Acción de editar contraseñas
+     *
+     */
 
     public function editAction($id = null, Request $request = null) {
         $request = $this->resolveRequest($request);
@@ -30,9 +36,7 @@ class PasswordController extends Controller {
 
         if (false === $this->get('security.context')->isGranted('ROLE_EDITAR_ENTIDAD', $object)) {
             //Controlar Voters
-            throw new \InvalidArgumentException(
-            'No eres el propietario para editar esta contraseña'
-            );
+            throw new AccessDeniedException('No eres el propietario para editar esta contraseña');
         }
 
         if (false === $this->admin->isGranted('EDIT', $object)) {
@@ -106,9 +110,60 @@ class PasswordController extends Controller {
                         ), null, $request);
     }
 
+    /*
+     *
+     * Acción de mostrar contraseñas
+     *
+     */
+
+    public function showAction($id = null, Request $request = null) {
+        $request = $this->resolveRequest($request);
+        $id = $request->get($this->admin->getIdParameter());
+
+        $object = $this->admin->getObject($id);
+
+        if (!$object) {
+            throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
+        }
+
+        if (false === $this->get('security.context')->isGranted('ROLE_LISTAR_ENTIDAD', $object)) {
+            //Controlar Voters
+            throw new AccessDeniedException('No tienes acceso a showAction');
+        }
+
+        if (false === $this->get('security.authorization_checker')->isGranted('view', $object)) {
+            throw new AccessDeniedException('Unauthorised access!');
+        }
+
+        return new Response('<h1>' . $object->getName() . '</h1>');
+
+        if (false === $this->admin->isGranted('VIEW', $object)) {
+            throw new AccessDeniedException();
+        }
+
+        $this->admin->setSubject($object);
+
+        return $this->render($this->admin->getTemplate('show'), array(
+                    'action' => 'show',
+                    'object' => $object,
+                    'elements' => $this->admin->getShow(),
+                        ), null, $request);
+    }
+
+    /*
+     *
+     * Acción de listar contraseñas
+     *
+     */
+
     public function listAction(Request $request = null) {
         $request = $this->resolveRequest($request);
 
+//        $prueba = $request->getLanguages();
+//        throw new \InvalidArgumentException(
+//        $prueba
+//        );
+//        
         if (false === $this->admin->isGranted('LIST')) {
             throw new AccessDeniedException();
         }
@@ -120,8 +175,9 @@ class PasswordController extends Controller {
         $datagrid = $this->admin->getDatagrid();
         $filters = $request->get('filter');
 
-        if (false === $this->get('security.context')->isGranted('ROLE_MOSTRAR_ENTIDAD', $datagrid)) {
+        if (false === $this->get('security.context')->isGranted('ROLE_LISTAR_ENTIDAD', $datagrid)) {
             //Controlar Voters
+//            throw new AccessDeniedException('No tienes acceso a listar');
         }
 
         if (!$filters || !array_key_exists('context', $filters)) {
@@ -146,6 +202,7 @@ class PasswordController extends Controller {
                 $datagrid->setValue('category', null, $category->getId());
             }
         }
+
         $formView = $datagrid->getForm()->createView();
 
         $this->get('twig')->getExtension('form')->renderer->setTheme($formView, $this->admin->getFilterTheme());
@@ -158,6 +215,12 @@ class PasswordController extends Controller {
         ));
     }
 
+    /*
+     *
+     * Acción de borrar contraseñas
+     *
+     */
+
     public function deleteAction($id, Request $request = null) {
         $request = $this->resolveRequest($request);
         $id = $request->get($this->admin->getIdParameter());
@@ -169,9 +232,7 @@ class PasswordController extends Controller {
 
         if (false === $this->get('security.context')->isGranted('ROLE_BORRAR_ENTIDAD', $object)) {
             //Controlar Voters
-            throw new \InvalidArgumentException(
-            'No eres el propietario para borrar esta contraseña'
-            );
+            throw new AccessDeniedException('No eres el propietario para borrar esta contraseña');
         }
 
         if (false === $this->admin->isGranted('DELETE', $object)) {

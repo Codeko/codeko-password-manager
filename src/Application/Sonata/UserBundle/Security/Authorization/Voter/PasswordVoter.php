@@ -7,7 +7,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class PasswordVoter implements VoterInterface {
 
-    const VERPASSWORD = 'ROLE_MOSTRAR_ENTIDAD';
+    const VERPASSWORD = 'ROLE_LISTAR_ENTIDAD';
     const EDITARPASSWORD = 'ROLE_EDITAR_ENTIDAD';
     const BORRARPASSWORD = 'ROLE_BORRAR_ENTIDAD';
 
@@ -41,13 +41,9 @@ class PasswordVoter implements VoterInterface {
 
                 if (!$user->isSuperAdmin()) {
 
-                    // Comprobar que la PASSWORD que se edita fue publicada por mismo usuario
-                    /* @var $idpassword type */
+                    /* @var $idpasswordPropietario type */
                     if ($idpasswordPropietario != $iduser) {
                         $vote = VoterInterface::ACCESS_DENIED;
-//                        throw new \InvalidArgumentException(
-//                        'No eres el propietario'
-//                        );
                         return $vote;
                     }
                     $vote = VoterInterface::ACCESS_GRANTED;
@@ -56,6 +52,25 @@ class PasswordVoter implements VoterInterface {
                     $vote = VoterInterface::ACCESS_GRANTED;
                     return $vote;
                 }
+            }
+
+            if ($attribute === 'ROLE_LISTAR_ENTIDAD') {
+//                $user = $token->getUser();
+//                $iduser = $user->getId();
+//                $idpasswordPropietario = $object->getUser()->getId();
+//
+//                if (!$user->isSuperAdmin()) {
+//
+//                    if ($idpasswordPropietario != $iduser) {
+//                        $vote = VoterInterface::ACCESS_DENIED;
+//                        return $vote;
+//                    }
+//                    $vote = VoterInterface::ACCESS_GRANTED;
+//                    return $vote;
+//                } else {
+//                    $vote = VoterInterface::ACCESS_GRANTED;
+//                    return $vote;
+//                }
             }
         }
 
