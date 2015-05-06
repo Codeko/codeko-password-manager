@@ -119,7 +119,11 @@ file that was distributed with this source code.
                 {% block logo %}
                     {% if admin_pool is defined %}
                         {% spaceless %}
+                            {% if app.request.attributes.get('_route') == 'sonata_admin_redirect' %}
+                            <a class="logo" href="{{ path('sonata_admin_dashboard') }}"><img class="rubberBand animated" src="{{ asset('bundles/applicationsonatauser/images/headerMenu.png') }}"/></a>    
+                            {% else %}
                             <a class="logo" href="{{ path('sonata_admin_dashboard') }}"><img src="{{ asset('bundles/applicationsonatauser/images/headerMenu.png') }}"/></a>
+                            {% endif %}
                             {#<a class="logo" href="{{ path('sonata_admin_dashboard') }}">
                                 {% if 'single_image' == admin_pool.getOption('title_mode') or 'both' == admin_pool.getOption('title_mode') %}
                                     <img src="{{ asset('bundles/applicationsonatauser/images/logo_title.png') }}" alt="{{ admin_pool.title }}">

@@ -15,69 +15,56 @@ use Doctrine\ORM\EntityManager;
  */
 class PasswordController extends Controller {
     /*
-     * 
+     *
+     * Acción de editar contraseñas
+     *
      */
 
     public function editAction($id = null, Request $request = null) {
         $request = $this->resolveRequest($request);
-
         // the key used to lookup the template
         $templateKey = 'edit';
-
         $id = $request->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
-
         if (!$object) {
             throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
         }
-
-        if (false === $this->get('security.context')->isGranted('ROLE_EDITAR_PASSWORD', $object)) {
+        if (false === $this->get('security.context')->isGranted('ROLE_EDITAR_ENTIDAD', $object)) {
             //Controlar Voters
+            throw new AccessDeniedException('No eres el propietario para editar esta contraseña');
         }
-
         if (false === $this->admin->isGranted('EDIT', $object)) {
             throw new AccessDeniedException();
         }
-
         $this->admin->setSubject($object);
-
         /** @var $form \Symfony\Component\Form\Form */
         $form = $this->admin->getForm();
         $form->setData($object);
-
         if ($this->getRestMethod($request) == 'POST') {
             $form->submit($request);
-
             $isFormValid = $form->isValid();
-
             // persist if the form was valid and if in preview mode the preview was approved
             if ($isFormValid && (!$this->isInPreviewMode($request) || $this->isPreviewApproved($request))) {
-
                 try {
                     $object = $this->admin->update($object);
-
                     if ($this->isXmlHttpRequest($request)) {
                         return $this->renderJson(array(
                                     'result' => 'ok',
                                     'objectId' => $this->admin->getNormalizedIdentifier($object)
                                         ), 200, array(), $request);
                     }
-
                     $this->addFlash(
                             'sonata_flash_success', $this->admin->trans(
                                     'flash_edit_success', array('%name%' => $this->escapeHtml($this->admin->toString($object))), 'SonataAdminBundle'
                             )
                     );
-
                     // redirect to edit mode
                     return $this->redirectTo($object, $request);
                 } catch (ModelManagerException $e) {
                     $this->handleModelManagerException($e);
-
                     $isFormValid = false;
                 }
             }
-
             // show an error message if the form failed validation
             if (!$isFormValid) {
                 if (!$this->isXmlHttpRequest($request)) {
@@ -93,12 +80,9 @@ class PasswordController extends Controller {
                 $this->admin->getShow();
             }
         }
-
         $view = $form->createView();
-
         // set the theme for the current Admin Form
         $this->get('twig')->getExtension('form')->renderer->setTheme($view, $this->admin->getFormTheme());
-
         return $this->render($this->admin->getTemplate($templateKey), array(
                     'action' => 'edit',
                     'form' => $view,
@@ -106,48 +90,69 @@ class PasswordController extends Controller {
                         ), null, $request);
     }
 
-    /**
-     * {@inheritdoc}
+    /*
+     *
+     * Acción de mostrar contraseñas
+     *
      */
-    public function render($view, array $parameters = array(), Response $response = null, Request $request = null) {
-        $parameters['media_pool'] = $this->container->get('sonata.media.pool');
-        $parameters['persistent_parameters'] = $this->admin->getPersistentParameters();
 
-        return parent::render($view, $parameters, $response, $request);
+    public function showAction($id = null, Request $request = null) {
+        $request = $this->resolveRequest($request);
+        $id = $request->get($this->admin->getIdParameter());
+        $object = $this->admin->getObject($id);
+        if (!$object) {
+            throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
+        }
+        if (false === $this->get('security.context')->isGranted('ROLE_LISTAR_ENTIDAD', $object)) {
+            //Controlar Voters
+            throw new AccessDeniedException('No tienes acceso a showAction');
+        }
+        if (false === $this->get('security.authorization_checker')->isGranted('view', $object)) {
+            throw new AccessDeniedException('Unauthorised access!');
+        }
+        return new Response('<h1>' . $object->getName() . '</h1>');
+        if (false === $this->admin->isGranted('VIEW', $object)) {
+            throw new AccessDeniedException();
+        }
+        $this->admin->setSubject($object);
+        return $this->render($this->admin->getTemplate('show'), array(
+                    'action' => 'show',
+                    'object' => $object,
+                    'elements' => $this->admin->getShow(),
+                        ), null, $request);
     }
 
     /*
-     * 
+     *
+     * Acción de listar contraseñas
+     *
      */
 
     public function listAction(Request $request = null) {
         $request = $this->resolveRequest($request);
-
+//        $prueba = $request->getLanguages();
+//        throw new \InvalidArgumentException(
+//        $prueba
+//        );
+//        
         if (false === $this->admin->isGranted('LIST')) {
             throw new AccessDeniedException();
         }
-
-        if ($listMode = $request->get('_list_mode')) {
+        if ($listMode = $request->get('_list_mode', 'mosaic')) {
             $this->admin->setListMode($listMode);
         }
-
         $datagrid = $this->admin->getDatagrid();
         $filters = $request->get('filter');
-
-        if (false === $this->get('security.context')->isGranted('ROLE_MOSTRAR_PASSWORD', $datagrid)) {
+        if (false === $this->get('security.context')->isGranted('ROLE_LISTAR_ENTIDAD', $datagrid)) {
             //Controlar Voters
+//            throw new AccessDeniedException('No tienes acceso a listar');
         }
-
-        // set the default context
         if (!$filters || !array_key_exists('context', $filters)) {
             $context = $this->admin->getPersistentParameter('context', $this->get('sonata.media.pool')->getDefaultContext());
         } else {
             $context = $filters['context']['value'];
         }
-
         $datagrid->setValue('context', null, $context);
-
-        // retrieve the main category for the tree view
         $category = $this->container->get('sonata.classification.manager.category')->getRootCategory($context);
         if (!$filters) {
             $datagrid->setValue('category', null, $category->getId());
@@ -164,10 +169,7 @@ class PasswordController extends Controller {
             }
         }
         $formView = $datagrid->getForm()->createView();
-
-        // set the theme for the current Admin Form
         $this->get('twig')->getExtension('form')->renderer->setTheme($formView, $this->admin->getFilterTheme());
-
         return $this->render($this->admin->getTemplate('list'), array(
                     'action' => 'list',
                     'form' => $formView,
@@ -178,39 +180,34 @@ class PasswordController extends Controller {
     }
 
     /*
-     * 
+     *
+     * Acción de borrar contraseñas
+     *
      */
 
     public function deleteAction($id, Request $request = null) {
         $request = $this->resolveRequest($request);
         $id = $request->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
-
         if (!$object) {
             throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
         }
-
-        if (false === $this->get('security.context')->isGranted('ROLE_BORRAR_PASSWORD', $object)) {
+        if (false === $this->get('security.context')->isGranted('ROLE_BORRAR_ENTIDAD', $object)) {
             //Controlar Voters
+            throw new AccessDeniedException('No eres el propietario para borrar esta contraseña');
         }
-
         if (false === $this->admin->isGranted('DELETE', $object)) {
             throw new AccessDeniedException();
         }
-
         if ($this->getRestMethod($request) == 'DELETE') {
             // check the csrf token
             $this->validateCsrfToken('sonata.delete', $request);
-
             $objectName = $this->admin->toString($object);
-
             try {
                 $this->admin->delete($object);
-
                 if ($this->isXmlHttpRequest($request)) {
                     return $this->renderJson(array('result' => 'ok'), 200, array(), $request);
                 }
-
                 $this->addFlash(
                         'sonata_flash_success', $this->admin->trans(
                                 'flash_delete_success', array('%name%' => $this->escapeHtml($objectName)), 'SonataAdminBundle'
@@ -218,21 +215,17 @@ class PasswordController extends Controller {
                 );
             } catch (ModelManagerException $e) {
                 $this->handleModelManagerException($e);
-
                 if ($this->isXmlHttpRequest($request)) {
                     return $this->renderJson(array('result' => 'error'), 200, array(), $request);
                 }
-
                 $this->addFlash(
                         'sonata_flash_error', $this->admin->trans(
                                 'flash_delete_error', array('%name%' => $this->escapeHtml($objectName)), 'SonataAdminBundle'
                         )
                 );
             }
-
             return $this->redirectTo($object, $request);
         }
-
         return $this->render($this->admin->getTemplate('delete'), array(
                     'object' => $object,
                     'action' => 'delete',

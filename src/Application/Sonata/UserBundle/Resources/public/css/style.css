@@ -41,7 +41,6 @@ root {
 body {
     margin: 0px;
     height: 100%;
-    padding-top: 50px;
     background: #eeeeee; /* Old browsers */
     background: -moz-linear-gradient(top,  #f8f8f8 0%, #c6c6c6 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f8f8f8), color-stop(100%,#c6c6c6)); /* Chrome,Safari4+ */
@@ -54,6 +53,7 @@ body {
 
 .container {
     height: 100vh;
+    padding-top: 50px;
 }
 
 .btn-success {
@@ -75,6 +75,7 @@ body {
     max-width: 170px !important;
     z-index: 10000;
 }
+
 
 .skin-black .main-header > .logo {
     background-color: white !important;
@@ -315,6 +316,10 @@ ul.nav-pills li {
     body {
         padding-top: 10px;
     }
+    
+    .container {
+        padding-top: 0px;
+    }
 }
 
 root { 
@@ -324,7 +329,6 @@ root {
 body {
     margin: 0px;
     height: 100%;
-    padding-top: 50px;
     background: #eeeeee; /* Old browsers */
     background: -moz-linear-gradient(top,  #f8f8f8 0%, #c6c6c6 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f8f8f8), color-stop(100%,#c6c6c6)); /* Chrome,Safari4+ */
@@ -543,6 +547,70 @@ ul.nav-pills li {
 .bounceIn {
     -webkit-animation-name: bounceIn;
     animation-name: bounceIn;
+}
+
+.rubberBand {
+  -webkit-animation-name: rubberBand;
+  animation-name: rubberBand;
+}
+
+@-webkit-keyframes rubberBand {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  30% {
+    -webkit-transform: scaleX(1.25) scaleY(0.75);
+    transform: scaleX(1.25) scaleY(0.75);
+  }
+
+  40% {
+    -webkit-transform: scaleX(0.75) scaleY(1.25);
+    transform: scaleX(0.75) scaleY(1.25);
+  }
+
+  60% {
+    -webkit-transform: scaleX(1.15) scaleY(0.85);
+    transform: scaleX(1.15) scaleY(0.85);
+  }
+
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+  
+@keyframes rubberBand {
+  0% {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+  }
+
+  30% {
+    -webkit-transform: scaleX(1.25) scaleY(0.75);
+    -ms-transform: scaleX(1.25) scaleY(0.75);
+    transform: scaleX(1.25) scaleY(0.75);
+  }
+
+  40% {
+    -webkit-transform: scaleX(0.75) scaleY(1.25);
+    -ms-transform: scaleX(0.75) scaleY(1.25);
+    transform: scaleX(0.75) scaleY(1.25);
+  }
+
+  60% {
+    -webkit-transform: scaleX(1.15) scaleY(0.85);
+    -ms-transform: scaleX(1.15) scaleY(0.85);
+    transform: scaleX(1.15) scaleY(0.85);
+  }
+
+  100% {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+  }
 }
 
 /*-------------MOVIL------------- */
