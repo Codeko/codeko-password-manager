@@ -17,7 +17,7 @@
             <generator strategy="AUTO"/>
         </id>
 
-        <many-to-many field="passwords" mapped-by="categorias" target-entity="Application\Sonata\UserBundle\Entity\Password"/>
+        <many-to-many field="passwords" mapped-by="category" target-entity="Application\Sonata\UserBundle\Entity\Password"/>
 
     </entity>
 </doctrine-mapping>

@@ -14,6 +14,9 @@ use Doctrine\ORM\EntityManager;
  *
  */
 class PasswordController extends Controller {
+    /*
+     * 
+     */
 
     public function editAction($id = null, Request $request = null) {
         $request = $this->resolveRequest($request);
@@ -103,31 +106,48 @@ class PasswordController extends Controller {
                         ), null, $request);
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function render($view, array $parameters = array(), Response $response = null, Request $request = null) {
+        $parameters['media_pool'] = $this->container->get('sonata.media.pool');
+        $parameters['persistent_parameters'] = $this->admin->getPersistentParameters();
+
+        return parent::render($view, $parameters, $response, $request);
+    }
+
+    /*
+     * 
+     */
+
     public function listAction(Request $request = null) {
         $request = $this->resolveRequest($request);
-        
+
         if (false === $this->admin->isGranted('LIST')) {
             throw new AccessDeniedException();
         }
-        
-        if ($listMode = $request->get('_list_mode', 'mosaic')) {
+
+        if ($listMode = $request->get('_list_mode')) {
             $this->admin->setListMode($listMode);
         }
-        
+
         $datagrid = $this->admin->getDatagrid();
         $filters = $request->get('filter');
 
         if (false === $this->get('security.context')->isGranted('ROLE_MOSTRAR_PASSWORD', $datagrid)) {
             //Controlar Voters
         }
-        
+
+        // set the default context
         if (!$filters || !array_key_exists('context', $filters)) {
             $context = $this->admin->getPersistentParameter('context', $this->get('sonata.media.pool')->getDefaultContext());
         } else {
             $context = $filters['context']['value'];
         }
+
         $datagrid->setValue('context', null, $context);
 
+        // retrieve the main category for the tree view
         $category = $this->container->get('sonata.classification.manager.category')->getRootCategory($context);
         if (!$filters) {
             $datagrid->setValue('category', null, $category->getId());
@@ -142,11 +162,12 @@ class PasswordController extends Controller {
             } else {
                 $datagrid->setValue('category', null, $category->getId());
             }
-            
         }
         $formView = $datagrid->getForm()->createView();
 
+        // set the theme for the current Admin Form
         $this->get('twig')->getExtension('form')->renderer->setTheme($formView, $this->admin->getFilterTheme());
+
         return $this->render($this->admin->getTemplate('list'), array(
                     'action' => 'list',
                     'form' => $formView,
@@ -155,17 +176,20 @@ class PasswordController extends Controller {
                     'csrf_token' => $this->getCsrfToken('sonata.batch'),
         ));
     }
-    
-        public function deleteAction($id, Request $request = null)
-    {
+
+    /*
+     * 
+     */
+
+    public function deleteAction($id, Request $request = null) {
         $request = $this->resolveRequest($request);
-        $id      = $request->get($this->admin->getIdParameter());
-        $object  = $this->admin->getObject($id);
+        $id = $request->get($this->admin->getIdParameter());
+        $object = $this->admin->getObject($id);
 
         if (!$object) {
             throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
         }
-        
+
         if (false === $this->get('security.context')->isGranted('ROLE_BORRAR_PASSWORD', $object)) {
             //Controlar Voters
         }
@@ -179,7 +203,7 @@ class PasswordController extends Controller {
             $this->validateCsrfToken('sonata.delete', $request);
 
             $objectName = $this->admin->toString($object);
-            
+
             try {
                 $this->admin->delete($object);
 
@@ -188,14 +212,10 @@ class PasswordController extends Controller {
                 }
 
                 $this->addFlash(
-                    'sonata_flash_success',
-                    $this->admin->trans(
-                        'flash_delete_success',
-                        array('%name%' => $this->escapeHtml($objectName)),
-                        'SonataAdminBundle'
-                    )
+                        'sonata_flash_success', $this->admin->trans(
+                                'flash_delete_success', array('%name%' => $this->escapeHtml($objectName)), 'SonataAdminBundle'
+                        )
                 );
-
             } catch (ModelManagerException $e) {
                 $this->handleModelManagerException($e);
 
@@ -204,12 +224,9 @@ class PasswordController extends Controller {
                 }
 
                 $this->addFlash(
-                    'sonata_flash_error',
-                    $this->admin->trans(
-                        'flash_delete_error',
-                        array('%name%' => $this->escapeHtml($objectName)),
-                        'SonataAdminBundle'
-                    )
+                        'sonata_flash_error', $this->admin->trans(
+                                'flash_delete_error', array('%name%' => $this->escapeHtml($objectName)), 'SonataAdminBundle'
+                        )
                 );
             }
 
@@ -217,10 +234,10 @@ class PasswordController extends Controller {
         }
 
         return $this->render($this->admin->getTemplate('delete'), array(
-            'object'     => $object,
-            'action'     => 'delete',
-            'csrf_token' => $this->getCsrfToken('sonata.delete')
-        ), null, $request);
+                    'object' => $object,
+                    'action' => 'delete',
+                    'csrf_token' => $this->getCsrfToken('sonata.delete')
+                        ), null, $request);
     }
 
     // FUNCION PRIVADA DE SONATAADMIN-CRUDCONTROLLER, HAY QUE LLAMARLA DESDE AQUI

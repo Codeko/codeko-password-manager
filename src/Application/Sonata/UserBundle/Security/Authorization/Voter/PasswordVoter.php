@@ -49,7 +49,6 @@ class PasswordVoter implements VoterInterface {
                         'No eres el propietario'
                         );
                     }
-                    
                 }
             }
         }
