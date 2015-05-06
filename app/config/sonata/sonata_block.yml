@@ -23,3 +23,6 @@ sonata_block:
         #sonata.media.block.feature_media:
             
         sonata.timeline.block.timeline:
+            
+        sonata.admin.block.search_result:
+            contexts: [admin]

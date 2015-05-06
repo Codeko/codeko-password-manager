@@ -16,13 +16,11 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use FOS\UserBundle\Model\UserManagerInterface;
-use Application\Sonata\ClassificationBundle\Entity\Category;
 
 class PasswordAdmin extends Admin {
 
     public $supportsPreviewMode = true;
-    
+
     /**
      * {@inheritdoc}
      */
@@ -31,16 +29,16 @@ class PasswordAdmin extends Admin {
                 ->addIdentifier('titulo')
                 ->add('user')
                 ->add('usernamePass')
-                ->add('url','url')
+                ->add('url', 'url')
                 ->add('password')
                 ->add('comentario')
                 ->add('fechaExpira')
                 ->add('fechaCreacion')
                 ->add('fechaModificacion')
                 ->add('fechaUltimoAcceso')
-                ->add('categorias')
+                ->add('category')
                 ->add('tipoPassword')
-                
+
         ;
     }
 
@@ -48,6 +46,7 @@ class PasswordAdmin extends Admin {
      * {@inheritdoc}
      */
     protected function configureDatagridFilters(DatagridMapper $filterMapper) {
+
         $filterMapper
                 ->add('titulo')
                 ->add('user')
@@ -58,7 +57,9 @@ class PasswordAdmin extends Admin {
                 ->add('fechaCreacion')
                 ->add('fechaModificacion')
                 ->add('fechaUltimoAcceso')
-                ->add('categorias')
+                ->add('category', null, array(
+                    'show_filter' => false,
+                ))
                 ->add('tipoPassword')
         ;
     }
@@ -79,7 +80,7 @@ class PasswordAdmin extends Admin {
                 ->add('fechaCreacion')
                 ->add('fechaModificacion')
                 ->add('fechaUltimoAcceso')
-                ->add('categorias')
+                ->add('category')
                 ->add('tipoPassword')
                 ->end()
         ;
@@ -97,14 +98,14 @@ class PasswordAdmin extends Admin {
                 ->add('url', null, array('required' => false))
                 ->add('password')
                 ->add('comentario', null, array('required' => false))
-                ->add('fechaExpira', null, array('required' => false, 'format' =>  'dd MMM yyyy','widget' => 'choice'))
+                ->add('fechaExpira', null, array('required' => false, 'format' => 'dd MMM yyyy', 'widget' => 'choice'))
                 ->add('fechaCreacion', null, array('required' => false))
                 ->add('fechaModificacion', null, array('required' => false))
                 ->add('fechaUltimoAcceso', null, array('required' => false))
                 ->add('tipoPassword', null, array('required' => false))
                 ->end()
                 ->with('Categorias')
-                ->add('categorias', null, array('label' => 'Categorias', 'expanded' => true, 'by_reference' => false, 'multiple' => true, 'required' => false))
+                ->add('category', null, array('label' => 'Categorias', 'expanded' => true, 'by_reference' => false, 'multiple' => true, 'required' => false))
                 ->end()
 
         ;

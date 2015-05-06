@@ -119,14 +119,19 @@ file that was distributed with this source code.
                 {% block logo %}
                     {% if admin_pool is defined %}
                         {% spaceless %}
-                            <a class="logo" href="{{ path('sonata_admin_dashboard') }}">
+                            {% if app.request.attributes.get('_route') == 'sonata_admin_redirect' %}
+                            <a class="logo" href="{{ path('sonata_admin_dashboard') }}"><img class="rubberBand animated" src="{{ asset('bundles/applicationsonatauser/images/headerMenu.png') }}"/></a>    
+                            {% else %}
+                            <a class="logo" href="{{ path('sonata_admin_dashboard') }}"><img src="{{ asset('bundles/applicationsonatauser/images/headerMenu.png') }}"/></a>
+                            {% endif %}
+                            {#<a class="logo" href="{{ path('sonata_admin_dashboard') }}">
                                 {% if 'single_image' == admin_pool.getOption('title_mode') or 'both' == admin_pool.getOption('title_mode') %}
                                     <img src="{{ asset('bundles/applicationsonatauser/images/logo_title.png') }}" alt="{{ admin_pool.title }}">
                                 {% endif %}
                                 {% if 'single_text' == admin_pool.getOption('title_mode') or 'both' == admin_pool.getOption('title_mode') %}
                                     <span>Password Manager</span>
                                 {% endif %}
-                            </a>
+                            </a>#}
                         {% endspaceless %}
                     {% endif %}
                 {% endblock %}
@@ -200,7 +205,7 @@ file that was distributed with this source code.
                         {% block sonata_side_nav %}
                             {% block sonata_sidebar_search %}
                                 {% if app.security.token and is_granted('ROLE_SONATA_ADMIN') %}
-                                    <form action="{{ url('sonata_admin_search') }}" method="GET" class="sidebar-form" role="search">
+                                    <form action="{{ url('sonata_admin_search') }}" method="GET" class="sidebar-form" style="margin-top: 16px;" role="search">
                                         <div class="input-group custom-search-form">
                                             <input type="text" name="q" value="{{ app.request.get('q') }}" class="form-control" placeholder="{{ 'search_placeholder'|trans({}, 'SonataAdminBundle') }}">
                                                 <span class="input-group-btn">
@@ -217,6 +222,7 @@ file that was distributed with this source code.
                             {% block side_bar_nav %}
                                 {% if app.security.token and is_granted('ROLE_SONATA_ADMIN') %}
                                     {{ knp_menu_render(sonata_knp_menu_build(app.request), {'template' : admin_pool.getTemplate('knp_menu_template')}) }}
+                                    
                                 {% endif %}
                             {% endblock side_bar_nav %}
                             {#{% block side_bar_after_nav %}

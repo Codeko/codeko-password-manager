@@ -43,7 +43,7 @@ gallery:
 
 media:
     resource: '@SonataMediaBundle/Resources/config/routing/media.xml'
-    prefix: /media    
+    prefix: /media   
 
 # REVISAR SUPLANTACION
 sonata_user_impersonating:

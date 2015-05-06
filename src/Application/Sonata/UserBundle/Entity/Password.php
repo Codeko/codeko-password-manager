@@ -64,7 +64,7 @@ class Password {
      * @var \DateTime
      */
     private $fechaUltimoAcceso;
-    private $categorias;
+    private $category;
     private $tipoPassword;
 
     /**
@@ -273,8 +273,8 @@ class Password {
         return $this->fechaUltimoAcceso;
     }
 
-    function getCategorias() {
-        return $this->categorias;
+    function getCategory() {
+        return $this->category;
     }
 
     function getTipoPassword() {
@@ -286,17 +286,17 @@ class Password {
     }
 
     public function __construct() {
-        $this->categorias = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->category = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-    public function addCategoria(Category $categoria) {
-        $categoria->addPassword($this);
-        $this->categorias[] = $categoria;
+    public function addCategory(Category $category) {
+        $category->addPassword($this);
+        $this->category[] = $category;
     }
 
-    public function removeCategoria(Category $categoria) {
-        $this->categorias->removeElement($categoria);
-        $categoria->removePassword($this);
+    public function removeCategory(Category $category) {
+        $this->category->removeElement($category);
+        $category->removePassword($this);
     }
 
     public function __toString() {
