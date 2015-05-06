@@ -28,8 +28,11 @@ class PasswordController extends Controller {
             throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
         }
 
-        if (false === $this->get('security.context')->isGranted('ROLE_EDITAR_PASSWORD', $object)) {
+        if (false === $this->get('security.context')->isGranted('ROLE_EDITAR_ENTIDAD', $object)) {
             //Controlar Voters
+            throw new \InvalidArgumentException(
+            'No eres el propietario para editar esta contraseña'
+            );
         }
 
         if (false === $this->admin->isGranted('EDIT', $object)) {
@@ -105,22 +108,22 @@ class PasswordController extends Controller {
 
     public function listAction(Request $request = null) {
         $request = $this->resolveRequest($request);
-        
+
         if (false === $this->admin->isGranted('LIST')) {
             throw new AccessDeniedException();
         }
-        
+
         if ($listMode = $request->get('_list_mode', 'mosaic')) {
             $this->admin->setListMode($listMode);
         }
-        
+
         $datagrid = $this->admin->getDatagrid();
         $filters = $request->get('filter');
 
-        if (false === $this->get('security.context')->isGranted('ROLE_MOSTRAR_PASSWORD', $datagrid)) {
+        if (false === $this->get('security.context')->isGranted('ROLE_MOSTRAR_ENTIDAD', $datagrid)) {
             //Controlar Voters
         }
-        
+
         if (!$filters || !array_key_exists('context', $filters)) {
             $context = $this->admin->getPersistentParameter('context', $this->get('sonata.media.pool')->getDefaultContext());
         } else {
@@ -142,7 +145,6 @@ class PasswordController extends Controller {
             } else {
                 $datagrid->setValue('category', null, $category->getId());
             }
-            
         }
         $formView = $datagrid->getForm()->createView();
 
@@ -155,19 +157,21 @@ class PasswordController extends Controller {
                     'csrf_token' => $this->getCsrfToken('sonata.batch'),
         ));
     }
-    
-        public function deleteAction($id, Request $request = null)
-    {
+
+    public function deleteAction($id, Request $request = null) {
         $request = $this->resolveRequest($request);
-        $id      = $request->get($this->admin->getIdParameter());
-        $object  = $this->admin->getObject($id);
+        $id = $request->get($this->admin->getIdParameter());
+        $object = $this->admin->getObject($id);
 
         if (!$object) {
             throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
         }
-        
-        if (false === $this->get('security.context')->isGranted('ROLE_BORRAR_PASSWORD', $object)) {
+
+        if (false === $this->get('security.context')->isGranted('ROLE_BORRAR_ENTIDAD', $object)) {
             //Controlar Voters
+            throw new \InvalidArgumentException(
+            'No eres el propietario para borrar esta contraseña'
+            );
         }
 
         if (false === $this->admin->isGranted('DELETE', $object)) {
@@ -179,7 +183,7 @@ class PasswordController extends Controller {
             $this->validateCsrfToken('sonata.delete', $request);
 
             $objectName = $this->admin->toString($object);
-            
+
             try {
                 $this->admin->delete($object);
 
@@ -188,14 +192,10 @@ class PasswordController extends Controller {
                 }
 
                 $this->addFlash(
-                    'sonata_flash_success',
-                    $this->admin->trans(
-                        'flash_delete_success',
-                        array('%name%' => $this->escapeHtml($objectName)),
-                        'SonataAdminBundle'
-                    )
+                        'sonata_flash_success', $this->admin->trans(
+                                'flash_delete_success', array('%name%' => $this->escapeHtml($objectName)), 'SonataAdminBundle'
+                        )
                 );
-
             } catch (ModelManagerException $e) {
                 $this->handleModelManagerException($e);
 
@@ -204,12 +204,9 @@ class PasswordController extends Controller {
                 }
 
                 $this->addFlash(
-                    'sonata_flash_error',
-                    $this->admin->trans(
-                        'flash_delete_error',
-                        array('%name%' => $this->escapeHtml($objectName)),
-                        'SonataAdminBundle'
-                    )
+                        'sonata_flash_error', $this->admin->trans(
+                                'flash_delete_error', array('%name%' => $this->escapeHtml($objectName)), 'SonataAdminBundle'
+                        )
                 );
             }
 
@@ -217,10 +214,10 @@ class PasswordController extends Controller {
         }
 
         return $this->render($this->admin->getTemplate('delete'), array(
-            'object'     => $object,
-            'action'     => 'delete',
-            'csrf_token' => $this->getCsrfToken('sonata.delete')
-        ), null, $request);
+                    'object' => $object,
+                    'action' => 'delete',
+                    'csrf_token' => $this->getCsrfToken('sonata.delete')
+                        ), null, $request);
     }
 
     // FUNCION PRIVADA DE SONATAADMIN-CRUDCONTROLLER, HAY QUE LLAMARLA DESDE AQUI

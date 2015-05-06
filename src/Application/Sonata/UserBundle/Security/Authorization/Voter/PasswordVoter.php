@@ -7,9 +7,9 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class PasswordVoter implements VoterInterface {
 
-    const VERPASSWORD = 'ROLE_MOSTRAR_PASSWORD';
-    const EDITARPASSWORD = 'ROLE_EDITAR_PASSWORD';
-    const BORRARPASSWORD = 'ROLE_BORRAR_PASSWORD';
+    const VERPASSWORD = 'ROLE_MOSTRAR_ENTIDAD';
+    const EDITARPASSWORD = 'ROLE_EDITAR_ENTIDAD';
+    const BORRARPASSWORD = 'ROLE_BORRAR_ENTIDAD';
 
     public function supportsAttribute($attribute) {
         return in_array($attribute, array(
@@ -34,7 +34,7 @@ class PasswordVoter implements VoterInterface {
 
             $vote = VoterInterface::ACCESS_DENIED;
 
-            if ($attribute === 'ROLE_EDITAR_PASSWORD' || $attribute === 'ROLE_BORRAR_PASSWORD') {
+            if ($attribute === 'ROLE_EDITAR_ENTIDAD' || $attribute === 'ROLE_BORRAR_ENTIDAD') {
                 $user = $token->getUser();
                 $iduser = $user->getId();
                 $idpasswordPropietario = $object->getUser()->getId();
@@ -45,11 +45,16 @@ class PasswordVoter implements VoterInterface {
                     /* @var $idpassword type */
                     if ($idpasswordPropietario != $iduser) {
                         $vote = VoterInterface::ACCESS_DENIED;
-                        throw new \InvalidArgumentException(
-                        'No eres el propietario'
-                        );
+//                        throw new \InvalidArgumentException(
+//                        'No eres el propietario'
+//                        );
+                        return $vote;
                     }
-                    
+                    $vote = VoterInterface::ACCESS_GRANTED;
+                    return $vote;
+                } else {
+                    $vote = VoterInterface::ACCESS_GRANTED;
+                    return $vote;
                 }
             }
         }
