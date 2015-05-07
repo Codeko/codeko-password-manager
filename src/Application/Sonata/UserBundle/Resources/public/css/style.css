@@ -54,6 +54,10 @@ th, td {
     vertical-align: middle !important;
 }
 
+.skin-black .sidebar > .sidebar-menu > li > a:hover, .skin-black .sidebar > .sidebar-menu > li.active > a {
+    border-left-color: #4CAE4C !important;
+}
+
 body {
     margin: 0px;
     height: 100%;
