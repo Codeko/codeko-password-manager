@@ -21,8 +21,8 @@ use Sonata\ClassificationBundle\Entity\BaseContext as BaseContext;
  *
  * @author <yourname> <youremail>
  */
-class Context extends BaseContext
-{
+class Context extends BaseContext {
+
     /**
      * @var integer $id
      */
@@ -33,8 +33,7 @@ class Context extends BaseContext
      *
      * @return integer $id
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 }

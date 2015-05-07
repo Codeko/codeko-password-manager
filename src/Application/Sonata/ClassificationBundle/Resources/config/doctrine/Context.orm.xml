@@ -15,7 +15,7 @@
 
         <id name="id" type="string" column="id">
             <generator strategy="NONE"/>
-        </id>
+        </id>   
 
     </entity>
 </doctrine-mapping>

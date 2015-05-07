@@ -138,7 +138,7 @@ class PasswordController extends Controller {
         if (false === $this->admin->isGranted('LIST')) {
             throw new AccessDeniedException();
         }
-        if ($listMode = $request->get('_list_mode', 'list')) {
+        if ($listMode = $request->get('_list_mode')) {
             $this->admin->setListMode($listMode);
         }
         $datagrid = $this->admin->getDatagrid();
@@ -148,7 +148,7 @@ class PasswordController extends Controller {
 //            throw new AccessDeniedException('No tienes acceso a listar');
         }
         if (!$filters || !array_key_exists('context', $filters)) {
-            $context = $this->admin->getPersistentParameter('context', $this->get('sonata.media.pool')->getDefaultContext());
+            $context = $this->admin->getPersistentParameter('context', 'default');
         } else {
             $context = $filters['context']['value'];
         }

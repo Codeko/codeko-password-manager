@@ -50,6 +50,10 @@
                 <source>breadcrumb.link_group_edit</source>
                 <target>Editar</target>
             </trans-unit>
+            <trans-unit id="breadcrumb.link_category_tree">
+                <source>breadcrumb.link_category_tree</source>
+                <target>Árbol de categorías</target>
+            </trans-unit>
             <trans-unit id="users">
                 <source>users</source>
                 <target>Usuarios</target>
