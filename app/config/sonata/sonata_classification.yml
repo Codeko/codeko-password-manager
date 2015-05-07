@@ -2,3 +2,6 @@ sonata_classification:
     class:
         category:       Application\Sonata\ClassificationBundle\Entity\Category
         context:        Application\Sonata\ClassificationBundle\Entity\Context
+    admin:
+        category:
+            class:      Application\Sonata\ClassificationBundle\Admin\CategoryAdmin
