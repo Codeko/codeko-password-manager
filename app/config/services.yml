@@ -22,3 +22,6 @@ services:
       public:     false
       tags:
          - { name: security.voter }
+
+imports:
+    - { resource: sonata/classification_admin.xml }
