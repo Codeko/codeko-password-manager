@@ -50,6 +50,10 @@ root {
     padding-right: 100%;
 }
 
+th {
+    vertical-align: middle !important;
+}
+
 body {
     margin: 0px;
     height: 100%;
