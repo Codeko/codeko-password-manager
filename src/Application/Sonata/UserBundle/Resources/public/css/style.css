@@ -50,7 +50,7 @@ root {
     padding-right: 100%;
 }
 
-th {
+th, td {
     vertical-align: middle !important;
 }
 
