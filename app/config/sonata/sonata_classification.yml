@@ -4,4 +4,4 @@ sonata_classification:
         context:        Application\Sonata\ClassificationBundle\Entity\Context
     admin:
         category:
-            class:      Application\Sonata\ClassificationBundle\Admin\CategoryAdmin
+            class:      Application\Sonata\ClassificationBundle\Admin\CategoryAdmin          
