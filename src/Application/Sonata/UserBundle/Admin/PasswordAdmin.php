@@ -27,17 +27,17 @@ class PasswordAdmin extends Admin {
     protected function configureListFields(ListMapper $listMapper) {
         $listMapper
                 ->addIdentifier('titulo')
-                ->add('user')
                 ->add('usernamePass')
-                ->add('url', 'url')
                 ->add('password')
+                ->add('url', 'url')
                 ->add('comentario')
+                ->add('tipoPassword')
                 ->add('fechaExpira')
                 ->add('fechaCreacion')
                 ->add('fechaModificacion')
                 ->add('fechaUltimoAcceso')
-                ->add('category')
-                ->add('tipoPassword')
+//                ->add('category')
+                ->add('user')
 
         ;
     }
@@ -91,7 +91,7 @@ class PasswordAdmin extends Admin {
      */
     protected function configureFormFields(FormMapper $formMapper) {
         $formMapper
-                ->with('General')
+                ->with('Contraseña:')
                 ->add('titulo')
                 ->add('user', null, array('required' => true))
                 ->add('usernamePass', null, array('required' => false))
