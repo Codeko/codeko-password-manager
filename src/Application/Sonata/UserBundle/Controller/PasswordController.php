@@ -138,7 +138,7 @@ class PasswordController extends Controller {
         if (false === $this->admin->isGranted('LIST')) {
             throw new AccessDeniedException();
         }
-        if ($listMode = $request->get('_list_mode', 'mosaic')) {
+        if ($listMode = $request->get('_list_mode', 'list')) {
             $this->admin->setListMode($listMode);
         }
         $datagrid = $this->admin->getDatagrid();
