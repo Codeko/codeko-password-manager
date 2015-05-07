@@ -33,6 +33,9 @@ class Category extends BaseCategory {
      * @var ArrayCollection $passwords
      */
     private $passwords;
+    protected $parent;
+    protected $context;
+    protected $children;
 
     /**
      * Get id
@@ -58,5 +61,4 @@ class Category extends BaseCategory {
     public function removePassword(Password $password) {
         $this->passwords->removeElement($password);
     }
-
 }
