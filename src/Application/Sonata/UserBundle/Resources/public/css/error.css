@@ -1,0 +1,62 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 08-abr-2015, 11:23:25
+    Author     : abex
+*/
+
+body {
+    background-color: #111111;
+}
+
+.board {
+    position: relative;
+    height: 150px;
+    width: 320px;
+    margin: auto;
+    padding: 20px;
+    font: 75px/75px Monoton, cursive;
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow: 0 0 80px #5CB85C, 0 0 30px Green, 0 0 6px DarkGreen;
+    color: red;
+}
+
+#error {
+    color: #fff;
+    text-shadow: 0 0 80px #ffffff, 0 0 30px #008000, 0 0 6px #0000ff;
+}
+
+.board p, .board a { 
+    line-height: 10%; 
+}
+
+p#text{
+    color: white;
+    margin: auto;
+    text-align: center;
+    margin-top: 100px;
+    font-family: "VT323",Helvetica,Arial,sans-serif;
+    font-size: 30px;
+}
+
+#atras{
+    color: green;
+    margin: auto;
+    text-align: center;
+    font-family: "VT323",Helvetica,Arial,sans-serif;
+    font-size: 30px;
+    padding-top: 40px;
+}
+
+/*-------------MOVIL------------- */
+
+@media (max-width: 500px) {
+    .board {       
+        padding: 0px;
+        margin-left: -10px;
+    }
+}
