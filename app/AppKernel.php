@@ -45,6 +45,7 @@ class AppKernel extends Kernel {
             new Sonata\ClassificationBundle\SonataClassificationBundle(),
             // BUNDLES PROPIOS
             new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
+            new Application\Sonata\AdminBundle\ApplicationSonataAdminBundle(),
             new Application\Sonata\TimelineBundle\ApplicationSonataTimelineBundle(), // easy extends integration
             new Application\Sonata\ClassificationBundle\ApplicationSonataClassificationBundle(),
         );
