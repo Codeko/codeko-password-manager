@@ -151,7 +151,8 @@ body {
 }
 
 .alert-danger {
-    margin: auto;
+    margin: auto !important;
+    margin-bottom: 10px !important;
     max-width: 430px;
 }
 
