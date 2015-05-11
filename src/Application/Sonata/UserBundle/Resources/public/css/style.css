@@ -38,6 +38,26 @@ root {
     display: block;
 }
 
+/*.main-header {
+    box-shadow: 0px 0px 8px #e1e1e1 !important;
+}*/
+
+.sonata-tree__item.is-active {
+    border: 1px solid #4CAE4C;
+}
+
+.sonata-tree__item__edit {
+    padding-right: 100%;
+}
+
+th, td {
+    vertical-align: middle !important;
+}
+
+.skin-black .sidebar > .sidebar-menu > li > a:hover, .skin-black .sidebar > .sidebar-menu > li.active > a {
+    border-left-color: #4CAE4C !important;
+}
+
 body {
     margin: 0px;
     height: 100%;

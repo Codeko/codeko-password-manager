@@ -98,21 +98,6 @@ class CategoryAdmin extends Admin {
                 ->add('position', 'integer', array('required' => false, 'data' => 0))
                 ->end()
         ;
-
-//        if (interface_exists('Sonata\MediaBundle\Model\MediaInterface')) {
-//            $formMapper
-//                ->with('General')
-//                    ->add('media', 'sonata_type_model_list',
-//                        array('required' => false),
-//                        array(
-//                            'link_parameters' => array(
-//                                'provider' => 'sonata.media.provider.image',
-//                                'context'  => 'sonata_category',
-//                            )
-//                        )
-//                    )
-//                ->end();
-//        }
     }
 
     /**

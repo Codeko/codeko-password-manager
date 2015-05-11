@@ -22,6 +22,14 @@ services:
       public:     false
       tags:
          - { name: security.voter }
+         
+    sonata.classification.admin.tag:
+      abstract: true
+      public: false
+      
+    sonata.classification.admin.collection:
+      abstract: true
+      public: false    
 
 imports:
     - { resource: sonata/classification_admin.xml }

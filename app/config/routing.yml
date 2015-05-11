@@ -32,6 +32,10 @@ sonata_admin_dashboard:
         _controller: FrameworkBundle:Redirect:redirect
         route: sonata_admin_redirect
         permanent: true
+        
+sonata_admin_search:
+    path: /search
+    defaults: {_controller: SonataAdminBundle:Core:search}
 
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"

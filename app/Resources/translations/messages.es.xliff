@@ -10,6 +10,10 @@
                 <source>Categoria Pass List</source>
                 <target>Categorías</target>
             </trans-unit>
+            <trans-unit id="gender_unknown">
+                <source>gender_unknown</source>
+                <target>Desconocido</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

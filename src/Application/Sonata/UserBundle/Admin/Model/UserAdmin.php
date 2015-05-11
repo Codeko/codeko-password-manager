@@ -111,11 +111,6 @@ class UserAdmin extends \Sonata\UserBundle\Admin\Model\UserAdmin
                 ->add('timezone')
                 ->add('phone')
             ->end()
-            /*
-            ->with('Security')
-                ->add('token')
-                ->add('twoStepVerificationCode')
-            ->end()*/
         ;
     }
 
@@ -140,12 +135,12 @@ class UserAdmin extends \Sonata\UserBundle\Admin\Model\UserAdmin
                 ))
             ->end()
             ->with('Profile')
-                ->add('dateOfBirth', 'birthday', array('required' => false))
+                ->add('dateOfBirth', 'sonata_type_datetime_picker', array('required' => false))
                 ->add('firstname', null, array('required' => false))
                 ->add('lastname', null, array('required' => false))
                 ->add('website', 'url', array('required' => false))
                 ->add('gender', 'sonata_user_gender', array(
-                    'required' => true,
+                    'required' => false,
                     'translation_domain' => $this->getTranslationDomain()
                 ))
                 ->add('locale', 'locale', array('required' => false))
@@ -170,13 +165,6 @@ class UserAdmin extends \Sonata\UserBundle\Admin\Model\UserAdmin
                 ->end()
             ;
         }
-
-        /*$formMapper
-            ->with('Security')
-                ->add('token', null, array('required' => false))
-                ->add('twoStepVerificationCode', null, array('required' => false))
-            ->end()
-        ;*/
     }
 
     /**
