@@ -30,6 +30,6 @@ services:
     sonata.classification.admin.collection:
       abstract: true
       public: false    
-
+        
 imports:
     - { resource: sonata/classification_admin.xml }

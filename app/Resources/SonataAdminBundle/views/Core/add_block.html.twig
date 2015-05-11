@@ -8,7 +8,11 @@
         {% for admin in group.items if display_group == false %}
             {% if admin.hasRoute('create') and admin.isGranted('CREATE') %}
                 {% set display_group = true %}
-                {% set groups = [group]|merge(groups) %}
+                {% if is_granted('ROLE_SONATA_ADMIN') %}
+                    {% set groups = [group]|merge(groups) %}
+                {% else %}
+                    {% set groups = [group] %}
+                {% endif %}
             {% endif %}
         {% endfor %}
     {% endfor %}
