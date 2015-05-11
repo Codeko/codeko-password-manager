@@ -36,7 +36,7 @@ class PasswordAdmin extends Admin {
                 ->add('fechaCreacion')
                 ->add('fechaModificacion')
                 ->add('fechaUltimoAcceso')
-//                ->add('category')
+                ->add('category')
                 ->add('user')
 
         ;
