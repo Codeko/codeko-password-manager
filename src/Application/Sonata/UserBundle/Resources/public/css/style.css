@@ -124,6 +124,10 @@ body {
     background-color: #5cb85c !important;
 }
 
+.alert-success {
+    border:0px !important;
+}
+
 .main-header .logo {
     font-size: 17px !important;
     padding-right: 30px !important;
