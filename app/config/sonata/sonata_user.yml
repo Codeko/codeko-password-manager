@@ -17,6 +17,8 @@ sonata_user:
 
     admin:
         user:
-            class: Application\Sonata\UserBundle\Admin\Model\UserAdmin           
+            class: Application\Sonata\UserBundle\Admin\Model\UserAdmin  
+        group:
+            class: Application\Sonata\UserBundle\Admin\Model\GroupAdmin  
             
     impersonating_route: sonata_user_impersonating

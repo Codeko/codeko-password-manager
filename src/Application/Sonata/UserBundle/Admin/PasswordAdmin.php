@@ -46,6 +46,8 @@ class PasswordAdmin extends Admin {
      * {@inheritdoc}
      */
     protected function configureListFields(ListMapper $listMapper) {
+        unset($this->listModes['mosaic']);
+        
         $listMapper
                 ->addIdentifier('titulo')
                 ->add('usernamePass')
@@ -117,7 +119,7 @@ class PasswordAdmin extends Admin {
                     ->add('tipoPassword', null, array('required' => false))
                     ->end()
                     ->with('Categorias')
-                    ->add('category', null, array('label' => 'Categorias', 'expanded' => true, 'by_reference' => false, 'multiple' => true, 'required' => false))
+                    ->add('category', 'sonata_type_model', array('label' => 'Categorias', 'expanded' => true, 'by_reference' => false, 'multiple' => true, 'required' => false))
                     ->end()
             ;
         } else {
@@ -133,7 +135,7 @@ class PasswordAdmin extends Admin {
                     ->add('tipoPassword', null, array('required' => false))
                     ->end()
                     ->with('Categorias')
-                    ->add('category', null, array('label' => 'Categorias', 'expanded' => true, 'by_reference' => false, 'multiple' => true, 'required' => false))
+                    ->add('category', 'sonata_type_model', array('label' => 'Categorias', 'expanded' => true, 'by_reference' => false, 'multiple' => true, 'required' => false))
                     ->end()
 
             ;

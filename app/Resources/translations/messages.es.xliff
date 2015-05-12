@@ -14,6 +14,14 @@
                 <source>gender_unknown</source>
                 <target>Desconocido</target>
             </trans-unit>
+            <trans-unit id="date_range_start">
+                <source>date_range_start</source>
+                <target>Desde</target>
+            </trans-unit>
+            <trans-unit id="date_range_end">
+                <source>date_range_end</source>
+                <target>Hasta</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

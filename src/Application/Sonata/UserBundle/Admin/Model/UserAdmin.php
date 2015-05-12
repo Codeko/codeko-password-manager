@@ -17,25 +17,22 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\UserBundle\Model\UserInterface;
-
 use FOS\UserBundle\Model\UserManagerInterface;
 
-class UserAdmin extends \Sonata\UserBundle\Admin\Model\UserAdmin
-{
+class UserAdmin extends \Sonata\UserBundle\Admin\Model\UserAdmin {
 
     public $supportsPreviewMode = true;
-    
+
     /**
      * {@inheritdoc}
      */
-    public function getFormBuilder()
-    {
+    public function getFormBuilder() {
         $this->formOptions['data_class'] = $this->getClass();
 
         $options = $this->formOptions;
         $options['validation_groups'] = (!$this->getSubject() || is_null($this->getSubject()->getId())) ? 'Registration' : 'Profile';
 
-        $formBuilder = $this->getFormContractor()->getFormBuilder( $this->getUniqid(), $options);
+        $formBuilder = $this->getFormContractor()->getFormBuilder($this->getUniqid(), $options);
 
         $this->defineFormBuilder($formBuilder);
 
@@ -45,8 +42,7 @@ class UserAdmin extends \Sonata\UserBundle\Admin\Model\UserAdmin
     /**
      * {@inheritdoc}
      */
-    public function getExportFields()
-    {
+    public function getExportFields() {
         // avoid security field to be exported
         return array_filter(parent::getExportFields(), function($v) {
             return !in_array($v, array('password', 'salt'));
@@ -56,20 +52,20 @@ class UserAdmin extends \Sonata\UserBundle\Admin\Model\UserAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureListFields(ListMapper $listMapper)
-    {
+    protected function configureListFields(ListMapper $listMapper) {
+        unset($this->listModes['mosaic']);
         $listMapper
-            ->addIdentifier('username')
-            ->add('email')
-            ->add('groups')
-            ->add('enabled', null, array('editable' => true))
-            ->add('locked', null, array('editable' => true))
-            ->add('createdAt')
+                ->addIdentifier('username')
+                ->add('email')
+                ->add('groups')
+                ->add('enabled', null, array('editable' => true))
+                ->add('locked', null, array('editable' => true))
+                ->add('createdAt')
         ;
-        
+
         if ($this->isGranted('ROLE_ALLOWED_TO_SWITCH')) {
             $listMapper
-                ->add('impersonating', 'string', array('template' => 'SonataUserBundle:Admin:Field/impersonating.html.twig'))
+                    ->add('impersonating', 'string', array('template' => 'SonataUserBundle:Admin:Field/impersonating.html.twig'))
             ;
         }
     }
@@ -77,31 +73,29 @@ class UserAdmin extends \Sonata\UserBundle\Admin\Model\UserAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureDatagridFilters(DatagridMapper $filterMapper)
-    {
+    protected function configureDatagridFilters(DatagridMapper $filterMapper) {
         $filterMapper
-            ->add('id')
-            ->add('username')
-            ->add('locked')
-            ->add('email')
-            ->add('groups')
+                ->add('id')
+                ->add('username')
+                ->add('locked')
+                ->add('email')
+                ->add('groups')
         ;
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function configureShowFields(ShowMapper $showMapper)
-    {
+    protected function configureShowFields(ShowMapper $showMapper) {
         $showMapper
-            ->with('General')
+                ->with('General')
                 ->add('username')
                 ->add('email')
-            ->end()
-            ->with('Groups')
+                ->end()
+                ->with('Groups')
                 ->add('groups')
-            ->end()
-            ->with('Profile')
+                ->end()
+                ->with('Profile')
                 ->add('dateOfBirth')
                 ->add('firstname')
                 ->add('lastname')
@@ -110,31 +104,30 @@ class UserAdmin extends \Sonata\UserBundle\Admin\Model\UserAdmin
                 ->add('locale')
                 ->add('timezone')
                 ->add('phone')
-            ->end()
+                ->end()
         ;
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function configureFormFields(FormMapper $formMapper)
-    {
+    protected function configureFormFields(FormMapper $formMapper) {
         $formMapper
-            ->with('General')
+                ->with('General')
                 ->add('username')
                 ->add('email')
                 ->add('plainPassword', 'password', array(
                     'required' => (!$this->getSubject() || is_null($this->getSubject()->getId()))
                 ))
-            ->end()
-            ->with('Groups')
+                ->end()
+                ->with('Groups')
                 ->add('groups', 'sonata_type_model', array(
                     'required' => false,
                     'expanded' => true,
                     'multiple' => true
                 ))
-            ->end()
-            ->with('Profile')
+                ->end()
+                ->with('Profile')
                 ->add('dateOfBirth', 'sonata_type_datetime_picker', array('required' => false))
                 ->add('firstname', null, array('required' => false))
                 ->add('lastname', null, array('required' => false))
@@ -146,14 +139,14 @@ class UserAdmin extends \Sonata\UserBundle\Admin\Model\UserAdmin
                 ->add('locale', 'locale', array('required' => false))
                 ->add('timezone', 'timezone', array('required' => false))
                 ->add('phone', null, array('required' => false))
-            ->end()
+                ->end()
         ;
 
         if ($this->getSubject() && !$this->getSubject()->hasRole('ROLE_SUPER_ADMIN')) {
             $formMapper
-                ->with('Management')
+                    ->with('Management')
                     ->add('realRoles', 'sonata_security_roles', array(
-                        'label'    => 'form.label_roles',
+                        'label' => 'form.label_roles',
                         'expanded' => true,
                         'multiple' => true,
                         'required' => false
@@ -162,7 +155,7 @@ class UserAdmin extends \Sonata\UserBundle\Admin\Model\UserAdmin
                     ->add('expired', null, array('required' => false))
                     ->add('enabled', null, array('required' => false))
                     ->add('credentialsExpired', null, array('required' => false))
-                ->end()
+                    ->end()
             ;
         }
     }
@@ -170,8 +163,7 @@ class UserAdmin extends \Sonata\UserBundle\Admin\Model\UserAdmin
     /**
      * {@inheritdoc}
      */
-    public function preUpdate($user)
-    {
+    public function preUpdate($user) {
         $this->getUserManager()->updateCanonicalFields($user);
         $this->getUserManager()->updatePassword($user);
     }
@@ -179,16 +171,15 @@ class UserAdmin extends \Sonata\UserBundle\Admin\Model\UserAdmin
     /**
      * @param UserManagerInterface $userManager
      */
-    public function setUserManager(UserManagerInterface $userManager)
-    {
+    public function setUserManager(UserManagerInterface $userManager) {
         $this->userManager = $userManager;
     }
 
     /**
      * @return UserManagerInterface
      */
-    public function getUserManager()
-    {
+    public function getUserManager() {
         return $this->userManager;
     }
+
 }
