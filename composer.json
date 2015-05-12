@@ -46,7 +46,8 @@
         "sonata-project/classification-bundle": "~2.2@dev",
         "sonata-project/comment-bundle": "~2.2@dev",
         "sonata-project/sonata-composer": "dev-master",
-        "jms/serializer-bundle": "0.13.*"
+        "jms/serializer-bundle": "0.13.*",
+        "gedmo/doctrine-extensions": "~2.4"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

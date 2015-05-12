@@ -29,7 +29,6 @@ security:
                     user:  { password: userpass, roles: [ 'ROLE_USER' ] }
                     admin: { password: adminpass, roles: [ 'ROLE_SUPER_ADMIN' ] }
                     pepe: { password: pepe, roles: [ 'ROLE_USER' ] }
-                    luis: { password: luis, roles: [ 'ROLE_USER' ] }
                     
         fos_userbundle:
             id: fos_user.user_provider.username_email    
@@ -98,7 +97,7 @@ security:
         - { path: ^/profile, role: [ROLE_ADMIN, ROLE_USER, ROLE_SONATA_ADMIN]}
 
         # Admin login page needs to be access without credential
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY, }
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
