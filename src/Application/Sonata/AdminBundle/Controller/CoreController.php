@@ -35,10 +35,11 @@ class CoreController extends Controller
     }
 
     /**
-     * @return \Sonata\AdminBundle\Search\SearchHandler
+     * @return \Application\Sonata\AdminBundle\Search\SearchHandler
      */
     protected function getSearchHandler()
     {
+//        return $this->get('application.sonata.adminbundle.search.handler');
         return $this->get('sonata.admin.search.handler');
     }
 
