@@ -24,10 +24,11 @@ class PasswordType extends AbstractType {
                 ->add('url')
                 ->add('password')
                 ->add('comentario')
-                ->add('fechaExpira', null, array('class' => 'sonata-medium-date-custom'))
-                ->add('fechaCreacion')
-                ->add('fechaModificacion')
-                ->add('fechaUltimoAcceso')
+                ->add('fechaExpira', null, array('class' => 'sonata_type_datetime_picker'))
+                ->add('fechaCreacion', null, array('class' => 'sonata_type_datetime_picker'))
+                ->add('fechaModificacion', 'hidden', array('class' => 'sonata_type_datetime_picker', 'input' => new \DateTime('now')
+                ))
+                ->add('fechaUltimoAcceso', null, array('class' => 'sonata_type_datetime_picker'))
                 ->add('tipoPassword')
                 ->add('category', null, array(
                     'class' => 'ApplicationSonataClassificationBundle:Category',

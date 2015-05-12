@@ -23,7 +23,7 @@ class PasswordAdmin extends Admin {
     public $supportsPreviewMode = true;
 
     /*
-     * 
+     * PROBLEMA, SI NO ERES ADMIN LO MUESTRA TODO!!!!!!!!!!!!!!!!
      */
 
     public function createQuery($context = 'list') {
@@ -32,9 +32,9 @@ class PasswordAdmin extends Admin {
         if (!$user->isSuperAdmin()) {
             $query = parent::createQuery($context);
             $query->andWhere(
-                    $query->expr()->eq($query->getRootAliases()[0] . '.user', ':username')
+                    $query->expr()->eq($query->getRootAliases()[0] . '.user', ':user')
             );
-            $query->setParameter('username', $user);
+            $query->setParameter(':user', $user);
         } else {
             $query = parent::createQuery($context);
         }
@@ -121,7 +121,7 @@ class PasswordAdmin extends Admin {
                     ->add('url', null, array('required' => false))
                     ->add('password')
                     ->add('comentario', null, array('required' => false))
-                    ->add('fechaExpira', 'sonata_type_datetime_picker', array('required' => false))
+                    ->add('fechaExpira', 'sonata_type_datetime_picker', array('required' => false))             
                     ->add('tipoPassword', null, array('required' => false))
                     ->end()
                     ->with('Categorias')

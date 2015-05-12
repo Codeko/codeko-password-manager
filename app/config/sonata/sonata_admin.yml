@@ -40,8 +40,8 @@ sonata_admin:
             Password Manager:
                 label: Password Manager
                 items:
-#                    - password.pass.servicio
-#                    - sonata.classification.admin.category
+                    - password.pass.servicio
+                    - sonata.classification.admin.category
                 roles: [ROLE_USER]
                 
     options:

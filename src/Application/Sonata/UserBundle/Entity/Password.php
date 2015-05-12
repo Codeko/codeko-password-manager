@@ -287,6 +287,7 @@ class Password {
 
     public function __construct() {
         $this->category = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->fechaCreacion = new \DateTime();
     }
 
     public function addCategory(Category $category) {
