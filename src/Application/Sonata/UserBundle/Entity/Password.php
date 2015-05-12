@@ -60,10 +60,6 @@ class Password {
      */
     private $fechaModificacion;
 
-    /**
-     * @var \DateTime
-     */
-    private $fechaUltimoAcceso;
     private $category;
     private $tipoPassword;
 
@@ -250,27 +246,6 @@ class Password {
      */
     public function getFechaModificacion() {
         return $this->fechaModificacion;
-    }
-
-    /**
-     * Set fechaUltimoAcceso
-     *
-     * @param \DateTime $fechaUltimoAcceso
-     * @return Password
-     */
-    public function setFechaUltimoAcceso($fechaUltimoAcceso) {
-        $this->fechaUltimoAcceso = $fechaUltimoAcceso;
-
-        return $this;
-    }
-
-    /**
-     * Get fechaUltimoAcceso
-     *
-     * @return \DateTime 
-     */
-    public function getFechaUltimoAcceso() {
-        return $this->fechaUltimoAcceso;
     }
 
     function getCategory() {
