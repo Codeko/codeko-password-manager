@@ -17,6 +17,8 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Application\Sonata\UserBundle\Entity\User;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+
 
 class PasswordAdmin extends Admin {
 
@@ -28,11 +30,10 @@ class PasswordAdmin extends Admin {
 
     public function createQuery($context = 'list') {
         $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
-
         if (!$user->isSuperAdmin()) {
             $query = parent::createQuery($context);
             $query->andWhere(
-                    $query->expr()->eq($query->getRootAliases()[0] . '.user', ':username')
+            $query->expr()->eq($query->getRootAliases()[0] . '.user', ':username')
             );
             $query->setParameter('username', $user);
         } else {
