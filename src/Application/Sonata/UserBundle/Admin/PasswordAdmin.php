@@ -24,16 +24,12 @@ class PasswordAdmin extends Admin {
 
     public $supportsPreviewMode = true;
 
-    /*
-     * PROBLEMA, SI NO ERES ADMIN LO MUESTRA TODO!!!!!!!!!!!!!!!!
-     */
-
     public function createQuery($context = 'list') {
         $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
         if (!$user->isSuperAdmin()) {
             $query = parent::createQuery($context);
             $query->andWhere(
-                    $query->expr()->eq($query->getRootAliases()[0] . '.user', ':user')
+               $query->expr()->eq($query->getRootAliases()[0] . '.user', ':user')
             );
             $query->setParameter(':user', $user);
         } else {
