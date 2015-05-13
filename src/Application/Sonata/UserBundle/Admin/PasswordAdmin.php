@@ -48,7 +48,7 @@ class PasswordAdmin extends Admin {
         $listMapper
                 ->addIdentifier('titulo')
                 ->add('usernamePass')
-                ->add('url', 'url')
+                ->add('url', 'url', array('hide_protocol' => true))
                 ->add('comentario')
                 ->add('tipoPassword')
                 ->add('fechaExpira')
