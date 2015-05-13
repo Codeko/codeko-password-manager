@@ -103,10 +103,10 @@ class PasswordController extends Controller {
         if (!$object) {
             throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
         }
-        if (false === $this->get('security.context')->isGranted('ROLE_LISTAR_ENTIDAD', $object)) {
-            //Controlar Voters
-            throw new AccessDeniedException('No tienes acceso a showAction');
-        }
+//        if (false === $this->get('security.context')->isGranted('ROLE_LISTAR_ENTIDAD', $object)) {
+//            //Controlar Voters
+//            throw new AccessDeniedException('No tienes acceso a showAction');
+//        }
         if (false === $this->get('security.authorization_checker')->isGranted('view', $object)) {
             throw new AccessDeniedException('Unauthorised access!');
         }
@@ -143,10 +143,10 @@ class PasswordController extends Controller {
         }
         $datagrid = $this->admin->getDatagrid();
         $filters = $request->get('filter');
-        if (false === $this->get('security.context')->isGranted('ROLE_LISTAR_ENTIDAD', $datagrid)) {
-            //Controlar Voters
-//            throw new AccessDeniedException('No tienes acceso a listar');
-        }
+//        if (false === $this->get('security.context')->isGranted('ROLE_LISTAR_ENTIDAD', $datagrid)) {
+//            //Controlar Voters
+////            throw new AccessDeniedException('No tienes acceso a listar');
+//        }
         if (!$filters || !array_key_exists('context', $filters)) {
             $context = $this->admin->getPersistentParameter('context', 'default');
         } else {

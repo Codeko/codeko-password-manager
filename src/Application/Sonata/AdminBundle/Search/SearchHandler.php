@@ -10,6 +10,7 @@
  */
 
 namespace Application\Sonata\AdminBundle\Search;
+//namespace Sonata\AdminBundle\Search;
 
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Admin\Pool;
