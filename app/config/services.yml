@@ -14,7 +14,7 @@ services:
     password.pass.servicio:
       class: Application\Sonata\UserBundle\Admin\PasswordAdmin
       tags:
-        - { name: sonata.admin, manager_type: orm, group: Password Manager, label: Contraseñas }
+        - { name: sonata.admin, manager_type: orm, group: Password Manager, label: Contraseñas, icon: fa-key }
       arguments: [null, Application\Sonata\UserBundle\Entity\Password, ApplicationSonataUserBundle:Password]
       
     security.access.password_voter:
