@@ -103,17 +103,17 @@ class PasswordController extends Controller {
         if (!$object) {
             throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
         }
-        if (false === $this->get('security.context')->isGranted('ROLE_LISTAR_ENTIDAD', $object)) {
-            //Controlar Voters
-            throw new AccessDeniedException('No tienes acceso a showAction');
-        }
-        if (false === $this->get('security.authorization_checker')->isGranted('view', $object)) {
-            throw new AccessDeniedException('Unauthorised access!');
-        }
-        return new Response('<h1>' . $object->getName() . '</h1>');
-        if (false === $this->admin->isGranted('VIEW', $object)) {
-            throw new AccessDeniedException();
-        }
+//        if (false === $this->get('security.context')->isGranted('ROLE_LISTAR_ENTIDAD', $object)) {
+//            //Controlar Voters
+//            throw new AccessDeniedException('No tienes acceso a showAction');
+//        }
+//        if (false === $this->get('security.authorization_checker')->isGranted('view', $object)) {
+//            throw new AccessDeniedException('Unauthorised access!');
+//        }
+//        return new Response('<h1>' . $object->getName() . '</h1>');
+//        if (false === $this->admin->isGranted('VIEW', $object)) {
+//            throw new AccessDeniedException();
+//        }
         $this->admin->setSubject($object);
         return $this->render($this->admin->getTemplate('show'), array(
                     'action' => 'show',

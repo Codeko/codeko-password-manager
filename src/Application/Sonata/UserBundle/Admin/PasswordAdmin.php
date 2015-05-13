@@ -47,7 +47,7 @@ class PasswordAdmin extends Admin {
      */
     protected function configureListFields(ListMapper $listMapper) {
         unset($this->listModes['mosaic']);
-        
+
         $listMapper
                 ->addIdentifier('titulo')
                 ->add('usernamePass')
@@ -57,7 +57,11 @@ class PasswordAdmin extends Admin {
                 ->add('fechaExpira')
                 ->add('category')
                 ->add('user')
-
+                ->add('_action', 'actions', array(
+                    'actions' => array(
+                        'show' => array(),
+                    )
+                ))
         ;
     }
 
@@ -66,9 +70,14 @@ class PasswordAdmin extends Admin {
      */
     protected function configureDatagridFilters(DatagridMapper $filterMapper) {
 
+        $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
+
         $filterMapper
-                ->add('titulo')
-                ->add('user')
+                ->add('titulo');
+        if ($user->isSuperAdmin()) {
+            $filterMapper->add('user');
+        }
+        $filterMapper
                 ->add('usernamePass')
                 ->add('url')
                 ->add('comentario')
@@ -107,39 +116,25 @@ class PasswordAdmin extends Admin {
     protected function configureFormFields(FormMapper $formMapper) {
         $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
 
+        $formMapper
+                ->with('Contraseña:', array('class' => 'col-md-6'))
+                ->add('titulo');
         if (!$user->isSuperAdmin()) {
-            $formMapper
-                    ->with('Contraseña:')
-                    ->add('titulo')
-                    ->add('usernamePass', null, array('required' => false))
-                    ->add('url', null, array('required' => false))
-                    ->add('password', 'password', array('attr' => array('class' => 'password','input' => 'password')))
-                    ->add('comentario', null, array('required' => false))
-                    ->add('fechaExpira', 'sonata_type_datetime_picker', array('required' => false))
-                    ->add('tipoPassword', null, array('required' => false))
-                    ->end()
-                    ->with('Categorias')
-                    ->add('category', 'sonata_type_model', array('label' => 'Categorias', 'expanded' => true, 'by_reference' => false, 'multiple' => true, 'required' => false))
-                    ->end()
-            ;
-        } else {
-            $formMapper
-                    ->with('Contraseña:')
-                    ->add('titulo')
-                    ->add('user', null, array('required' => true))
-                    ->add('usernamePass', null, array('required' => false))
-                    ->add('url', null, array('required' => false))
-                    ->add('password', 'password', array('attr' => array('class' => 'password','input' => 'password')))
-                    ->add('comentario', null, array('required' => false))
-                    ->add('fechaExpira', 'sonata_type_datetime_picker', array('required' => false))
-                    ->add('tipoPassword', null, array('required' => false))
-                    ->end()
-                    ->with('Categorias')
-                    ->add('category', 'sonata_type_model', array('label' => 'Categorias', 'expanded' => true, 'by_reference' => false, 'multiple' => true, 'required' => false))
-                    ->end()
-
-            ;
+            $formMapper->add('user', null, array('required' => true));
         }
+        $formMapper
+                ->add('usernamePass', null, array('required' => false))
+                ->add('url', null, array('required' => false))
+                ->add('password', 'password', array('attr' => array('class' => 'password', 'input' => 'password')))
+                ->add('comentario', null, array('required' => false))
+                ->add('fechaExpira', 'sonata_type_datetime_picker', array('required' => false))
+                ->add('tipoPassword', null, array('required' => false))
+                ->end()
+                ->with('Categorias', array('class' => 'col-md-6'))
+                ->add('category', 'sonata_type_model', array('label' => 'Categorias', 'expanded' => true, 'by_reference' => false, 'multiple' => true, 'required' => false))
+                ->end()
+
+        ;
     }
 
     public function getNewInstance() {

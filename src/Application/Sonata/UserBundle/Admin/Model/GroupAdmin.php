@@ -56,13 +56,11 @@ class GroupAdmin extends Admin {
      */
     protected function configureFormFields(FormMapper $formMapper) {
         $formMapper
-                ->tab('Group')
                 ->with('General', array('class' => 'col-md-6'))
                 ->add('name')
                 ->end()
                 ->end()
-                ->tab('Security')
-                ->with('Roles', array('class' => 'col-md-12'))
+                ->with('Roles', array('class' => 'col-md-6'))
                 ->add('roles', 'sonata_security_roles', array(
                     'expanded' => true,
                     'multiple' => true,

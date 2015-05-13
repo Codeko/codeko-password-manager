@@ -55,7 +55,7 @@ class PasswordVoter implements VoterInterface {
                     return $vote;
                 }
             }
-            
+
             if ($attribute === 'ROLE_EDITAR_USUARIO') {
                 $user = $token->getUser();
                 $iduser = $user->getId();
@@ -75,7 +75,7 @@ class PasswordVoter implements VoterInterface {
                 }
             }
 
-            if ($attribute === 'ROLE_LISTAR_ENTIDAD') {
+//            if ($attribute === 'ROLE_LISTAR_ENTIDAD') {
 //                $user = $token->getUser();
 //                $iduser = $user->getId();
 //                $idpasswordPropietario = $object->getUser()->getId();
@@ -92,7 +92,7 @@ class PasswordVoter implements VoterInterface {
 //                    $vote = VoterInterface::ACCESS_GRANTED;
 //                    return $vote;
 //                }
-            }
+//            }
         }
 
         return $vote;
