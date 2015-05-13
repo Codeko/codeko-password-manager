@@ -10,7 +10,7 @@ sonata_admin:
         edit:    SonataAdminBundle:CRUD:edit.html.twig
         preview: SonataAdminBundle:CRUD:preview.html.twig
         search:              SonataAdminBundle:Core:search.html.twig
-        search_result_block: SonataAdminBundle:Block:block_search_result.html.twig
+        search_result_block: SonataAdminBundle:Block:block_search_result.html.twig       
         
  #   security:
         #handler: sonata.admin.security.handler.role
