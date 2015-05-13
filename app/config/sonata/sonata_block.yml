@@ -13,11 +13,23 @@ sonata_block:
         sonata.block.service.rss:
             
         # used to display the menu in profile pages
-        sonata.user.block.menu:   
+        sonata.user.block.menu:  
+            contexts: [user]
+            
         # used to display menu option (login option)
         sonata.user.block.account: 
             
         sonata.timeline.block.timeline:
             
         sonata.admin.block.search_result:
-            contexts: [admin]
+            contexts: [user]
+            
+    exception:
+        default:
+            filter:                     debug_only
+        filters:
+            debug_only:             sonata.block.exception.filter.debug_only
+            ignore_block_exception: sonata.block.exception.filter.ignore_block_exception
+            keep_all:               sonata.block.exception.filter.keep_all
+            keep_none:              sonata.block.exception.filter.keep_none
+            

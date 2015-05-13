@@ -14,6 +14,34 @@
                 <source>gender_unknown</source>
                 <target>Desconocido</target>
             </trans-unit>
+            <trans-unit id="date_range_start">
+                <source>date_range_start</source>
+                <target>Desde</target>
+            </trans-unit>
+            <trans-unit id="date_range_end">
+                <source>date_range_end</source>
+                <target>Hasta</target>
+            </trans-unit>
+            <trans-unit id="Username Pass">
+                <source>Username Pass</source>
+                <target>Usuario asociado</target>
+            </trans-unit>
+            <trans-unit id="Category">
+                <source>Category</source>
+                <target>Categoria(s)</target>
+            </trans-unit>
+            <trans-unit id="User">
+                <source>User</source>
+                <target>Propietario</target>
+            </trans-unit>
+            <trans-unit id="Action">
+                <source>Action</source>
+                <target></target>
+            </trans-unit>
+            <trans-unit id="ROLE_USER:">
+                <source>ROLE_USER:</source>
+                <target>Usuario</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

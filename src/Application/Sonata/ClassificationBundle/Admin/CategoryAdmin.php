@@ -111,7 +111,6 @@ class CategoryAdmin extends Admin {
 
         $datagridMapper
                 ->add('name')
-                ->add('context', null, array(), null, $options)
                 ->add('enabled')
         ;
     }
@@ -120,9 +119,9 @@ class CategoryAdmin extends Admin {
      * {@inheritdoc}
      */
     protected function configureListFields(ListMapper $listMapper) {
+        unset($this->listModes['mosaic']);
         $listMapper
                 ->addIdentifier('name')
-                ->add('context')
                 ->add('slug')
                 ->add('description')
                 ->add('enabled', null, array('editable' => true))

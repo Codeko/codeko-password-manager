@@ -24,7 +24,7 @@ file that was distributed with this source code.
 <!DOCTYPE html>
 <html {% block html_attributes %}class="no-js"{% endblock %}>
     <head>
-         <link rel="shortcut icon" type="image/x-icon" href="{{ asset('bundles/applicationsonatauser/images/favicon.ico') }}" />
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('bundles/applicationsonatauser/images/favicon.ico') }}" />
         {% block meta_tags %}
             <meta charset="UTF-8">
             <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
@@ -33,7 +33,7 @@ file that was distributed with this source code.
         {% block stylesheets %}
             {% if admin_pool is defined %}
                 {% for stylesheet in admin_pool.getOption('stylesheets', []) %}
-                        <link rel="stylesheet" href="{{ asset(stylesheet) }}">
+                    <link rel="stylesheet" href="{{ asset(stylesheet) }}">
                 {% endfor %}
             {% endif %}
         {% endblock %}
@@ -46,7 +46,7 @@ file that was distributed with this source code.
                     USE_ICHECK: {% if admin_pool is defined and admin_pool.getOption('use_icheck') %}true{% else %}false{% endif %}
                 };
                 window.SONATA_TRANSLATIONS = {
-                    CONFIRM_EXIT:  '{{ 'confirm_exit'|trans({}, 'SonataAdminBundle')|escape('js') }}'
+                    CONFIRM_EXIT: '{{ 'confirm_exit'|trans({}, 'SonataAdminBundle')|escape('js') }}'
                 };
             </script>
 
@@ -64,28 +64,35 @@ file that was distributed with this source code.
 
             {# localize select2 #}
             {% if admin_pool is defined and admin_pool.getOption('use_select2') %}
-                {% if locale == 'pt' %}{% set locale = 'pt_PT' %}{% endif %}
+            {% if locale == 'pt' %}{% set locale = 'pt_PT' %}{% endif %}
 
-                {# omit default EN locale #}
-                {% if locale[:2] != 'en' %}
-                    <script src="{{ asset('bundles/sonatacore/vendor/select2/select2_locale_' ~ locale|replace({'_':'-'}) ~ '.js') }}"></script>
-                {% endif %}
+            {# omit default EN locale #}
+            {% if locale[:2] != 'en' %}
+                <script src="{{ asset('bundles/sonatacore/vendor/select2/select2_locale_' ~ locale|replace({'_':'-'}) ~ '.js') }}"></script>
             {% endif %}
+        {% endif %}
 
-            {% if admin_pool is defined and admin_pool.getOption('use_bootlint') %}
-                {# Bootlint - https://github.com/twbs/bootlint#in-the-browser #}
-                <script type="text/javascript">
-                    javascript:(function(){var s=document.createElement("script");s.onload=function(){bootlint.showLintReportForCurrentDocument([], {hasProblems: false, problemFree: false});};s.src="https://maxcdn.bootstrapcdn.com/bootlint/latest/bootlint.min.js";document.body.appendChild(s)})();
-                </script>
-            {% endif %}
-        {% endblock %}
+        {% if admin_pool is defined and admin_pool.getOption('use_bootlint') %}
+            {# Bootlint - https://github.com/twbs/bootlint#in-the-browser #}
+            <script type="text/javascript">
+                javascript:(function () {
+                    var s = document.createElement("script");
+                    s.onload = function () {
+                        bootlint.showLintReportForCurrentDocument([], {hasProblems: false, problemFree: false});
+                    };
+                    s.src = "https://maxcdn.bootstrapcdn.com/bootlint/latest/bootlint.min.js";
+                    document.body.appendChild(s)
+                })();
+            </script>
+        {% endif %}
+    {% endblock %}
 
-        <title>
+    <title>
         {% block sonata_head_title %}
             Password Manager
 
             {% if _title is not empty %}
-                 - {{ _title|raw }}
+                - {{ _title|raw }}
             {% else %}
                 {% if action is defined %}
                     -
@@ -101,9 +108,9 @@ file that was distributed with this source code.
                 {% endif %}
             {% endif%}
         {% endblock %}
-        </title>
-    </head>
-    <body {% block body_attributes %}class="sonata-bc skin-black fixed"{% endblock %}>
+    </title>
+</head>
+<body {% block body_attributes %}class="sonata-bc skin-black fixed"{% endblock %}>
 
     <div class="wrapper">
 
@@ -111,32 +118,32 @@ file that was distributed with this source code.
             <header class="main-header">
                 {% block sonata_header_noscript_warning %}
                     <noscript>
-                        <div class="noscript-warning">
-                            {{ 'noscript_warning'|trans({}, 'SonataAdminBundle') }}
-                        </div>
+                    <div class="noscript-warning">
+                        {{ 'noscript_warning'|trans({}, 'SonataAdminBundle') }}
+                    </div>
                     </noscript>
                 {% endblock %}
                 {% block logo %}
                     {% if admin_pool is defined %}
                         {% spaceless %}
                             {% if app.request.attributes.get('_route') == 'sonata_admin_redirect' %}
-                            <a class="logo" href="{{ path('sonata_admin_dashboard') }}"><img class="rubberBand animated" src="{{ asset('bundles/applicationsonatauser/images/headerMenu.png') }}"/></a>    
-                            {% else %}
-                            <a class="logo" href="{{ path('sonata_admin_dashboard') }}"><img src="{{ asset('bundles/applicationsonatauser/images/headerMenu.png') }}"/></a>
-                            {% endif %}
-                            {#<a class="logo" href="{{ path('sonata_admin_dashboard') }}">
-                                {% if 'single_image' == admin_pool.getOption('title_mode') or 'both' == admin_pool.getOption('title_mode') %}
-                                    <img src="{{ asset('bundles/applicationsonatauser/images/logo_title.png') }}" alt="{{ admin_pool.title }}">
+                                <a class="logo" href="{{ path('sonata_admin_dashboard') }}"><img class="rubberBand animated" src="{{ asset('bundles/applicationsonatauser/images/headerMenu.png') }}"/></a>    
+                                {% else %}
+                                <a class="logo" href="{{ path('sonata_admin_dashboard') }}"><img src="{{ asset('bundles/applicationsonatauser/images/headerMenu.png') }}"/></a>
                                 {% endif %}
-                                {% if 'single_text' == admin_pool.getOption('title_mode') or 'both' == admin_pool.getOption('title_mode') %}
-                                    <span>Password Manager</span>
-                                {% endif %}
-                            </a>#}
-                        {% endspaceless %}
-                    {% endif %}
-                {% endblock %}
-                {% block sonata_nav %}
-                    {% if admin_pool is defined %}
+                                {#<a class="logo" href="{{ path('sonata_admin_dashboard') }}">
+                                    {% if 'single_image' == admin_pool.getOption('title_mode') or 'both' == admin_pool.getOption('title_mode') %}
+                                        <img src="{{ asset('bundles/applicationsonatauser/images/logo_title.png') }}" alt="{{ admin_pool.title }}">
+                                    {% endif %}
+                                    {% if 'single_text' == admin_pool.getOption('title_mode') or 'both' == admin_pool.getOption('title_mode') %}
+                                        <span>Password Manager</span>
+                                    {% endif %}
+                                </a>#}
+                            {% endspaceless %}
+                        {% endif %}
+                    {% endblock %}
+                    {% block sonata_nav %}
+                        {% if admin_pool is defined %}
                         <nav class="navbar navbar-static-top" role="navigation">
                             <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                                 <span class="sr-only">Toggle navigation</span>
@@ -160,12 +167,12 @@ file that was distributed with this source code.
                                                                 </li>
                                                             {% else %}
                                                                 <li class="active"><span>{{ menu.label }}</span></li>
+                                                                    {% endif %}
+                                                                {% endfor %}
                                                             {% endif %}
-                                                        {% endfor %}
-                                                    {% endif %}
-                                                {% else %}
-                                                    {{ _breadcrumb|raw }}
-                                                {% endif %}
+                                                        {% else %}
+                                                            {{ _breadcrumb|raw }}
+                                                        {% endif %}
                                             </ol>
                                         {% endif %}
                                     </div>
@@ -204,15 +211,15 @@ file that was distributed with this source code.
                     <section class="sidebar">
                         {% block sonata_side_nav %}
                             {% block sonata_sidebar_search %}
-                                {% if app.security.token and is_granted('ROLE_SONATA_ADMIN') %}
+                                {% if app.security.token or is_granted('ROLE_SONATA_ADMIN') %}
                                     <form action="{{ url('sonata_admin_search') }}" method="GET" class="sidebar-form" style="margin-top: 16px;" role="search">
                                         <div class="input-group custom-search-form">
                                             <input type="text" name="q" value="{{ app.request.get('q') }}" class="form-control" placeholder="{{ 'search_placeholder'|trans({}, 'SonataAdminBundle') }}">
-                                                <span class="input-group-btn">
-                                                    <button class="btn btn-flat" type="submit">
-                                                        <i class="fa fa-search"></i>
-                                                    </button>
-                                                </span>
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-flat" type="submit">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </span>
                                         </div>
                                     </form>
                                 {% endif %}
@@ -220,9 +227,8 @@ file that was distributed with this source code.
 
                             {% block side_bar_before_nav %} {% endblock %}
                             {% block side_bar_nav %}
-                                {% if app.security.token and is_granted('ROLE_SONATA_ADMIN') %}
-                                    {{ knp_menu_render(sonata_knp_menu_build(app.request), {'template' : admin_pool.getTemplate('knp_menu_template')}) }}
-                                    
+                                {% if app.security.token or is_granted('ROLE_SONATA_ADMIN') %}              
+                                    {{ knp_menu_render(sonata_knp_menu_build(app.request), {'template' : admin_pool.getTemplate('knp_menu_template')}) }}                                   
                                 {% endif %}
                             {% endblock side_bar_nav %}
                             {#{% block side_bar_after_nav %}
@@ -261,7 +267,7 @@ file that was distributed with this source code.
                                                     <div class="nav navbar-right btn-group">
                                                         {% for mode, settings in admin.listModes %}
                                                             <a href="{{ admin.generateUrl('list', app.request.query.all|merge({_list_mode: mode})) }}" class="btn btn-default navbar-btn btn-sm{% if admin.getListMode() == mode %} active{% endif %}"><i class="{{ settings.class }}"></i></a>
-                                                        {% endfor %}
+                                                            {% endfor %}
                                                     </div>
                                                 {% endif %}
 
@@ -292,7 +298,7 @@ file that was distributed with this source code.
 
                             {% block notice %}
                                 {% include 'SonataCoreBundle:FlashMessage:render.html.twig' %}
-                                
+
                             {% endblock notice %}
 
                             {% if _preview is not empty %}
@@ -329,5 +335,26 @@ file that was distributed with this source code.
             </div>
         {% endblock sonata_wrapper %}
     </div>
-    </body>
+</body>
+<script>
+    function traducirRoles() {
+
+        var span = document.getElementsByTagName("span");
+        for (var i = 0; i < span.length; i++) {
+            if (span[i].innerHTML.contains('ROLE_USER:')) {
+                span[i].innerHTML = " Usuario común (Sin privilegios)";                
+            }else if (span[i].innerHTML.contains('ROLE_ADMIN: ROLE_USER')) {
+                span[i].innerHTML = " Administrador (Privilegios de usuario)";                
+            }else if (span[i].innerHTML.contains('ROLE_SUPER_ADMIN: ROLE_USER, ROLE_ADMIN, ROLE_SONATA_ADMIN, ROLE_ALLOWED_TO_SWITCH')) {
+                span[i].innerHTML = " Super Administrador (Todos los privilegios)";                
+            }else if (span[i].innerHTML.contains('ROLE_SONATA_ADMIN')) {
+                span[i].innerHTML = " Administrador Sonata (Privilegios especiales administración)";                
+            }else if (span[i].innerHTML.contains('ROLE_ALLOWED_TO_SWITCH')) {
+                span[i].innerHTML = " Puede suplantar usuario(s)";                
+            }
+        }
+    }
+
+    traducirRoles();
+</script>
 </html>

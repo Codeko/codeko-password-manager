@@ -1,14 +1,11 @@
 <?php
-
 namespace Application\Sonata\UserBundle\Controller;
-
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 //use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Doctrine\ORM\EntityManager;
-
 /**
  * Password controller.
  *
@@ -19,7 +16,6 @@ class PasswordController extends Controller {
      * Acción de editar contraseñas
      *
      */
-
     public function editAction($id = null, Request $request = null) {
         $request = $this->resolveRequest($request);
         // the key used to lookup the template
@@ -89,13 +85,11 @@ class PasswordController extends Controller {
                     'object' => $object,
                         ), null, $request);
     }
-
     /*
      *
      * Acción de mostrar contraseñas
      *
      */
-
     public function showAction($id = null, Request $request = null) {
         $request = $this->resolveRequest($request);
         $id = $request->get($this->admin->getIdParameter());
@@ -103,17 +97,17 @@ class PasswordController extends Controller {
         if (!$object) {
             throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
         }
-        if (false === $this->get('security.context')->isGranted('ROLE_LISTAR_ENTIDAD', $object)) {
-            //Controlar Voters
-            throw new AccessDeniedException('No tienes acceso a showAction');
-        }
-        if (false === $this->get('security.authorization_checker')->isGranted('view', $object)) {
-            throw new AccessDeniedException('Unauthorised access!');
-        }
-        return new Response('<h1>' . $object->getName() . '</h1>');
-        if (false === $this->admin->isGranted('VIEW', $object)) {
-            throw new AccessDeniedException();
-        }
+//        if (false === $this->get('security.context')->isGranted('ROLE_LISTAR_ENTIDAD', $object)) {
+//            //Controlar Voters
+//            throw new AccessDeniedException('No tienes acceso a showAction');
+//        }
+//        if (false === $this->get('security.authorization_checker')->isGranted('view', $object)) {
+//            throw new AccessDeniedException('Unauthorised access!');
+//        }
+//        return new Response('<h1>' . $object->getName() . '</h1>');
+//        if (false === $this->admin->isGranted('VIEW', $object)) {
+//            throw new AccessDeniedException();
+//        }
         $this->admin->setSubject($object);
         return $this->render($this->admin->getTemplate('show'), array(
                     'action' => 'show',
@@ -121,13 +115,11 @@ class PasswordController extends Controller {
                     'elements' => $this->admin->getShow(),
                         ), null, $request);
     }
-
     /*
      *
      * Acción de listar contraseñas
      *
      */
-
     public function listAction(Request $request = null) {
         $request = $this->resolveRequest($request);
 //        $prueba = $request->getLanguages();
@@ -143,10 +135,10 @@ class PasswordController extends Controller {
         }
         $datagrid = $this->admin->getDatagrid();
         $filters = $request->get('filter');
-        if (false === $this->get('security.context')->isGranted('ROLE_LISTAR_ENTIDAD', $datagrid)) {
-            //Controlar Voters
-//            throw new AccessDeniedException('No tienes acceso a listar');
-        }
+//        if (false === $this->get('security.context')->isGranted('ROLE_LISTAR_ENTIDAD', $datagrid)) {
+//            //Controlar Voters
+////            throw new AccessDeniedException('No tienes acceso a listar');
+//        }
         if (!$filters || !array_key_exists('context', $filters)) {
             $context = $this->admin->getPersistentParameter('context', 'default');
         } else {
@@ -178,13 +170,11 @@ class PasswordController extends Controller {
                     'csrf_token' => $this->getCsrfToken('sonata.batch'),
         ));
     }
-
     /*
      *
      * Acción de borrar contraseñas
      *
      */
-
     public function deleteAction($id, Request $request = null) {
         $request = $this->resolveRequest($request);
         $id = $request->get($this->admin->getIdParameter());
@@ -232,7 +222,6 @@ class PasswordController extends Controller {
                     'csrf_token' => $this->getCsrfToken('sonata.delete')
                         ), null, $request);
     }
-
     // FUNCION PRIVADA DE SONATAADMIN-CRUDCONTROLLER, HAY QUE LLAMARLA DESDE AQUI
     /**
      * To keep backwards compatibility with older Sonata Admin code.
@@ -245,5 +234,4 @@ class PasswordController extends Controller {
         }
         return $request;
     }
-
 }

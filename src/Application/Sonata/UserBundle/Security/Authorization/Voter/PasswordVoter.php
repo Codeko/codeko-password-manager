@@ -10,12 +10,14 @@ class PasswordVoter implements VoterInterface {
     const VERPASSWORD = 'ROLE_LISTAR_ENTIDAD';
     const EDITARPASSWORD = 'ROLE_EDITAR_ENTIDAD';
     const BORRARPASSWORD = 'ROLE_BORRAR_ENTIDAD';
+    const EDITARUSUARIO = 'ROLE_EDITAR_USUARIO';
 
     public function supportsAttribute($attribute) {
         return in_array($attribute, array(
             self::VERPASSWORD,
             self::EDITARPASSWORD,
             self::BORRARPASSWORD,
+            self::EDITARUSUARIO,
         ));
     }
 
@@ -54,7 +56,26 @@ class PasswordVoter implements VoterInterface {
                 }
             }
 
-            if ($attribute === 'ROLE_LISTAR_ENTIDAD') {
+            if ($attribute === 'ROLE_EDITAR_USUARIO') {
+                $user = $token->getUser();
+                $iduser = $user->getId();
+                $idUsuarioPropietario = $object->getId();
+
+                if (!$user->isSuperAdmin()) {
+
+                    if ($idUsuarioPropietario != $iduser) {
+                        $vote = VoterInterface::ACCESS_DENIED;
+                        return $vote;
+                    }
+                    $vote = VoterInterface::ACCESS_GRANTED;
+                    return $vote;
+                } else {
+                    $vote = VoterInterface::ACCESS_GRANTED;
+                    return $vote;
+                }
+            }
+
+//            if ($attribute === 'ROLE_LISTAR_ENTIDAD') {
 //                $user = $token->getUser();
 //                $iduser = $user->getId();
 //                $idpasswordPropietario = $object->getUser()->getId();
@@ -71,7 +92,7 @@ class PasswordVoter implements VoterInterface {
 //                    $vote = VoterInterface::ACCESS_GRANTED;
 //                    return $vote;
 //                }
-            }
+//            }
         }
 
         return $vote;
