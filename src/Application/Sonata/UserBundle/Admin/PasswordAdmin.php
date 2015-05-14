@@ -19,7 +19,6 @@ use Sonata\AdminBundle\Show\ShowMapper;
 use Application\Sonata\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-
 class PasswordAdmin extends Admin {
 
     public $supportsPreviewMode = true;
@@ -29,7 +28,7 @@ class PasswordAdmin extends Admin {
         if (!$user->isSuperAdmin()) {
             $query = parent::createQuery($context);
             $query->andWhere(
-               $query->expr()->eq($query->getRootAliases()[0] . '.user', ':user')
+                    $query->expr()->eq($query->getRootAliases()[0] . '.user', ':user')
             );
             $query->setParameter(':user', $user);
         } else {
@@ -48,7 +47,9 @@ class PasswordAdmin extends Admin {
         $listMapper
                 ->addIdentifier('titulo')
                 ->add('usernamePass')
-                ->add('url', 'url')
+                ->add('url', 'url', array(
+                    'hide_protocol' => true
+                ))
                 ->add('comentario', 'text')
                 ->add('tipoPassword')
                 ->add('fechaExpira')
@@ -99,7 +100,7 @@ class PasswordAdmin extends Admin {
                 ->add('usernamePass')
                 ->add('url')
                 ->add('password')
-                ->add('comentario','text')
+                ->add('comentario', 'text')
                 ->add('fechaExpira')
                 ->add('category')
                 ->add('tipoPassword')
@@ -116,13 +117,13 @@ class PasswordAdmin extends Admin {
         $formMapper
                 ->with('Contraseña:', array('class' => 'col-md-6'))
                 ->add('titulo');
-        if (!$user->isSuperAdmin()) {
+        if ($user->isSuperAdmin()) {
             $formMapper->add('user', null, array('required' => true));
         }
         $formMapper
                 ->add('usernamePass', null, array('required' => false))
                 ->add('url', null, array('required' => false))
-                ->add('password', 'password', array('required' => false,'attr' => array('class' => 'password', 'input' => 'password')))
+                ->add('password', 'password', array('required' => false, 'attr' => array('class' => 'password', 'input' => 'password')))
                 ->add('comentario', 'textarea', array('required' => false))
                 ->add('fechaExpira', 'sonata_type_datetime_picker', array('required' => false))
                 ->add('tipoPassword', null, array('required' => false))
@@ -145,6 +146,20 @@ class PasswordAdmin extends Admin {
         }
 
         return $instance;
+    }
+
+    public function preUpdate($pass) {
+        if (substr($pass->getUrl(),0,4) !== 'http') {
+            $url = $pass->getUrl();
+            $pass->setUrl('http://' . $url);
+        }
+    }
+
+    public function prePersist($pass) {
+        if (substr($pass->getUrl(),0,4) !== 'http') {
+            $url = $pass->getUrl();
+            $pass->setUrl('http://' . $url);
+        }
     }
 
 }
