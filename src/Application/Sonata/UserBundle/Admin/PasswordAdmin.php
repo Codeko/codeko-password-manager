@@ -54,6 +54,7 @@ class PasswordAdmin extends Admin {
                 ->add('tipoPassword')
                 ->add('fechaExpira')
                 ->add('category')
+                ->add('enabled', null, array('editable' => true))
                 ->add('user')
                 ->add('_action', 'actions', array(
                     'actions' => array(
@@ -86,6 +87,7 @@ class PasswordAdmin extends Admin {
                     'show_filter' => false,
                 ))
                 ->add('tipoPassword')
+                ->add('enabled')
         ;
     }
 
@@ -104,6 +106,7 @@ class PasswordAdmin extends Admin {
                 ->add('fechaExpira')
                 ->add('category')
                 ->add('tipoPassword')
+                ->add('enabled')
                 ->end()
         ;
     }
@@ -130,6 +133,7 @@ class PasswordAdmin extends Admin {
                 ->end()
                 ->with('Categorias', array('class' => 'col-md-6'))
                 ->add('category', 'sonata_type_model', array('label' => 'Categorias', 'expanded' => true, 'by_reference' => false, 'multiple' => true, 'required' => false))
+                ->add('enabled')
                 ->end()
 
         ;
