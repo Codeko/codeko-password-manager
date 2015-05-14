@@ -59,9 +59,9 @@ class Password {
      * @var \DateTime
      */
     private $fechaModificacion;
-
     private $category;
     private $tipoPassword;
+    protected $enabled;
 
     /**
      * Get id
@@ -277,6 +277,20 @@ class Password {
 
     public function __toString() {
         return $this->getTitulo() ? : 'n/a';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setEnabled($enabled) {
+        $this->enabled = $enabled;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEnabled() {
+        return $this->enabled;
     }
 
 }

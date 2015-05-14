@@ -14,7 +14,7 @@ file that was distributed with this source code.
 {% block field %}
 {% spaceless %}
     {% if value is empty %}
-        &nbsp;
+        -
     {% else %}
         {% if field_description.options.url is defined %}
             {# target url is string #}

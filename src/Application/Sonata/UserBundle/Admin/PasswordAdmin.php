@@ -17,8 +17,8 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Application\Sonata\UserBundle\Entity\User;
+use Application\Sonata\ClassificationBundle\Entity\Category;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-
 
 class PasswordAdmin extends Admin {
 
@@ -29,7 +29,7 @@ class PasswordAdmin extends Admin {
         if (!$user->isSuperAdmin()) {
             $query = parent::createQuery($context);
             $query->andWhere(
-               $query->expr()->eq($query->getRootAliases()[0] . '.user', ':user')
+                    $query->expr()->eq($query->getRootAliases()[0] . '.user', ':user')
             );
             $query->setParameter(':user', $user);
         } else {
@@ -48,11 +48,15 @@ class PasswordAdmin extends Admin {
         $listMapper
                 ->addIdentifier('titulo')
                 ->add('usernamePass')
-                ->add('url', 'url', array('hide_protocol' => true))
-                ->add('comentario')
+                ->add('url', 'url', array(
+                    'hide_protocol' => true
+                ))
+                ->add('comentario', 'text')
                 ->add('tipoPassword')
                 ->add('fechaExpira')
                 ->add('category')
+                ->add('category.enabled')
+                ->add('enabled', null, array('editable' => true))
                 ->add('user')
                 ->add('_action', 'actions', array(
                     'actions' => array(
@@ -85,6 +89,8 @@ class PasswordAdmin extends Admin {
                     'show_filter' => false,
                 ))
                 ->add('tipoPassword')
+                ->add('enabled')
+                ->add('category.enabled')
         ;
     }
 
@@ -99,10 +105,12 @@ class PasswordAdmin extends Admin {
                 ->add('usernamePass')
                 ->add('url')
                 ->add('password')
-                ->add('comentario')
+                ->add('comentario', 'text')
                 ->add('fechaExpira')
                 ->add('category')
+                ->add('category.enabled')
                 ->add('tipoPassword')
+                ->add('enabled')
                 ->end()
         ;
     }
@@ -116,19 +124,25 @@ class PasswordAdmin extends Admin {
         $formMapper
                 ->with('Contraseña', array('class' => 'col-md-6'))
                 ->add('titulo');
-        if (!$user->isSuperAdmin()) {
+        if ($user->isSuperAdmin()) {
             $formMapper->add('user', null, array('required' => true));
         }
         $formMapper
                 ->add('usernamePass', null, array('required' => false))
                 ->add('url', null, array('required' => false))
+<<<<<<< HEAD
                 ->add('password', 'password', array('attr' => array('class' => 'password', 'input' => 'password'),'required' => false))
                 ->add('comentario', null, array('required' => false))
+=======
+                ->add('password', 'password', array('required' => false, 'attr' => array('class' => 'password', 'input' => 'password')))
+                ->add('comentario', 'textarea', array('required' => false))
+>>>>>>> origin/devab
                 ->add('fechaExpira', 'sonata_type_datetime_picker', array('required' => false))
                 ->add('tipoPassword', null, array('required' => false))
                 ->end()
                 ->with('Categorias', array('class' => 'col-md-6'))
                 ->add('category', 'sonata_type_model', array('label' => 'Categorias', 'expanded' => true, 'by_reference' => false, 'multiple' => true, 'required' => false))
+                ->add('enabled')
                 ->end()
 
         ;
@@ -145,6 +159,20 @@ class PasswordAdmin extends Admin {
         }
 
         return $instance;
+    }
+
+    public function preUpdate($pass) {
+        if (substr($pass->getUrl(),0,4) !== 'http') {
+            $url = $pass->getUrl();
+            $pass->setUrl('http://' . $url);
+        }
+    }
+
+    public function prePersist($pass) {
+        if (substr($pass->getUrl(),0,4) !== 'http') {
+            $url = $pass->getUrl();
+            $pass->setUrl('http://' . $url);
+        }
     }
 
 }
