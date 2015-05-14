@@ -115,7 +115,7 @@ $formMapper->add('user', null, array('required' => true));
 $formMapper
 ->add('usernamePass', null, array('required' => false))
 ->add('url', null, array('required' => false))
-->add('password', 'password', array('required' => false, 'attr' => array('class' => 'password', 'input' => 'password')))
+->add('password', 'password', array('required' => false, 'attr' => array('class' => 'password', 'input' => 'password'), array('required' => false)))
 ->add('comentario', 'textarea', array('required' => false))
 ->add('fechaExpira', 'sonata_type_datetime_picker', array('required' => false))
 ->add('tipoPassword', null, array('required' => false))
