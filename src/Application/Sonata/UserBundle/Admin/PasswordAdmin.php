@@ -137,7 +137,7 @@ class PasswordAdmin extends Admin {
                 ->end()
                 ->with('Categorias', array('class' => 'col-md-6'))
                 ->add('category', 'sonata_type_model', array('label' => 'Categorias', 'expanded' => true, 'by_reference' => false, 'multiple' => true, 'required' => false))
-                ->add('enabled')
+                ->add('enabled', null, array('required' => false))
                 ->end()
 
         ;
