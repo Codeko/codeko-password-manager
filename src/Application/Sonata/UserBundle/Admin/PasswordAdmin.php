@@ -59,6 +59,7 @@ class PasswordAdmin extends Admin {
                 ->add('_action', 'actions', array(
                     'actions' => array(
                         'show' => array(),
+                        'clipboard' => array(),
                     )
                 ))
         ;
