@@ -17,6 +17,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Application\Sonata\UserBundle\Entity\User;
+use Application\Sonata\ClassificationBundle\Entity\Category;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class PasswordAdmin extends Admin {
@@ -54,6 +55,7 @@ class PasswordAdmin extends Admin {
                 ->add('tipoPassword')
                 ->add('fechaExpira')
                 ->add('category')
+                ->add('category.enabled')
                 ->add('enabled', null, array('editable' => true))
                 ->add('user')
                 ->add('_action', 'actions', array(
@@ -88,6 +90,7 @@ class PasswordAdmin extends Admin {
                 ))
                 ->add('tipoPassword')
                 ->add('enabled')
+                ->add('category.enabled')
         ;
     }
 
@@ -105,6 +108,7 @@ class PasswordAdmin extends Admin {
                 ->add('comentario', 'text')
                 ->add('fechaExpira')
                 ->add('category')
+                ->add('category.enabled')
                 ->add('tipoPassword')
                 ->add('enabled')
                 ->end()
