@@ -10,7 +10,7 @@ file that was distributed with this source code.
 #}
 
 {% if admin.isGranted('CLIPBOARD', object) and admin.hasRoute('edit') %}
-    <td><a class="btn btn-sm btn-default edit_link" id="clipboard" title="Copiar al portapapeles" >
+    <td><a class="btn btn-sm btn-default edit_link clipboard" title="Copiar al portapapeles" >
             <i class="fa fa-clipboard"></i>
             Copiar al portapapeles
         </a></td>
@@ -18,14 +18,11 @@ file that was distributed with this source code.
     <script>
 
         $(document).ready(function () {
-            $('a#clipboard').zclip({
+            $('a.clipboard').zclip({
                 path: '{{ asset('bundles/applicationsonatauser/js/ZeroClipboard.swf') }}',
                 copy: 'weehe'
             });
         });
 
-        $("a#clipboard").click(function () {
-            alert("weeheeeeee");
-        });
     </script>
 {% endif %}
