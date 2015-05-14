@@ -14,13 +14,15 @@ file that was distributed with this source code.
             <i class="fa fa-clipboard"></i>
             Copiar al portapapeles
         </a></td>
-    <script type="text/javascript" src="{{ asset('bundles/applicationsonatauser/js/jquery.zclip.js') }}"></script>
+      
+    <script type="text/javascript" src="{{ asset('bundles/applicationsonatauser/js/jquery.zclip.min.js') }}"></script>
+
     <script>
 
         $(document).ready(function () {
             $('a.clipboard').zclip({
                 path: '{{ asset('bundles/applicationsonatauser/js/ZeroClipboard.swf') }}',
-                copy: 'weehe'
+                copy: 'weehee'
             });
         });
 
