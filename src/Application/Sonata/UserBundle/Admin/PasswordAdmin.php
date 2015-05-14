@@ -19,6 +19,7 @@ use Sonata\AdminBundle\Show\ShowMapper;
 use Application\Sonata\UserBundle\Entity\User;
 use Application\Sonata\ClassificationBundle\Entity\Category;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 
 class PasswordAdmin extends Admin {
 
@@ -132,8 +133,8 @@ class PasswordAdmin extends Admin {
                 ->add('tipoPassword', null, array('required' => false))
                 ->end()
                 ->with('Categorias', array('class' => 'col-md-6'))
-                ->add('category', 'sonata_type_model', array('label' => 'Categorias', 'expanded' => true, 'by_reference' => false, 'multiple' => true, 'required' => false))
-                ->add('enabled')
+                ->add('category', 'sonata_type_model', array('label' => 'Categorias', 'expanded' => true, 'by_reference' => false, 'multiple' => true, 'required' => true))
+                ->add('enabled', null, array('required' => false, 'data' => true))
                 ->end()
         ;
     }
@@ -150,17 +151,25 @@ class PasswordAdmin extends Admin {
     }
 
     public function preUpdate($pass) {
-        if (substr($pass->getUrl(), 0, 4) !== 'http') {
+        if (substr($pass->getUrl(), 0, 4) !== 'http' && $pass->getUrl() !== null) {
             $url = $pass->getUrl();
             $pass->setUrl('http://' . $url);
         }
+        $encoder = new MessageDigestPasswordEncoder('sha512', true, 10);
+        $plainPassword = $pass->getPassword();
+        $encoded = $encoder->encodePassword($pass, $plainPassword);
+        $pass->setPassword($encoded);
     }
 
     public function prePersist($pass) {
-        if (substr($pass->getUrl(), 0, 4) !== 'http') {
+        if (substr($pass->getUrl(), 0, 4) !== 'http' && $pass->getUrl() !== null) {
             $url = $pass->getUrl();
             $pass->setUrl('http://' . $url);
         }
+        $encoder = new MessageDigestPasswordEncoder('sha512', true, 10);
+        $plainPassword = $pass->getPassword();
+        $encoded = $encoder->encodePassword($pass, $plainPassword);
+        $pass->setPassword($encoded);
     }
 
 }
