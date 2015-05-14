@@ -114,7 +114,7 @@ class PasswordAdmin extends Admin {
         $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
 
         $formMapper
-                ->with('Contraseña:', array('class' => 'col-md-6'))
+                ->with('Contraseña', array('class' => 'col-md-6'))
                 ->add('titulo');
         if (!$user->isSuperAdmin()) {
             $formMapper->add('user', null, array('required' => true));
@@ -122,7 +122,7 @@ class PasswordAdmin extends Admin {
         $formMapper
                 ->add('usernamePass', null, array('required' => false))
                 ->add('url', null, array('required' => false))
-                ->add('password', 'password', array('attr' => array('class' => 'password', 'input' => 'password')))
+                ->add('password', 'password', array('attr' => array('class' => 'password', 'input' => 'password'),'required' => false))
                 ->add('comentario', null, array('required' => false))
                 ->add('fechaExpira', 'sonata_type_datetime_picker', array('required' => false))
                 ->add('tipoPassword', null, array('required' => false))
