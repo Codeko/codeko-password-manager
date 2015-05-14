@@ -10,21 +10,30 @@ file that was distributed with this source code.
 #}
 
 {% if admin.isGranted('CLIPBOARD', object) and admin.hasRoute('edit') %}
-    <td><a class="btn btn-sm btn-default edit_link clipboard" title="Copiar al portapapeles" >
+    {#<td><a class="btn btn-sm btn-default edit_link" id="clipboard" onclick="copyClipboard()" title="Copiar al portapapeles" >
             <i class="fa fa-clipboard"></i>
             Copiar al portapapeles
-        </a></td>
-      
-    <script type="text/javascript" src="{{ asset('bundles/applicationsonatauser/js/jquery.zclip.min.js') }}"></script>
+        </a></td>#}
+ 
+        <td><object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+            id="clippy" >
+    <param name="movie" value="{{ asset('bundles/applicationsonatauser/js/clippy.swf') }}"/>
+    <param name="allowScriptAccess" value="always" />
+    <param name="quality" value="high" />
+    <param name="scale" value="noscale" />
+    <param NAME="FlashVars" value="text=Mi contraseña">
+    <param name="bgcolor" value="red">
+    <embed src="{{ asset('bundles/applicationsonatauser/js/clippy.swf') }}"
+           width="110"
+           height="14"
+           name="clippy"
+           quality="high"
+           allowScriptAccess="always"
+           type="application/x-shockwave-flash"
+           pluginspage="http://www.macromedia.com/go/getflashplayer"
+           FlashVars="text=Mi contraseña"
+           bgcolor="red"
+    />
+            </object></td>
 
-    <script>
-
-        $(document).ready(function () {
-            $('a.clipboard').zclip({
-                path: '{{ asset('bundles/applicationsonatauser/js/ZeroClipboard.swf') }}',
-                copy: 'weehee'
-            });
-        });
-
-    </script>
 {% endif %}
