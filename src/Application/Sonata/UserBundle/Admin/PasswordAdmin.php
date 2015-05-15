@@ -16,10 +16,9 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Application\Sonata\UserBundle\Entity\User;
 use Application\Sonata\ClassificationBundle\Entity\Category;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
+use Symfony\Component\HttpFoundation\Request;
 
 class PasswordAdmin extends Admin {
 
@@ -77,8 +76,7 @@ class PasswordAdmin extends Admin {
                 ->add('comentario', 'text')
                 ->add('tipoPassword')
                 ->add('fechaExpira')
-                ->add('category')
-                ->add('category.enabled')
+                ->add('category', null, array('associated_property' => 'getName'))
                 ->add('enabled', null, array('editable' => true))
                 ->add('user')
                 ->add('_action', 'actions', array(
@@ -145,6 +143,9 @@ class PasswordAdmin extends Admin {
      */
     protected function configureFormFields(FormMapper $formMapper) {
         $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
+
+        // AQUII!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
         $formMapper
                 ->with('Contraseña:', array('class' => 'col-md-6'))
                 ->add('titulo');
@@ -178,25 +179,43 @@ class PasswordAdmin extends Admin {
     }
 
     public function preUpdate($pass) {
+        // AÑADIENDO HTTP DELANTE DE URL
         if (substr($pass->getUrl(), 0, 4) !== 'http' && $pass->getUrl() !== null) {
             $url = $pass->getUrl();
             $pass->setUrl('http://' . $url);
         }
+
+        // CODIFICANDO CONTRASEÑAS
         $encoder = new MessageDigestPasswordEncoder('sha512', true, 10);
         $plainPassword = $pass->getPassword();
         $encoded = $encoder->encodePassword($pass, $plainPassword);
         $pass->setPassword($encoded);
+
+
+        // CATEGORIA DEFAULT SI NO SE SELECCIONA NINGUNA EN EL FORMULARIO
+        if (count($pass->getCategory()) === 0) {
+            $pass->addCategory($this->getConfigurationPool()->getContainer()->get('doctrine')->getRepository('Application\Sonata\ClassificationBundle\Entity\Category')->find(1));
+        }
     }
 
     public function prePersist($pass) {
+        // AÑADIENDO HTTP DELANTE DE URL
         if (substr($pass->getUrl(), 0, 4) !== 'http' && $pass->getUrl() !== null) {
             $url = $pass->getUrl();
             $pass->setUrl('http://' . $url);
         }
+
+        // CODIFICANDO CONTRASEÑAS
         $encoder = new MessageDigestPasswordEncoder('sha512', true, 10);
         $plainPassword = $pass->getPassword();
         $encoded = $encoder->encodePassword($pass, $plainPassword);
         $pass->setPassword($encoded);
+
+
+        // CATEGORIA DEFAULT SI NO SE SELECCIONA NINGUNA EN EL FORMULARIO
+        if (count($pass->getCategory()) === 0) {
+            $pass->addCategory($this->getConfigurationPool()->getContainer()->get('doctrine')->getRepository('Application\Sonata\ClassificationBundle\Entity\Category')->find(1));
+        }
     }
 
 }
