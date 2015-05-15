@@ -30,7 +30,8 @@ class PasswordType extends AbstractType {
                     'class' => 'ApplicationSonataClassificationBundle:Category',
                     'property' => 'name',
                     'allow_add' => true,
-                    'allow_delete' => true
+                    'allow_delete' => true,
+                    'required' => true,
         ));
     }
 
