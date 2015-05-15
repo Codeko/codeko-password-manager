@@ -39,6 +39,30 @@ class PasswordAdmin extends Admin {
         return $query;
     }
 
+//    protected function configureRoutes(RouteCollection $collection) {
+//        $collection->add('Clone', $this->getRouterIdParameter() . '/Clone');
+//    }
+
+    private function buildRoutes() {
+        if ($this->loaded['routes']) {
+            return;
+        }
+
+        $this->loaded['routes'] = true;
+
+        $this->routes = new RouteCollection(
+                $this->getBaseCodeRoute(), $this->getBaseRouteName(), $this->getBaseRoutePattern(), $this->getBaseControllerName()
+        );
+
+        $this->routeBuilder->build($this, $this->routes);
+
+        $this->configureRoutes($this->routes);
+
+        foreach ($this->getExtensions() as $extension) {
+            $extension->configureRoutes($this, $this->routes);
+        }
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -61,6 +85,9 @@ class PasswordAdmin extends Admin {
                     'actions' => array(
                         'show' => array(),
                         'clipboard' => array(),
+                        'Clone' => array(
+                            'template' => 'SonataAdminBundle:CRUD:list__action_clone.html.twig'
+                        )
                     )
                 ))
         ;
