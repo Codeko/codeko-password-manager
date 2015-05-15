@@ -35,8 +35,31 @@ class PasswordAdmin extends Admin {
         } else {
             $query = parent::createQuery($context);
         }
-
         return $query;
+    }
+
+//    protected function configureRoutes(RouteCollection $collection) {
+//        $collection->add('Clone', $this->getRouterIdParameter() . '/Clone');
+//    }
+
+    private function buildRoutes() {
+        if ($this->loaded['routes']) {
+            return;
+        }
+
+        $this->loaded['routes'] = true;
+
+        $this->routes = new RouteCollection(
+                $this->getBaseCodeRoute(), $this->getBaseRouteName(), $this->getBaseRoutePattern(), $this->getBaseControllerName()
+        );
+
+        $this->routeBuilder->build($this, $this->routes);
+
+        $this->configureRoutes($this->routes);
+
+        foreach ($this->getExtensions() as $extension) {
+            $extension->configureRoutes($this, $this->routes);
+        }
     }
 
     /**
@@ -44,7 +67,6 @@ class PasswordAdmin extends Admin {
      */
     protected function configureListFields(ListMapper $listMapper) {
         unset($this->listModes['mosaic']);
-
         $listMapper
                 ->addIdentifier('titulo')
                 ->add('usernamePass')
@@ -60,6 +82,10 @@ class PasswordAdmin extends Admin {
                 ->add('_action', 'actions', array(
                     'actions' => array(
                         'show' => array(),
+                        'clipboard' => array(),
+                        'Clone' => array(
+                            'template' => 'SonataAdminBundle:CRUD:list__action_clone.html.twig'
+                        )
                     )
                 ))
         ;
@@ -69,9 +95,7 @@ class PasswordAdmin extends Admin {
      * {@inheritdoc}
      */
     protected function configureDatagridFilters(DatagridMapper $filterMapper) {
-
         $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
-
         $filterMapper
                 ->add('titulo');
         if ($user->isSuperAdmin()) {
@@ -121,7 +145,7 @@ class PasswordAdmin extends Admin {
         $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
 
         // AQUII!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        
+
         $formMapper
                 ->with('Contraseña:', array('class' => 'col-md-6'))
                 ->add('titulo');
@@ -140,32 +164,21 @@ class PasswordAdmin extends Admin {
                 ->add('category', 'sonata_type_model', array('label' => 'Categorias', 'expanded' => true, 'by_reference' => false, 'multiple' => true, 'required' => true))
                 ->add('enabled', null, array('required' => false, 'data' => true))
                 ->end()
-
         ;
     }
 
     public function getNewInstance() {
         $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
-
         if (!$user->isSuperAdmin()) {
             $instance = parent::getNewInstance();
             $instance->setUser($this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser());
         } else {
             $instance = parent::getNewInstance();
         }
-
         return $instance;
     }
 
     public function preUpdate($pass) {
-        acciones($pass);
-    }
-
-    public function prePersist($pass) {
-        acciones($pass);
-    }
-
-    public function acciones($pass) {
         // AÑADIENDO HTTP DELANTE DE URL
         if (substr($pass->getUrl(), 0, 4) !== 'http' && $pass->getUrl() !== null) {
             $url = $pass->getUrl();
@@ -176,8 +189,28 @@ class PasswordAdmin extends Admin {
         $encoder = new MessageDigestPasswordEncoder('sha512', true, 10);
         $plainPassword = $pass->getPassword();
         $encoded = $encoder->encodePassword($pass, $plainPassword);
-
         $pass->setPassword($encoded);
+
+
+        // CATEGORIA DEFAULT SI NO SE SELECCIONA NINGUNA EN EL FORMULARIO
+        if (count($pass->getCategory()) === 0) {
+            $pass->addCategory($this->getConfigurationPool()->getContainer()->get('doctrine')->getRepository('Application\Sonata\ClassificationBundle\Entity\Category')->find(1));
+        }
+    }
+
+    public function prePersist($pass) {
+        // AÑADIENDO HTTP DELANTE DE URL
+        if (substr($pass->getUrl(), 0, 4) !== 'http' && $pass->getUrl() !== null) {
+            $url = $pass->getUrl();
+            $pass->setUrl('http://' . $url);
+        }
+
+        // CODIFICANDO CONTRASEÑAS
+        $encoder = new MessageDigestPasswordEncoder('sha512', true, 10);
+        $plainPassword = $pass->getPassword();
+        $encoded = $encoder->encodePassword($pass, $plainPassword);
+        $pass->setPassword($encoded);
+
 
         // CATEGORIA DEFAULT SI NO SE SELECCIONA NINGUNA EN EL FORMULARIO
         if (count($pass->getCategory()) === 0) {

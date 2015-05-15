@@ -4,13 +4,36 @@ use Sonata\AdminBundle\Controller\CRUDController as Controller;
 //use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Doctrine\ORM\EntityManager;
+use Sonata\AdminBundle\Route\RouteCollection;
 /**
  * Password controller.
  *
  */
 class PasswordController extends Controller {
+    
+    
+    public function cloneAction() {
+        $object = $this->admin->getSubject();
+
+        if (!$object) {
+            throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
+        }
+
+        $clonedObject = clone $object;  // Careful, you may need to overload the __clone method of your object
+                                        // to set its id to null
+        $clonedObject->setName($object->getName()." (Clone)");
+
+        $this->admin->create($clonedObject);
+
+        $this->addFlash('sonata_flash_success', 'Clonado satisfactoriamente');
+
+        return new RedirectResponse($this->admin->generateUrl('list'));
+    }
+    
+    
     /*
      *
      * Acción de editar contraseñas

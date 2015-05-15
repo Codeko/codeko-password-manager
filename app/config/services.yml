@@ -16,6 +16,12 @@ services:
       tags:
         - { name: sonata.admin, manager_type: orm, group: Password Manager, label: Contraseñas, icon: fa-key }
       arguments: [null, Application\Sonata\UserBundle\Entity\Password, ApplicationSonataUserBundle:Password]
+
+    application_sonata_user.admin.tipo_pass:
+        class: Application\Sonata\UserBundle\Admin\TipoPassAdmin
+        arguments: [~, Application\Sonata\UserBundle\Entity\TipoPass, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Password Manager, label: TipoPass}
       
     security.access.password_voter:
       class:      Application\Sonata\UserBundle\Security\Authorization\Voter\PasswordVoter
