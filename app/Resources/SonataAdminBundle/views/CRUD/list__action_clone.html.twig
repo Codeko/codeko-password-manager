@@ -10,7 +10,7 @@ file that was distributed with this source code.
 #}
 {% if admin.isGranted('Clone', object) and admin.hasRoute('Clone') %}
     <td class="sonata-ba-list-field">
-        <a class="btn btn-sm" href="{#{{ admin.generateObjectUrl('Clone', object) }}#}">clone</a>
+        <a class="btn btn-sm" href="{{ admin.generateObjectUrl('Clone', object) }}">clone</a>
     </td>
 {% endif %}
 
