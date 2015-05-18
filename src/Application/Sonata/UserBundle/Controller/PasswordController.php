@@ -24,11 +24,11 @@ class PasswordController extends Controller {
 
         $clonedObject = clone $object;  // Careful, you may need to overload the __clone method of your object
                                         // to set its id to null
-        $clonedObject->setTitulo($object->getTitulo()." (clone)");
+        $clonedObject->setTitulo($object->getTitulo()." (Copia)");
 
         $this->admin->create($clonedObject);
 
-        $this->addFlash('sonata_flash_success', 'Clonado satisfactoriamente');
+        $this->addFlash('sonata_flash_success', 'Duplicada satisfactoriamente');
 
         return new RedirectResponse($this->admin->generateUrl('list'));
     }
