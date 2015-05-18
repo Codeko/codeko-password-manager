@@ -1,5 +1,7 @@
 <?php
+
 namespace Application\Sonata\UserBundle\Controller;
+
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 //use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -8,32 +10,15 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Doctrine\ORM\EntityManager;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
+
 /**
  * Password controller.
  *
  */
 class PasswordController extends Controller {
-    
-    
+
     public function cloneAction() {
-        $object = $this->admin->getSubject();
-
-        if (!$object) {
-            throw new AccessDeniedException(sprintf('unable to find the object with id : %s', $id));
-        }
-
-        $clonedObject = clone $object;  // Careful, you may need to overload the __clone method of your object
-                                        // to set its id to null
-        $clonedObject->setTitulo($object->getTitulo()." (Copia)");
-
-        $this->admin->create($clonedObject);
-
-        $this->addFlash('sonata_flash_success', 'Duplicada satisfactoriamente');
-
-        return new RedirectResponse($this->admin->generateUrl('list'));
-    }
-    
-    public function batchActionClone() {
         $object = $this->admin->getSubject();
 
         if (!$object) {
@@ -50,12 +35,103 @@ class PasswordController extends Controller {
 
         return new RedirectResponse($this->admin->generateUrl('list'));
     }
-    
+
+//        public function batchActionClone() {
+//        $object = $this->admin->getSubject();
+//
+//        if (!$object) {
+//            throw new AccessDeniedException(sprintf('unable to find the object with id : %s', $id));
+//        }
+//
+//        $clonedObject = clone $object;  // Careful, you may need to overload the __clone method of your object
+//                                        // to set its id to null
+//        $clonedObject->setTitulo($object->getTitulo()." (Copia)");
+//
+//        $this->admin->create($clonedObject);
+//
+//        $this->addFlash('sonata_flash_success', 'Duplicada satisfactoriamente');
+//
+//        return new RedirectResponse($this->admin->generateUrl('list'));
+//    }
+
+    public function batchActionClone(ProxyQueryInterface $query) {
+        $request = $this->get('request');
+        $modelManager = $this->admin->getModelManager();
+
+        $target = $modelManager->find($this->admin->getClass(), $request->get('targetId'));
+
+        if ($target === null) {
+            $this->addFlash('sonata_flash_error', 'No se selecciono ningun elemento');
+
+            return new RedirectResponse($this->admin->generateUrl('list', array('filter' => $this->admin->getFilterParameters())));
+        }
+
+//        $selectedModels = $query->execute();
+ throw new AccessDeniedException($request->get('targetId'));
+//        try {
+//            $modelManager->batchClone($this->admin->getClass(), $query);
+//            $this->addFlash('sonata_flash_success', 'Duplicado satisfactoriamente');
+//        } catch (ModelManagerException $e) {
+//            $this->handleModelManagerException($e);
+//            $this->addFlash('sonata_flash_error', 'Error al duplicar');
+//        }
+//
+//        return new RedirectResponse($this->admin->generateUrl(
+//                        'list', array('filter' => $this->admin->getFilterParameters())
+//        ));
+//    }
+        try {
+            foreach ($selectedModels as $selectedModel) {
+                throw new AccessDeniedException($selectedModel);
+                $modelManager->delete($selectedModel);
+            }
+
+            $modelManager->update($selectedModel);
+        } catch (\Exception $e) {
+            $this->addFlash('sonata_flash_error', 'flash_batch_merge_error');
+
+            return new RedirectResponse($this->admin->generateUrl('list', array('filter' => $this->admin->getFilterParameters())));
+        }
+        $this->addFlash('sonata_flash_success', 'flash_batch_merge_success');
+
+        return new RedirectResponse($this->admin->generateUrl('list', array('filter' => $this->admin->getFilterParameters())));
+    }
+
+public function batchActionMergeIsRelevant(array $normalizedSelectedIds, $allEntitiesSelected)
+{
+    // here you have access to all POST parameters, if you use some custom ones
+    // POST parameters are kept even after the confirmation page.
+    $parameterBag = $this->get('request')->request;
+
+    // check that a target has been chosen
+    if (!$parameterBag->has('targetId')) {
+        return 'flash_batch_merge_no_target';
+    }
+
+    $normalizedTargetId = $parameterBag->get('targetId');
+
+    // if all entities are selected, a merge can be done
+    if ($allEntitiesSelected) {
+        return true;
+    }
+
+    // filter out the target from the selected models
+    $normalizedSelectedIds = array_filter($normalizedSelectedIds,
+        function($normalizedSelectedId) use($normalizedTargetId){
+            return $normalizedSelectedId !== $normalizedTargetId;
+        }
+    );
+
+    // if at least one but not the target model is selected, a merge can be done.
+    return count($normalizedSelectedIds) > 0;
+}
+
     /*
      *
      * Acción de editar contraseñas
      *
      */
+
     public function editAction($id = null, Request $request = null) {
         $request = $this->resolveRequest($request);
         // the key used to lookup the template
@@ -125,11 +201,13 @@ class PasswordController extends Controller {
                     'object' => $object,
                         ), null, $request);
     }
+
     /*
      *
      * Acción de mostrar contraseñas
      *
      */
+
     public function showAction($id = null, Request $request = null) {
         $request = $this->resolveRequest($request);
         $id = $request->get($this->admin->getIdParameter());
@@ -155,11 +233,13 @@ class PasswordController extends Controller {
                     'elements' => $this->admin->getShow(),
                         ), null, $request);
     }
+
     /*
      *
      * Acción de listar contraseñas
      *
      */
+
     public function listAction(Request $request = null) {
         $request = $this->resolveRequest($request);
 //        $prueba = $request->getLanguages();
@@ -210,11 +290,13 @@ class PasswordController extends Controller {
                     'csrf_token' => $this->getCsrfToken('sonata.batch'),
         ));
     }
+
     /*
      *
      * Acción de borrar contraseñas
      *
      */
+
     public function deleteAction($id, Request $request = null) {
         $request = $this->resolveRequest($request);
         $id = $request->get($this->admin->getIdParameter());
@@ -262,6 +344,7 @@ class PasswordController extends Controller {
                     'csrf_token' => $this->getCsrfToken('sonata.delete')
                         ), null, $request);
     }
+
     // FUNCION PRIVADA DE SONATAADMIN-CRUDCONTROLLER, HAY QUE LLAMARLA DESDE AQUI
     /**
      * To keep backwards compatibility with older Sonata Admin code.
@@ -274,4 +357,5 @@ class PasswordController extends Controller {
         }
         return $request;
     }
+
 }
