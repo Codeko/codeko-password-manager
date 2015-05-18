@@ -8,9 +8,9 @@ For the full copyright and license information, please view the LICENSE
 file that was distributed with this source code.
 
 #}
-{% if admin.isGranted('Clone', object) and admin.hasRoute('Clone') %}
     <td class="sonata-ba-list-field">
-        <a class="btn btn-sm" href="{#{{ admin.generateObjectUrl('Clone', object) }}#}">clone</a>
+        <a class="btn btn-sm btn-default edit_link" href=" {{ admin.generateObjectUrl('clone', object) }} "  title="Copiar al portapapeles" >
+            <i class="fa fa-files-o"></i> Duplicar
+        </a>
     </td>
-{% endif %}
 

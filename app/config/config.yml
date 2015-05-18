@@ -11,6 +11,7 @@ imports:
     - { resource: sonata/sonata_timeline.yml }
     - { resource: sonata/sonata_intl.yml }
     - { resource: sonata/sonata_classification.yml }
+    - { resource: sonata/sonata_media.yml }
     
 framework:
     #esi:             ~

@@ -14,31 +14,32 @@ class PasswordType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-                ->add('titulo')
-                ->add('user', null, array(
-                    'class' => 'ApplicationSonataUserBundle:User',
-                    'property' => 'user',
-                    'allow_add' => true,
-                    'allow_delete' => true))
-                ->add('nombreUsuario')
-                ->add('url')
-                ->add('password', 'password', array(
-                    'type' => 'password',
-                    'attr' => array(
-                        'class' => 'password',
-                        'input' => 'password',
-                    )
-                ))
-                ->add('comentario')
-                ->add('fechaExpira', null, array('class' => 'sonata_type_datetime_picker'))
-                ->add('tipoPassword')
-                ->add('category', null, array(
-                    'class' => 'ApplicationSonataClassificationBundle:Category',
-                    'property' => 'name',
-                    'allow_add' => true,
-                    'allow_delete' => true,
-                    'required' => true,
-                ));               
+        ->add('titulo')
+        ->add('user', null, array(
+        'class' => 'ApplicationSonataUserBundle:User',
+        'property' => 'user',
+        'allow_add' => true,
+        'allow_delete' => true))
+        ->add('nombreUsuario')
+        ->add('url')
+        ->add('password', 'password', array(
+        'type' => 'password',
+        'attr' => array(
+        'class' => 'password',
+        'input' => 'password',
+        )
+        ))
+        ->add('comentario')
+        ->add('fechaExpira', null, array('class' => 'sonata_type_datetime_picker'))
+        ->add('tipoPassword')
+        ->add('category', null, array(
+        'class' => 'ApplicationSonataClassificationBundle:Category',
+        'property' => 'name',
+        'allow_add' => true,
+        'allow_delete' => true,
+        'required' => true,
+        ))
+        ->add('generar', 'button', array('property_path' => false));
     }
 
     /**

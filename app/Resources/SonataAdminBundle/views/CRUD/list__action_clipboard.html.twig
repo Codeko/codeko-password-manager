@@ -9,33 +9,32 @@ file that was distributed with this source code.
 
 #}
 
-{% if admin.isGranted('CLIPBOARD', object) and admin.hasRoute('edit') %}
+{% if admin.isGranted('CLIPBOARD', object) and admin.hasRoute('edit') %}  
     <td class="sonata-ba-list-field">
-        <!--<a style="position:relative" class="btn btn-sm btn-default edit_link" id="clipboard" onclick="copyClipboard()" title="Copiar al portapapeles" >
+        <!--<a style="position:relative" class="btn btn-sm btn-default edit_link"  title="Copiar al portapapeles" >
             <i class="fa fa-clipboard"></i> Copiar al portapapeles
         </a>-->
         <div style="margin-left: 6px; width:20px; overflow:hidden; height:18px;">
             <object style="position:relative" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-                width="34px" height="28px" margin="0px">
-            <param name="movie" value="{{ asset('bundles/applicationsonatauser/js/clippy.swf') }}"/>
-            <param name="allowScriptAccess" value="always" />
-            <param name="quality" value="high" />
-            <param name="scale" value="noscale" />
-            <param name="wmode" value="transparent" />
-            <param NAME="FlashVars" value="text={{ object.password }}">
-            <param name="bgcolor" value="transparent">
-            <embed src="{{ asset('bundles/applicationsonatauser/js/clippy.swf') }}"
-                   wmode="transparent"
-                   width="110"
-                   height="14"
-                   name="clippy"
-                   quality="high"
-                   allowScriptAccess="always"
-                   type="application/x-shockwave-flash"
-                   pluginspage="http://www.macromedia.com/go/getflashplayer"
-                   FlashVars="text={{ object.password }}"
-                   bgcolor="transparent"
-                   />
+                    width="34px" height="28px" margin="0px">
+                <param name="movie" value="{{ asset('bundles/applicationsonatauser/js/clippy.swf') }}"/>
+                <param name="allowScriptAccess" value="always" />
+                <param name="quality" value="high" />
+                <param name="scale" value="noscale" />
+                <param name="wmode" value="transparent" />
+                <param NAME="FlashVars" value="text={{ object.password }}">
+                <param name="bgcolor" value="transparent">
+                <embed src="{{ asset('bundles/applicationsonatauser/js/clippy.swf') }}"
+                       wmode="transparent"
+                       width="110"
+                       height="14"
+                       name="clippy"
+                       quality="high"
+                       allowScriptAccess="always"
+                       type="application/x-shockwave-flash"
+                       pluginspage="http://www.macromedia.com/go/getflashplayer"
+                       FlashVars="text={{ object.password }}"
+                       bgcolor="transparent"
+                       />
             </object></div>
-    </td>
 {% endif %}

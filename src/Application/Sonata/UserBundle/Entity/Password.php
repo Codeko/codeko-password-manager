@@ -62,6 +62,7 @@ class Password {
     private $category;
     private $tipoPassword;
     protected $enabled;
+    private $files;
 
     /**
      * Get id
@@ -263,6 +264,7 @@ class Password {
     public function __construct() {
         $this->category = new \Doctrine\Common\Collections\ArrayCollection();
         $this->fechaCreacion = new \DateTime();
+        $this->files = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function addCategory(Category $category) {
@@ -293,4 +295,19 @@ class Password {
         return $this->enabled;
     }
 
+    public function getFiles() {
+        return $this->files;
+    }
+
+    public function setFiles($files) {
+        $this->files = $files;
+    }
+
+    public function addFiles(Media $file) {
+        $this->files[] = $file;
+    }
+
+    public function removeFiles(Media $file) {
+        $this->files->removeElement($file);
+    }
 }
