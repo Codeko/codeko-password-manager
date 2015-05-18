@@ -19,7 +19,7 @@ class PasswordController extends Controller {
         $object = $this->admin->getSubject();
 
         if (!$object) {
-            throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
+            throw new AccessDeniedException(sprintf('unable to find the object with id : %s', $id));
         }
 
         $clonedObject = clone $object;  // Careful, you may need to overload the __clone method of your object
@@ -33,6 +33,23 @@ class PasswordController extends Controller {
         return new RedirectResponse($this->admin->generateUrl('list'));
     }
     
+    public function batchActionClone() {
+        $object = $this->admin->getSubject();
+
+        if (!$object) {
+            throw new AccessDeniedException(sprintf('unable to find the object with id : %s', $id));
+        }
+
+        $clonedObject = clone $object;  // Careful, you may need to overload the __clone method of your object
+        // to set its id to null
+        $clonedObject->setTitulo($object->getTitulo() . " (Copia)");
+
+        $this->admin->create($clonedObject);
+
+        $this->addFlash('sonata_flash_success', 'Duplicada satisfactoriamente');
+
+        return new RedirectResponse($this->admin->generateUrl('list'));
+    }
     
     /*
      *

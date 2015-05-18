@@ -219,5 +219,19 @@ class PasswordAdmin extends Admin {
             $pass->addCategory($this->getConfigurationPool()->getContainer()->get('doctrine')->getRepository('Application\Sonata\ClassificationBundle\Entity\Category')->find(1));
         }
     }
+    
+    public function getBatchActions()
+{
+    // retrieve the default (currently only the delete action) actions
+    $actions = parent::getBatchActions();
+    
+    // check user permissions
+        $actions['clone']=[
+            'label'            => 'Duplicar',
+            'ask_confirmation' => false, // If true, a confirmation will be asked before performing the action
+        ];
+
+    return $actions;
+}
 
 }
