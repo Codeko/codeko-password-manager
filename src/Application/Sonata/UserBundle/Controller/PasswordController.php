@@ -24,7 +24,7 @@ class PasswordController extends Controller {
 
         $clonedObject = clone $object;  // Careful, you may need to overload the __clone method of your object
                                         // to set its id to null
-        $clonedObject->setName($object->getName()." (Clone)");
+        $clonedObject->setTitulo($object->getTitulo()." (clone)");
 
         $this->admin->create($clonedObject);
 

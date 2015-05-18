@@ -19,6 +19,7 @@ use Sonata\AdminBundle\Show\ShowMapper;
 use Application\Sonata\ClassificationBundle\Entity\Category;
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 use Symfony\Component\HttpFoundation\Request;
+use Sonata\AdminBundle\Route\RouteCollection;
 
 class PasswordAdmin extends Admin {
 
@@ -38,9 +39,10 @@ class PasswordAdmin extends Admin {
         return $query;
     }
 
-//    protected function configureRoutes(RouteCollection $collection) {
-//        $collection->add('Clone', $this->getRouterIdParameter() . '/Clone');
-//    }
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->add('clone', $this->getRouterIdParameter().'/clone');
+    }
 
     private function buildRoutes() {
         if ($this->loaded['routes']) {
