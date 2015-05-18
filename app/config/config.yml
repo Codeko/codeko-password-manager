@@ -128,7 +128,3 @@ parameters:
     sonata.user.admin.user.class: Application\Sonata\UserBundle\Admin\Model\UserAdmin
     sonata.user.admin.user.entity: Application\Sonata\UserBundle\Entity\User
 
-
-
-
-

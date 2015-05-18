@@ -22,7 +22,13 @@ class PasswordType extends AbstractType {
                     'allow_delete' => true))
                 ->add('nombreUsuario')
                 ->add('url')
-                ->add('password', 'password', array('type' => 'password', 'attr' => array('class' => 'password','input' => 'password')))
+                ->add('password', 'password', array(
+                    'type' => 'password',
+                    'attr' => array(
+                        'class' => 'password',
+                        'input' => 'password',
+                    )
+                ))
                 ->add('comentario')
                 ->add('fechaExpira', null, array('class' => 'sonata_type_datetime_picker'))
                 ->add('tipoPassword')
@@ -32,7 +38,7 @@ class PasswordType extends AbstractType {
                     'allow_add' => true,
                     'allow_delete' => true,
                     'required' => true,
-        ));
+                ));               
     }
 
     /**

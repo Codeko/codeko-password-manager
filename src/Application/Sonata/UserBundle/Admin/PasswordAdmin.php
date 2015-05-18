@@ -19,6 +19,8 @@ use Sonata\AdminBundle\Show\ShowMapper;
 use Application\Sonata\ClassificationBundle\Entity\Category;
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 use Symfony\Component\HttpFoundation\Request;
+use Hackzilla\Bundle\PasswordGeneratorBundle\Form\Type\OptionType;
+use Hackzilla\PasswordGenerator\Generator\HumanPasswordGenerator;
 
 class PasswordAdmin extends Admin {
 
@@ -158,13 +160,16 @@ class PasswordAdmin extends Admin {
                 ->add('password', 'password', array('required' => false, 'attr' => array('class' => 'password', 'input' => 'password')))
                 ->add('comentario', 'textarea', array('required' => false))
                 ->add('fechaExpira', 'sonata_type_datetime_picker', array('required' => false))
-                ->add('tipoPassword', null, array('required' => false))
+                ->add('tipoPassword', 'sonata_type_model', array('required' => false))
                 ->end()
                 ->with('Categorias', array('class' => 'col-md-6'))
                 ->add('category', 'sonata_type_model', array('label' => 'Categorias', 'expanded' => true, 'by_reference' => false, 'multiple' => true, 'required' => true))
                 ->add('enabled', null, array('required' => false, 'data' => true))
                 ->end()
-        ;
+                ->with('Generador', array('class' => 'col-md-6'));
+//                $option = new HumanPasswordGenerator;
+//        $formMapper
+//¡                ->add('generador', new OptionType($option));
     }
 
     public function getNewInstance() {

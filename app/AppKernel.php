@@ -43,6 +43,8 @@ class AppKernel extends Kernel {
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             // Sonata Classification
             new Sonata\ClassificationBundle\SonataClassificationBundle(),
+            // Password generator
+            new Hackzilla\Bundle\PasswordGeneratorBundle\HackzillaPasswordGeneratorBundle(),   
             // BUNDLES PROPIOS
             new Application\Sonata\AdminBundle\ApplicationSonataAdminBundle(),
             new Application\Sonata\TimelineBundle\ApplicationSonataTimelineBundle(), // easy extends integration

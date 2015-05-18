@@ -45,4 +45,9 @@ fos_user_change_password:
 sonata_user_impersonating:
     pattern:  /
     defaults: { _controller: SonataPageBundle:Page:catchAll } 
+    
+# PASSWORD GENERATOR
+hackzilla_password_generator:
+    resource: "@HackzillaPasswordGeneratorBundle/Resources/config/routing.yml"
+    prefix:   /passgen
 
