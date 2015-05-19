@@ -47,7 +47,10 @@
         "sonata-project/comment-bundle": "~2.2@dev",
         "sonata-project/sonata-composer": "dev-master",
         "jms/serializer-bundle": "0.13.*",
-        "gedmo/doctrine-extensions": "~2.4"
+        "gedmo/doctrine-extensions": "~2.4",
+        "hackzilla/password-generator": "~1.0",
+        "hackzilla/password-generator-bundle": "~1.3",
+        "sonata-project/media-bundle": "~2.3@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

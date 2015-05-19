@@ -11,6 +11,7 @@ imports:
     - { resource: sonata/sonata_timeline.yml }
     - { resource: sonata/sonata_intl.yml }
     - { resource: sonata/sonata_classification.yml }
+    - { resource: sonata/sonata_media.yml }
     
 framework:
     #esi:             ~
@@ -127,8 +128,4 @@ jms_security_extra:
 parameters:
     sonata.user.admin.user.class: Application\Sonata\UserBundle\Admin\Model\UserAdmin
     sonata.user.admin.user.entity: Application\Sonata\UserBundle\Entity\User
-
-
-
-
 

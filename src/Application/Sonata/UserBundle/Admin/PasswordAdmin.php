@@ -20,6 +20,8 @@ use Application\Sonata\ClassificationBundle\Entity\Category;
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 use Symfony\Component\HttpFoundation\Request;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Hackzilla\Bundle\PasswordGeneratorBundle\Form\Type\OptionType;
+use Hackzilla\PasswordGenerator\Generator\HumanPasswordGenerator;
 
 class PasswordAdmin extends Admin {
 
@@ -39,9 +41,8 @@ class PasswordAdmin extends Admin {
         return $query;
     }
 
-    protected function configureRoutes(RouteCollection $collection)
-    {
-        $collection->add('clone', $this->getRouterIdParameter().'/clone');
+    protected function configureRoutes(RouteCollection $collection) {
+        $collection->add('clone', $this->getRouterIdParameter() . '/clone');
     }
 
     private function buildRoutes() {
@@ -160,13 +161,16 @@ class PasswordAdmin extends Admin {
                 ->add('password', 'password', array('required' => false, 'attr' => array('class' => 'password', 'input' => 'password')))
                 ->add('comentario', 'textarea', array('required' => false))
                 ->add('fechaExpira', 'sonata_type_datetime_picker', array('required' => false))
-                ->add('tipoPassword', null, array('required' => false))
+                ->add('tipoPassword', 'sonata_type_model', array('required' => false))
                 ->end()
                 ->with('Categorias', array('class' => 'col-md-6'))
                 ->add('category', 'sonata_type_model', array('label' => 'Categorias', 'expanded' => true, 'by_reference' => false, 'multiple' => true, 'required' => true))
                 ->add('enabled', null, array('required' => false, 'data' => true))
                 ->end()
-        ;
+                ->with('Generador', array('class' => 'col-md-6'))
+                ->end()
+                ->with('Archivos', array('class' => 'col-md-6'))                
+                ->add('files', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'default')));
     }
 
     public function getNewInstance() {
@@ -219,19 +223,18 @@ class PasswordAdmin extends Admin {
             $pass->addCategory($this->getConfigurationPool()->getContainer()->get('doctrine')->getRepository('Application\Sonata\ClassificationBundle\Entity\Category')->find(1));
         }
     }
-    
-    public function getBatchActions()
-{
-    // retrieve the default (currently only the delete action) actions
-    $actions = parent::getBatchActions();
-    
-    // check user permissions
-        $actions['clone']=[
-            'label'            => 'Duplicar',
+
+    public function getBatchActions() {
+        // retrieve the default (currently only the delete action) actions
+        $actions = parent::getBatchActions();
+
+        // check user permissions
+        $actions['clone'] = [
+            'label' => 'Duplicar',
             'ask_confirmation' => false, // If true, a confirmation will be asked before performing the action
         ];
 
-    return $actions;
-}
+        return $actions;
+    }
 
 }
