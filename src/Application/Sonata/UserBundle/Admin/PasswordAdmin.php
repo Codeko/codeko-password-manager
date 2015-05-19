@@ -171,7 +171,12 @@ class PasswordAdmin extends Admin {
                 ->with('Generador', array('class' => 'col-md-6'))
                 ->end()
                 ->with('Archivos', array('class' => 'col-md-6'))
-                ->add('files', 'sonata_type_collection')
+                ->add('files', 'sonata_type_model', array(
+                    'label' => 'Archivos',
+                    'by_reference' => false,
+                    'multiple' => true,
+                    'expanded' => true,
+                ))
         ;
     }
 
