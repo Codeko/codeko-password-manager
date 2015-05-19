@@ -17,5 +17,14 @@
             <generator strategy="AUTO"/>
         </id>
 
+        
+        <many-to-one field="password" target-entity="Application\Sonata\UserBundle\Entity\Password" inversed-by="files">
+            <join-column name="password_id" referenced-column-name="id" on-delete="CASCADE" nullable="true" />
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </many-to-one>
+
+
     </entity>
 </doctrine-mapping>

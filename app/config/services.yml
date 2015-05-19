@@ -46,3 +46,4 @@ services:
     
 imports:
     - { resource: sonata/classification_admin.xml }
+    - { resource: sonata/doctrine_orm_admin.xml }
