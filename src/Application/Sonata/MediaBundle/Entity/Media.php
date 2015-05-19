@@ -106,14 +106,6 @@ class Media extends BaseMedia {
         return $this->password;
     }
 
-//    public function addPassword(Password $password) {
-//        $this->password = $password;
-//    }
-//
-//    public function removePassword(Password $password) {
-//        $this->password->removeElement($password);       
-//    }
-
     public function __toString() {
         return $this->getName() ? : 'n/a';
     }

@@ -297,18 +297,32 @@ class Password {
         return $this->enabled;
     }
 
+    public function setFiles($files) {
+        if (count($files) > 0) {
+            foreach ($files as $i) {
+                $this->addFile($i);
+            }
+        }
+
+        $this->files = $files;
+
+        return $this;
+    }
+
     public function getFiles() {
         return $this->files;
     }
 
     public function addFile(Media $file) {
         $file->setPassword($this);
-        $this->files[] = $file;
+        $this->files->add($file);
+
+        return $this;
     }
 
     public function removeFile(Media $file) {
         $this->files->removeElement($file);
-        $file->setPassword($this);
+        $file->setPassword(null);
     }
 
 }
