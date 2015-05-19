@@ -74,8 +74,7 @@ abstract class BaseMediaAdmin extends Admin
             return;
         }
 
-        $formMapper->add('providerName', 'hidden')
-                ->add('password',null,array('label' => 'Pass asociado'));
+        $formMapper->add('providerName', 'hidden');
 
         $formMapper->getFormBuilder()->addModelTransformer(new ProviderDataTransformer($this->pool, $this->getClass()), true);
 

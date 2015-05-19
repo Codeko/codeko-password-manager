@@ -171,7 +171,8 @@ class PasswordAdmin extends Admin {
                 ->with('Generador', array('class' => 'col-md-6'))
                 ->end()
                 ->with('Archivos', array('class' => 'col-md-6'))
-                ->add('files', 'sonata_type_model', array('required' => false, 'label' => 'Archivos', 'expanded' => true, 'by_reference' => false, 'multiple' => true));
+                ->add('files', 'sonata_type_collection')
+        ;
     }
 
     public function getNewInstance() {
@@ -203,7 +204,7 @@ class PasswordAdmin extends Admin {
         if (count($pass->getCategory()) === 0) {
             $pass->addCategory($this->getConfigurationPool()->getContainer()->get('doctrine')->getRepository('Application\Sonata\ClassificationBundle\Entity\Category')->find(1));
         }
-        
+
         $pass->setFiles($pass->getFiles());
     }
 
@@ -225,7 +226,7 @@ class PasswordAdmin extends Admin {
         if (count($pass->getCategory()) === 0) {
             $pass->addCategory($this->getConfigurationPool()->getContainer()->get('doctrine')->getRepository('Application\Sonata\ClassificationBundle\Entity\Category')->find(1));
         }
-        
+
         $this->preUpdate($pass);
     }
 

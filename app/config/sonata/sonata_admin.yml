@@ -43,8 +43,12 @@ sonata_admin:
                     - password.pass.servicio
                     - sonata.classification.admin.category
                     - application_sonata_user.admin.tipo_pass
+                    - sonata.media.admin.media
                 roles: [ROLE_USER]
                 
     options:
         use_select2:    true 
         # disable select2
+       
+
+        
