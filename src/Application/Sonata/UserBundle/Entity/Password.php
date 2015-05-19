@@ -4,6 +4,8 @@ namespace Application\Sonata\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Application\Sonata\ClassificationBundle\Entity\Category;
+use Application\Sonata\MediaBundle\Entity\Media;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Password
@@ -262,9 +264,9 @@ class Password {
     }
 
     public function __construct() {
-        $this->category = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->category = new ArrayCollection();
         $this->fechaCreacion = new \DateTime();
-        $this->files = new \Doctrine\Common\Collections\ArrayCollection();
+//        $this->files = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function addCategory(Category $category) {
@@ -299,15 +301,14 @@ class Password {
         return $this->files;
     }
 
-    public function setFiles($files) {
-        $this->files = $files;
-    }
-
-    public function addFiles(Media $file) {
+    public function addFile(Media $file) {
+        $file->setPassword($this);
         $this->files[] = $file;
     }
 
-    public function removeFiles(Media $file) {
+    public function removeFile(Media $file) {
         $this->files->removeElement($file);
+        $file->setPassword($this);
     }
+
 }
