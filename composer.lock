@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
     "hash": "a785afb976d9438ecc33adf89c6c631e",
@@ -2151,7 +2151,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "Knplabs",
+                    "name": "KnpLabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -3035,12 +3035,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/cache.git",
-                "reference": "593bb96d9b7fa3eca1cb5736e46ecfe92c12d7fd"
+                "reference": "a1522be3a1874c4646e7f9aaea6ca973b8bcbcde"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/cache/zipball/593bb96d9b7fa3eca1cb5736e46ecfe92c12d7fd",
-                "reference": "593bb96d9b7fa3eca1cb5736e46ecfe92c12d7fd",
+                "url": "https://api.github.com/repos/sonata-project/cache/zipball/a1522be3a1874c4646e7f9aaea6ca973b8bcbcde",
+                "reference": "a1522be3a1874c4646e7f9aaea6ca973b8bcbcde",
                 "shasum": ""
             },
             "require-dev": {
@@ -3088,7 +3088,7 @@
                 "mongodb",
                 "redis"
             ],
-            "time": "2015-03-31 08:27:52"
+            "time": "2015-05-18 12:12:33"
         },
         {
             "name": "sonata-project/cache-bundle",
@@ -3096,16 +3096,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataCacheBundle.git",
-                "reference": "70460807b1c735632e1185b3f9cbfeb4489388f6"
+                "reference": "cb3af3a201bc6bd46138e39947479212e8878e36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataCacheBundle/zipball/70460807b1c735632e1185b3f9cbfeb4489388f6",
-                "reference": "70460807b1c735632e1185b3f9cbfeb4489388f6",
+                "url": "https://api.github.com/repos/sonata-project/SonataCacheBundle/zipball/cb3af3a201bc6bd46138e39947479212e8878e36",
+                "reference": "cb3af3a201bc6bd46138e39947479212e8878e36",
                 "shasum": ""
             },
             "require": {
                 "sonata-project/cache": "~1.0",
+                "symfony/config": "~2.2",
                 "symfony/filesystem": "~2.2",
                 "symfony/http-foundation": "~2.2",
                 "symfony/process": "~2.2",
@@ -3157,7 +3158,7 @@
             "keywords": [
                 "cache block"
             ],
-            "time": "2015-03-26 12:06:09"
+            "time": "2015-05-18 21:58:53"
         },
         {
             "name": "sonata-project/classification-bundle",
@@ -3290,16 +3291,16 @@
         },
         {
             "name": "sonata-project/core-bundle",
-            "version": "2.3.2",
+            "version": "2.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataCoreBundle.git",
-                "reference": "bef29b901730c9ce5af1eac2ec138a29bd1f1d06"
+                "reference": "360942d98ac7441dc9b06b089ef8636721e37f9c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataCoreBundle/zipball/bef29b901730c9ce5af1eac2ec138a29bd1f1d06",
-                "reference": "bef29b901730c9ce5af1eac2ec138a29bd1f1d06",
+                "url": "https://api.github.com/repos/sonata-project/SonataCoreBundle/zipball/360942d98ac7441dc9b06b089ef8636721e37f9c",
+                "reference": "360942d98ac7441dc9b06b089ef8636721e37f9c",
                 "shasum": ""
             },
             "require": {
@@ -3351,7 +3352,7 @@
             "keywords": [
                 "sonata"
             ],
-            "time": "2015-05-18 10:03:25"
+            "time": "2015-05-18 14:31:37"
         },
         {
             "name": "sonata-project/datagrid-bundle",
@@ -3822,12 +3823,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataMediaBundle.git",
-                "reference": "3a5fb704d03cf0cabd6b6f2ebb36ea655c0c3c16"
+                "reference": "3735ff82a0e3cd80948f2e5d9f61c56cfb03f223"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/3a5fb704d03cf0cabd6b6f2ebb36ea655c0c3c16",
-                "reference": "3a5fb704d03cf0cabd6b6f2ebb36ea655c0c3c16",
+                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/3735ff82a0e3cd80948f2e5d9f61c56cfb03f223",
+                "reference": "3735ff82a0e3cd80948f2e5d9f61c56cfb03f223",
                 "shasum": ""
             },
             "require": {
@@ -3901,7 +3902,7 @@
                 "vimeo",
                 "youtube"
             ],
-            "time": "2015-05-05 13:17:37"
+            "time": "2015-05-18 13:17:45"
         },
         {
             "name": "sonata-project/news-bundle",
