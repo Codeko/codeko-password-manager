@@ -86,9 +86,6 @@ class PasswordAdmin extends Admin {
                 ->add('_action', 'actions', array(
                     'actions' => array(
                         'show' => array(),
-                        'Clone' => array(
-                            'template' => 'SonataAdminBundle:CRUD:list__action_clone.html.twig',
-                        ),
                         'clipboard' => array()
                     )
                 ))

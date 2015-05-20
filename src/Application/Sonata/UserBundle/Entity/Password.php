@@ -268,7 +268,15 @@ class Password {
         $this->fechaCreacion = new \DateTime();
 //        $this->files = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
+    
+//public function __clone() {
+//    if ($this->id) {
+//        $this->setId(null);
+//        $this->B = clone $this->B;
+//        $this->C = clone $this->C;
+//    }
+//}
+//
     public function addCategory(Category $category) {
         $category->addPassword($this);
         $this->category[] = $category;
