@@ -34,6 +34,10 @@
     width: 100%;
 }
 
+.invisible {
+    display: none ! important;
+}
+
 root { 
     display: block;
 }
