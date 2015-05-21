@@ -1,0 +1,55 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+<th{% if(is_diff|default(false)) %} class="diff"{% endif %}>{% block name %}{{ admin.trans(field_description.label, {}, field_description.translationDomain) }}{% endblock %}</th>
+<td>
+{% block field %}
+    {% if block('name') == 'Password' %}
+        {% if field_description.options.safe %}
+            <div class="btn-group" id="botonCampoContraseña" style="margin-right:12px;cursor:pointer;"><a class="view_link" title="Mostrar"><i class="glyphicon glyphicon-zoom-in"> - </i></a></div><input type="password" id="campoContraseña" size="100%" style="border:0px;background:none;" value="{{ value|raw }}"/>
+        {% else %}
+            <div class="btn-group" id="botonCampoContraseña" style="margin-right:12px;cursor:pointer;"><a class="view_link" title="Mostrar"><i class="glyphicon glyphicon-zoom-in"> - </i></a></div><input type="password" id="campoContraseña" size="100%" style="border:0px;background:none;" value="{{ value|nl2br }}" />
+        {% endif %}
+        
+        <script>
+            $(document).ready(function(){
+                $('#botonCampoContraseña').click(function() {
+                    
+                    if($('#campoContraseña').hasClass('botonPulsado')){
+                       $('#campoContraseña').attr('type','password');
+                       $('#campoContraseña').toggleClass('botonPulsado');
+                    } else {
+                       $('#campoContraseña').attr('type','text');
+                       $('#campoContraseña').toggleClass('botonPulsado');
+                    }
+
+                });
+            });
+        </script>
+        
+    {% else %}
+        {% if field_description.options.safe %}
+            {{ value|raw }}
+        {% else %}
+            {{ value|nl2br }}
+        {% endif %}
+    {% endif %}
+{% endblock %}
+</td>
+
+{% block field_compare %}
+    {% if(value_compare is defined) %}
+        <td>
+            {% set value = value_compare %}
+            {{ block('field') }}
+        </td>
+    {% endif %}
+{% endblock %}

@@ -86,7 +86,7 @@ class PasswordAdmin extends Admin {
                 ->add('_action', 'actions', array(
                     'actions' => array(
                         'show' => array(),
-                        'clipboard' => array()
+                        'clipboard' => array(),
                     )
                 ))
         ;
@@ -128,7 +128,7 @@ class PasswordAdmin extends Admin {
                 ->add('user')
                 ->add('usernamePass')
                 ->add('url')
-                ->add('password')
+                ->add('password', 'password', array('label' => 'Password'))
                 ->add('comentario', 'text')
                 ->add('fechaExpira')
                 ->add('category')
