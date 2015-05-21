@@ -20,13 +20,11 @@ use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\CoreBundle\Model\Metadata;
 use Sonata\MediaBundle\Provider\Pool;
 use Sonata\MediaBundle\Form\DataTransformer\ProviderDataTransformer;
-
 use Knp\Menu\ItemInterface as MenuItemInterface;
 
-abstract class BaseMediaAdmin extends Admin
-{
-    protected $pool;
+abstract class BaseMediaAdmin extends Admin {
 
+    protected $pool;
     protected $categoryManager;
 
     /**
@@ -36,8 +34,7 @@ abstract class BaseMediaAdmin extends Admin
      * @param Pool                     $pool
      * @param CategoryManagerInterface $categoryManager
      */
-    public function __construct($code, $class, $baseControllerName, Pool $pool, CategoryManagerInterface $categoryManager)
-    {
+    public function __construct($code, $class, $baseControllerName, Pool $pool, CategoryManagerInterface $categoryManager) {
         parent::__construct($code, $class, $baseControllerName);
 
         $this->pool = $pool;
@@ -48,22 +45,19 @@ abstract class BaseMediaAdmin extends Admin
     /**
      * {@inheritdoc}
      */
-    protected function configureListFields(ListMapper $listMapper)
-    {
+    protected function configureListFields(ListMapper $listMapper) {
         $listMapper
-            ->addIdentifier('name')
-            ->add('description')
-            ->add('enabled')
-            ->add('size')
-            ->add('password',null,array('label' => 'Pass asociado'))
+                ->addIdentifier('name')
+                ->add('description')
+                ->add('enabled')
+                ->add('password.titulo', null, array('label' => 'Pass asociado', 'associated_property' => 'getName'))
         ;
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function configureFormFields(FormMapper $formMapper)
-    {
+    protected function configureFormFields(FormMapper $formMapper) {
         $media = $this->getSubject();
 
         if (!$media) {
@@ -81,6 +75,7 @@ abstract class BaseMediaAdmin extends Admin
         $provider = $this->pool->getProvider($media->getProviderName());
 
         if ($media->getId()) {
+            $formMapper->add('password', 'sonata_type_model', array('label' => 'Pass asociado', 'attr' => array('allow_add' => false)));
             $provider->buildEditForm($formMapper);
         } else {
             $provider->buildCreateForm($formMapper);
@@ -90,8 +85,7 @@ abstract class BaseMediaAdmin extends Admin
     /**
      * {@inheritdoc}
      */
-    public function prePersist($media)
-    {
+    public function prePersist($media) {
         $parameters = $this->getPersistentParameters();
         $media->setContext($parameters['context']);
     }
@@ -99,8 +93,7 @@ abstract class BaseMediaAdmin extends Admin
     /**
      * {@inheritdoc}
      */
-    public function getPersistentParameters()
-    {
+    public function getPersistentParameters() {
         $parameters = parent::getPersistentParameters();
 
         if (!$this->hasRequest()) {
@@ -115,7 +108,7 @@ abstract class BaseMediaAdmin extends Admin
         }
 
         $providers = $this->pool->getProvidersByContext($context);
-        $provider  = $this->getRequest()->get('provider');
+        $provider = $this->getRequest()->get('provider');
 
         // if the context has only one provider, set it into the request
         // so the intermediate provider selection is skipped
@@ -130,18 +123,17 @@ abstract class BaseMediaAdmin extends Admin
             $categoryId = $this->categoryManager->getRootCategory($context)->getId();
         }
 
-        return array_merge($parameters,array(
-            'context'      => $context,
-            'category'     => $categoryId,
-            'hide_context' => (bool)$this->getRequest()->get('hide_context')
+        return array_merge($parameters, array(
+            'context' => $context,
+            'category' => $categoryId,
+            'hide_context' => (bool) $this->getRequest()->get('hide_context')
         ));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getNewInstance()
-    {
+    public function getNewInstance() {
         $media = parent::getNewInstance();
 
         if ($this->hasRequest()) {
@@ -168,20 +160,19 @@ abstract class BaseMediaAdmin extends Admin
     /**
      * @return null|\Sonata\MediaBundle\Provider\Pool
      */
-    public function getPool()
-    {
+    public function getPool() {
         return $this->pool;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getObjectMetadata($object)
-    {
+    public function getObjectMetadata($object) {
         $provider = $this->pool->getProvider($object->getProviderName());
 
         $url = $provider->generatePublicUrl($object, $provider->getFormatName($object, 'admin'));
 
         return new Metadata($object->getName(), $object->getDescription(), $url);
     }
+
 }

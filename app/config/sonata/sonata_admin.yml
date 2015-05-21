@@ -1,4 +1,8 @@
 sonata_admin:
+    
+#    options:
+#        html5_validate: false 
+        # does not use html5 validation
     templates:
         # default global templates
         layout:  SonataAdminBundle::standard_layout.html.twig
@@ -50,5 +54,4 @@ sonata_admin:
         use_select2:    true 
         # disable select2
        
-
         

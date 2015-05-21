@@ -32,14 +32,9 @@ class MediaAdmin extends Admin
 
         $datagridMapper
             ->add('name')
-            ->add('providerReference')
             ->add('enabled')
-            ->add('context', null, array(
-                'show_filter' => $this->getPersistentParameter('hide_context') !== true
-            ), 'choice', $options)
-            ->add('width')
-            ->add('height')
             ->add('contentType')
+            ->add('password',null,array('label' => 'Pass Asociado'))
         ;
 
         $providers = array();
@@ -48,15 +43,5 @@ class MediaAdmin extends Admin
         foreach ($providerNames as $name) {
             $providers[$name] = $name;
         }
-
-        $datagridMapper->add('providerName', 'doctrine_orm_choice', array(
-            'field_options'=> array(
-                'choices' => $providers,
-                'required' => false,
-                'multiple' => false,
-                'expanded' => false,
-            ),
-            'field_type'=> 'choice',
-        ));
     }
 }

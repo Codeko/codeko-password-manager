@@ -173,6 +173,7 @@ class PasswordAdmin extends Admin {
                     'by_reference' => false,
                     'multiple' => true,
                     'expanded' => true,
+                    'required' => false
                 ))
         ;
     }

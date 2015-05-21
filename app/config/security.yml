@@ -67,6 +67,7 @@ security:
         # This part is handled by the FOS User Bundle
         main:
             pattern:             .*
+            context:            user
             form_login:
                 provider:       fos_userbundle
                 csrf_provider: form.csrf_provider
