@@ -17,7 +17,7 @@ use DeepCopy\DeepCopy;
  * Password controller.
  *
  */
-class PasswordController extends Controller {
+    class PasswordController extends Controller {
 
     public function cloneAction() {
         $object = $this->admin->getSubject();

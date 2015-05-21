@@ -23,6 +23,7 @@ class TipoPassAdmin extends Admin {
      * @param ListMapper $listMapper
      */
     protected function configureListFields(ListMapper $listMapper) {
+        unset($this->listModes['mosaic']);
         $listMapper
                 ->addIdentifier('nombre')
         ;
