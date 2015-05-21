@@ -4,6 +4,8 @@ namespace Application\Sonata\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Application\Sonata\ClassificationBundle\Entity\Category;
+use Application\Sonata\MediaBundle\Entity\Media;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Password
@@ -59,9 +61,10 @@ class Password {
      * @var \DateTime
      */
     private $fechaModificacion;
-
     private $category;
     private $tipoPassword;
+    protected $enabled;
+    private $files;
 
     /**
      * Get id
@@ -261,10 +264,11 @@ class Password {
     }
 
     public function __construct() {
-        $this->category = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->category = new ArrayCollection();
         $this->fechaCreacion = new \DateTime();
+//        $this->files = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
+    
     public function addCategory(Category $category) {
         $category->addPassword($this);
         $this->category[] = $category;
@@ -277,6 +281,48 @@ class Password {
 
     public function __toString() {
         return $this->getTitulo() ? : 'n/a';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setEnabled($enabled) {
+        $this->enabled = $enabled;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEnabled() {
+        return $this->enabled;
+    }
+
+    public function setFiles($files) {
+        if (count($files) > 0) {
+            foreach ($files as $i) {
+                $this->addFile($i);
+            }
+        }
+
+        $this->files = $files;
+
+        return $this;
+    }
+
+    public function getFiles() {
+        return $this->files;
+    }
+
+    public function addFile(Media $file) {
+        $file->setPassword($this);
+        $this->files->add($file);
+
+        return $this;
+    }
+
+    public function removeFile(Media $file) {
+        $this->files->removeElement($file);
+        $file->setPassword(null);
     }
 
 }

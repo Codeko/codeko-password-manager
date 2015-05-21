@@ -1,0 +1,40 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% if admin.isGranted('CLIPBOARD', object) and admin.hasRoute('edit') %}  
+    <td class="sonata-ba-list-field">
+        <a style="position:relative" class="btn btn-sm btn-default edit_link"  title="Copiar al portapapeles" >
+            <i class="fa fa-clipboard"></i>
+           
+        <div style="position:absolute;margin: -22px 0px 0px -8px; width:25px; overflow:hidden; height:25px;z-index:1000;opacity:0;">
+            <object style="position:relative" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+                    width="18px" height="18px" margin="0px">
+                <param name="movie" value="{{ asset('bundles/applicationsonatauser/js/clippy.swf') }}"/>
+                <param name="allowScriptAccess" value="always" />
+                <param name="quality" value="high" />
+                <param name="scale" value="noscale" />
+                <param name="wmode" value="transparent" />
+                <param NAME="FlashVars" value="text={{ object.password }}">
+                <param name="bgcolor" value="transparent">
+                <embed src="{{ asset('bundles/applicationsonatauser/js/clippy.swf') }}"
+                       wmode="transparent"
+                       width="200"
+                       height="94"
+                       name="clippy"
+                       quality="high"
+                       allowScriptAccess="always"
+                       type="application/x-shockwave-flash"
+                       pluginspage="http://www.macromedia.com/go/getflashplayer"
+                       FlashVars="text={{ object.password }}"
+                       bgcolor="transparent"
+                       />
+            </object></div></a>
+{% endif %}

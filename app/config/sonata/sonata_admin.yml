@@ -1,4 +1,8 @@
 sonata_admin:
+    
+#    options:
+#        html5_validate: false 
+        # does not use html5 validation
     templates:
         # default global templates
         layout:  SonataAdminBundle::standard_layout.html.twig
@@ -10,7 +14,7 @@ sonata_admin:
         edit:    SonataAdminBundle:CRUD:edit.html.twig
         preview: SonataAdminBundle:CRUD:preview.html.twig
         search:              SonataAdminBundle:Core:search.html.twig
-        search_result_block: SonataAdminBundle:Block:block_search_result.html.twig
+        search_result_block: SonataAdminBundle:Block:block_search_result.html.twig       
         
  #   security:
         #handler: sonata.admin.security.handler.role
@@ -42,8 +46,12 @@ sonata_admin:
                 items:
                     - password.pass.servicio
                     - sonata.classification.admin.category
+                    - application_sonata_user.admin.tipo_pass
+                    - sonata.media.admin.media
                 roles: [ROLE_USER]
                 
     options:
         use_select2:    true 
         # disable select2
+       
+        

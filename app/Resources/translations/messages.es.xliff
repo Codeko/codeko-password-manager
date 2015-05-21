@@ -24,7 +24,7 @@
             </trans-unit>
             <trans-unit id="Username Pass">
                 <source>Username Pass</source>
-                <target>Usuario asociado</target>
+                <target>Usuario</target>
             </trans-unit>
             <trans-unit id="Category">
                 <source>Category</source>
@@ -38,9 +38,13 @@
                 <source>Action</source>
                 <target></target>
             </trans-unit>
-            <trans-unit id="ROLE_USER:">
-                <source>ROLE_USER:</source>
-                <target>Usuario</target>
+            <trans-unit id="Enabled">
+                <source>Enabled</source>
+                <target>Habilitado</target>
+            </trans-unit>
+            <trans-unit id="Category Enabled">
+                <source>Category Enabled</source>
+                <target>Cat.Habilitada</target>
             </trans-unit>
         </body>
     </file>
