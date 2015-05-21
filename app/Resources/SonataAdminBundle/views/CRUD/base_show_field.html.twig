@@ -14,15 +14,14 @@ file that was distributed with this source code.
 {% block field %}
     {% if block('name') == 'Password' %}
         {% if field_description.options.safe %}
-            <div class="btn-group" id="botonCampoContraseña" style="margin-right:12px;cursor:pointer;"><a class="view_link" title="Mostrar"><i class="glyphicon glyphicon-zoom-in"> - </i></a></div><input type="password" id="campoContraseña" size="100%" style="border:0px;background:none;" value="{{ value|raw }}"/>
+            <div class="btn-group" id="botonCampoContraseña" style="margin-right:12px;cursor:pointer;"><a class="view_link" title="Mostrar"><i class="glyphicon glyphicon-zoom-in"> <span style="color:black">-</span> </i></a></div><input type="password" id="campoContraseña" size="100%" style="border:0px;background:none;" value="{{ value|raw }}"/>
         {% else %}
-            <div class="btn-group" id="botonCampoContraseña" style="margin-right:12px;cursor:pointer;"><a class="view_link" title="Mostrar"><i class="glyphicon glyphicon-zoom-in"> - </i></a></div><input type="password" id="campoContraseña" size="100%" style="border:0px;background:none;" value="{{ value|nl2br }}" />
+            <div class="btn-group" id="botonCampoContraseña" style="margin-right:12px;cursor:pointer;"><a class="view_link" title="Mostrar"><i class="glyphicon glyphicon-zoom-in"> <span style="color:black">-</span> </i></a></div><input type="password" id="campoContraseña" size="100%" style="border:0px;background:none;" value="{{ value|nl2br }}" />
         {% endif %}
         
         <script>
             $(document).ready(function(){
                 $('#botonCampoContraseña').click(function() {
-                    
                     if($('#campoContraseña').hasClass('botonPulsado')){
                        $('#campoContraseña').attr('type','password');
                        $('#campoContraseña').toggleClass('botonPulsado');
@@ -30,7 +29,6 @@ file that was distributed with this source code.
                        $('#campoContraseña').attr('type','text');
                        $('#campoContraseña').toggleClass('botonPulsado');
                     }
-
                 });
             });
         </script>
