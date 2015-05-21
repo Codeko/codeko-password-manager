@@ -24,7 +24,7 @@ class TipoPassAdmin extends Admin {
      */
     protected function configureListFields(ListMapper $listMapper) {
         $listMapper
-                ->add('nombre')
+                ->addIdentifier('nombre')
         ;
     }
 

@@ -6,7 +6,7 @@
     <parameters>
         <!-- MEDIA -->
         <parameter key="sonata.media.admin.media.class">Application\Sonata\MediaBundle\Admin\ORM\MediaAdmin</parameter>
-        <parameter key="sonata.media.admin.media.controller">SonataMediaBundle:MediaAdmin</parameter>
+        <parameter key="sonata.media.admin.media.controller">ApplicationSonataMediaBundle:MediaAdmin</parameter>
         <parameter key="sonata.media.admin.media.translation_domain">SonataMediaBundle</parameter>
 
         <!-- GALLERY -->

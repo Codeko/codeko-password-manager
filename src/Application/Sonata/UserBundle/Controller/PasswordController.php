@@ -162,11 +162,7 @@ class PasswordController extends Controller {
      */
     public function listAction(Request $request = null) {
         $request = $this->resolveRequest($request);
-//        $prueba = $request->getLanguages();
-//        throw new \InvalidArgumentException(
-//        $prueba
-//        );
-//        
+        
         if (false === $this->admin->isGranted('LIST')) {
             throw new AccessDeniedException();
         }
