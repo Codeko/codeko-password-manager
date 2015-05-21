@@ -42,7 +42,13 @@ services:
         tags:
             - { name: doctrine.event_subscriber, connection: default }
         calls:
-            - [ setAnnotationReader, [ @annotation_reader ] ]      
+            - [ setAnnotationReader, [ @annotation_reader ] ]
+            
+    kernel.listener.expired_password:
+        class: Application\Sonata\EventListener\ExpiredPassword
+        arguments: [@router, @security.context, @session]
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onCheckExpired, priority: 1 } 
     
 imports:
     - { resource: sonata/classification_admin.xml }
