@@ -125,11 +125,22 @@ file that was distributed with this source code.
                                                                 $(this)
                                                                         .closest('table')
                                                                         .find('td.sonata-ba-list-field-batch input[type="checkbox"], div.sonata-ba-list-field-batch input[type="checkbox"]')
+                                                                        .find('td.sonata-ba-list-field-batch input[type="radio"], div.sonata-ba-list-field-batch input[type="radio"]')
                                                                         .iCheck($(this).is(':checked') ? 'check' : 'uncheck')
                                                                         ;
                                                             });
 
                                                             $('td.sonata-ba-list-field-batch input[type="checkbox"], div.sonata-ba-list-field-batch input[type="checkbox"]')
+                                                                    .on('ifChanged', function () {
+                                                                        $(this)
+                                                                                .closest('tr, div.sonata-ba-list-field-batch')
+                                                                                .toggleClass('sonata-ba-list-row-selected', $(this).is(':checked'))
+                                                                                ;
+                                                                    })
+                                                                    .trigger('ifChanged')
+                                                                    ;
+                                                                    
+                                                            $('td.sonata-ba-list-field-batch input[type="radio"], div.sonata-ba-list-field-batch input[type="radio"]')
                                                                     .on('ifChanged', function () {
                                                                         $(this)
                                                                                 .closest('tr, div.sonata-ba-list-field-batch')
