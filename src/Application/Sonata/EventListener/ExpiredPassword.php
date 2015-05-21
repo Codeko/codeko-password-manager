@@ -25,7 +25,8 @@ class ExpiredPassword {
     }
 
     public function onCheckExpired(GetResponseEvent $event) {
-//        if (($this->security_context->getToken() ) && ( $this->security_context->isGranted('IS_AUTHENTICATED_FULLY') )) {
+        
+        if (($this->security_context->getToken() ) && ( $this->security_context->isGranted('IS_AUTHENTICATED_FULLY') )) {
 //            
 //            /* Comprobacion de fecha de caducidad */
 //            
@@ -38,7 +39,8 @@ class ExpiredPassword {
 //                    $this->session->getFlashBag()->add('sonata_flash_error', 'Su clave ha caducado');
 //                    
 //                }
-//        }
+        }
+        
     }
 
 }
