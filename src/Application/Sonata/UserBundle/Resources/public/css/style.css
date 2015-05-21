@@ -50,7 +50,7 @@ root {
     border: 1px solid #4CAE4C;
 }
 
-.sonata-tree__item__edit {
+.sonata-tree__item__edit, .sonata-tree__item {
     padding-right: 100%;
 }
 
