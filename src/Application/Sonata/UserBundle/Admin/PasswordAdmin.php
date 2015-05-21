@@ -135,6 +135,7 @@ class PasswordAdmin extends Admin {
                 ->add('category.enabled')
                 ->add('tipoPassword')
                 ->add('enabled')
+                ->add('files', null, array('label' => 'Archivos', 'associated_property' => 'getName'))
                 ->end()
         ;
     }
