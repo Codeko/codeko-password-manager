@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Application\Sonata\UserBundle\Entity\Password;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @Service("request.set_messages_count_listener")
@@ -33,32 +34,24 @@ class ExpiredPassword {
 
         if (($this->security_context->getToken() ) && ( $this->security_context->isGranted('IS_AUTHENTICATED_FULLY') )) {
             $idUsuarioActivo = $this->security_context->getToken()->getUser()->getId();
-            $sql = "SELECT id, titulo, fechaExpira FROM Password WHERE user_id = '" . $idUsuarioActivo . "'";
+            $sql = "SELECT titulo, fechaExpira FROM Password WHERE user_id = '" . $idUsuarioActivo . "'";
             $connection = $this->em->getConnection();
             $statement = $connection->prepare($sql);
             $statement->execute();
             $results = $statement->fetchAll();
 
             foreach ($results as $valor) {
-                echo $results[0]["titulo"];
-                echo $results[0]["fechaExpira"];
+//                echo $valor["titulo"];
+//                echo $valor["fechaExpira"];
+                $fecha = $valor["fechaExpira"];
+                $segundos = strtotime($fecha) - strtotime('now');
+                $diferencia_dias = intval($segundos / 60 / 60 / 24);
+                if (!empty($valor["fechaExpira"])) {
+                    if ($diferencia_dias <= 0) {
+                        $this->session->getFlashBag()->add('sonata_flash_error', 'Su clave  "' . $valor["titulo"] . '" ha caducado');
+                    }
+                }
             }
-            
-//            $em = $this->getDoctrine()->getEntityManager();
-//            $result= $em->createQuery($sql)->getResult();
-//            echo $result;
-//            
-//            /* Comprobacion de fecha de caducidad */
-//            
-//                $today = new \DateTime();
-//                $expira = $this->security_context->getToken()->getUser()->getPasswordChangedAt()->diff($today);
-//                //$expira = $this->security_context->getToken()->getUser()->getPasswordChangedAt()->diff($today);
-//                
-//                if ($expira->format('%a') < 0) {
-//                    
-//                    $this->session->getFlashBag()->add('sonata_flash_error', 'Su clave ha caducado');
-//                    
-//                }
         }
     }
 

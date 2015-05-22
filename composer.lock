@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "72d7f4743021437f28c8c3fac2cfad58",
+    "hash": "def48a851ca0d9db22fdb3fbb4f4c79c",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2151,7 +2151,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "Knplabs",
+                    "name": "KnpLabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -2670,16 +2670,16 @@
         },
         {
             "name": "scheb/two-factor-bundle",
-            "version": "v1.3.2",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/scheb/two-factor-bundle.git",
-                "reference": "ee0949f1218127d347ebca8b7528e8e4d00010f6"
+                "reference": "636740b69bc0573e90afc8ffdf10c9dc00cde3b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/scheb/two-factor-bundle/zipball/ee0949f1218127d347ebca8b7528e8e4d00010f6",
-                "reference": "ee0949f1218127d347ebca8b7528e8e4d00010f6",
+                "url": "https://api.github.com/repos/scheb/two-factor-bundle/zipball/636740b69bc0573e90afc8ffdf10c9dc00cde3b5",
+                "reference": "636740b69bc0573e90afc8ffdf10c9dc00cde3b5",
                 "shasum": ""
             },
             "require": {
@@ -2714,7 +2714,7 @@
                 "two-factor",
                 "two-step"
             ],
-            "time": "2015-04-29 13:37:07"
+            "time": "2015-05-21 18:23:41"
         },
         {
             "name": "sensio/distribution-bundle",
