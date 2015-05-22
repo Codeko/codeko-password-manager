@@ -127,7 +127,7 @@ file that was distributed with this source code.
                 {% block logo %}
                     {% if admin_pool is defined %}
                         {% spaceless %}
-                            {% if app.request.attributes.get('_route') == 'sonata_admin_redirect' %}
+                            {% if app.request.attributes.get('_route') == 'sonata_admin_dashboard' %}
                                 <a class="logo" href="{{ path('sonata_admin_dashboard') }}"><img class="rubberBand animated" src="{{ asset('bundles/applicationsonatauser/images/headerMenu.png') }}"/></a>    
                                 {% else %}
                                 <a class="logo" href="{{ path('sonata_admin_dashboard') }}"><img src="{{ asset('bundles/applicationsonatauser/images/headerMenu.png') }}"/></a>
