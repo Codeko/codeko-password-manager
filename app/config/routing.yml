@@ -1,11 +1,10 @@
 admin:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
     prefix: /
-#    defaults:  { _controller: SonataAdminBundle:Core:dashboard }
 
 _sonata_admin:
     resource: .
-    type:     sonata_admin
+    type:     sonata_admin 
 
 ## Security Routes
 default:
@@ -29,13 +28,6 @@ fos_user_profile:
 fos_user_register:
     resource: "@SonataUserBundle/Resources/config/routing/sonata_registration_1.xml"
     prefix: /registro
-#
-#sonata_admin_dashboard:
-#    path: /dashboard
-#    defaults:
-#        _controller: FrameworkBundle:Redirect:redirect
-#        route: sonata_admin_redirect
-#        permanent: true
         
 sonata_admin_search:
     path: /search

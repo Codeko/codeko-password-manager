@@ -206,12 +206,12 @@ class PasswordAdmin extends Admin {
         $request = Request::createFromGlobals();
 
         $valorCat = $request->query->get('idCat');
+        if ($valorCat !== null) {
+            $entityManager = $this->getModelManager()->getEntityManager('Application\Sonata\ClassificationBundle\Entity\Category');
+            $reference = $entityManager->getReference('Application\Sonata\ClassificationBundle\Entity\Category', $valorCat);
 
-        $entityManager = $this->getModelManager()->getEntityManager('Application\Sonata\ClassificationBundle\Entity\Category');
-        $reference = $entityManager->getReference('Application\Sonata\ClassificationBundle\Entity\Category', $valorCat);
-
-        $instance->addCategory($reference);
-
+            $instance->addCategory($reference);
+        }
         return $instance;
     }
 
