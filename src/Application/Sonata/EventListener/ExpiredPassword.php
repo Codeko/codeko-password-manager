@@ -41,8 +41,6 @@ class ExpiredPassword {
             $results = $statement->fetchAll();
 
             foreach ($results as $valor) {
-//                echo $valor["titulo"];
-//                echo $valor["fechaExpira"];
                 $fecha = $valor["fechaExpira"];
                 $segundos = strtotime($fecha) - strtotime('now');
                 $diferencia_dias = intval($segundos / 60 / 60 / 24);
