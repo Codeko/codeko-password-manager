@@ -234,7 +234,8 @@ use DeepCopy\DeepCopy;
             } else {
                 $datagrid->setValue('category', null, $category->getId());
             }
-        }
+        }       
+        
         $formView = $datagrid->getForm()->createView();
         $this->get('twig')->getExtension('form')->renderer->setTheme($formView, $this->admin->getFilterTheme());
         return $this->render($this->admin->getTemplate('list'), array(

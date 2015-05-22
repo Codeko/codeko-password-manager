@@ -148,6 +148,7 @@ class PasswordAdmin extends Admin {
 
         // AQUII!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+
         $formMapper
                 ->with('Contraseña:', array('class' => 'col-md-6'))
                 ->add('titulo');
@@ -163,7 +164,7 @@ class PasswordAdmin extends Admin {
                 ->add('tipoPassword', 'sonata_type_model', array('required' => false))
                 ->end()
                 ->with('Categorias', array('class' => 'col-md-6'))
-                ->add('category', 'sonata_type_model', array('label' => 'Categorias', 'expanded' => true, 'by_reference' => false, 'multiple' => true, 'required' => true))
+                ->add('category', 'sonata_type_model', array('label' => 'Categorias', 'expanded' => true, 'by_reference' => false, 'multiple' => true, 'required' => true, 'attr' => array('data' => '1')))
                 ->add('enabled', null, array('required' => false, 'data' => true))
                 ->end()
                 ->with('Generador', array('class' => 'col-md-6'))
@@ -187,6 +188,16 @@ class PasswordAdmin extends Admin {
         } else {
             $instance = parent::getNewInstance();
         }
+
+        $request = Request::createFromGlobals();
+
+        $valorCat = $request->query->get('idCat');
+
+        $entityManager = $this->getModelManager()->getEntityManager('Application\Sonata\ClassificationBundle\Entity\Category');
+        $reference = $entityManager->getReference('Application\Sonata\ClassificationBundle\Entity\Category', $valorCat);
+
+        $instance->addCategory($reference);
+
         return $instance;
     }
 
