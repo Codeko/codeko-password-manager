@@ -46,10 +46,10 @@ class Category extends BaseCategory {
         return $this->id;
     }
 
-    public function setId($id){
+    public function setId($id) {
         $this->id = $id;
     }
-    
+
     function getPasswords() {
         return $this->passwords;
     }
@@ -65,8 +65,8 @@ class Category extends BaseCategory {
     public function removePassword(Password $password) {
         $this->passwords->removeElement($password);
     }
-    
-    public function getClass(){
-        return $this.  get_class();
+
+    public function getClass() {
+        return $this . get_class();
     }
 }

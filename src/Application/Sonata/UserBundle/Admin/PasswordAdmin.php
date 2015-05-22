@@ -146,9 +146,6 @@ class PasswordAdmin extends Admin {
     protected function configureFormFields(FormMapper $formMapper) {
         $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
 
-        // AQUII!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
         $formMapper
                 ->with('Contraseña:', array('class' => 'col-md-6'))
                 ->add('titulo');
@@ -164,8 +161,25 @@ class PasswordAdmin extends Admin {
                 ->add('tipoPassword', 'sonata_type_model', array('required' => false))
                 ->end()
                 ->with('Categorias', array('class' => 'col-md-6'))
-                ->add('category', 'sonata_type_model', array('label' => 'Categorias', 'expanded' => true, 'by_reference' => false, 'multiple' => true, 'required' => true, 'attr' => array('data' => '1')))
-                ->add('enabled', null, array('required' => false, 'data' => true))
+                ->add('category', 'sonata_type_model', array('label' => 'Categorias', 'expanded' => true, 'by_reference' => false, 'multiple' => true, 'required' => true))
+                // MOSTRANDO CATEGORIAS EN ARBOL 
+                //        if ($this->hasSubject()) {
+                //            $foo = $this->getSubject()->getCategory();
+                //            for ($i = 0; $i < count($foo); $i++) {
+                //                if ($foo[$i]->getId() === null) {
+                //                    $formMapper
+                //                            ->add('category', 'sonata_category_selector', array(
+                //                                'category' => $foo[$i] ? : null,
+                //                                'model_manager' => $foo[$i]->getModelManager(),
+                //                                'class' => $foo[$i]->getClass(),
+                //                                'required' => true,
+                //                                'context' => $foo[$i]->getContext()
+                //                    ));
+                //                }
+                //            }
+                //        }
+                //        $formMapper
+                ->add('enabled', null, array('required' => false))
                 ->end()
                 ->with('Generador', array('class' => 'col-md-6'))
                 ->end()
@@ -192,12 +206,12 @@ class PasswordAdmin extends Admin {
         $request = Request::createFromGlobals();
 
         $valorCat = $request->query->get('idCat');
+        if ($valorCat !== null) {
+            $entityManager = $this->getModelManager()->getEntityManager('Application\Sonata\ClassificationBundle\Entity\Category');
+            $reference = $entityManager->getReference('Application\Sonata\ClassificationBundle\Entity\Category', $valorCat);
 
-        $entityManager = $this->getModelManager()->getEntityManager('Application\Sonata\ClassificationBundle\Entity\Category');
-        $reference = $entityManager->getReference('Application\Sonata\ClassificationBundle\Entity\Category', $valorCat);
-
-        $instance->addCategory($reference);
-
+            $instance->addCategory($reference);
+        }
         return $instance;
     }
 
