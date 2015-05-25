@@ -2,7 +2,6 @@
 
 namespace Application\Sonata\UserBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 
 /**
  * TipoPass
