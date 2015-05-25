@@ -53,7 +53,8 @@
         "hackzilla/password-generator": "~1.0",
         "hackzilla/password-generator-bundle": "~1.3",
         "myclabs/deep-copy": "^1.3",
-        "nzo/url-encryptor-bundle": "~1.4"
+        "nzo/url-encryptor-bundle": "~1.4",
+        "rollerworks/password-strength-bundle": "~1.3"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
