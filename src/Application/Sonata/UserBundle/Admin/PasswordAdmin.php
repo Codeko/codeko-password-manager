@@ -16,12 +16,8 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Application\Sonata\ClassificationBundle\Entity\Category;
-use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 use Symfony\Component\HttpFoundation\Request;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Hackzilla\Bundle\PasswordGeneratorBundle\Form\Type\OptionType;
-use Hackzilla\PasswordGenerator\Generator\HumanPasswordGenerator;
 
 class PasswordAdmin extends Admin {
 
@@ -63,6 +59,16 @@ class PasswordAdmin extends Admin {
         foreach ($this->getExtensions() as $extension) {
             $extension->configureRoutes($this, $this->routes);
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExportFields() {
+        // avoid security field to be exported
+        return array_filter(parent::getExportFields(), function($v) {
+            return !in_array($v, array('password', 'salt'));
+        });
     }
 
     /**
@@ -155,7 +161,9 @@ class PasswordAdmin extends Admin {
         $formMapper
                 ->add('usernamePass', null, array('required' => false))
                 ->add('url', null, array('required' => false))
-                ->add('password', 'password', array('required' => false, 'attr' => array('class' => 'password', 'input' => 'password')))
+                ->add('plainPassword', 'password', array(
+                    'required' => (!$this->getSubject() || is_null($this->getSubject()->getId()))
+                ))
                 ->add('comentario', 'textarea', array('required' => false))
                 ->add('fechaExpira', 'sonata_type_datetime_picker', array('required' => false))
                 ->add('tipoPassword', 'sonata_type_model', array('required' => false))
@@ -223,12 +231,8 @@ class PasswordAdmin extends Admin {
         }
 
         // CODIFICANDO CONTRASEÑAS
-        $encoder = new MessageDigestPasswordEncoder('sha512', true, 10);
-        $plainPassword = $pass->getPassword();
-        $encoded = $encoder->encodePassword($pass, $plainPassword);
-        $pass->setPassword($encoded);
-
-
+        $this->getModelManager()->getEntityManager('Application\Sonata\UserBundle\Entity\Password')->persist($pass);
+        $this->getModelManager()->getEntityManager('Application\Sonata\UserBundle\Entity\Password')->flush();
         // CATEGORIA DEFAULT SI NO SE SELECCIONA NINGUNA EN EL FORMULARIO
         if (count($pass->getCategory()) === 0) {
             $pass->addCategory($this->getConfigurationPool()->getContainer()->get('doctrine')->getRepository('Application\Sonata\ClassificationBundle\Entity\Category')->find(1));
@@ -245,12 +249,11 @@ class PasswordAdmin extends Admin {
         }
 
         // CODIFICANDO CONTRASEÑAS
-        $encoder = new MessageDigestPasswordEncoder('sha512', true, 10);
-        $plainPassword = $pass->getPassword();
-        $encoded = $encoder->encodePassword($pass, $plainPassword);
-        $pass->setPassword($encoded);
-
-
+        if ($pass->getPlainPassword() !== null) {
+            $pass->setPassword($this->getConfigurationPool()->getContainer()->get('nzo_url_encryptor')->encrypt($pass->getPlainPassword()));
+        } else {
+            $pass->setPassword($this->getConfigurationPool()->getContainer()->get('nzo_url_encryptor')->encrypt($pass->getPassword()));
+        }
         // CATEGORIA DEFAULT SI NO SE SELECCIONA NINGUNA EN EL FORMULARIO
         if (count($pass->getCategory()) === 0) {
             $pass->addCategory($this->getConfigurationPool()->getContainer()->get('doctrine')->getRepository('Application\Sonata\ClassificationBundle\Entity\Category')->find(1));

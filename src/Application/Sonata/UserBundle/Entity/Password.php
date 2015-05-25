@@ -2,6 +2,7 @@
 
 namespace Application\Sonata\UserBundle\Entity;
 
+use Application\Sonata\UserBundle\Validator\Constraints as RollerworksPassword;
 use Doctrine\ORM\Mapping as ORM;
 use Application\Sonata\ClassificationBundle\Entity\Category;
 use Application\Sonata\MediaBundle\Entity\Media;
@@ -65,6 +66,15 @@ class Password {
     private $tipoPassword;
     protected $enabled;
     private $files;
+
+    /**
+     * Plain password. Used for model validation. Must not be persisted.
+     *
+     * @var string
+     * @RollerworksPassword\PasswordStrength(minLength=7, minStrength=3)
+     * @RollerworksPassword\PasswordRequirements(requireLetters=true, requireNumbers=true, requireCaseDiff=true)
+     */
+    protected $plainPassword;
 
     /**
      * Get id
@@ -266,9 +276,9 @@ class Password {
     public function __construct() {
         $this->category = new ArrayCollection();
         $this->fechaCreacion = new \DateTime();
-//        $this->files = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->files = new ArrayCollection();
     }
-    
+
     public function addCategory(Category $category) {
         $category->addPassword($this);
         $this->category[] = $category;
@@ -323,6 +333,16 @@ class Password {
     public function removeFile(Media $file) {
         $this->files->removeElement($file);
         $file->setPassword(null);
+    }
+
+    public function getPlainPassword() {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($password) {
+        $this->plainPassword = $password;
+
+        return $this;
     }
 
 }
