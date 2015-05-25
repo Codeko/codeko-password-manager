@@ -17,7 +17,7 @@ use DeepCopy\DeepCopy;
  * Password controller.
  *
  */
-    class PasswordController extends Controller {
+class PasswordController extends Controller {
 
     public function cloneAction() {
         $object = $this->admin->getSubject();
@@ -49,7 +49,11 @@ use DeepCopy\DeepCopy;
             return new RedirectResponse($this->admin->generateUrl('list', array('filter' => $this->admin->getFilterParameters())));
         }
 
+
+        $passOrigen = $target->getPassword();
+        $passDecript = $this->get('nzo_url_encryptor')->decrypt($passOrigen);
         $clonedObject = clone $target;
+        $clonedObject->setPassword($passDecript);
         $clonedObject->setTitulo($target->getTitulo() . " (Copia)");
         $this->admin->create($clonedObject);
 
@@ -201,7 +205,7 @@ use DeepCopy\DeepCopy;
 
     public function listAction(Request $request = null) {
         $request = $this->resolveRequest($request);
-        
+
         if (false === $this->admin->isGranted('LIST')) {
             throw new AccessDeniedException();
         }
@@ -234,8 +238,8 @@ use DeepCopy\DeepCopy;
             } else {
                 $datagrid->setValue('category', null, $category->getId());
             }
-        }       
-        
+        }
+
         $formView = $datagrid->getForm()->createView();
         $this->get('twig')->getExtension('form')->renderer->setTheme($formView, $this->admin->getFilterTheme());
         return $this->render($this->admin->getTemplate('list'), array(

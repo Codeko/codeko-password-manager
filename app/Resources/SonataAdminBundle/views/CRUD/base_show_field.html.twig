@@ -14,9 +14,9 @@ file that was distributed with this source code.
 {% block field %}
     {% if block('name') == 'Password' %}
         {% if field_description.options.safe %}
-            <div class="btn-group" id="botonCampoContraseña" style="margin-right:12px;cursor:pointer;"><a class="view_link" title="Mostrar"><i class="glyphicon glyphicon-zoom-in"> <span style="color:black">-</span> </i></a></div><input type="password" id="campoContraseña" size="100%" style="border:0px;background:none;" value="{{ value|raw }}"/>
+            <div class="btn-group" id="botonCampoContraseña" style="margin-right:12px;cursor:pointer;"><a class="view_link" title="Mostrar"><i class="glyphicon glyphicon-zoom-in"> <span style="color:black">-</span> </i></a></div><input type="password" id="campoContraseña" size="100%" style="border:0px;background:none;" value="{{ value|raw|urldecrypt }}"/>
         {% else %}
-            <div class="btn-group" id="botonCampoContraseña" style="margin-right:12px;cursor:pointer;"><a class="view_link" title="Mostrar"><i class="glyphicon glyphicon-zoom-in"> <span style="color:black">-</span> </i></a></div><input type="password" id="campoContraseña" size="100%" style="border:0px;background:none;" value="{{ value|nl2br }}" />
+            <div class="btn-group" id="botonCampoContraseña" style="margin-right:12px;cursor:pointer;"><a class="view_link" title="Mostrar"><i class="glyphicon glyphicon-zoom-in"> <span style="color:black">-</span> </i></a></div><input type="password" id="campoContraseña" size="100%" style="border:0px;background:none;" value="{{ value|nl2br|urldecrypt }}" />
         {% endif %}
         
         <script>
