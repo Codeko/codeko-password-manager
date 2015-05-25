@@ -2,7 +2,7 @@
 
 namespace Application\Sonata\UserBundle\Entity;
 
-use Rollerworks\Bundle\PasswordStrengthBundle\Validator\Constraints as RollerworksPassword;
+use Application\Sonata\UserBundle\Validator\Constraints as RollerworksPassword;
 use Doctrine\ORM\Mapping as ORM;
 use Application\Sonata\ClassificationBundle\Entity\Category;
 use Application\Sonata\MediaBundle\Entity\Media;
