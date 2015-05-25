@@ -46,7 +46,9 @@ class AppKernel extends Kernel {
             // Sonata Media
             new Sonata\MediaBundle\SonataMediaBundle(),
             // Password generator
-            new Hackzilla\Bundle\PasswordGeneratorBundle\HackzillaPasswordGeneratorBundle(),   
+            new Hackzilla\Bundle\PasswordGeneratorBundle\HackzillaPasswordGeneratorBundle(), 
+            // Encriptando/Desencriptando passwords
+            new Nzo\UrlEncryptorBundle\NzoUrlEncryptorBundle(),
             // BUNDLES PROPIOS
             new Application\Sonata\AdminBundle\ApplicationSonataAdminBundle(),
             new Application\Sonata\TimelineBundle\ApplicationSonataTimelineBundle(), // easy extends integration

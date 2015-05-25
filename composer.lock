@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "72d7f4743021437f28c8c3fac2cfad58",
+    "hash": "58d68724d3d8858e9c7a1efefde79762",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2532,6 +2532,61 @@
             "time": "2015-05-16 17:16:14"
         },
         {
+            "name": "nzo/url-encryptor-bundle",
+            "version": "1.4",
+            "target-dir": "Nzo/UrlEncryptorBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/NAYZO/NzoUrlEncryptorBundle.git",
+                "reference": "580a9ce106f3b00f98153ebc7a38cf18f191d010"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/NAYZO/NzoUrlEncryptorBundle/zipball/580a9ce106f3b00f98153ebc7a38cf18f191d010",
+                "reference": "580a9ce106f3b00f98153ebc7a38cf18f191d010",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "symfony/framework-bundle": "~2.1"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Nzo\\UrlEncryptorBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ala Eddine Khefifi",
+                    "email": "alakhefifi@gmail.com"
+                }
+            ],
+            "description": "The NzoUrlEncryptorBundle is a Symfony2 Bundle used to Encrypt and Decrypt data and variables in the Web application or passed through URL",
+            "keywords": [
+                "data",
+                "decrypt",
+                "decryption",
+                "encrypt",
+                "encryption",
+                "id",
+                "link",
+                "security",
+                "url",
+                "variable"
+            ],
+            "time": "2015-05-12 14:11:44"
+        },
+        {
             "name": "phpcollection/phpcollection",
             "version": "0.4.0",
             "source": {
@@ -2670,16 +2725,16 @@
         },
         {
             "name": "scheb/two-factor-bundle",
-            "version": "v1.3.2",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/scheb/two-factor-bundle.git",
-                "reference": "ee0949f1218127d347ebca8b7528e8e4d00010f6"
+                "reference": "636740b69bc0573e90afc8ffdf10c9dc00cde3b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/scheb/two-factor-bundle/zipball/ee0949f1218127d347ebca8b7528e8e4d00010f6",
-                "reference": "ee0949f1218127d347ebca8b7528e8e4d00010f6",
+                "url": "https://api.github.com/repos/scheb/two-factor-bundle/zipball/636740b69bc0573e90afc8ffdf10c9dc00cde3b5",
+                "reference": "636740b69bc0573e90afc8ffdf10c9dc00cde3b5",
                 "shasum": ""
             },
             "require": {
@@ -2714,7 +2769,7 @@
                 "two-factor",
                 "two-step"
             ],
-            "time": "2015-04-29 13:37:07"
+            "time": "2015-05-21 18:23:41"
         },
         {
             "name": "sensio/distribution-bundle",

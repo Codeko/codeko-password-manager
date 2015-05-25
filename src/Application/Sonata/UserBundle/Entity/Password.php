@@ -67,6 +67,13 @@ class Password {
     private $files;
 
     /**
+     * Plain password. Used for model validation. Must not be persisted.
+     *
+     * @var string
+     */
+    protected $plainPassword;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -266,9 +273,9 @@ class Password {
     public function __construct() {
         $this->category = new ArrayCollection();
         $this->fechaCreacion = new \DateTime();
-//        $this->files = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->files = new ArrayCollection();
     }
-    
+
     public function addCategory(Category $category) {
         $category->addPassword($this);
         $this->category[] = $category;
@@ -323,6 +330,16 @@ class Password {
     public function removeFile(Media $file) {
         $this->files->removeElement($file);
         $file->setPassword(null);
+    }
+
+    public function getPlainPassword() {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($password) {
+        $this->plainPassword = $password;
+
+        return $this;
     }
 
 }

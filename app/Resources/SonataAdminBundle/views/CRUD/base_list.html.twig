@@ -31,7 +31,7 @@ file that was distributed with this source code.
             {% endif %}
             {# #}
             {% if admin.hasRoute('batch') %}
-                <form action="{{ admin.generateUrl('batch', {'filter': admin.filterParameters}) }}" method="POST" >
+                <form action="{{ admin.generateUrl('batch', {'filter': admin.filterParameters})}}" method="POST" >
                     <input type="hidden" name="_sonata_csrf_token" value="{{ csrf_token }}">
                 {% endif %}
 
@@ -125,22 +125,11 @@ file that was distributed with this source code.
                                                                 $(this)
                                                                         .closest('table')
                                                                         .find('td.sonata-ba-list-field-batch input[type="checkbox"], div.sonata-ba-list-field-batch input[type="checkbox"]')
-                                                                        .find('td.sonata-ba-list-field-batch input[type="radio"], div.sonata-ba-list-field-batch input[type="radio"]')
                                                                         .iCheck($(this).is(':checked') ? 'check' : 'uncheck')
                                                                         ;
                                                             });
 
                                                             $('td.sonata-ba-list-field-batch input[type="checkbox"], div.sonata-ba-list-field-batch input[type="checkbox"]')
-                                                                    .on('ifChanged', function () {
-                                                                        $(this)
-                                                                                .closest('tr, div.sonata-ba-list-field-batch')
-                                                                                .toggleClass('sonata-ba-list-row-selected', $(this).is(':checked'))
-                                                                                ;
-                                                                    })
-                                                                    .trigger('ifChanged')
-                                                                    ;
-                                                                    
-                                                            $('td.sonata-ba-list-field-batch input[type="radio"], div.sonata-ba-list-field-batch input[type="radio"]')
                                                                     .on('ifChanged', function () {
                                                                         $(this)
                                                                                 .closest('tr, div.sonata-ba-list-field-batch')
@@ -156,7 +145,7 @@ file that was distributed with this source code.
                                                 {% block batch_actions %}
                                                     <!-- -->
                                                     <label class="checkbox todos" for="{{ admin.uniqid }}_all_elements">
-                                                       <input type="checkbox" name="all_elements" id="{{ admin.uniqid }}_all_elements">
+                                                        <input type="checkbox" name="all_elements" id="{{ admin.uniqid }}_all_elements">
                                                         {{ 'all_elements'|trans({}, 'SonataAdminBundle') }}
                                                         ({{ admin.datagrid.pager.nbresults }})
                                                     </label>
@@ -173,29 +162,29 @@ file that was distributed with this source code.
                                         {% endif %}
                                     </div>
                                     <script>
-                                        $(document).ready(function() {
+                                        $(document).ready(function () {
                                             $('div.iradio_flat-blue').addClass('invisible');
                                         });
-                                        
-                                        var comprobarVisibilidad = function(){
-                                            
-                                            if ($('#select2-chosen-47').html()!=='Duplicar') {
+
+                                        var comprobarVisibilidad = function () {
+
+                                            if ($('#select2-chosen-47').html() !== 'Duplicar') {
                                                 $('div.icheckbox_flat-blue').removeClass('invisible');
                                                 $('div.iradio_flat-blue').addClass('invisible');
-                                                    if ($('.todos > div').hasClass('checked')){
-                                                        $('.todos').click();
-                                                    }
+                                                if ($('.todos > div').hasClass('checked')) {
+                                                    $('.todos').click();
+                                                }
                                             } else {
                                                 $('div.icheckbox_flat-blue').addClass('invisible');
                                                 $('div.iradio_flat-blue').removeClass('invisible');
-                                                if ($('.todos > div').hasClass('checked')){
-                                                }else{
+                                                if ($('.todos > div').hasClass('checked')) {
+                                                } else {
                                                     $('.todos').click();
                                                 }
                                             }
 
                                         };
-                                        
+
                                     </script>
 
                                     <div class="pull-right">
