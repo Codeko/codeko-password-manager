@@ -169,7 +169,7 @@ class PasswordAdmin extends Admin {
                 ->add('tipoPassword', 'sonata_type_model', array('required' => false))
                 ->end()
                 ->with('Categorias', array('class' => 'col-md-6'))
-                ->add('category', 'sonata_type_model', array('label' => 'Categorias', 'expanded' => true, 'by_reference' => false, 'multiple' => true, 'required' => true))
+                ->add('category', 'sonata_type_model', array('label' => 'Categorias', 'expanded' => false, 'by_reference' => false, 'multiple' => true, 'required' => true))
                 // MOSTRANDO CATEGORIAS EN ARBOL 
                 //        if ($this->hasSubject()) {
                 //            $foo = $this->getSubject()->getCategory();
