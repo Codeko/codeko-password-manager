@@ -12,7 +12,7 @@ file that was distributed with this source code.
 {% if admin.hasRoute('create') and admin.isGranted('CREATE')%}
     {% if admin.subClasses is empty %}
         {% if datagrid is defined %}
-            <a class="sonata-action-element" href="{{ admin.generateUrl('create') }}{% if 'password' in app.request.attributes.get('_route') %}?idCat={% if datagrid.values['category']['value'] is defined %}{{ datagrid.values['category']['value'] }}{% endif %}{% endif %}">
+            <a class="sonata-action-element" href="{{ admin.generateUrl('create') }}{% if 'password' in app.request.attributes.get('_route') %}?idCat={% if datagrid.values['category']['value'] is defined %}{{ datagrid.values['category']['value'] }}{% else %}'1'{% endif %}{% endif %}">
                 <i class="fa fa-plus-circle"></i>
                 {{ 'link_action_create'|trans({}, 'SonataAdminBundle') }}</a>
             {% endif %}
