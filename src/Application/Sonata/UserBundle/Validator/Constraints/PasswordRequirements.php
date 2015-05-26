@@ -24,8 +24,8 @@ class PasswordRequirements extends Constraint
     public $missingNumbersMessage = 'Su contraseña debe incluir al menos un número.';
     public $missingSpecialCharacterMessage = 'Su contraseña debe contener al menos un caracter especial.';
 
-    public $minLength = 6;
-    public $requireLetters = true;
+    public $minLength = 4;
+    public $requireLetters = false;
     public $requireCaseDiff = false;
     public $requireNumbers = false;
     public $requireSpecialCharacter = false;
