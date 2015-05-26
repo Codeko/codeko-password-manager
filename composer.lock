@@ -2157,7 +2157,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "KnpLabs",
+                    "name": "Knplabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -3004,12 +3004,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "c26ac009e6f2de4f84b019fd600c0b04f6510bc6"
+                "reference": "0d24a74b06fa160d302b8052de82b0fce0096eea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/c26ac009e6f2de4f84b019fd600c0b04f6510bc6",
-                "reference": "c26ac009e6f2de4f84b019fd600c0b04f6510bc6",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/0d24a74b06fa160d302b8052de82b0fce0096eea",
+                "reference": "0d24a74b06fa160d302b8052de82b0fce0096eea",
                 "shasum": ""
             },
             "require": {
@@ -3018,6 +3018,7 @@
                 "knplabs/knp-menu": ">=2.0,<3.0",
                 "knplabs/knp-menu-bundle": ">=2.0,<3.0.0",
                 "sonata-project/block-bundle": "~2.3",
+                "sonata-project/core-bundle": "^2.3.2",
                 "sonata-project/exporter": "~1.0",
                 "symfony/class-loader": "~2.3",
                 "symfony/config": "~2.3",
@@ -3081,7 +3082,7 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2015-05-22 10:11:10"
+            "time": "2015-05-25 10:10:23"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -4027,12 +4028,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataNewsBundle.git",
-                "reference": "39723dc21c5b8cb4d3391f2431889a962fe39153"
+                "reference": "97883dad465440544b3c491a2ea169b3d2c7a9b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataNewsBundle/zipball/39723dc21c5b8cb4d3391f2431889a962fe39153",
-                "reference": "39723dc21c5b8cb4d3391f2431889a962fe39153",
+                "url": "https://api.github.com/repos/sonata-project/SonataNewsBundle/zipball/97883dad465440544b3c491a2ea169b3d2c7a9b4",
+                "reference": "97883dad465440544b3c491a2ea169b3d2c7a9b4",
                 "shasum": ""
             },
             "require": {
@@ -4093,7 +4094,7 @@
                 "post",
                 "sonata"
             ],
-            "time": "2015-04-28 18:58:18"
+            "time": "2015-05-25 09:24:03"
         },
         {
             "name": "sonata-project/notification-bundle",
