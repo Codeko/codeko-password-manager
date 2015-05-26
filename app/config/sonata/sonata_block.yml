@@ -22,7 +22,7 @@ sonata_block:
         sonata.timeline.block.timeline:
             
         sonata.admin.block.search_result:
-            contexts: [user]
+            contexts: [admin]
             
     exception:
         default:

@@ -50,6 +50,21 @@ services:
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onCheckExpired, priority: 1 } 
             
+    sonata.adminbundle.search.handler:
+        class: Application\Sonata\AdminBundle\Search\SearchHandler
+        arguments:
+        -  @sonata.admin.pool
+        
+    sonata.admin.block.search_result:
+        class: Application\Sonata\AdminBundle\Search\AdminSearchBlockService
+        tags:
+            - { name: sonata.block }
+        arguments:
+            - sonata.admin.block.search_result
+            - @templating
+            - @sonata.admin.pool
+            - @sonata.adminbundle.search.handler
+        
 #    sonata.form.type.passgen:
 #        class: Hackzilla\Bundle\PasswordGeneratorBundle\Form\Type\OptionType
 #        arguments: [@Hackzilla\PasswordGenerator\Generator\PasswordGeneratorInterface]  
