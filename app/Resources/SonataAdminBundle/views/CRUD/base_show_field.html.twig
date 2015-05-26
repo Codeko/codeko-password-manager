@@ -12,7 +12,7 @@ file that was distributed with this source code.
 <th{% if(is_diff|default(false)) %} class="diff"{% endif %}>{% block name %}{{ admin.trans(field_description.label, {}, field_description.translationDomain) }}{% endblock %}</th>
 <td>
 {% block field %}
-    {% if block('name') == 'Password' %}
+    {% if block('name') == 'Contraseña' %}
         {% if field_description.options.safe %}
             <div class="btn-group" id="botonCampoContraseña" style="margin-right:12px;cursor:pointer;"><a class="view_link" title="Mostrar"><i class="glyphicon glyphicon-zoom-in"> <span style="color:black">-</span> </i></a></div><input type="password" id="campoContraseña" size="100%" style="border:0px;background:none;" value="{{ value|raw|urldecrypt }}"/>
         {% else %}
