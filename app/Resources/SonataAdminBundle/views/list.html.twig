@@ -29,6 +29,10 @@ file that was distributed with this source code.
 {% endmacro %}
 {% block list_table %}
     <div class="col-xs-6 col-md-3">
-        {{ tree.navigate_child([root_category], admin, true, datagrid.values['category']['value'], 1) }}       
+        {% if datagrid.values['category']['value'] is defined %}
+            {{ tree.navigate_child([root_category], admin, true, datagrid.values['category']['value'], 1) }}
+        {% else %}
+            {{ tree.navigate_child([root_category], admin, true, 1, 1) }}
+        {% endif %}
     </div>
 {% endblock %}
