@@ -113,14 +113,6 @@ file that was distributed with this source code.
 </head>
 <body {% block body_attributes %}class="sonata-bc skin-black fixed"{% endblock %}>
     
-    {% if app.request.attributes.get('_route') == 'admin_sonata_user_password_list' %}
-        {% if app.request.getRequestUri()|slice((app.request.getRequestUri()|length)-4,app.request.getRequestUri()|length) == 'list'%}
-            <script>
-                    $(location).attr('href','list?filter[category][value]=1');
-            </script>
-        {% endif %}
-    {%endif%}
-    
     <div class="wrapper">
 
         {% block sonata_header %}
