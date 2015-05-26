@@ -4,6 +4,7 @@ namespace Application\Sonata\UserBundle\Entity;
 
 use Application\Sonata\UserBundle\Validator\Constraints as RollerworksPassword;
 use Doctrine\ORM\Mapping as ORM;
+
 use Application\Sonata\ClassificationBundle\Entity\Category;
 use Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -71,8 +72,8 @@ class Password {
      * Plain password. Used for model validation. Must not be persisted.
      *
      * @var string
-     * @RollerworksPassword\PasswordStrength(minLength=7, minStrength=3)
-     * @RollerworksPassword\PasswordRequirements(requireLetters=true, requireNumbers=true, requireCaseDiff=true)
+     * @RollerworksPassword\PasswordStrength(minLength=4, minStrength=1)
+     * @RollerworksPassword\PasswordRequirements(requireLetters=false, requireNumbers=false, requireCaseDiff=false)
      */
     protected $plainPassword;
 

@@ -2,7 +2,6 @@
 
 namespace Application\Sonata\EventListener;
 
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
@@ -44,13 +43,12 @@ class ExpiredPassword {
 
                 foreach ($results as $valor) {
                     $fecha = $valor["fechaExpira"];
-                    $segundos = strtotime($fecha) - strtotime('now');
-                    $diferencia_dias = intval($segundos / 60 / 60 / 24);
+                    $diferencia_segundos = strtotime($fecha) - strtotime('now');
+                    $diferencia_dias = intval($diferencia_segundos / 60 / 60 / 24);
                     
                     if (!empty($valor["fechaExpira"])) {
                         if ($diferencia_dias <= 0) {
-                            $response = new RedirectResponse($this->router->generate('fos_user_change_password'));
-                            $this->session->getFlashBag()->add('sonata_flash_error', 'Su clave "' . $valor["titulo"] . '" ha caducado');
+                            $this->session->getFlashBag()->add('sonata_flash_error', 'Su clave "' . $valor["titulo"] . '" ha expirado');
                         }
                     }
                 }

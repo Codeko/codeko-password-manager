@@ -49,7 +49,7 @@ class Category extends BaseCategory {
     public function setId($id) {
         $this->id = $id;
     }
-
+    
     function getPasswords() {
         return $this->passwords;
     }
