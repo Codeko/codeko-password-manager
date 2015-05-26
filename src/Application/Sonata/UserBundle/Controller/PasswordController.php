@@ -110,6 +110,7 @@ class PasswordController extends Controller {
         /** @var $form \Symfony\Component\Form\Form */
         $form = $this->admin->getForm();
         $form->setData($object);
+        
         if ($this->getRestMethod($request) == 'POST') {
             $form->submit($request);
             $isFormValid = $form->isValid();

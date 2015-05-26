@@ -19,8 +19,8 @@ use Symfony\Component\Validator\Constraint;
 class PasswordStrength extends Constraint
 {
     public $message = 'Contraseña demasiado débil';
-    public $minLength = 6;
-    public $minStrength;
+    public $minLength = 4;
+    public $minStrength = 1;
 
     /**
      * {@inheritDoc}

@@ -22,7 +22,7 @@ file that was distributed with this source code.
                 <param name="quality" value="high" />
                 <param name="scale" value="noscale" />
                 <param name="wmode" value="transparent" />
-                <param NAME="FlashVars" value="text={{ object.password }}">
+                <param NAME="FlashVars" value="text={{ object.password|urldecrypt }}">
                 <param name="bgcolor" value="transparent">
                 <embed src="{{ asset('bundles/applicationsonatauser/js/clippy.swf') }}"
                        wmode="transparent"
@@ -33,7 +33,7 @@ file that was distributed with this source code.
                        allowScriptAccess="always"
                        type="application/x-shockwave-flash"
                        pluginspage="http://www.macromedia.com/go/getflashplayer"
-                       FlashVars="text={{ object.password }}"
+                       FlashVars="text={{ object.password|urldecrypt }}"
                        bgcolor="transparent"
                        />
             </object></div></a>

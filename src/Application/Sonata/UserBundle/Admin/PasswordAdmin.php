@@ -18,6 +18,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\HttpFoundation\Request;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Hackzilla\PasswordGenerator\Generator\HybridPasswordGenerator;
 
 class PasswordAdmin extends Admin {
 
@@ -134,7 +135,7 @@ class PasswordAdmin extends Admin {
                 ->add('user')
                 ->add('usernamePass')
                 ->add('url')
-                ->add('password', 'password', array('label' => 'Password'))
+                ->add('password', 'password', array('label' => 'Contraseña'))
                 ->add('comentario', 'text')
                 ->add('fechaExpira')
                 ->add('category')
@@ -161,35 +162,16 @@ class PasswordAdmin extends Admin {
         $formMapper
                 ->add('usernamePass', null, array('required' => false))
                 ->add('url', null, array('required' => false))
-                ->add('plainPassword', 'password', array(
-                    'required' => (!$this->getSubject() || is_null($this->getSubject()->getId()))
+                ->add('plainPassword', 'password', array('label' => 'Contraseña',
+                    'required' => false
                 ))
                 ->add('comentario', 'textarea', array('required' => false))
                 ->add('fechaExpira', 'sonata_type_datetime_picker', array('required' => false))
                 ->add('tipoPassword', 'sonata_type_model', array('required' => false))
                 ->end()
                 ->with('Categorias', array('class' => 'col-md-6'))
-                ->add('category', 'sonata_type_model', array('label' => 'Categorias', 'expanded' => false, 'by_reference' => false, 'multiple' => true, 'required' => true))
-                // MOSTRANDO CATEGORIAS EN ARBOL 
-                //        if ($this->hasSubject()) {
-                //            $foo = $this->getSubject()->getCategory();
-                //            for ($i = 0; $i < count($foo); $i++) {
-                //                if ($foo[$i]->getId() === null) {
-                //                    $formMapper
-                //                            ->add('category', 'sonata_category_selector', array(
-                //                                'category' => $foo[$i] ? : null,
-                //                                'model_manager' => $foo[$i]->getModelManager(),
-                //                                'class' => $foo[$i]->getClass(),
-                //                                'required' => true,
-                //                                'context' => $foo[$i]->getContext()
-                //                    ));
-                //                }
-                //            }
-                //        }
-                //        $formMapper
+                ->add('category', 'sonata_type_model', array('label' => 'Categorias', 'expanded' => false, 'by_reference' => false, 'multiple' => true, 'required' => false))
                 ->add('enabled', null, array('required' => false))
-                ->end()
-                ->with('Generador', array('class' => 'col-md-6'))
                 ->end()
                 ->with('Archivos', array('class' => 'col-md-6'))
                 ->add('files', 'sonata_type_model', array(
@@ -229,7 +211,6 @@ class PasswordAdmin extends Admin {
             $url = $pass->getUrl();
             $pass->setUrl('http://' . $url);
         }
-
         // CODIFICANDO CONTRASEÑAS
         $this->getModelManager()->getEntityManager('Application\Sonata\UserBundle\Entity\Password')->persist($pass);
         $this->getModelManager()->getEntityManager('Application\Sonata\UserBundle\Entity\Password')->flush();
@@ -247,7 +228,24 @@ class PasswordAdmin extends Admin {
             $url = $pass->getUrl();
             $pass->setUrl('http://' . $url);
         }
+        // PASSWORD AUTOGENERADO (RETOCAR!!!!!!)
+        if ($pass->getPlainPassword() === null && $pass->getPassword() === null) {
 
+            $generator = new HybridPasswordGenerator();
+
+            $generator
+                    ->setUppercase()
+                    ->setLowercase()
+                    ->setNumbers()
+                    ->setSymbols(true)
+                    ->setSegmentLength(7)
+                    ->setSegmentCount(1)
+                    ->setSegmentSeparator('-');
+
+            $password = $generator->generatePassword();
+            
+            $pass->setPlainPassword($password);           
+        }
         // CODIFICANDO CONTRASEÑAS
         if ($pass->getPlainPassword() !== null) {
             $pass->setPassword($this->getConfigurationPool()->getContainer()->get('nzo_url_encryptor')->encrypt($pass->getPlainPassword()));
