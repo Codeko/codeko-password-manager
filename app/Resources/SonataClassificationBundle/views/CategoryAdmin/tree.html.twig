@@ -30,7 +30,7 @@ file that was distributed with this source code.
                     {% if element.description is not empty %}
                         <i class="text-muted"></i>
                     {% else %}
-                        &nbsp;
+                        -
                     {% endif %}
                     {#<a class="label label-default pull-right" href="{{ admin.generateObjectUrl('edit', element) }}">edit <i class="fa fa-magic"></i></a>#}
                 </div>
@@ -48,7 +48,7 @@ file that was distributed with this source code.
         'mode':   'tree',
         'action': action,
         'admin':  admin,
-    } only %}
+    } only %}   
 {% endblock %}
 
 {% block list_table %}
@@ -58,10 +58,7 @@ file that was distributed with this source code.
                 <h1 class="box-title">
                     {{ admin.trans('tree_catalog_title', {}, admin.translationdomain) }}
                     {% if not app.request.get('hide_context') %}
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                <strong class="text-info">{{ current_context.name }}</strong> <span class="caret"></span>
-                            </button>
+                        <div class="btn-group">                            
                             <ul class="dropdown-menu" role="menu">
                                 {% for category in root_categories %}
                                     <li>
@@ -82,6 +79,14 @@ file that was distributed with this source code.
             </div>
             <div class="box-content">
                 {{ tree.navigate_child([main_category], admin, true, 0) }}
+            </div>
+            <div>
+                <span class="btn-group" style="padding: 10px">
+                    <a class="btn btn-success btn-sm sonata-ba-action" href="{{ admin.generateUrl('create') }}">
+                        <i class="fa fa-plus-circle"></i>
+                        {{ 'link_action_create'|trans({}, 'SonataAdminBundle') }}
+                    </a>
+                </span>
             </div>
         </div>
     </div>

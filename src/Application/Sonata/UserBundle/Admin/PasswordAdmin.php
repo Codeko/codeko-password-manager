@@ -171,7 +171,7 @@ class PasswordAdmin extends Admin {
                 ->end()
                 ->with('Categorias', array('class' => 'col-md-6'))
                 ->add('category', 'sonata_type_model', array('label' => 'Categorias', 'expanded' => false, 'by_reference' => false, 'multiple' => true, 'required' => false))
-                ->add('enabled', null, array('required' => false))
+                ->add('enabled', null, array('required' => false, 'data' => true))
                 ->end()
                 ->with('Archivos', array('class' => 'col-md-6'))
                 ->add('files', 'sonata_type_model', array(
