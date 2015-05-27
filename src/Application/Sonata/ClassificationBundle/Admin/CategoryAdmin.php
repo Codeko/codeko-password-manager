@@ -94,7 +94,7 @@ class CategoryAdmin extends Admin {
 
         $formMapper->end()
                 ->with('Options', array('class' => 'col-md-6'))
-                ->add('enabled')
+                ->add('enabled', null, array('required' => false))
                 ->add('position', 'integer', array('required' => false, 'data' => 0))
                 ->end()
         ;

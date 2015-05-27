@@ -163,7 +163,8 @@ class PasswordAdmin extends Admin {
                 ->add('usernamePass', null, array('required' => false))
                 ->add('url', null, array('required' => false))
                 ->add('plainPassword', 'password', array('label' => 'Contraseña',
-                    'required' => false
+                    'required' => false,
+                    'attr' => array('placeholder' => 'Si deja el campo vacío la contraseña será autogenerada ')
                 ))
                 ->add('comentario', 'textarea', array('required' => false))
                 ->add('fechaExpira', 'sonata_type_datetime_picker', array('required' => false))
@@ -252,8 +253,8 @@ class PasswordAdmin extends Admin {
                     ->setSegmentSeparator('-');
 
             $password = $generator->generatePassword();
-            
-            $pass->setPlainPassword($password);           
+
+            $pass->setPlainPassword($password);
         }
         // CODIFICANDO CONTRASEÑAS
         if ($pass->getPlainPassword() !== null) {

@@ -406,6 +406,10 @@
                 <source>message_form_group_empty</source>
                 <target>No hay campos disponibles.</target>
             </trans-unit>
+            <trans-unit id="TipoPass">
+                <source>TipoPass</source>
+                <target>Tipos de contraseñas</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

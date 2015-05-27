@@ -162,6 +162,14 @@
                 <source>breadcrumb.link_category_tree</source>
                 <target>Árbol de categorías</target>
             </trans-unit>
+            <trans-unit id="active">
+                <source>active</source>
+                <target>Activo</target>
+            </trans-unit>
+            <trans-unit id="disabled">
+                <source>disabled</source>
+                <target>Deshabilitado</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
