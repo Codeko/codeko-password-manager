@@ -14,7 +14,7 @@
             </trans-unit>
             <trans-unit id="3">
                 <source>HEADING_PASSWORDS</source>
-                <target>Passwords</target>
+                <target>Contraseña(s) generada(s)</target>
             </trans-unit>
             <trans-unit id="4">
                 <source>HEADING_DESCRIPTION</source>
