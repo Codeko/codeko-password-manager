@@ -86,7 +86,7 @@ security:
                 path: /logout
                 target: /login
             anonymous:          true 
-            switch_user:        true
+            switch_user:        false
             #switch_user: { role: ROLE_ADMIN, parameter: _want_to_be_this_user }
 
     # with these settings you can restrict or allow access for different parts
