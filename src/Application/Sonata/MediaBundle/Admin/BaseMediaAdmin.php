@@ -24,18 +24,20 @@ abstract class BaseMediaAdmin extends Admin {
     protected $pool;
     protected $categoryManager;
 
+    //Necesitamos idPropietario en la entidad media
+    
 //    public function createQuery($context = 'list') {
 //        $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
 //        $idUser = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser()->getId();
-////        $idpasswordPropietario = $object->getPassword()->getUser()->getId();
-////        echo "<html><script>alert('".$this->pool->."');</script></html>";
+////        $idPropietario =  $this->categoryManager->getIdPropietario;
+////        echo "<html><script>alert('".$idpasswordPropietario."');</script></html>";
 //
 //        if (!$user->isSuperAdmin()) {
 //            $query = parent::createQuery($context);
 //            $query->andWhere(
-//                    $query->expr()->eq($query->getRootAliases()[0] . '.password', ':password')
+//                    $query->expr()->eq($query->getRootAliases()[0] . '.idPropietario', ':idPropietario')
 //            );
-//            $query->setParameter(':password', $idUser);
+//            $query->setParameter(':idPropietario', $idUser);
 //        } else {
 //            $query = parent::createQuery($context);
 //        }
