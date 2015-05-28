@@ -187,8 +187,14 @@ file that was distributed with this source code.
                                         };
 
                                     </script>
-
+                                    
                                     <div class="pull-right">
+                                        <span class="btn-group" style="padding: 10px;margin-right:10px;">
+                                    <a class="btn btn-success btn-sm sonata-ba-action" href="{{ admin.generateUrl('create') }}{% if 'password' in app.request.attributes.get('_route') %}?idCat={% if datagrid.values['category']['value'] is defined %}{{ datagrid.values['category']['value'] }}{% else %}1{% endif %}{% endif %}">
+                                        <i class="fa fa-plus-circle"></i>
+                                        {{ 'link_action_create'|trans({}, 'SonataAdminBundle') }}
+                                    </a>
+                                </span>
                                         {% if admin.hasRoute('export') and admin.isGranted("EXPORT") and admin.getExportFormats()|length %}
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">

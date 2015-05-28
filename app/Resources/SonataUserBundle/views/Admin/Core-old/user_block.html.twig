@@ -28,12 +28,12 @@
                             <button type ="button" class="btn btn-danger btn-sm" onclick="window.location.href = '{{ url('sonata_user_admin_security_logout') }}'">{{ 'user_block_logout'|trans({}, 'SonataUserBundle') }}</button>
                         </div>
                         <!-- END SIDEBAR BUTTONS -->
-                        <div class="profile-userbuttons">                         
+                        {#<div class="profile-userbuttons">                         
                             {% if is_granted('ROLE_PREVIOUS_ADMIN') and sonata_user.impersonating %}
                                 Suplantando a {{ app.user.username }} </br>                             
                                 <button type ="button" class="btn btn-instagram btn-sm" onclick="window.location.href = '{{ url(sonata_user.impersonating.route, sonata_user.impersonating.parameters| merge({'_switch_user': '_exit'})) }}'">Desuplantar</a>
                             {% endif %}
-                        </div>
+                        </div>#}
                     </div>
                 </div>
             <!--</div>-->
