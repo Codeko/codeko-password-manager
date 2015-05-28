@@ -24,6 +24,24 @@ abstract class BaseMediaAdmin extends Admin {
     protected $pool;
     protected $categoryManager;
 
+//    public function createQuery($context = 'list') {
+//        $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
+//        $idUser = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser()->getId();
+////        $idpasswordPropietario = $object->getPassword()->getUser()->getId();
+////        echo "<html><script>alert('".$this->pool->."');</script></html>";
+//
+//        if (!$user->isSuperAdmin()) {
+//            $query = parent::createQuery($context);
+//            $query->andWhere(
+//                    $query->expr()->eq($query->getRootAliases()[0] . '.password', ':password')
+//            );
+//            $query->setParameter(':password', $idUser);
+//        } else {
+//            $query = parent::createQuery($context);
+//        }
+//        return $query;
+//    }
+
     /**
      * @param string                   $code
      * @param string                   $class
