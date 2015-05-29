@@ -8,11 +8,9 @@
             {{ "form_not_available"|trans({}, "SonataAdminBundle") }}
         </div>
     {% else %}
-        {# #}
-        {# #}
+
         {# INTENTANDO ABRIR GENERADOR CONTRASEÑAS CON AJAX #}
-        {# #}
-        {# #}
+
         {% if 'Password' in admin.getClass() %}
             <script>
                 $(document).ready(function(){
@@ -42,10 +40,7 @@
                 </div>
             </div>     
         {% endif %}
-        {# #}
-        {# #}
-        {# #}
-        {# #}
+
         <form
             {% if admin_pool.getOption('form_type') == 'horizontal' %}class="form-horizontal"{% endif %}
             role="form"

@@ -45,7 +45,7 @@ class ExpiredPassword {
                     $fecha = $valor["fechaExpira"];
                     $diferencia_segundos = strtotime($fecha) - strtotime('now');
                     $diferencia_dias = intval($diferencia_segundos / 60 / 60 / 24);
-                    
+
                     if (!empty($valor["fechaExpira"])) {
                         if ($diferencia_dias <= 0) {
                             $this->session->getFlashBag()->add('sonata_flash_error', 'Su clave "' . $valor["titulo"] . '" ha expirado');

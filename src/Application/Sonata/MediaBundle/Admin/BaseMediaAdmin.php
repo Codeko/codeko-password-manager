@@ -24,6 +24,25 @@ abstract class BaseMediaAdmin extends Admin {
     protected $pool;
     protected $categoryManager;
 
+    //Necesitamos idPropietario en la entidad "Media"
+    
+    public function createQuery($context = 'list') {
+        $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
+        $idUser = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser()->getId();
+
+        if (!$user->isSuperAdmin()) {
+            $query = parent::createQuery($context);
+            $query->andWhere(
+                    $query->expr()->eq($query->getRootAliases()[0] . '.propietario', ':user_id')
+            );
+            $query->setParameter(':user_id', $idUser);
+        } else {
+            $query = parent::createQuery($context);
+        }
+        
+        return $query;
+    }
+
     /**
      * @param string                   $code
      * @param string                   $class
@@ -74,6 +93,7 @@ abstract class BaseMediaAdmin extends Admin {
 
         if ($media->getId()) {
             $formMapper->add('password', 'sonata_type_model', array('label' => 'Pass asociado', 'attr' => array('allow_add' => false)));
+            //$formMapper->add('propietario', 'sonata_type_model', array('label' => 'Propietario asociado', 'attr' => array('allow_add' => false)));
             $provider->buildEditForm($formMapper);
         } else {
             $provider->buildCreateForm($formMapper);

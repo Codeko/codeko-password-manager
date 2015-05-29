@@ -3,7 +3,7 @@
     {{ form_errors(form) }}
     {{ form_rest(form) }}
 
-    {# OCULTANDO CAMPO "NUMERO DE CONTRASEÑAS", POR DEFECTO SE CREA UNA SOLA #}
+    {# ESILOS #}
     <script>
         var labels = document.getElementsByTagName('label');
         for (var i = 0; i < labels.length; i++) {
@@ -14,6 +14,7 @@
     <script>
         function recogerPass() {
             $('#pppp').css('display', 'block');
+            
             $('.passwords').html($('#passTemp').find('#pppp').html());
 
             $("#passTemp").html("");

@@ -21,4 +21,4 @@ sonata_user:
         group:
             class: Application\Sonata\UserBundle\Admin\Model\GroupAdmin  
             
-    impersonating_route: sonata_user_impersonating
+#    impersonating_route: sonata_user_impersonating

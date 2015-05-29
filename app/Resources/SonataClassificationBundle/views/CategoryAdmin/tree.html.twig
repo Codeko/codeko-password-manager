@@ -1,25 +1,10 @@
-{#
-
-This file is part of the Sonata package.
-
-(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
-
-For the full copyright and license information, please view the LICENSE
-file that was distributed with this source code.
-
-#}
-
-{#
-    This template is not used at all, it is just a template that you can use to create
-    your own custom tree view.
-#}
 {% extends 'SonataAdminBundle:CRUD:base_list.html.twig' %}
 
 {% import _self as tree %}
 {% macro navigate_child(collection, admin, root, depth) %}
     <ul{% if root %} class="sonata-tree sonata-tree--toggleable js-treeview"{% endif %}>
         {% for element in collection %}
-            <li class="sonata-ba-list-field" objectId="{{ element.id }}" >
+            <li class="sonata-ba-list-field" objectId="{{ element.id }}">
                 <div class="sonata-tree__item"{% if depth < 2 %} data-treeview-toggled{% endif %}>
                     {% if element.parent or root %}<i class="fa fa-caret-right" data-treeview-toggler></i>{% endif %}
                     <a class="sonata-tree__item__edit" href="{{ admin.generateObjectUrl('edit', element) }}">
@@ -32,7 +17,7 @@ file that was distributed with this source code.
                     {% else %}
                         -
                     {% endif %}
-                    {#<a class="label label-default pull-right" href="{{ admin.generateObjectUrl('edit', element) }}">edit <i class="fa fa-magic"></i></a>#}
+                    
                 </div>
 
                 {% if element.children|length %}

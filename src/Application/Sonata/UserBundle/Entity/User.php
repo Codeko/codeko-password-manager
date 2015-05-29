@@ -42,11 +42,6 @@ class User extends BaseUser {
         return $this->id;
     }
 
-//
-//    public function __construct() {
-//        $this->passwords = new \Doctrine\Common\Collections\ArrayCollection();
-//    }
-
     public function addPassword(Password $password) {
         $this->passwords[] = $password;
     }
