@@ -8,6 +8,44 @@
             {{ "form_not_available"|trans({}, "SonataAdminBundle") }}
         </div>
     {% else %}
+        {# #}
+        {# #}
+        {# INTENTANDO ABRIR GENERADOR CONTRASEÑAS CON AJAX #}
+        {# #}
+        {# #}
+        {% if 'Password' in admin.getClass() %}
+            <script>
+                $(document).ready(function(){
+                    $('.campoPass').after($('#botonPass'));
+                    $('#botonPass').show(); 
+                });
+            </script>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-warning" id='botonPass' data-toggle="modal" data-target="#myModal" style='margin-top: 6px; display: none;'>
+                <i class="fa fa-key fa-spin"></i>
+                {{ 'Generar contraseña' }}
+            </button>
+        {% endif %}
+        {% if 'Password' in admin.getClass() %}
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content sonata-ba-form">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Generar Contraseña</h4>
+                        </div>                      
+                        <div class="modal-body box" id="prueba">
+                            {% render controller("HackzillaPasswordGeneratorBundle:Generator:form", {'mode': 'hybrid'}) %}
+                        </div>                                   
+                    </div>
+                </div>
+            </div>     
+        {% endif %}
+        {# #}
+        {# #}
+        {# #}
+        {# #}
         <form
             {% if admin_pool.getOption('form_type') == 'horizontal' %}class="form-horizontal"{% endif %}
             role="form"
@@ -73,14 +111,7 @@
                             {% else %}
                                 <button type="submit" class="btn btn-success" name="btn_create"><i class="fa fa-plus-circle"></i> {{ 'btn_create'|trans({}, 'SonataAdminBundle') }}</button>
                             {% endif %}
-                        {% else %}                        
-                            {% if 'Password' in admin.getClass() %}
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">
-                                    <i class="fa fa-key fa-spin"></i>
-                                    {{ 'Generar contraseña' }}
-                                </button>
-                            {% endif %}
+                        {% else %}                                                    
                             {% if admin.supportsPreviewMode %}
                                 <button class="btn btn-info persist-preview" name="btn_preview" type="submit">
                                     <i class="fa fa-eye"></i>
@@ -115,32 +146,7 @@
                     {% endblock %}
                 </div>
             {% endblock formactions %}
-        </form>
-        {# #}
-        {# #}
-        {# INTENTANDO ABRIR GENERADOR CONTRASEÑAS CON AJAX #}
-        {# #}
-        {# #}
-        {% if 'Password' in admin.getClass() %}
-            <!-- Modal -->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Generar Contraseña</h4>
-                        </div>
-                        <div class="modal-body">
-                            {% render controller("HackzillaPasswordGeneratorBundle:Generator:form", {'mode': 'hybrid'}) %}
-                        </div>                                   
-                    </div>
-                </div>
-            </div>
-        {% endif %}
-        {# #}
-        {# #}
-        {# #}
-        {# #}
+        </form>       
     {% endif%}
 
     {{ sonata_block_render_event('sonata.admin.edit.form.bottom', { 'admin': admin, 'object': object }) }}

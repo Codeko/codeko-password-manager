@@ -165,7 +165,7 @@ class PasswordAdmin extends Admin {
                 ->add('url', null, array('required' => false))
                 ->add('plainPassword', 'password', array('label' => 'Contraseña',
                     'required' => false,
-                    'attr' => array('placeholder' => 'Si deja el campo vacío la contraseña será autogenerada ')
+                    'attr' => array('class' => 'campoPass')
                 ))
                 ->add('comentario', 'textarea', array('required' => false))
                 ->add('fechaExpira', 'sonata_type_datetime_picker', array('required' => false))
@@ -214,6 +214,11 @@ class PasswordAdmin extends Admin {
             $pass->setUrl('http://' . $url);
         }
         // CODIFICANDO CONTRASEÑAS
+        if ($pass->getPlainPassword() !== null) {
+            $pass->setPassword($this->getConfigurationPool()->getContainer()->get('nzo_url_encryptor')->encrypt($pass->getPlainPassword()));
+        } else {
+            $pass->setPassword($this->getConfigurationPool()->getContainer()->get('nzo_url_encryptor')->encrypt($pass->getPassword()));
+        }
         $this->getModelManager()->getEntityManager('Application\Sonata\UserBundle\Entity\Password')->persist($pass);
         $this->getModelManager()->getEntityManager('Application\Sonata\UserBundle\Entity\Password')->flush();
         // CATEGORIA DEFAULT SI NO SE SELECCIONA NINGUNA EN EL FORMULARIO
@@ -230,30 +235,7 @@ class PasswordAdmin extends Admin {
             $url = $pass->getUrl();
             $pass->setUrl('http://' . $url);
         }
-        // PASSWORD AUTOGENERADO (RETOCAR!!!!!!)
-        if ($pass->getPlainPassword() === null && $pass->getPassword() === null) {
-
-            $generator = new HybridPasswordGenerator();
-
-            $generator
-                    ->setUppercase()
-                    ->setLowercase()
-                    ->setNumbers()
-                    ->setSymbols(true)
-                    ->setSegmentLength(7)
-                    ->setSegmentCount(1)
-                    ->setSegmentSeparator('-');
-
-            $password = $generator->generatePassword();
-
-            $pass->setPlainPassword($password);
-        }
-        // CODIFICANDO CONTRASEÑAS
-        if ($pass->getPlainPassword() !== null) {
-            $pass->setPassword($this->getConfigurationPool()->getContainer()->get('nzo_url_encryptor')->encrypt($pass->getPlainPassword()));
-        } else {
-            $pass->setPassword($this->getConfigurationPool()->getContainer()->get('nzo_url_encryptor')->encrypt($pass->getPassword()));
-        }
+        
         // CATEGORIA DEFAULT SI NO SE SELECCIONA NINGUNA EN EL FORMULARIO
         if (count($pass->getCategory()) === 0) {
             $pass->addCategory($this->getConfigurationPool()->getContainer()->get('doctrine')->getRepository('Application\Sonata\ClassificationBundle\Entity\Category')->find(1));
