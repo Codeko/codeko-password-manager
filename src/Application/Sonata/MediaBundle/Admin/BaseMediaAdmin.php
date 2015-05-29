@@ -24,7 +24,7 @@ abstract class BaseMediaAdmin extends Admin {
     protected $pool;
     protected $categoryManager;
 
-    //Necesitamos idPropietario en la entidad media
+    //Necesitamos idPropietario en la entidad "Media"
     
 //    public function createQuery($context = 'list') {
 //        $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
