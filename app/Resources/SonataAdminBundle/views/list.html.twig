@@ -17,8 +17,8 @@ file that was distributed with this source code.
             <li>
                 <div class="sonata-tree__item{% if element.id == current_category %} is-active{% endif %}"{% if depth < 2 %} data-treeview-toggled{% endif %}>
                     {% if element.parent or root %}<i class="fa fa-caret-right" data-treeview-toggler></i>{% endif %}
-                    <div style="width:100%;height:100%;cursor:pointer;" onclick="location.href='{{ url(app.request.attributes.get('_route'), app.request.query.all|merge({'filter[category][value]': element.id})) }}'">
-                    <a class="sonata-tree__item__edit" href="{{ url(app.request.attributes.get('_route'), app.request.query.all|merge({'filter[category][value]': element.id})) }}">{{ element.name }}</a>
+                    <div style="width:100%;height:100%;cursor:pointer;" onclick="location.href = '{{ url(app.request.attributes.get('_route'), app.request.query.all|merge({'filter[category][value]': element.id})) }}'">
+                        <a class="sonata-tree__item__edit" href="{{ url(app.request.attributes.get('_route'), app.request.query.all|merge({'filter[category][value]': element.id})) }}">{{ element.name }}</a>
                     </div>
                 </div>
                 {% if element.children|length %}
