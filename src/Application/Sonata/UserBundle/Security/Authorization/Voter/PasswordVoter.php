@@ -11,6 +11,8 @@ class PasswordVoter implements VoterInterface {
     const EDITARPASSWORD = 'ROLE_EDITAR_ENTIDAD';
     const BORRARPASSWORD = 'ROLE_BORRAR_ENTIDAD';
     const EDITARUSUARIO = 'ROLE_EDITAR_USUARIO';
+    const EDITARMULTIMEDIA = 'ROLE_EDITAR_MULTIMEDIA';
+    const BORRARMULTIMEDIA = 'ROLE_BORRAR_MULTIMEDIA';
 
     public function supportsAttribute($attribute) {
         return in_array($attribute, array(
@@ -18,6 +20,8 @@ class PasswordVoter implements VoterInterface {
             self::EDITARPASSWORD,
             self::BORRARPASSWORD,
             self::EDITARUSUARIO,
+            self::EDITARMULTIMEDIA,
+            self::BORRARMULTIMEDIA,
         ));
     }
 
@@ -44,6 +48,24 @@ class PasswordVoter implements VoterInterface {
                 if (!$user->isSuperAdmin()) {
 
                     /* @var $idpasswordPropietario type */
+                    if ($idpasswordPropietario != $iduser) {
+                        $vote = VoterInterface::ACCESS_DENIED;
+                        return $vote;
+                    }
+                    $vote = VoterInterface::ACCESS_GRANTED;
+                    return $vote;
+                } else {
+                    $vote = VoterInterface::ACCESS_GRANTED;
+                    return $vote;
+                }
+            }
+
+            if ($attribute === 'ROLE_EDITAR_MULTIMEDIA' || $attribute === 'ROLE_BORRAR_MULTIMEDIA') {
+                $user = $token->getUser();
+                $iduser = $user->getId();
+                $idpasswordPropietario = $object->getPassword()->getUser()->getId();
+
+                if (!$user->isSuperAdmin()) {
                     if ($idpasswordPropietario != $iduser) {
                         $vote = VoterInterface::ACCESS_DENIED;
                         return $vote;

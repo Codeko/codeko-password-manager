@@ -1,28 +1,19 @@
-{#
-
-This file is part of the Sonata package.
-
-(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
-
-For the full copyright and license information, please view the LICENSE
-file that was distributed with this source code.
-
-#}
-
 {% extends base_template %}
 
+
 {% block actions %}
-    
+{% if app.request.attributes.get('_route') == 'admin_sonata_media_media_list' %}{% else %}
     {% spaceless %}
         {% if admin.hasRoute('create') and admin.isGranted('CREATE')%}
             <li>{% include 'SonataAdminBundle:Core:create_button.html.twig' %}</li>
             {% endif %}
         {% endspaceless %}
-    {% endblock %}
+    {% endif %}
+{% endblock %}
 
 {% block tab_menu %}{{ knp_menu_render(admin.sidemenu(action), {'currentClass' : 'active', 'template': admin_pool.getTemplate('tab_menu_template')}, 'twig') }}{% endblock %}
 {% block list_table %}
-    
+
     {# CARGANDO ARBOL DE CATEGORIAS EN LA VISTA PASSWORD_LIST #}
     {% if 'Password' in admin.getClass() %}
         {% include 'SonataAdminBundle::list.html.twig' %}   
@@ -93,6 +84,17 @@ file that was distributed with this source code.
                             {% endblock %}
                         </table>
                     {% else %}
+                    {% if app.request.attributes.get('_route') == 'admin_sonata_media_media_list' %}
+                    <div class="info-box">
+                            <span class="info-box-icon bg-aqua"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">{{ 'no_result'|trans({}, 'SonataAdminBundle') }}</span>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
+                            </div><!-- /.info-box-content -->
+                        </div>
+                    {% else %}
                         <div class="info-box">
                             <span class="info-box-icon bg-aqua"><i class="fa fa-arrow-circle-right"></i></span>
                             <div class="info-box-content">
@@ -108,19 +110,20 @@ file that was distributed with this source code.
                             </div><!-- /.info-box-content -->
                         </div>
                     {% endif %}
+                {% endif %}
 
-                    {{ sonata_block_render_event('sonata.admin.list.table.bottom', { 'admin': admin }) }}
-                </div>
-                {% block list_footer %}
-                    {% if admin.datagrid.results|length > 0 %}
-                        <div class="box-footer">
-                            <div class="form-inline clearfix">
-                                {% if not app.request.isXmlHttpRequest %}
-                                    <div class="pull-left">
-                                        {% if admin.hasRoute('batch') and batchactions|length > 0  %}
-                                            {% block batch %}
-                                                <script>
-                                                    {% block batch_javascript %}
+                {{ sonata_block_render_event('sonata.admin.list.table.bottom', { 'admin': admin }) }}
+            </div>
+            {% block list_footer %}
+                {% if admin.datagrid.results|length > 0 %}
+                    <div class="box-footer">
+                        <div class="form-inline clearfix">
+                            {% if not app.request.isXmlHttpRequest %}
+                                <div class="pull-left">
+                                    {% if admin.hasRoute('batch') and batchactions|length > 0  %}
+                                        {% block batch %}
+                                            <script>
+                                                {% block batch_javascript %}
                                                         jQuery(document).ready(function ($) {
                                                             $('#list_batch_checkbox').on('ifChanged', function () {
                                                                 $(this)
@@ -140,98 +143,106 @@ file that was distributed with this source code.
                                                                     .trigger('ifChanged')
                                                                     ;
                                                         });
-                                                    {% endblock %}
-                                                </script>
-
-                                                {% block batch_actions %}
-                                                    <!-- -->
-                                                    <label class="checkbox todos" for="{{ admin.uniqid }}_all_elements">
-                                                        <input type="checkbox" name="all_elements" id="{{ admin.uniqid }}_all_elements">
-                                                        {{ 'all_elements'|trans({}, 'SonataAdminBundle') }}
-                                                        ({{ admin.datagrid.pager.nbresults }})
-                                                    </label>
-                                                    <!-- -->
-                                                    <select name="action" style="width: auto; height: auto" class="form-control" onchange="comprobarVisibilidad()">
-                                                        {% for action, options in batchactions %}
-                                                            <option value="{{ action }}">{{ options.label }}</option>
-                                                        {% endfor %}
-                                                    </select>
                                                 {% endblock %}
+                                            </script>
 
-                                                <input type="submit" class="btn btn-small btn-primary" value="{{ 'btn_batch'|trans({}, 'SonataAdminBundle') }}">
+                                            {% block batch_actions %}
+                                                <!-- -->
+                                                <label class="checkbox todos" for="{{ admin.uniqid }}_all_elements">
+                                                    <input type="checkbox" name="all_elements" id="{{ admin.uniqid }}_all_elements">
+                                                    {{ 'all_elements'|trans({}, 'SonataAdminBundle') }}
+                                                    ({{ admin.datagrid.pager.nbresults }})
+                                                </label>
+                                                <!-- -->
+                                                <select name="action" style="width: auto; height: auto" class="form-control" onchange="comprobarVisibilidad()">
+                                                    {% for action, options in batchactions %}
+                                                        <option value="{{ action }}">{{ options.label }}</option>
+                                                    {% endfor %}
+                                                </select>
                                             {% endblock %}
-                                        {% endif %}
-                                    </div>
-                                    <script>
-                                        $(document).ready(function () {
-                                            $('div.iradio_flat-blue').addClass('invisible');
-                                        });
 
-                                        var comprobarVisibilidad = function () {
-
-                                            if ($('#select2-chosen-47').html() !== 'Duplicar') {
-                                                $('div.icheckbox_flat-blue').removeClass('invisible');
-                                                $('div.iradio_flat-blue').addClass('invisible');
-                                                if ($('.todos > div').hasClass('checked')) {
-                                                    $('.todos').click();
-                                                }
-                                            } else {
-                                                $('div.icheckbox_flat-blue').addClass('invisible');
-                                                $('div.iradio_flat-blue').removeClass('invisible');
-                                                if ($('.todos > div').hasClass('checked')) {
-                                                } else {
-                                                    $('.todos').click();
-                                                }
-                                            }
-
-                                        };
-
-                                    </script>
-
-                                    <div class="pull-right">
-                                        {% if admin.hasRoute('export') and admin.isGranted("EXPORT") and admin.getExportFormats()|length %}
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                                    <i class="glyphicon glyphicon-export"></i>
-                                                    {{ "label_export_download"|trans({}, "SonataAdminBundle") }}
-                                                    <span class="caret"></span>
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    {% for format in admin.getExportFormats() %}
-                                                        <li>
-                                                            <a href="{{ admin.generateUrl('export', admin.modelmanager.paginationparameters(admin.datagrid, 0) + {'format' : format}) }}">
-                                                                <i class="glyphicon glyphicon-download"></i>
-                                                                {{ format|upper }}
-                                                            </a>
-                                                        <li>
-                                                        {% endfor %}
-                                                </ul>
-                                            </div>
-
-                                            &nbsp;-&nbsp;
-                                        {% endif %}
-
-                                        {% block pager_results %}
-                                            {% include admin.getTemplate('pager_results') %}
+                                            <input type="submit" class="btn btn-small btn-primary" value="{{ 'btn_batch'|trans({}, 'SonataAdminBundle') }}">
                                         {% endblock %}
-                                    </div>
-                                {% endif %}
-                            </div>
+                                    {% endif %}
+                                </div>
+                                <script>
+                                    $(document).ready(function () {
+                                        $('div.iradio_flat-blue').addClass('invisible');
+                                    });
 
-                            {% block pager_links %}
-                                {% if admin.datagrid.pager.haveToPaginate() %}
-                                    <hr/>
-                                    {% include admin.getTemplate('pager_links') %}
-                                {% endif %}
-                            {% endblock %}
+                                    var comprobarVisibilidad = function () {
+
+                                        if ($('#select2-chosen-47').html() !== 'Duplicar') {
+                                            $('div.icheckbox_flat-blue').removeClass('invisible');
+                                            $('div.iradio_flat-blue').addClass('invisible');
+                                            if ($('.todos > div').hasClass('checked')) {
+                                                $('.todos').click();
+                                            }
+                                        } else {
+                                            $('div.icheckbox_flat-blue').addClass('invisible');
+                                            $('div.iradio_flat-blue').removeClass('invisible');
+                                            if ($('.todos > div').hasClass('checked')) {
+                                            } else {
+                                                $('.todos').click();
+                                            }
+                                        }
+
+                                    };
+
+                                </script>
+
+                                <div class="pull-right">
+                                    {% if app.request.attributes.get('_route') == 'admin_sonata_user_password_list' or app.request.attributes.get('_route') == 'admin_sonata_user_tipopass_list' or app.request.attributes.get('_route') == 'admin_sonata_classification_category_list' %}
+                                    <span class="btn-group" style="padding: 10px;margin-right:10px;">
+                                        <a class="btn btn-success btn-sm sonata-ba-action" href="{{ admin.generateUrl('create') }}{% if 'password' in app.request.attributes.get('_route') %}?idCat={% if datagrid.values['category']['value'] is defined %}{{ datagrid.values['category']['value'] }}{% else %}1{% endif %}{% endif %}">
+                                            <i class="fa fa-plus-circle"></i>
+                                            {{ 'link_action_create'|trans({}, 'SonataAdminBundle') }}
+                                        </a>
+                                    </span>
+                                        {% endif %}
+                                    {% if admin.hasRoute('export') and admin.isGranted("EXPORT") and admin.getExportFormats()|length %}
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                <i class="glyphicon glyphicon-export"></i>
+                                                {{ "label_export_download"|trans({}, "SonataAdminBundle") }}
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                {% for format in admin.getExportFormats() %}
+                                                    <li>
+                                                        <a href="{{ admin.generateUrl('export', admin.modelmanager.paginationparameters(admin.datagrid, 0) + {'format' : format}) }}">
+                                                            <i class="glyphicon glyphicon-download"></i>
+                                                            {{ format|upper }}
+                                                        </a>
+                                                    <li>
+                                                    {% endfor %}
+                                            </ul>
+                                        </div>
+
+                                        &nbsp;-&nbsp;
+                                    {% endif %}
+
+                                    {% block pager_results %}
+                                        {% include admin.getTemplate('pager_results') %}
+                                    {% endblock %}
+                                </div>
+                            {% endif %}
                         </div>
-                    {% endif %}
-                {% endblock %}
-            </div>
-            {% if admin.hasRoute('batch') %}
-            </form>
-        {% endif %}
-    </div>
+
+                        {% block pager_links %}
+                            {% if admin.datagrid.pager.haveToPaginate() %}
+                                <hr/>
+                                {% include admin.getTemplate('pager_links') %}
+                            {% endif %}
+                        {% endblock %}
+                    </div>
+                {% endif %}
+            {% endblock %}
+        </div>
+        {% if admin.hasRoute('batch') %}
+        </form>
+    {% endif %}
+</div>
 {% endblock %}
 
 {% block list_filters_actions %}

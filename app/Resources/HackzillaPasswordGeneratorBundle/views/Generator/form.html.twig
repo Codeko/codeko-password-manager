@@ -1,0 +1,131 @@
+{% block form %}
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    {{ form_rest(form) }}
+
+    {# ESILOS #}
+    <script>
+        var labels = document.getElementsByTagName('label');
+        for (var i = 0; i < labels.length; i++) {
+            labels[i].style.paddingRight = "15px";
+        }
+    </script>
+
+    <script>
+        function recogerPass() {
+            $('#pppp').css('display', 'block');
+            
+            $('.passwords').html($('#passTemp').find('#pppp').html());
+
+            $("#passTemp").html("");
+        }
+    </script>
+
+    <script>
+        // GENERANDO PASS
+        $(document).ready(function () {
+            // process the form
+            $('.btn-reset-test').click(function (event) {
+                $('input[name=quantity]').val(5);
+                $('.icheckbox_flat-blue').addClass('checked');
+                $('input[type=checkbox]').attr('checked', true);
+                $('input[name=symbols]').parent().removeClass('checked');
+                $('input[name=segment_count]').val(4);
+                $('input[name=segment_length]').val(3);
+                event.preventDefault();
+                event.stopPropagation();
+            });
+            $('#prueba form').submit(function (event) {
+                // get the form data
+                // there are many ways to get this data using jQuery (you can use the class or id also)
+                var formData = {
+                    'quantity': $('input[name=quantity]').val(),
+                    'segment_count': $('input[name=segment_count]').val(),
+                    'segment_length': $('input[name=segment_length]').val()
+                };
+
+                if ($('input[name=uppercase]').parent().hasClass("checked")) {
+                    formData['uppercase'] = '1';
+                }
+                ;
+                if ($('input[name=lowercase]').parent().hasClass("checked")) {
+                    formData['lowercase'] = '1';
+                }
+                ;
+                if ($('input[name=numbers]').parent().hasClass("checked")) {
+                    formData['numbers'] = '1';
+                }
+                ;
+                if ($('input[name=symbols]').parent().hasClass("checked")) {
+                    formData['symbols'] = '1';
+                }
+                ;
+                if ($('input[name=avoid_similar]').parent().hasClass("checked")) {
+                    formData['avoid_similar'] = '1';
+                }
+                ;
+
+                // process the form
+                $.ajax({
+                    type: 'GET', // define the type of HTTP verb we want to use 
+                    url: '{{path('hackzilla_password_generator_hybrid_form')}}', // the url where we want to POST
+                    data: formData, // our data object
+                    success: function (msg) {
+                        $("#passTemp").html(msg);
+                        recogerPass();
+                    },
+                    error: function (msg) {
+                        $("#passTemp").html(msg);
+                    }
+                })
+                        // using the done promise callback
+                        .done(function (data) {
+                            // log data to the console so we can see
+                            console.log(data);
+                            // here we will handle errors and validation messages
+                        });
+                // stop the form from submitting the normal way and refreshing the page
+                event.preventDefault();
+                event.stopPropagation();
+            });
+        });
+    </script>
+
+    <div id="passTemp" style="display:none;"></div>
+
+    <script>
+        function selectPass(pass) {
+            $(".campoPass").val(pass);
+            $("#myModal").modal('hide');
+        }
+    </script>
+
+    <div class="passwords modal-body" id="pppp" style="display:hidden">
+        <h4>{{ "HEADING_PASSWORDS"|trans }}</h4>
+        <div>
+            <ul>
+                {% for password in passwords -%}
+                    <li><a href="#" onclick="selectPass('{{ password }}');">{{ password }}</a></li>
+                    {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="modal-footer actions">
+        <input type="submit" class="btn btn-success" value="{{ 'BUTTON_GENERATE'|trans }}">
+        <input type="reset" class="btn btn-danger btn-reset-test" value="{{ 'BUTTON_RESET'|trans }}">       
+    </div>
+    {{ form_end(form) }}
+
+    {% if error %}
+        <div class="alert alert-warning" role="alert">
+            <strong>{{ 'ERROR_HEADING'|trans }}</strong>&nbsp;
+
+            {%- if error == 'CharactersNotFoundException' %}
+            {{ 'ERROR_CHARACTERS_NOT_FOUND_EXCEPTION'|trans }}.
+        {% else %}
+            {{ 'ERROR_UNKNOWN'|trans }}.
+        {% endif -%}
+    </div>
+    {% endif %}
+        {% endblock form %}

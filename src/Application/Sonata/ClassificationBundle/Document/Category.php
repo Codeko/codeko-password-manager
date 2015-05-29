@@ -27,7 +27,22 @@ class Category extends BaseCategory
      * @var integer $id
      */
     protected $id;
+    
+    protected $parent_id;
 
+    /**
+     * Get id
+     *
+     * @return integer $id
+     */
+    
+    public function getParent_id() {
+        return $this->parent_id;
+    }
+
+    public function setParent_id($parent_id) {
+        $this->parent_id = $parent_id;
+    }
     /**
      * Get id
      *

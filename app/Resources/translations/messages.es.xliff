@@ -46,6 +46,22 @@
                 <source>Category Enabled</source>
                 <target>Cat.Habilitada</target>
             </trans-unit>
+            <trans-unit id="active">
+                <source>active</source>
+                <target>Activo</target>
+            </trans-unit>
+            <trans-unit id="disabled">
+                <source>disabled</source>
+                <target>Deshabilitado</target>
+            </trans-unit>
+            <trans-unit id="TipoPass">
+                <source>TipoPass</source>
+                <target>Tipos de contraseñas</target>
+            </trans-unit>
+            <trans-unit id="Tipo Pass List">
+                <source>Tipo Pass List</source>
+                <target>Tipos de contraseñas</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

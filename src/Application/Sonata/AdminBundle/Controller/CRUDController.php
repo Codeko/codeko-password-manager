@@ -234,8 +234,10 @@ class CRUDController extends Controller {
 
         $user = $this->admin->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
 
-        if (!$user->isSuperAdmin()) {
-            throw new AccessDeniedException();
+        if ($request->get('_route') != 'admin_sonata_user_tipopass_list') {
+            if (!$user->isSuperAdmin()) {
+                throw new AccessDeniedException();
+            }
         }
 
         if ($listMode = $request->get('_list_mode')) {
@@ -783,9 +785,7 @@ class CRUDController extends Controller {
 //        if (false === $this->get('security.authorization_checker')->isGranted('view', $object)) {
 //            throw new AccessDeniedException('Unauthorised access!');
 //        }
-
 //        return new Response('<h1>' . $object->getName() . '</h1>');
-
 //        if (false === $this->admin->isGranted('VIEW', $object)) {
 //            throw new AccessDeniedException();
 //        }

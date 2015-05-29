@@ -1,18 +1,7 @@
-{#
-
-This file is part of the Sonata package.
-
-(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
-
-For the full copyright and license information, please view the LICENSE
-file that was distributed with this source code.
-
-#}
-
 {% if admin.hasRoute('create') and admin.isGranted('CREATE')%}
     {% if admin.subClasses is empty %}
         {% if datagrid is defined %}
-            <a class="sonata-action-element" href="{{ admin.generateUrl('create') }}{% if 'password' in app.request.attributes.get('_route') %}?idCat={{ datagrid.values['category']['value'] }}{% endif %}">
+            <a class="sonata-action-element" href="{{ admin.generateUrl('create') }}{% if 'password' in app.request.attributes.get('_route') %}?idCat={% if datagrid.values['category']['value'] is defined %}{{ datagrid.values['category']['value'] }}{% else %}1{% endif %}{% endif %}">
                 <i class="fa fa-plus-circle"></i>
                 {{ 'link_action_create'|trans({}, 'SonataAdminBundle') }}</a>
             {% endif %}

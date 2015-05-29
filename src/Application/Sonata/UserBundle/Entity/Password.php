@@ -326,6 +326,7 @@ class Password {
 
     public function addFile(Media $file) {
         $file->setPassword($this);
+        $file->setPropietario($this);
         $this->files->add($file);
 
         return $this;
@@ -334,6 +335,7 @@ class Password {
     public function removeFile(Media $file) {
         $this->files->removeElement($file);
         $file->setPassword(null);
+        $file->setPropietario(null);
     }
 
     public function getPlainPassword() {

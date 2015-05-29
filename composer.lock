@@ -2157,7 +2157,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "KnpLabs",
+                    "name": "Knplabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -2792,16 +2792,16 @@
         },
         {
             "name": "scheb/two-factor-bundle",
-            "version": "v1.4.0",
+            "version": "v1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/scheb/two-factor-bundle.git",
-                "reference": "636740b69bc0573e90afc8ffdf10c9dc00cde3b5"
+                "reference": "9f43a5833e0954fccc303d987d3d7a937d8cbc99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/scheb/two-factor-bundle/zipball/636740b69bc0573e90afc8ffdf10c9dc00cde3b5",
-                "reference": "636740b69bc0573e90afc8ffdf10c9dc00cde3b5",
+                "url": "https://api.github.com/repos/scheb/two-factor-bundle/zipball/9f43a5833e0954fccc303d987d3d7a937d8cbc99",
+                "reference": "9f43a5833e0954fccc303d987d3d7a937d8cbc99",
                 "shasum": ""
             },
             "require": {
@@ -2836,7 +2836,7 @@
                 "two-factor",
                 "two-step"
             ],
-            "time": "2015-05-21 18:23:41"
+            "time": "2015-05-26 13:03:26"
         },
         {
             "name": "sensio/distribution-bundle",
@@ -3004,12 +3004,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "c26ac009e6f2de4f84b019fd600c0b04f6510bc6"
+                "reference": "d4e992a29baa62456a311badc50282d9af716dc8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/c26ac009e6f2de4f84b019fd600c0b04f6510bc6",
-                "reference": "c26ac009e6f2de4f84b019fd600c0b04f6510bc6",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/d4e992a29baa62456a311badc50282d9af716dc8",
+                "reference": "d4e992a29baa62456a311badc50282d9af716dc8",
                 "shasum": ""
             },
             "require": {
@@ -3018,6 +3018,7 @@
                 "knplabs/knp-menu": ">=2.0,<3.0",
                 "knplabs/knp-menu-bundle": ">=2.0,<3.0.0",
                 "sonata-project/block-bundle": "~2.3",
+                "sonata-project/core-bundle": "^2.3.2",
                 "sonata-project/exporter": "~1.0",
                 "symfony/class-loader": "~2.3",
                 "symfony/config": "~2.3",
@@ -3081,7 +3082,7 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2015-05-22 10:11:10"
+            "time": "2015-05-26 14:44:04"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -3577,12 +3578,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle.git",
-                "reference": "e114b10f5c62cbc361633d666fef281b5240ed27"
+                "reference": "43096bfc8700e49c06f32a5bfcba6143c360834d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/e114b10f5c62cbc361633d666fef281b5240ed27",
-                "reference": "e114b10f5c62cbc361633d666fef281b5240ed27",
+                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/43096bfc8700e49c06f32a5bfcba6143c360834d",
+                "reference": "43096bfc8700e49c06f32a5bfcba6143c360834d",
                 "shasum": ""
             },
             "require": {
@@ -3640,7 +3641,7 @@
                 "generator",
                 "sonata"
             ],
-            "time": "2015-04-27 14:54:55"
+            "time": "2015-05-26 14:44:47"
         },
         {
             "name": "sonata-project/easy-extends-bundle",
@@ -4027,12 +4028,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataNewsBundle.git",
-                "reference": "39723dc21c5b8cb4d3391f2431889a962fe39153"
+                "reference": "97883dad465440544b3c491a2ea169b3d2c7a9b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataNewsBundle/zipball/39723dc21c5b8cb4d3391f2431889a962fe39153",
-                "reference": "39723dc21c5b8cb4d3391f2431889a962fe39153",
+                "url": "https://api.github.com/repos/sonata-project/SonataNewsBundle/zipball/97883dad465440544b3c491a2ea169b3d2c7a9b4",
+                "reference": "97883dad465440544b3c491a2ea169b3d2c7a9b4",
                 "shasum": ""
             },
             "require": {
@@ -4093,7 +4094,7 @@
                 "post",
                 "sonata"
             ],
-            "time": "2015-04-28 18:58:18"
+            "time": "2015-05-25 09:24:03"
         },
         {
             "name": "sonata-project/notification-bundle",
@@ -4945,16 +4946,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.6.7",
+            "version": "v2.6.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "0449d0e1178bc8e934520b20432d1705c3b25e7e"
+                "reference": "7ae1934082d9ac299303b146e4a999274a723e94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/0449d0e1178bc8e934520b20432d1705c3b25e7e",
-                "reference": "0449d0e1178bc8e934520b20432d1705c3b25e7e",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/7ae1934082d9ac299303b146e4a999274a723e94",
+                "reference": "7ae1934082d9ac299303b146e4a999274a723e94",
                 "shasum": ""
             },
             "require": {
@@ -5045,20 +5046,20 @@
             ],
             "authors": [
                 {
-                    "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
-                },
-                {
                     "name": "Fabien Potencier",
                     "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
                 }
             ],
             "description": "The Symfony PHP framework",
-            "homepage": "http://symfony.com",
+            "homepage": "https://symfony.com",
             "keywords": [
                 "framework"
             ],
-            "time": "2015-05-11 01:58:49"
+            "time": "2015-05-27 00:17:10"
         },
         {
             "name": "twig/extensions",

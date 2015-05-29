@@ -60,8 +60,6 @@
 
                     <a href="#">
                         {% set translation_domain = item.attribute('label_catalogue') %}
-                        {#{% set icon = item.attribute('icon')|default ? item.attribute('icon') : '' %}
-                        {{ icon|default|raw }}#}
                         {% if item.name == 'Users' %}
                             <i class="fa fa-users"></i>
                         {% elseif item.name == 'Password Manager' %}

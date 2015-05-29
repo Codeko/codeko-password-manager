@@ -38,9 +38,9 @@ fos_user_change_password:
     prefix: /profile 
 
 # REVISAR SUPLANTACION
-sonata_user_impersonating:
-    pattern:  /
-    defaults: { _controller: SonataPageBundle:Page:catchAll } 
+#sonata_user_impersonating:
+#    pattern:  /
+#    defaults: { _controller: SonataPageBundle:Page:catchAll } 
     
 # PASSWORD GENERATOR
 hackzilla_password_generator:

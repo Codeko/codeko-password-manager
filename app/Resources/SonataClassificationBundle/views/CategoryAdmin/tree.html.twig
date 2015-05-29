@@ -1,37 +1,23 @@
-{#
-
-This file is part of the Sonata package.
-
-(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
-
-For the full copyright and license information, please view the LICENSE
-file that was distributed with this source code.
-
-#}
-
-{#
-    This template is not used at all, it is just a template that you can use to create
-    your own custom tree view.
-#}
 {% extends 'SonataAdminBundle:CRUD:base_list.html.twig' %}
 
 {% import _self as tree %}
 {% macro navigate_child(collection, admin, root, depth) %}
     <ul{% if root %} class="sonata-tree sonata-tree--toggleable js-treeview"{% endif %}>
         {% for element in collection %}
-            <li class="sonata-ba-list-field" objectId="{{ element.id }}" >
+            <li class="sonata-ba-list-field" objectId="{{ element.id }}">
                 <div class="sonata-tree__item"{% if depth < 2 %} data-treeview-toggled{% endif %}>
                     {% if element.parent or root %}<i class="fa fa-caret-right" data-treeview-toggler></i>{% endif %}
-                    <a class="sonata-tree__item__edit" ghj href="{{ admin.generateObjectUrl('edit', element) }}">{{ element.name }}</a>
+                    <a class="sonata-tree__item__edit" href="{{ admin.generateObjectUrl('edit', element) }}">
+                     {% if element.enabled %}{{ element.name }}<span class="label label-success" style="margin-left:15px;"><i class="fa fa-check"></i> {{ admin.trans('active', {}, admin.translationDomain) }}</span>{% endif %}
+                    {% if not element.enabled %}{{ element.name }}<span class="label label-danger" style="margin-left:15px;"><i class="fa fa-times"> {{ admin.trans('disabled', {}, admin.translationDomain) }}</i></span>{% endif %}
+                    </a>
                     <i class="text-muted">{{ element.description }}</i>
                     {% if element.description is not empty %}
-                        <i class="text-muted">{{ element.description }}</i>
+                        <i class="text-muted"></i>
                     {% else %}
-                        &nbsp;
+                        -
                     {% endif %}
-                    {#<a class="label label-default pull-right" href="{{ admin.generateObjectUrl('edit', element) }}">edit <i class="fa fa-magic"></i></a>#}
-                    {% if element.enabled %}<span class="label label-success pull-right"><i class="fa fa-check"></i> {{ admin.trans('active', {}, admin.translationDomain) }}</span>{% endif %}
-                    {% if not element.enabled %}<span class="label label-danger pull-right"><i class="fa fa-times"> {{ admin.trans('disabled', {}, admin.translationDomain) }}</i></span>{% endif %}
+                    
                 </div>
 
                 {% if element.children|length %}
@@ -47,7 +33,7 @@ file that was distributed with this source code.
         'mode':   'tree',
         'action': action,
         'admin':  admin,
-    } only %}
+    } only %}   
 {% endblock %}
 
 {% block list_table %}
@@ -57,10 +43,7 @@ file that was distributed with this source code.
                 <h1 class="box-title">
                     {{ admin.trans('tree_catalog_title', {}, admin.translationdomain) }}
                     {% if not app.request.get('hide_context') %}
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                <strong class="text-info">{{ current_context.name }}</strong> <span class="caret"></span>
-                            </button>
+                        <div class="btn-group">                            
                             <ul class="dropdown-menu" role="menu">
                                 {% for category in root_categories %}
                                     <li>
@@ -81,6 +64,14 @@ file that was distributed with this source code.
             </div>
             <div class="box-content">
                 {{ tree.navigate_child([main_category], admin, true, 0) }}
+            </div>
+            <div>
+                <span class="btn-group" style="padding: 10px">
+                    <a class="btn btn-success btn-sm sonata-ba-action" href="{{ admin.generateUrl('create') }}">
+                        <i class="fa fa-plus-circle"></i>
+                        {{ 'link_action_create'|trans({}, 'SonataAdminBundle') }}
+                    </a>
+                </span>
             </div>
         </div>
     </div>

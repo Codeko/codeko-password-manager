@@ -1,15 +1,7 @@
-# Learn more about services, parameters and containers at
-# http://symfony.com/doc/current/book/service_container.html
 parameters:
-#    parameter_name: value
-    # ... other parameters
     security.acl.permission.map.class: Sonata\AdminBundle\Security\Acl\Permission\AdminPermissionMap
-    # optionally use a custom MaskBuilder
-    #sonata.admin.security.mask.builder.class: Sonata\AdminBundle\Security\Acl\Permission\MaskBuilder
+
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
       
     password.pass.servicio:
       class: Application\Sonata\UserBundle\Admin\PasswordAdmin
@@ -50,11 +42,20 @@ services:
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onCheckExpired, priority: 1 } 
             
-#    sonata.form.type.passgen:
-#        class: Hackzilla\Bundle\PasswordGeneratorBundle\Form\Type\OptionType
-#        arguments: [@Hackzilla\PasswordGenerator\Generator\PasswordGeneratorInterface]  
-#        tags:
-#            - { name: form.type, alias: passgen }
+    sonata.adminbundle.search.handler:
+        class: Application\Sonata\AdminBundle\Search\SearchHandler
+        arguments:
+        -  @sonata.admin.pool
+        
+    sonata.admin.block.search_result:
+        class: Application\Sonata\AdminBundle\Search\AdminSearchBlockService
+        tags:
+            - { name: sonata.block }
+        arguments:
+            - sonata.admin.block.search_result
+            - @templating
+            - @sonata.admin.pool
+            - @sonata.adminbundle.search.handler      
     
 imports:
     - { resource: sonata/classification_admin.xml }

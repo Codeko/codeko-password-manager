@@ -33,7 +33,6 @@ class Category extends BaseCategory {
      * @var ArrayCollection $passwords
      */
     private $passwords;
-    protected $parent;
     protected $context;
     protected $children;
 
@@ -45,11 +44,11 @@ class Category extends BaseCategory {
     public function getId() {
         return $this->id;
     }
-
+    
     public function setId($id) {
         $this->id = $id;
     }
-    
+       
     function getPasswords() {
         return $this->passwords;
     }

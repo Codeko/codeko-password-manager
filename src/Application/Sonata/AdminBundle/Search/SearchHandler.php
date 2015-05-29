@@ -59,6 +59,9 @@ class SearchHandler {
                  if($filter->getFormName()=='name') {
                     $datagrid->setValue('name', null, $term);
                 }
+                 if($filter->getFormName()=='nombre') {
+                    $datagrid->setValue('nombre', null, $term);
+                }
                 $found = true;
             }
         }

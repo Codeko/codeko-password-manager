@@ -77,6 +77,7 @@ class PasswordAdmin extends Admin {
      */
     protected function configureListFields(ListMapper $listMapper) {
         unset($this->listModes['mosaic']);
+        
         $listMapper
                 ->addIdentifier('titulo')
                 ->add('usernamePass')
@@ -163,7 +164,8 @@ class PasswordAdmin extends Admin {
                 ->add('usernamePass', null, array('required' => false))
                 ->add('url', null, array('required' => false))
                 ->add('plainPassword', 'password', array('label' => 'Contraseña',
-                    'required' => false
+                    'required' => false,
+                    'attr' => array('class' => 'campoPass')
                 ))
                 ->add('comentario', 'textarea', array('required' => false))
                 ->add('fechaExpira', 'sonata_type_datetime_picker', array('required' => false))
@@ -171,7 +173,7 @@ class PasswordAdmin extends Admin {
                 ->end()
                 ->with('Categorias', array('class' => 'col-md-6'))
                 ->add('category', 'sonata_type_model', array('label' => 'Categorias', 'expanded' => false, 'by_reference' => false, 'multiple' => true, 'required' => false))
-                ->add('enabled', null, array('required' => false))
+                ->add('enabled', null, array('required' => false, 'data' => true))
                 ->end()
                 ->with('Archivos', array('class' => 'col-md-6'))
                 ->add('files', 'sonata_type_model', array(
@@ -212,6 +214,11 @@ class PasswordAdmin extends Admin {
             $pass->setUrl('http://' . $url);
         }
         // CODIFICANDO CONTRASEÑAS
+        if ($pass->getPlainPassword() !== null) {
+            $pass->setPassword($this->getConfigurationPool()->getContainer()->get('nzo_url_encryptor')->encrypt($pass->getPlainPassword()));
+        } else {
+            $pass->setPassword($this->getConfigurationPool()->getContainer()->get('nzo_url_encryptor')->encrypt($pass->getPassword()));
+        }
         $this->getModelManager()->getEntityManager('Application\Sonata\UserBundle\Entity\Password')->persist($pass);
         $this->getModelManager()->getEntityManager('Application\Sonata\UserBundle\Entity\Password')->flush();
         // CATEGORIA DEFAULT SI NO SE SELECCIONA NINGUNA EN EL FORMULARIO
@@ -228,30 +235,7 @@ class PasswordAdmin extends Admin {
             $url = $pass->getUrl();
             $pass->setUrl('http://' . $url);
         }
-        // PASSWORD AUTOGENERADO (RETOCAR!!!!!!)
-        if ($pass->getPlainPassword() === null && $pass->getPassword() === null) {
-
-            $generator = new HybridPasswordGenerator();
-
-            $generator
-                    ->setUppercase()
-                    ->setLowercase()
-                    ->setNumbers()
-                    ->setSymbols(true)
-                    ->setSegmentLength(7)
-                    ->setSegmentCount(1)
-                    ->setSegmentSeparator('-');
-
-            $password = $generator->generatePassword();
-            
-            $pass->setPlainPassword($password);           
-        }
-        // CODIFICANDO CONTRASEÑAS
-        if ($pass->getPlainPassword() !== null) {
-            $pass->setPassword($this->getConfigurationPool()->getContainer()->get('nzo_url_encryptor')->encrypt($pass->getPlainPassword()));
-        } else {
-            $pass->setPassword($this->getConfigurationPool()->getContainer()->get('nzo_url_encryptor')->encrypt($pass->getPassword()));
-        }
+        
         // CATEGORIA DEFAULT SI NO SE SELECCIONA NINGUNA EN EL FORMULARIO
         if (count($pass->getCategory()) === 0) {
             $pass->addCategory($this->getConfigurationPool()->getContainer()->get('doctrine')->getRepository('Application\Sonata\ClassificationBundle\Entity\Category')->find(1));
