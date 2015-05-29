@@ -8,50 +8,73 @@
         var labels = document.getElementsByTagName('label');
         for (var i = 0; i < labels.length; i++) {
             labels[i].style.paddingRight = "15px";
-            var attr = labels[i].getAttribute('for');
-            if (attr === 'quantity') {
-                labels[i].style.display = 'none';
-            }
         }
-        document.getElementById('quantity').style.display = 'none';
-        document.getElementById('quantity').setAttribute("value", "1");
     </script>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> 
-    
+    <script>
+        function recogerPass() {
+            $('#pppp').css('display', 'block');
+            $('.passwords').html($('#passTemp').find('#pppp').html());
+
+            $("#passTemp").html("");
+        }
+    </script>
+
     <script>
         // GENERANDO PASS
         $(document).ready(function () {
             // process the form
-            $('#form').submit(function (event) {
+            $('.btn-reset-test').click(function (event) {
+                $('input[name=quantity]').val(5);
+                $('.icheckbox_flat-blue').addClass('checked');
+                $('input[type=checkbox]').attr('checked', true);
+                $('input[name=symbols]').parent().removeClass('checked');
+                $('input[name=segment_count]').val(4);
+                $('input[name=segment_length]').val(3);
+                event.preventDefault();
+                event.stopPropagation();
+            });
+            $('#prueba form').submit(function (event) {
                 // get the form data
                 // there are many ways to get this data using jQuery (you can use the class or id also)
                 var formData = {
                     'quantity': $('input[name=quantity]').val(),
-                    'uppercase': $('input[name=uppercase]').val(),
-                    'lowercase': $('input[name=lowercase]').val(),
-                    'numbers': $('input[name=numbers]').val(),
-                    'avoid_similar': $('input[name=avoid_similar]').val(),
                     'segment_count': $('input[name=segment_count]').val(),
                     'segment_length': $('input[name=segment_length]').val()
                 };
 
-                for (i in formData){
-                    alert(formData[i].toString());
+                if ($('input[name=uppercase]').parent().hasClass("checked")) {
+                    formData['uppercase'] = '1';
                 }
+                ;
+                if ($('input[name=lowercase]').parent().hasClass("checked")) {
+                    formData['lowercase'] = '1';
+                }
+                ;
+                if ($('input[name=numbers]').parent().hasClass("checked")) {
+                    formData['numbers'] = '1';
+                }
+                ;
+                if ($('input[name=symbols]').parent().hasClass("checked")) {
+                    formData['symbols'] = '1';
+                }
+                ;
+                if ($('input[name=avoid_similar]').parent().hasClass("checked")) {
+                    formData['avoid_similar'] = '1';
+                }
+                ;
+
                 // process the form
                 $.ajax({
-                    type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
-                    url: 'http://www.passmanager/app_dev.php/sonata/user/password/create', // the url where we want to POST
+                    type: 'GET', // define the type of HTTP verb we want to use 
+                    url: '{{path('hackzilla_password_generator_hybrid_form')}}', // the url where we want to POST
                     data: formData, // our data object
-                    dataType: 'json', // what type of data do we expect back from the server
-                    encode: true,
                     success: function (msg) {
-                        $("#thanks").html(msg), //hide button and show thank you
-                                $("#form-content").modal('hide'); //hide popup  
+                        $("#passTemp").html(msg);
+                        recogerPass();
                     },
-                    error: function () {
-                        alert("failure");
+                    error: function (msg) {
+                        $("#passTemp").html(msg);
                     }
                 })
                         // using the done promise callback
@@ -62,26 +85,34 @@
                         });
                 // stop the form from submitting the normal way and refreshing the page
                 event.preventDefault();
+                event.stopPropagation();
             });
         });
     </script>
 
-    <div class="passwords modal-body">
+    <div id="passTemp" style="display:none;"></div>
+
+    <script>
+        function selectPass(pass) {
+            $(".campoPass").val(pass);
+            $("#myModal").modal('hide');
+        }
+    </script>
+
+    <div class="passwords modal-body" id="pppp" style="display:hidden">
         <h4>{{ "HEADING_PASSWORDS"|trans }}</h4>
         <div>
-            ------------------------------------
             <ul>
                 {% for password in passwords -%}
-                    <li>{{ password }}</li>
+                    <li><a href="#" onclick="selectPass('{{ password }}');">{{ password }}</a></li>
                     {% endfor %}
             </ul>
         </div>
-        ------------------------------------
     </div>
 
     <div class="modal-footer actions">
         <input type="submit" class="btn btn-success" value="{{ 'BUTTON_GENERATE'|trans }}">
-        <input type="reset" class="btn btn-danger" value="{{ 'BUTTON_RESET'|trans }}">       
+        <input type="reset" class="btn btn-danger btn-reset-test" value="{{ 'BUTTON_RESET'|trans }}">       
     </div>
     {{ form_end(form) }}
 
@@ -96,4 +127,4 @@
         {% endif -%}
     </div>
     {% endif %}
-{% endblock form %}
+        {% endblock form %}
