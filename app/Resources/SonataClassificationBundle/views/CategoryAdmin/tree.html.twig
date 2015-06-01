@@ -11,11 +11,10 @@
                      {% if element.enabled %}{{ element.name }}<span class="label label-success" style="margin-left:15px;"><i class="fa fa-check"></i> {{ admin.trans('active', {}, admin.translationDomain) }}</span>{% endif %}
                     {% if not element.enabled %}{{ element.name }}<span class="label label-danger" style="margin-left:15px;"><i class="fa fa-times"> {{ admin.trans('disabled', {}, admin.translationDomain) }}</i></span>{% endif %}
                     </a>
-                    <i class="text-muted">{{ element.description }}</i>
                     {% if element.description is not empty %}
-                        <i class="text-muted"></i>
+                        &nbsp;&nbsp;-&nbsp;&nbsp;<i class="text-muted"></i><i class="text-muted">{{ element.description }}</i>
                     {% else %}
-                        -
+                        &nbsp;&nbsp;-&nbsp;&nbsp;
                     {% endif %}
                     
                 </div>
