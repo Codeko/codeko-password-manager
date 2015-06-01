@@ -11,6 +11,8 @@
         </id>
 
         <one-to-many field="passwords" target-entity="Password" mapped-by="user" />
+        <one-to-many field="files" target-entity="Application\Sonata\MediaBundle\Entity\Media" mapped-by="propietario" />
+        <many-to-many field="passVisibles" mapped-by="usersPermitidos" target-entity="Application\Sonata\UserBundle\Entity\Password"/>
     </entity>
 
 </doctrine-mapping>

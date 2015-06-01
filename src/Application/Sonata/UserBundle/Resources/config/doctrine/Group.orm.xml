@@ -9,7 +9,7 @@
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
-
+        <many-to-many field="passVisibles" mapped-by="gruposPermitidos" target-entity="Application\Sonata\UserBundle\Entity\Password"/>
     </entity>
 
 </doctrine-mapping>

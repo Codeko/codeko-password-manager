@@ -4,7 +4,6 @@ namespace Application\Sonata\UserBundle\Entity;
 
 use Application\Sonata\UserBundle\Validator\Constraints as RollerworksPassword;
 use Doctrine\ORM\Mapping as ORM;
-
 use Application\Sonata\ClassificationBundle\Entity\Category;
 use Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -67,6 +66,8 @@ class Password {
     private $tipoPassword;
     protected $enabled;
     private $files;
+    private $usersPermitidos;
+    private $gruposPermitidos;
 
     /**
      * Plain password. Used for model validation. Must not be persisted.
@@ -278,6 +279,8 @@ class Password {
         $this->category = new ArrayCollection();
         $this->fechaCreacion = new \DateTime();
         $this->files = new ArrayCollection();
+        $this->usersPermitidos = new ArrayCollection();
+        $this->gruposPermitidos = new ArrayCollection();
     }
 
     public function addCategory(Category $category) {
@@ -346,6 +349,34 @@ class Password {
         $this->plainPassword = $password;
 
         return $this;
+    }
+
+    public function getUsersPermitidos() {
+        return $this->usersPermitidos;
+    }
+
+    public function addUsersPermitido(User $user) {
+        $user->addPassVisibles($this);
+        $this->usersPermitidos[] = $user;
+    }
+
+    public function removeUsersPermitido(User $user) {
+        $this->usersPermitidos->removeElement($user);
+        $user->removePassVisibles($this);
+    }
+
+    public function getGruposPermitidos() {
+        return $this->gruposPermitidos;
+    }
+
+    public function addGruposPermitido(Group $group) {
+        $group->addPassVisibles($this);
+        $this->gruposPermitidos[] = $group;
+    }
+
+    public function removeGruposPermitido(Group $group) {
+        $this->gruposPermitidos->removeElement($group);
+        $group->removePassVisibles($this);
     }
 
 }

@@ -9,6 +9,9 @@ sonata_media:
     # or doctrine_mongodb, doctrine_phpcr
     contexts:
         default:  
+            download:
+                strategy: sonata.media.security.superadmin_strategy
+                mode: http
         # the default context is mandatory
             providers:
                 - sonata.media.provider.image
@@ -26,7 +29,7 @@ sonata_media:
     filesystem:
         local:
             directory:  %kernel.root_dir%/../web/uploads/media
-            create:     false
+            create:     true
             
     providers:
         file:

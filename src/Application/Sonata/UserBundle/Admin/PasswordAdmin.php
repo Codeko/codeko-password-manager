@@ -77,7 +77,7 @@ class PasswordAdmin extends Admin {
      */
     protected function configureListFields(ListMapper $listMapper) {
         unset($this->listModes['mosaic']);
-        
+
         $listMapper
                 ->addIdentifier('titulo')
                 ->add('usernamePass')
@@ -91,6 +91,8 @@ class PasswordAdmin extends Admin {
                 ->add('enabled', null, array('editable' => true))
                 ->add('user')
                 ->add('files', null, array('label' => 'Archivos', 'associated_property' => 'getName'))
+                ->add('usersPermitidos', null, array('label' => 'Visible para usuarios'))
+                ->add('gruposPermitidos', null, array('label' => 'Visible para grupos'))
                 ->add('_action', 'actions', array(
                     'actions' => array(
                         'show' => array(),
@@ -155,6 +157,7 @@ class PasswordAdmin extends Admin {
         $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
 
         $formMapper
+                ->tab('General')
                 ->with('Contraseña:', array('class' => 'col-md-6'))
                 ->add('titulo');
         if ($user->isSuperAdmin()) {
@@ -172,6 +175,7 @@ class PasswordAdmin extends Admin {
                 ->add('tipoPassword', 'sonata_type_model', array('required' => false))
                 ->end()
                 ->with('Categorias', array('class' => 'col-md-6'))
+                //->add('category','entity',array('class'=>'Application\Sonata\ClassificationBundle\Entity\Category','multiple'=>true ))
                 ->add('category', 'sonata_type_model', array('label' => 'Categorias', 'expanded' => false, 'by_reference' => false, 'multiple' => true, 'required' => false))
                 ->add('enabled', null, array('required' => false, 'data' => true))
                 ->end()
@@ -183,6 +187,29 @@ class PasswordAdmin extends Admin {
                     'expanded' => true,
                     'required' => false
                 ))
+                ->end()
+                ->end()
+                // PERMISOS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                ->tab('Permisos')
+                ->with('Usuarios Asociados', array('class' => 'col-md-6'))
+                ->add('usersPermitidos', 'sonata_type_model', array(
+                    'label' => 'Usuarios Permitidos',
+                    'by_reference' => false,
+                    'multiple' => true,
+                    'expanded' => false,
+                    'required' => false,
+                ))
+                ->end()
+                ->with('Grupos Asociados', array('class' => 'col-md-6'))
+                ->add('gruposPermitidos', 'sonata_type_model', array(
+                    'label' => 'Grupos Permitidos',
+                    'by_reference' => false,
+                    'multiple' => true,
+                    'expanded' => false,
+                    'required' => false,
+                ))
+                ->end()
+                ->end()
         ;
     }
 
@@ -235,7 +262,7 @@ class PasswordAdmin extends Admin {
             $url = $pass->getUrl();
             $pass->setUrl('http://' . $url);
         }
-        
+
         // CATEGORIA DEFAULT SI NO SE SELECCIONA NINGUNA EN EL FORMULARIO
         if (count($pass->getCategory()) === 0) {
             $pass->addCategory($this->getConfigurationPool()->getContainer()->get('doctrine')->getRepository('Application\Sonata\ClassificationBundle\Entity\Category')->find(1));
