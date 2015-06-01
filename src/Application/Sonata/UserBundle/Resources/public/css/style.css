@@ -51,7 +51,7 @@ root {
 }
 
 .sonata-tree__item__edit, .sonata-tree__item {
-    padding: 5px 0px 5px 5px !important;
+    padding: 8px 0px 8px 5px !important;
 }
 
 ul.sonata-tree {
