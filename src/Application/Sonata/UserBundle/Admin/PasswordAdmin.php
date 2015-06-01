@@ -18,7 +18,6 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\HttpFoundation\Request;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Hackzilla\PasswordGenerator\Generator\HybridPasswordGenerator;
 
 class PasswordAdmin extends Admin {
 
@@ -27,11 +26,16 @@ class PasswordAdmin extends Admin {
     public function createQuery($context = 'list') {
         $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
         if (!$user->isSuperAdmin()) {
-            $query = parent::createQuery($context);
-            $query->andWhere(
-                    $query->expr()->eq($query->getRootAliases()[0] . '.user', ':user')
-            );
-            $query->setParameter(':user', $user);
+//            if (false === $this->getConfigurationPool()->getContainer()->get('security.context')->isGranted('ROLE_EDITAR_ENTIDAD', $context)) {
+//                //Controlar Voters
+//                throw new AccessDeniedException('No eres el propietario para editar esta contraseña');
+//            } else {
+                $query = parent::createQuery($context);
+                $query->andWhere(
+                        $query->expr()->eq($query->getRootAliases()[0] . '.user', ':user')
+                );
+                $query->setParameter(':user', $user);
+//            }
         } else {
             $query = parent::createQuery($context);
         }
@@ -77,7 +81,7 @@ class PasswordAdmin extends Admin {
      */
     protected function configureListFields(ListMapper $listMapper) {
         unset($this->listModes['mosaic']);
-        
+
         $listMapper
                 ->addIdentifier('titulo')
                 ->add('usernamePass')
@@ -235,7 +239,7 @@ class PasswordAdmin extends Admin {
             $url = $pass->getUrl();
             $pass->setUrl('http://' . $url);
         }
-        
+
         // CATEGORIA DEFAULT SI NO SE SELECCIONA NINGUNA EN EL FORMULARIO
         if (count($pass->getCategory()) === 0) {
             $pass->addCategory($this->getConfigurationPool()->getContainer()->get('doctrine')->getRepository('Application\Sonata\ClassificationBundle\Entity\Category')->find(1));
