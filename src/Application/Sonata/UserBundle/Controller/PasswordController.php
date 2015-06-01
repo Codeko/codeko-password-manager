@@ -37,7 +37,7 @@ class PasswordController extends Controller {
         $modelManager = $this->admin->getModelManager();
 
         $target = $modelManager->find($this->admin->getClass(), $request->get('targetId'));
-
+//throw new AccessDeniedException($request->get('targetId'));
         if ($target === null) {
             $this->addFlash('sonata_flash_error', 'No se selecciono ningun elemento');
 
