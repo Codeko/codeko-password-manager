@@ -62,12 +62,30 @@ class Password {
      * @var \DateTime
      */
     private $fechaModificacion;
+    /*
+     * 
+     */
     private $category;
+    /*
+     * 
+     */
     private $tipoPassword;
+    /*
+     * 
+     */
     protected $enabled;
+    /*
+     * 
+     */
     private $files;
-    private $usersPermitidos;
-    private $gruposPermitidos;
+    /*
+     * 
+     */
+    private $permisosUser;
+    /*
+     * 
+     */
+    private $permisosGrupo;
 
     /**
      * Plain password. Used for model validation. Must not be persisted.
@@ -129,9 +147,17 @@ class Password {
         return $this->user;
     }
 
+    /*
+     * 
+     */
+
     function getUsernamePass() {
         return $this->usernamePass;
     }
+
+    /*
+     * 
+     */
 
     function setUsernamePass($usernamePass) {
         $this->usernamePass = $usernamePass;
@@ -263,35 +289,63 @@ class Password {
         return $this->fechaModificacion;
     }
 
+    /*
+     * 
+     */
+
     function getCategory() {
         return $this->category;
     }
+
+    /*
+     * 
+     */
 
     function getTipoPassword() {
         return $this->tipoPassword;
     }
 
+    /*
+     * 
+     */
+
     function setTipoPassword($tipoPassword) {
         $this->tipoPassword = $tipoPassword;
     }
+
+    /*
+     * 
+     */
 
     public function __construct() {
         $this->category = new ArrayCollection();
         $this->fechaCreacion = new \DateTime();
         $this->files = new ArrayCollection();
-        $this->usersPermitidos = new ArrayCollection();
-        $this->gruposPermitidos = new ArrayCollection();
+        $this->permisosUser = new ArrayCollection();
+        $this->permisosGrupo = new ArrayCollection();
     }
+
+    /*
+     * 
+     */
 
     public function addCategory(Category $category) {
         $category->addPassword($this);
         $this->category[] = $category;
     }
 
+    /*
+     * 
+     */
+
     public function removeCategory(Category $category) {
         $this->category->removeElement($category);
         $category->removePassword($this);
     }
+
+    /*
+     * 
+     */
 
     public function __toString() {
         return $this->getTitulo() ? : 'n/a';
@@ -311,6 +365,10 @@ class Password {
         return $this->enabled;
     }
 
+    /*
+     * 
+     */
+
     public function setFiles($files) {
         if (count($files) > 0) {
             foreach ($files as $i) {
@@ -323,9 +381,17 @@ class Password {
         return $this;
     }
 
+    /*
+     * 
+     */
+
     public function getFiles() {
         return $this->files;
     }
+
+    /*
+     * 
+     */
 
     public function addFile(Media $file) {
         $file->setPassword($this);
@@ -335,15 +401,27 @@ class Password {
         return $this;
     }
 
+    /*
+     * 
+     */
+
     public function removeFile(Media $file) {
         $this->files->removeElement($file);
         $file->setPassword(null);
         $file->setPropietario(null);
     }
 
+    /*
+     * 
+     */
+
     public function getPlainPassword() {
         return $this->plainPassword;
     }
+
+    /*
+     * 
+     */
 
     public function setPlainPassword($password) {
         $this->plainPassword = $password;
@@ -351,32 +429,78 @@ class Password {
         return $this;
     }
 
-    public function getUsersPermitidos() {
-        return $this->usersPermitidos;
+    /*
+     * 
+     */
+
+    function getPermisosUser() {
+        return $this->permisosUser;
     }
 
-    public function addUsersPermitido(User $user) {
-        $user->addPassVisibles($this);
-        $this->usersPermitidos[] = $user;
+    /*
+     * 
+     */
+
+    function setPermisosUser(PermisoUser $permiso) {
+
+        $this->permisosUser = $permiso;
+
+        return $this;
     }
 
-    public function removeUsersPermitido(User $user) {
-        $this->usersPermitidos->removeElement($user);
-        $user->removePassVisibles($this);
+    /*
+     * 
+     */
+
+    public function addPermisosUser(PermisoUser $permiso) {
+        $permiso->setPasswords($this);
+        $this->permisosUser[] = $permiso;
+        return $this;
     }
 
-    public function getGruposPermitidos() {
-        return $this->gruposPermitidos;
+    /*
+     * 
+     */
+
+    public function removePermisosUser(PermisoUser $permiso) {
+        $this->permisosUser->removeElement($permiso);
     }
 
-    public function addGruposPermitido(Group $group) {
-        $group->addPassVisibles($this);
-        $this->gruposPermitidos[] = $group;
+    /*
+     * 
+     */
+
+    function getPermisosGrupo() {
+        return $this->permisosGrupo;
     }
 
-    public function removeGruposPermitido(Group $group) {
-        $this->gruposPermitidos->removeElement($group);
-        $group->removePassVisibles($this);
+    /*
+     * 
+     */
+
+    function setPermisosGrupo(PermisoGrupo $permiso) {
+
+        $this->permisosGrupo = $permiso;
+
+        return $this;
+    }
+
+    /*
+     * 
+     */
+
+    public function addPermisosGrupo(PermisoGrupo $permiso) {
+        $permiso->setPasswords($this);
+        $this->permisosGrupo[] = $permiso;
+        return $this;
+    }
+
+    /*
+     * 
+     */
+
+    public function removePermisosGrupo(PermisoGrupo $permiso) {
+        $this->permisosGrupo->removeElement($permiso);
     }
 
 }

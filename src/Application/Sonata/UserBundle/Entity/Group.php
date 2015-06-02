@@ -29,9 +29,9 @@ class Group extends BaseGroup {
     protected $id;
 
     /*
-     * @var ArrayCollection $passVisibles
+     * @var ArrayCollection $permisos
      */
-    protected $passVisibles;
+    protected $permisos;
 
     /**
      * Get id
@@ -46,16 +46,41 @@ class Group extends BaseGroup {
         return $this->getName()? : 'n/a';
     }
 
-    function getPassVisibles() {
-        return $this->passVisibles;
+    /*
+     * 
+     */
+
+    function getPermisos() {
+        return $this->permisos;
     }
 
-    public function addPassVisibles(Password $pass) {
-        $this->passVisibles[] = $pass;
+    /*
+     * 
+     */
+
+    function setPermisos(PermisoGrupo $permiso) {
+
+        $this->permisos = $permiso;
+
+        return $this;
     }
 
-    public function removePassVisibles(Password $pass) {
-        $this->passVisibles->removeElement($pass);
+    /*
+     * 
+     */
+
+    public function addPermisos(PermisoGrupo $permiso) {
+        $permiso->setGrupo($this);
+        $this->permisos[] = $permiso;
+        return $this;
+    }
+
+    /*
+     * 
+     */
+
+    public function removePermisos(PermisoGrupo $permiso) {
+        $this->permisos->removeElement($permiso);
     }
 
 }

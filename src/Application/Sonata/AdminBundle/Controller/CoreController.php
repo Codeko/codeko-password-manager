@@ -85,7 +85,7 @@ class CoreController extends Controller
             'base_template'   => $this->getBaseTemplate($request),
             'admin_pool'      => $this->container->get('sonata.admin.pool'),
             'blocks'          => $blocks,
-            'animate_logo'  => '1',
+            'animate_logo'    => 1,
         ));
     }
 

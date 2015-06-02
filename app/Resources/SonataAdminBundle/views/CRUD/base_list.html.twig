@@ -1,6 +1,6 @@
 {% extends base_template %}
 {% block actions %}
-{% if is_media is defined and is_media %}&nbsp;{% else %}
+{% if is_media is defined and is_media %}{% else %}
     {% spaceless %}
         {% if admin.hasRoute('create') and admin.isGranted('CREATE')%}
             <li>{% include 'SonataAdminBundle:Core:create_button.html.twig' %}</li>
@@ -10,45 +10,6 @@
 {% endblock %}
 {% block tab_menu %}{{ knp_menu_render(admin.sidemenu(action), {'currentClass' : 'active', 'template': admin_pool.getTemplate('tab_menu_template')}, 'twig') }}{% endblock %}
 {% block list_table %}
-<script>
-    $(document).ready(function () {
-        $('div.iradio_flat-blue').addClass('invisible');
-    });
-    var comprobarVisibilidad = function () {
-        if ($('#select2-chosen-47').html() !== "") {
-            if ($('#select2-chosen-47').html() !== 'Duplicar') {
-                $('div.icheckbox_flat-blue').removeClass('invisible');
-                $('div.iradio_flat-blue').addClass('invisible');
-                if ($('.todos > div').hasClass('checked')) {
-                    $('.todos').click();
-                }
-            } else {
-                $('div.icheckbox_flat-blue').addClass('invisible');
-                $('div.iradio_flat-blue').removeClass('invisible');
-                if ($('.todos > div').hasClass('checked')) {
-                } else {
-                    $('.todos').click();
-                }
-            }
-        }
-        if ($('#select2-chosen-45').html() !== "") {
-            if ($('#select2-chosen-45').html() !== 'Duplicar') {
-                $('div.icheckbox_flat-blue').removeClass('invisible');
-                $('div.iradio_flat-blue').addClass('invisible');
-                if ($('.todos > div').hasClass('checked')) {
-                    $('.todos').click();
-                }
-            } else if ($('#select2-chosen-45').html() === 'Duplicar') {
-                $('div.icheckbox_flat-blue').addClass('invisible');
-                $('div.iradio_flat-blue').removeClass('invisible');
-                if ($('.todos > div').hasClass('checked')) {
-                } else {
-                    $('.todos').click();
-                }
-            }
-        }
-    };
-</script>
 {# CARGANDO ARBOL DE CATEGORIAS EN LA VISTA PASSWORD_LIST #}
 {% if 'Password' in admin.getClass() %}
     {% include 'SonataAdminBundle::list.html.twig' %}
@@ -113,7 +74,7 @@
                         {% endblock %}
                     </table>
                 {% else %}
-                   {% if is_media is defined and is_media %}
+                    {% if is_media is defined and is_media %}
                         <div class="info-box">
                             <span class="info-box-icon bg-aqua"><i class="fa fa-arrow-circle-right"></i></span>
                             <div class="info-box-content">
@@ -152,24 +113,24 @@
                                         {% block batch %}
                                             <script>
                                                 {% block batch_javascript %}
-                                                    jQuery(document).ready(function ($) {
-                                                        $('#list_batch_checkbox').on('ifChanged', function () {
-                                                            $(this)
-                                                                    .closest('table')
-                                                                    .find('td.sonata-ba-list-field-batch input[type="checkbox"], div.sonata-ba-list-field-batch input[type="checkbox"]')
-                                                                    .iCheck($(this).is(':checked') ? 'check' : 'uncheck')
+                                                        jQuery(document).ready(function ($) {
+                                                            $('#list_batch_checkbox').on('ifChanged', function () {
+                                                                $(this)
+                                                                        .closest('table')
+                                                                        .find('td.sonata-ba-list-field-batch input[type="checkbox"], div.sonata-ba-list-field-batch input[type="checkbox"]')
+                                                                        .iCheck($(this).is(':checked') ? 'check' : 'uncheck')
+                                                                        ;
+                                                            });
+                                                            $('td.sonata-ba-list-field-batch input[type="checkbox"], div.sonata-ba-list-field-batch input[type="checkbox"]')
+                                                                    .on('ifChanged', function () {
+                                                                        $(this)
+                                                                                .closest('tr, div.sonata-ba-list-field-batch')
+                                                                                .toggleClass('sonata-ba-list-row-selected', $(this).is(':checked'))
+                                                                                ;
+                                                                    })
+                                                                    .trigger('ifChanged')
                                                                     ;
                                                         });
-                                                        $('td.sonata-ba-list-field-batch input[type="checkbox"], div.sonata-ba-list-field-batch input[type="checkbox"]')
-                                                                .on('ifChanged', function () {
-                                                                    $(this)
-                                                                            .closest('tr, div.sonata-ba-list-field-batch')
-                                                                            .toggleClass('sonata-ba-list-row-selected', $(this).is(':checked'))
-                                                                            ;
-                                                                })
-                                                                .trigger('ifChanged')
-                                                                ;
-                                                    });
                                                 {% endblock %}
                                             </script>
                                             {% block batch_actions %}
@@ -191,18 +152,18 @@
                                     {% endif %}
                                 </div>
                                 <div class="pull-right">
-                                    
+
                                     {% if no_button is defined and no_button %}
                                         &nbsp; 
                                     {% else %}        
-                                           <span class="btn-group" style="padding: 10px;margin-right:10px;">
+                                        <span class="btn-group" style="padding: 10px;margin-right:10px;">
                                             <a class="btn btn-success btn-sm sonata-ba-action" href="{{ admin.generateUrl('create') }}{% if 'password' in app.request.attributes.get('_route') %}?idCat={% if datagrid.values['category']['value'] is defined %}{{ datagrid.values['category']['value'] }}{% else %}1{% endif %}{% endif %}">
                                                 <i class="fa fa-plus-circle"></i>
                                                 {{ 'link_action_create'|trans({}, 'SonataAdminBundle') }}
                                             </a>
                                         </span>
                                     {% endif %}
-                                    
+
                                     {% if admin.hasRoute('export') and admin.isGranted("EXPORT") and admin.getExportFormats()|length %}
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">

@@ -40,9 +40,9 @@ class User extends BaseUser {
     protected $files;
 
     /*
-     * @var ArrayCollection $passVisibles
+     * @var ArrayCollection $permisos
      */
-    protected $passVisibles;
+    protected $permisos;
 
     /**
      * Get id
@@ -53,35 +53,81 @@ class User extends BaseUser {
         return $this->id;
     }
 
+    /*
+     * 
+     */
+
     public function addPassword(Password $password) {
         $this->passwords[] = $password;
     }
+
+    /*
+     * 
+     */
 
     public function removePassword(Password $password) {
         $this->passwords->removeElement($password);
     }
 
+    /*
+     * 
+     */
+
     public function addFile(Media $file) {
         $this->files[] = $file;
     }
+
+    /*
+     * 
+     */
 
     public function removeFile(Media $file) {
         $this->files->removeElement($file);
     }
 
+    /*
+     * 
+     */
+
     public function __toString() {
         return $this->getUsername() ? : 'n/a';
     }
 
-    function getPassVisibles() {
-        return $this->passVisibles;
+    /*
+     * 
+     */
+
+    function getPermisos() {
+        return $this->permisos;
     }
 
-    public function addPassVisibles(Password $pass) {
-        $this->passVisibles[] = $pass;
+    /*
+     * 
+     */
+
+    function setPermisos(PermisoUser $permiso) {
+
+        $this->permisos = $permiso;
+
+        return $this;
     }
 
-    public function removePassVisibles(Password $pass) {
-        $this->passVisibles->removeElement($pass);
+    /*
+     * 
+     */
+
+    public function addPermisos(PermisoUser $permiso) {
+        $permiso->setUser($this);
+        $this->permisos[] = $permiso;
+        return $this;
     }
+
+    /*
+     * 
+     */
+
+    public function removePermisos(PermisoUser $permiso) {
+        $this->permisos->removeElement($permiso);
+    }
+
 }

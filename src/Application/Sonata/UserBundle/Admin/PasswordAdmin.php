@@ -29,20 +29,15 @@ class PasswordAdmin extends Admin {
         
         $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
         if (!$user->isSuperAdmin()) {
-
-            $sqlPermisos = "SELECT * FROM passwords_users_permisos";
-            $queryPermisos = parent::createQuery($sqlPermisos);
-            
-            
-                $query = parent::createQuery($context);
-                
-                $query->andWhere(
-                        $query->expr()->eq($query->getRootAliases()[0] . '.user', ':user')
-                );
-                
-                $query->setParameter(':user', $user);
-
-//                throw new AccessDeniedException($queryPermisos);
+//            if (false === $this->getConfigurationPool()->getContainer()->get('security.context')->isGranted('ROLE_EDITAR_ENTIDAD', $context)) {
+//                //Controlar Voters
+//                throw new AccessDeniedException('No eres el propietario para editar esta contraseña');
+//            } else {
+            $query = parent::createQuery($context);
+            $query->andWhere(
+                    $query->expr()->eq($query->getRootAliases()[0] . '.user', ':user')
+            );
+            $query->setParameter(':user', $user);
 //            }
         } else {
             $query = parent::createQuery($context);
@@ -103,8 +98,8 @@ class PasswordAdmin extends Admin {
                 ->add('enabled', null, array('editable' => true))
                 ->add('user')
                 ->add('files', null, array('label' => 'Archivos', 'associated_property' => 'getName'))
-                ->add('usersPermitidos', null, array('label' => 'Visible para usuarios'))
-                ->add('gruposPermitidos', null, array('label' => 'Visible para grupos'))
+//                ->add('usersPermitidos', null, array('label' => 'Visible para usuarios'))
+//                ->add('gruposPermitidos', null, array('label' => 'Visible para grupos'))
                 ->add('_action', 'actions', array(
                     'actions' => array(
                         'show' => array(),
@@ -184,11 +179,10 @@ class PasswordAdmin extends Admin {
                 ))
                 ->add('comentario', 'textarea', array('required' => false))
                 ->add('fechaExpira', 'sonata_type_datetime_picker', array('required' => false))
-                ->add('tipoPassword', 'sonata_type_model', array('required' => false))
                 ->end()
-                ->with('Categorias', array('class' => 'col-md-6'))
-                //->add('category','entity',array('class'=>'Application\Sonata\ClassificationBundle\Entity\Category','multiple'=>true ))
+                ->with('Categorias y tipos', array('class' => 'col-md-6'))
                 ->add('category', 'sonata_type_model', array('label' => 'Categorias', 'expanded' => false, 'by_reference' => false, 'multiple' => true, 'required' => false))
+                ->add('tipoPassword', 'sonata_type_model', array('required' => false))
                 ->add('enabled', null, array('required' => false, 'data' => true))
                 ->end()
                 ->with('Archivos', array('class' => 'col-md-6'))
@@ -203,23 +197,31 @@ class PasswordAdmin extends Admin {
                 ->end()
                 // PERMISOS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 ->tab('Permisos')
-                ->with('Usuarios Asociados', array('class' => 'col-md-6'))
-                ->add('usersPermitidos', 'sonata_type_model', array(
-                    'label' => 'Usuarios Permitidos',
-                    'by_reference' => false,
-                    'multiple' => true,
-                    'expanded' => false,
-                    'required' => false,
-                ))
+                ->with('Permisos de Usuario', array('class' => 'col-md-6'))
+//                ->add('usersPermitidos', 'sonata_type_model', array(
+//                    'label' => 'Usuarios Permitidos',
+//                    'by_reference' => false,
+//                    'multiple' => true,
+//                    'expanded' => false,
+//                    'required' => false,
+//                ))
+//                ->add('permisosUser', 'permisoUser', array(
+//                    'multiple' => true,
+//                    'required' => false,
+//                ))
                 ->end()
-                ->with('Grupos Asociados', array('class' => 'col-md-6'))
-                ->add('gruposPermitidos', 'sonata_type_model', array(
-                    'label' => 'Grupos Permitidos',
-                    'by_reference' => false,
-                    'multiple' => true,
-                    'expanded' => false,
-                    'required' => false,
-                ))
+                ->with('Permisos de Grupos', array('class' => 'col-md-6'))
+//                ->add('gruposPermitidos', 'sonata_type_model', array(
+//                    'label' => 'Grupos Permitidos',
+//                    'by_reference' => false,
+//                    'multiple' => true,
+//                    'expanded' => false,
+//                    'required' => false,
+//                ))
+//                ->add('permisosGrupo', 'permisoGrupo', array(
+//                    'multiple' => true,
+//                    'required' => false,
+//                ))
                 ->end()
                 ->end()
         ;
