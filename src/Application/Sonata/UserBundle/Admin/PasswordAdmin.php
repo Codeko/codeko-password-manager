@@ -18,23 +18,31 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\HttpFoundation\Request;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class PasswordAdmin extends Admin {
 
     public $supportsPreviewMode = true;
+    
 
     public function createQuery($context = 'list') {
+        
         $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
         if (!$user->isSuperAdmin()) {
-//            if (false === $this->getConfigurationPool()->getContainer()->get('security.context')->isGranted('ROLE_EDITAR_ENTIDAD', $context)) {
-//                //Controlar Voters
-//                throw new AccessDeniedException('No eres el propietario para editar esta contraseña');
-//            } else {
+
+            $sqlPermisos = "SELECT * FROM passwords_users_permisos";
+            $queryPermisos = parent::createQuery($sqlPermisos);
+            
+            
                 $query = parent::createQuery($context);
+                
                 $query->andWhere(
                         $query->expr()->eq($query->getRootAliases()[0] . '.user', ':user')
                 );
+                
                 $query->setParameter(':user', $user);
+
+//                throw new AccessDeniedException($queryPermisos);
 //            }
         } else {
             $query = parent::createQuery($context);
@@ -193,7 +201,7 @@ class PasswordAdmin extends Admin {
                 ))
                 ->end()
                 ->end()
-                // PERMISOS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                // PERMISOS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 ->tab('Permisos')
                 ->with('Usuarios Asociados', array('class' => 'col-md-6'))
                 ->add('usersPermitidos', 'sonata_type_model', array(
