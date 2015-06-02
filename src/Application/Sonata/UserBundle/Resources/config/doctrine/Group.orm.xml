@@ -10,7 +10,7 @@
             <generator strategy="AUTO" />
         </id>
         
-        <one-to-many field="permisos" target-entity="PermisoGrupo" mapped-by="grupos" />
+        <one-to-many field="permisos" target-entity="PermisoGrupo" mapped-by="grupo" />
     </entity>
 
 </doctrine-mapping>

@@ -72,8 +72,8 @@ class CategoryAdmin extends Admin {
      * {@inheritdoc}
      */
     protected function configureFormFields(FormMapper $formMapper) {
-        
-        echo "<script>alert('".$this->getSubject()."');</script>";
+
+        echo "<script>alert('" . $this->getSubject() . "');</script>";
         $formMapper
                 ->with('General', array('class' => 'col-md-6'))
                 ->add('name')
@@ -98,6 +98,35 @@ class CategoryAdmin extends Admin {
                 ->add('enabled', null, array('required' => false))
                 ->add('position', 'integer', array('required' => false, 'data' => 0))
                 ->end()
+                // PERMISOS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                ->tab('Permisos')
+                ->with('Permisos de Usuario', array('class' => 'col-md-6'))
+                ->add('permisosUser', 'sonata_type_model', array(
+                    'label' => 'Permisos de usuario',
+                    'by_reference' => false,
+                    'multiple' => true,
+                    'expanded' => false,
+                    'required' => false,
+                ))
+//                ->add('permisosUser', 'permisoUser', array(
+//                    'multiple' => true,
+//                    'required' => false,
+//                ))
+                ->end()
+                ->with('Permisos de Grupos', array('class' => 'col-md-6'))
+                ->add('permisosGrupo', 'sonata_type_model', array(
+                    'label' => 'Permisos de grupo',
+                    'by_reference' => false,
+                    'multiple' => true,
+                    'expanded' => false,
+                    'required' => false,
+                ))
+//                ->add('permisosGrupo', 'permisoGrupo', array(
+//                    'multiple' => true,
+//                    'required' => false,
+//                ))
+                ->end()
+                ->end()
         ;
     }
 
@@ -113,6 +142,8 @@ class CategoryAdmin extends Admin {
         $datagridMapper
                 ->add('name')
                 ->add('enabled')
+                ->add('permisosUser', null, array('label' => 'Permisos de Usuarios'))
+                ->add('permisosGrupo', null, array('label' => 'Permisos de Grupos'))
         ;
     }
 
@@ -128,6 +159,8 @@ class CategoryAdmin extends Admin {
                 ->add('enabled', null, array('editable' => true))
                 ->add('position')
                 ->add('parent')
+                ->add('permisosUser', null, array('label' => 'Permisos de Usuarios'))
+                ->add('permisosGrupo', null, array('label' => 'Permisos de Grupos'))
         ;
     }
 

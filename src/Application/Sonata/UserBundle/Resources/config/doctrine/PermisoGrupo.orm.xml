@@ -5,13 +5,13 @@
             <generator strategy="AUTO"/>
         </id>
         <field name="permisos" type="integer" column="permisos"/>
-        <many-to-one field="grupos" target-entity="Application\Sonata\UserBundle\Entity\Group" inversed-by="permisos">
+        <many-to-one field="grupo" target-entity="Application\Sonata\UserBundle\Entity\Group" inversed-by="permisos">
             <join-column name="grupo_id" referenced-column-name="id" nullable="true" />
             <cascade>
                 <cascade-all/>
             </cascade>
         </many-to-one>
-        <many-to-one field="passwords" target-entity="Application\Sonata\UserBundle\Entity\Password" inversed-by="permisosGrupo">
+        <many-to-one field="password" target-entity="Application\Sonata\UserBundle\Entity\Password" inversed-by="permisosGrupo">
             <join-column name="password_id" referenced-column-name="id" nullable="true" />
             <cascade>
                 <cascade-all/>

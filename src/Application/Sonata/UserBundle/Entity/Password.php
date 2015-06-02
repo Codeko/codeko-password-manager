@@ -453,7 +453,7 @@ class Password {
      */
 
     public function addPermisosUser(PermisoUser $permiso) {
-        $permiso->setPasswords($this);
+        $permiso->setPassword($this);
         $this->permisosUser[] = $permiso;
         return $this;
     }
@@ -490,7 +490,7 @@ class Password {
      */
 
     public function addPermisosGrupo(PermisoGrupo $permiso) {
-        $permiso->setPasswords($this);
+        $permiso->setPassword($this);
         $this->permisosGrupo[] = $permiso;
         return $this;
     }

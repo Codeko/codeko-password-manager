@@ -15,14 +15,14 @@ class PermisoGrupo {
     private $id;
 
     /**
-     * @var ArrayCollection $passwords
+     * @var Password $password
      */
-    private $passwords;
+    private $password;
 
     /**
-     * @var ArrayCollection $grupos
+     * @var Group $grupo
      */
-    private $grupos;
+    private $grupo;
 
     /**
      * @var integer
@@ -39,13 +39,13 @@ class PermisoGrupo {
     }
 
     /**
-     * Set user
+     * Set group
      *
-     * @param \stdClass $grupo
+     * @param $grupo
      * @return PermisoGrupo
      */
-    public function setGrupos(Group $grupo) {
-        $this->grupos = $grupo;
+    public function setGrupo(Group $grupo) {
+        $this->grupo = $grupo;
 
         return $this;
     }
@@ -53,38 +53,20 @@ class PermisoGrupo {
     /**
      * Get grupo
      *
-     * @return \stdClass 
+     * @return grupo 
      */
-    public function getGrupos() {
-        return $this->grupos;
-    }
-
-    /*
-     * 
-     */
-
-    public function addGrupos(Group $grupo) {
-        $grupo->setPermisos($this);
-        $this->grupos[] = $grupo;
-        return $this;
-    }
-
-    /*
-     * 
-     */
-
-    public function removeGrupos(Group $grupo) {
-        $this->grupos->removeElement($grupo);
+    public function getGrupo() {
+        return $this->grupo;
     }
 
     /**
      * Set password
      *
-     * @param \stdClass $password
+     * @param Password $password
      * @return PermisoGrupo
      */
-    public function setPasswords(Password $password) {
-        $this->passwords = $password;
+    public function setPassword(Password $password) {
+        $this->password = $password;
 
         return $this;
     }
@@ -92,28 +74,10 @@ class PermisoGrupo {
     /**
      * Get password
      *
-     * @return \stdClass 
+     * @return password 
      */
-    public function getPasswords() {
-        return $this->passwords;
-    }
-
-    /*
-     * 
-     */
-
-    public function addPassword(Password $password) {
-        $password->setPermisosUser($this);
-        $this->passwords[] = $password;
-        return $this;
-    }
-
-    /*
-     * 
-     */
-
-    public function removePassword(Password $password) {
-        $this->passwords->removeElement($password);
+    public function getPassword() {
+        return $this->password;
     }
 
     /**
@@ -135,6 +99,14 @@ class PermisoGrupo {
      */
     public function getPermisos() {
         return $this->permisos;
+    }
+
+    /*
+     * 
+     */
+
+    public function __toString() {
+        return $this->getGrupo().'('.$this->getPermisos().')' ? : 'n/a';
     }
 
 }

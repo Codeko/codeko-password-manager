@@ -58,17 +58,6 @@ class Group extends BaseGroup {
      * 
      */
 
-    function setPermisos(PermisoGrupo $permiso) {
-
-        $this->permisos = $permiso;
-
-        return $this;
-    }
-
-    /*
-     * 
-     */
-
     public function addPermisos(PermisoGrupo $permiso) {
         $permiso->setGrupo($this);
         $this->permisos[] = $permiso;

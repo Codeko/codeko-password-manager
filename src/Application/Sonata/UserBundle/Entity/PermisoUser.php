@@ -15,14 +15,14 @@ class PermisoUser {
     private $id;
 
     /**
-     * @var ArrayCollection $passwords
+     * @var Password $password
      */
-    private $passwords;
+    private $password;
 
     /**
-     * @var ArrayCollection $users
+     * @var User $user
      */
-    private $users;
+    private $user;
 
     /**
      * @var integer
@@ -39,54 +39,28 @@ class PermisoUser {
     }
 
     /**
-     * Set password
-     *
-     * @param \stdClass $password
-     * @return PermisoUser
-     */
-    public function setPasswords(Password $password) {
-        $this->passwords = $password;
-
-        return $this;
-    }
-
-    /**
      * Get password
      *
      * @return \stdClass 
      */
-    public function getPasswords() {
-        return $this->passwords;
+    public function getPassword() {
+        return $this->password;
     }
 
     /*
      * 
      */
 
-    public function addPassword(Password $password) {
-        $password->setPermisosUser($this);
-        $this->passwords[] = $password;
-        return $this;
+    function setPassword(Password $password) {
+        $this->password = $password;
     }
 
     /*
      * 
      */
 
-    public function removePassword(Password $password) {
-        $this->passwords->removeElement($password);
-    }
-
-    /**
-     * Set user
-     *
-     * @param \stdClass $user
-     * @return PermisoUser
-     */
-    public function setUsers(User $user) {
-        $this->users = $user;
-
-        return $this;
+    function setUser(User $user) {
+        $this->user = $user;
     }
 
     /**
@@ -94,26 +68,8 @@ class PermisoUser {
      *
      * @return \stdClass 
      */
-    public function getUsers() {
-        return $this->users;
-    }
-
-    /*
-     * 
-     */
-
-    public function addUsers(User $user) {
-        $user->setPermisos($this);
-        $this->users[] = $user;
-        return $this;
-    }
-
-    /*
-     * 
-     */
-
-    public function removeUsers(User $user) {
-        $this->users->removeElement($user);
+    public function getUser() {
+        return $this->user;
     }
 
     /**
@@ -135,6 +91,14 @@ class PermisoUser {
      */
     public function getPermisos() {
         return $this->permisos;
+    }
+
+    /*
+     * 
+     */
+
+    public function __toString() {
+        return $this->getUser().'('.$this->getPermisos().')' ? : 'n/a';
     }
 
 }

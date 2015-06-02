@@ -14,50 +14,6 @@
 {% block tab_menu %}{{ knp_menu_render(admin.sidemenu(action), {'currentClass' : 'active', 'template': admin_pool.getTemplate('tab_menu_template')}, 'twig') }}{% endblock %}
 {% block list_table %}
 
-    <script>
-        $(document).ready(function () {
-            $('div.iradio_flat-blue').addClass('invisible');
-        });
-
-        var comprobarVisibilidad = function () {
-            if ($('#select2-chosen-47').html() !== "") {
-                if ($('#select2-chosen-47').html() !== 'Duplicar') {
-                    $('div.icheckbox_flat-blue').removeClass('invisible');
-                    $('div.iradio_flat-blue').addClass('invisible');
-                    if ($('.todos > div').hasClass('checked')) {
-                        $('.todos').click();
-                    }
-                } else {
-                    $('div.icheckbox_flat-blue').addClass('invisible');
-                    $('div.iradio_flat-blue').removeClass('invisible');
-                    if ($('.todos > div').hasClass('checked')) {
-                    } else {
-                        $('.todos').click();
-                    }
-                }
-            }
-            if ($('#select2-chosen-45').html() !== "") {
-                if ($('#select2-chosen-45').html() !== 'Duplicar') {
-                    $('div.icheckbox_flat-blue').removeClass('invisible');
-                    $('div.iradio_flat-blue').addClass('invisible');
-                    if ($('.todos > div').hasClass('checked')) {
-                        $('.todos').click();
-                    }
-                } else if ($('#select2-chosen-45').html() === 'Duplicar') {
-                    $('div.icheckbox_flat-blue').addClass('invisible');
-                    $('div.iradio_flat-blue').removeClass('invisible');
-                    if ($('.todos > div').hasClass('checked')) {
-                    } else {
-                        $('.todos').click();
-                    }
-                }
-            }
-
-        };
-        //|| ($('#select2-chosen-45').html() !== 'Duplicar')
-
-    </script>
-
     {# CARGANDO ARBOL DE CATEGORIAS EN LA VISTA PASSWORD_LIST #}
     {% if 'Password' in admin.getClass() %}
         {% include 'SonataAdminBundle::list.html.twig' %}   
