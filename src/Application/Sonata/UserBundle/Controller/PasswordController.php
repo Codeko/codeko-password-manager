@@ -35,22 +35,25 @@ class PasswordController extends Controller {
     public function batchActionClone(ProxyQueryInterface $query) {
         $request = $this->get('request');
         $modelManager = $this->admin->getModelManager();
-        $id = $request->get('idx');
-        
-        $target = $modelManager->find($this->admin->getClass(), $id[0]);
-        if ($target === null) {
-            $this->addFlash('sonata_flash_error', 'No se selecciono ningun elemento');
+        $ids = $request->get('idx');
+        $cantidad = count($ids);
 
-            return new RedirectResponse($this->admin->generateUrl('list', array('filter' => $this->admin->getFilterParameters())));
+        for ($i = 0; $i < $cantidad; $i++) {
+            $target = $modelManager->find($this->admin->getClass(), $ids[$i]);
+            if ($target === null) {
+                $this->addFlash('sonata_flash_error', 'No se selecciono ningun elemento');
+
+                return new RedirectResponse($this->admin->generateUrl('list', array('filter' => $this->admin->getFilterParameters())));
+            }
+            $passOrigen = $target->getPassword();
+            $passDecript = $this->get('nzo_url_encryptor')->decrypt($passOrigen);
+            $clonedObject = clone $target;
+            $clonedObject->setPassword($passDecript);
+            $clonedObject->setTitulo($target->getTitulo() . " (Copia)");
+            $this->admin->create($clonedObject);
         }
-        $passOrigen = $target->getPassword();
-        $passDecript = $this->get('nzo_url_encryptor')->decrypt($passOrigen);
-        $clonedObject = clone $target;
-        $clonedObject->setPassword($passDecript);
-        $clonedObject->setTitulo($target->getTitulo() . " (Copia)");
-        $this->admin->create($clonedObject);
 
-        $this->addFlash('sonata_flash_success', 'Duplicada satisfactoriamente');
+        $this->addFlash('sonata_flash_success', 'Duplicado satisfactoriamente');
 
         return new RedirectResponse($this->admin->generateUrl('list'));
     }
@@ -81,7 +84,7 @@ class PasswordController extends Controller {
         /** @var $form \Symfony\Component\Form\Form */
         $form = $this->admin->getForm();
         $form->setData($object);
-        
+
         if ($this->getRestMethod($request) == 'POST') {
             $form->submit($request);
             $isFormValid = $form->isValid();
