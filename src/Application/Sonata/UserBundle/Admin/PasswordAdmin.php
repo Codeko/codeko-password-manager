@@ -18,12 +18,15 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\HttpFoundation\Request;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class PasswordAdmin extends Admin {
 
     public $supportsPreviewMode = true;
+    
 
     public function createQuery($context = 'list') {
+        
         $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
         if (!$user->isSuperAdmin()) {
 //            if (false === $this->getConfigurationPool()->getContainer()->get('security.context')->isGranted('ROLE_EDITAR_ENTIDAD', $context)) {
@@ -196,7 +199,7 @@ class PasswordAdmin extends Admin {
                 ))
                 ->end()
                 ->end()
-                // PERMISOS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                // PERMISOS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 ->tab('Permisos')
                 ->with('Permisos de Usuario', array('class' => 'col-md-6'))
                 ->add('permisosUser', 'sonata_type_model', array(

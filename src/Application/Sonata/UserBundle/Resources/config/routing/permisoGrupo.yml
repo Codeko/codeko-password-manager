@@ -1,30 +1,30 @@
-tipopass:
+permisoGrupo:
     path:     /
-    defaults: { _controller: "ApplicationSonataUserBundle:TipoPass:index" }
+    defaults: { _controller: "ApplicationSonataUserBundle:PermisoGrupo:index" }
 
-tipopass_show:
+permisoGrupo_show:
     path:     /{id}/show
-    defaults: { _controller: "ApplicationSonataUserBundle:TipoPass:show" }
+    defaults: { _controller: "ApplicationSonataUserBundle:PermisoGrupo:show" }
 
-tipopass_new:
+permisoGrupo_new:
     path:     /new
-    defaults: { _controller: "ApplicationSonataUserBundle:TipoPass:new" }
+    defaults: { _controller: "ApplicationSonataUserBundle:PermisoGrupo:new" }
 
-tipopass_create:
+permisoGrupo_create:
     path:     /create
-    defaults: { _controller: "ApplicationSonataUserBundle:TipoPass:create" }
+    defaults: { _controller: "ApplicationSonataUserBundle:PermisoGrupo:create" }
     methods:  POST
 
-tipopass_edit:
+permisoGrupo_edit:
     path:     /{id}/edit
-    defaults: { _controller: "ApplicationSonataUserBundle:TipoPass:edit" }
+    defaults: { _controller: "ApplicationSonataUserBundle:PermisoGrupo:edit" }
 
-tipopass_update:
+permisoGrupo_update:
     path:     /{id}/update
-    defaults: { _controller: "ApplicationSonataUserBundle:TipoPass:update" }
+    defaults: { _controller: "ApplicationSonataUserBundle:PermisoGrupo:update" }
     methods:  [POST, PUT]
 
-tipopass_delete:
+permisoGrupo_delete:
     path:     /{id}/delete
-    defaults: { _controller: "ApplicationSonataUserBundle:TipoPass:delete" }
+    defaults: { _controller: "ApplicationSonataUserBundle:PermisoGrupo:delete" }
     methods:  [POST, DELETE]

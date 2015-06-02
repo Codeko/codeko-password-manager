@@ -6,13 +6,13 @@
         </id>
         <field name="permisos" type="integer" column="permisos"/>
         <many-to-one field="user" target-entity="Application\Sonata\UserBundle\Entity\User" inversed-by="permisos">
-            <join-column name="user_id" referenced-column-name="id" nullable="true" />
+            <join-column name="user_id" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
             <cascade>
                 <cascade-all/>
             </cascade>
         </many-to-one>
         <many-to-one field="categoria" target-entity="Application\Sonata\ClassificationBundle\Entity\Category" inversed-by="permisosUser">
-            <join-column name="category_id" referenced-column-name="id" nullable="true" />
+            <join-column name="category_id" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
             <cascade>
                 <cascade-all/>
             </cascade>

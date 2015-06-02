@@ -104,6 +104,8 @@ class MediaAdminController extends Controller {
                     'datagrid' => $datagrid,
                     'root_category' => $category,
                     'csrf_token' => $this->getCsrfToken('sonata.batch'),
+                    'no_button' => 1,
+                    'is_media' => 1,
         ));
     }
 
@@ -126,8 +128,8 @@ class MediaAdminController extends Controller {
         if (!$object) {
             throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
         }
-        
-         if (false === $this->get('security.context')->isGranted('ROLE_BORRAR_MULTIMEDIA', $object)) {
+
+        if (false === $this->get('security.context')->isGranted('ROLE_BORRAR_MULTIMEDIA', $object)) {
             //Controlar Voters
             throw new AccessDeniedException('No eres el propietario para borrar este fichero');
         }

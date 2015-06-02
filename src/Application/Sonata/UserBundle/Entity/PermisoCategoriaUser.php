@@ -97,7 +97,7 @@ class PermisoCategoriaUser {
      */
 
     public function __toString() {
-        return $this->getUser() . '(' . $this->getPermisos() . ')' ? : 'n/a';
+        return '(' . $this->getCategoria() . ')(' . $this->getUser() . ')(' . $this->getPermisos() . ')' ? : 'n/a';
     }
 
 }

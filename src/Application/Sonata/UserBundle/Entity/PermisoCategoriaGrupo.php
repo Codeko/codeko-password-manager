@@ -97,7 +97,7 @@ class PermisoCategoriaGrupo {
      */
 
     public function __toString() {
-        return $this->getGrupo() . '(' . $this->getPermisos() . ')' ? : 'n/a';
+        return '(' . $this->getCategoria() . ')(' . $this->getGrupo() . ')(' . $this->getPermisos() . ')' ? : 'n/a';
     }
 
 }

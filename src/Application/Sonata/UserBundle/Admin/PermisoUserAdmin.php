@@ -16,8 +16,8 @@ class PermisoUserAdmin extends Admin {
     protected function configureDatagridFilters(DatagridMapper $datagridMapper) {
         $datagridMapper
                 ->add('permisos')
-                ->add('user',null, array('label' => 'Usuario'))
-                ->add('password',null, array('label' => 'Contraseña'))
+                ->add('user', null, array('label' => 'Usuario'))
+                ->add('password', null, array('label' => 'Contraseña'))
         ;
     }
 
@@ -25,11 +25,10 @@ class PermisoUserAdmin extends Admin {
      * @param ListMapper $listMapper
      */
     protected function configureListFields(ListMapper $listMapper) {
-        $listMapper                
+        $listMapper
                 ->addIdentifier('password', null, array('label' => 'Contraseña'))
                 ->addIdentifier('user', null, array('label' => 'Usuario'))
                 ->add('permisos')
-                
                 ->add('_action', 'actions', array(
                     'label' => 'Acciones',
                     'actions' => array(
@@ -45,6 +44,9 @@ class PermisoUserAdmin extends Admin {
      * @param FormMapper $formMapper
      */
     protected function configureFormFields(FormMapper $formMapper) {
+        // AQUI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //echo "<script>alert('".$this->getForm()."');</script>";    
+        
         $formMapper
                 ->add('permisos')
                 ->add('user', 'sonata_type_model', array(
@@ -77,4 +79,18 @@ class PermisoUserAdmin extends Admin {
         ;
     }
 
+//
+//    public function getNewInstance() {
+//
+//        $request = Request::createFromGlobals();
+//
+//        $valorPass = $request->query->get('idPass');
+//        if ($valorPass !== null) {
+//            $entityManager = $this->getModelManager()->getEntityManager('Application\Sonata\UserBundle\Entity\Password');
+//            $reference = $entityManager->getReference('Application\Sonata\UserBundle\Entity\Password', $valorPass);
+//
+//            $instance->setPassword($reference);
+//        }
+//        return $instance;
+//    }
 }

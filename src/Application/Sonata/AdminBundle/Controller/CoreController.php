@@ -84,7 +84,8 @@ class CoreController extends Controller
         return $this->render($this->getAdminPool()->getTemplate('dashboard'), array(
             'base_template'   => $this->getBaseTemplate($request),
             'admin_pool'      => $this->container->get('sonata.admin.pool'),
-            'blocks'          => $blocks
+            'blocks'          => $blocks,
+            'animate_logo'    => 1,
         ));
     }
 

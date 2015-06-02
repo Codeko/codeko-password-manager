@@ -35,53 +35,27 @@ class PasswordController extends Controller {
     public function batchActionClone(ProxyQueryInterface $query) {
         $request = $this->get('request');
         $modelManager = $this->admin->getModelManager();
+        $ids = $request->get('idx');
+        $cantidad = count($ids);
 
-        $target = $modelManager->find($this->admin->getClass(), $request->get('targetId'));
+        for ($i = 0; $i < $cantidad; $i++) {
+            $target = $modelManager->find($this->admin->getClass(), $ids[$i]);
+            if ($target === null) {
+                $this->addFlash('sonata_flash_error', 'No se selecciono ningun elemento');
 
-        if ($target === null) {
-            $this->addFlash('sonata_flash_error', 'No se selecciono ningun elemento');
-
-            return new RedirectResponse($this->admin->generateUrl('list', array('filter' => $this->admin->getFilterParameters())));
+                return new RedirectResponse($this->admin->generateUrl('list', array('filter' => $this->admin->getFilterParameters())));
+            }
+            $passOrigen = $target->getPassword();
+            $passDecript = $this->get('nzo_url_encryptor')->decrypt($passOrigen);
+            $clonedObject = clone $target;
+            $clonedObject->setPassword($passDecript);
+            $clonedObject->setTitulo($target->getTitulo() . " (Copia)");
+            $this->admin->create($clonedObject);
         }
 
-
-        $passOrigen = $target->getPassword();
-        $passDecript = $this->get('nzo_url_encryptor')->decrypt($passOrigen);
-        $clonedObject = clone $target;
-        $clonedObject->setPassword($passDecript);
-        $clonedObject->setTitulo($target->getTitulo() . " (Copia)");
-        $this->admin->create($clonedObject);
-
-        $this->addFlash('sonata_flash_success', 'Duplicada satisfactoriamente');
+        $this->addFlash('sonata_flash_success', 'Duplicado satisfactoriamente');
 
         return new RedirectResponse($this->admin->generateUrl('list'));
-    }
-
-    public function batchActionMergeIsRelevant(array $normalizedSelectedIds, $allEntitiesSelected) {
-        // here you have access to all POST parameters, if you use some custom ones
-        // POST parameters are kept even after the confirmation page.
-        $parameterBag = $this->get('request')->request;
-
-        // check that a target has been chosen
-        if (!$parameterBag->has('targetId')) {
-            return 'flash_batch_merge_no_target';
-        }
-
-        $normalizedTargetId = $parameterBag->get('targetId');
-
-        // if all entities are selected, a merge can be done
-        if ($allEntitiesSelected) {
-            return true;
-        }
-
-        // filter out the target from the selected models
-        $normalizedSelectedIds = array_filter($normalizedSelectedIds, function($normalizedSelectedId) use($normalizedTargetId) {
-            return $normalizedSelectedId !== $normalizedTargetId;
-        }
-        );
-
-        // if at least one but not the target model is selected, a merge can be done.
-        return count($normalizedSelectedIds) > 0;
     }
 
     /*
@@ -110,7 +84,7 @@ class PasswordController extends Controller {
         /** @var $form \Symfony\Component\Form\Form */
         $form = $this->admin->getForm();
         $form->setData($object);
-        
+
         if ($this->getRestMethod($request) == 'POST') {
             $form->submit($request);
             $isFormValid = $form->isValid();
