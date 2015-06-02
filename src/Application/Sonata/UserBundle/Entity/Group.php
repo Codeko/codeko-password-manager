@@ -21,24 +21,41 @@ use Sonata\UserBundle\Entity\BaseGroup as BaseGroup;
  *
  * @author <yourname> <youremail>
  */
-class Group extends BaseGroup
-{
+class Group extends BaseGroup {
+
     /**
      * @var integer $id
      */
     protected $id;
+
+    /*
+     * @var ArrayCollection $passVisibles
+     */
+    protected $passVisibles;
 
     /**
      * Get id
      *
      * @return integer $id
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
-    
+
     public function __toString() {
-        return $this->getName()?: 'n/a';
+        return $this->getName()? : 'n/a';
     }
+
+    function getPassVisibles() {
+        return $this->passVisibles;
+    }
+
+    public function addPassVisibles(Password $pass) {
+        $this->passVisibles[] = $pass;
+    }
+
+    public function removePassVisibles(Password $pass) {
+        $this->passVisibles->removeElement($pass);
+    }
+
 }

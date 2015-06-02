@@ -61,6 +61,7 @@ class UserAdmin extends \Sonata\UserBundle\Admin\Model\UserAdmin {
                 ->add('enabled', null, array('editable' => true))
                 ->add('locked', null, array('editable' => true))
                 ->add('createdAt')
+                ->add('passVisibles', null, array('label' => 'Pass visibles'))
         ;
 
 //        if ($this->isGranted('ROLE_ALLOWED_TO_SWITCH')) {
@@ -165,6 +166,7 @@ class UserAdmin extends \Sonata\UserBundle\Admin\Model\UserAdmin {
                     ),array(
                         'translation_domain' => $this->getTranslationDomain(),
                     ))
+                    //->add('roles','choice',array('choices'=>$this->getConfigurationPool()->getContainer()->getParameter('security.role_hierarchy.roles'),'multiple'=>true ))
                     ->add('locked', null, array('required' => false))
                     ->add('expired', null, array('required' => false))
                     ->add('enabled', null, array('required' => false))

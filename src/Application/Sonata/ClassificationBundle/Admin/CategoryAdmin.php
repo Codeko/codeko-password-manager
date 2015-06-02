@@ -72,6 +72,8 @@ class CategoryAdmin extends Admin {
      * {@inheritdoc}
      */
     protected function configureFormFields(FormMapper $formMapper) {
+        
+        echo "<script>alert('".$this->getSubject()."');</script>";
         $formMapper
                 ->with('General', array('class' => 'col-md-6'))
                 ->add('name')
