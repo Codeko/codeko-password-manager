@@ -39,7 +39,6 @@ class GroupAdmin extends Admin {
         $listMapper
                 ->addIdentifier('name')
                 ->add('roles')
-                ->add('passVisibles', null, array('label' => 'Pass visibles'))
         ;
     }
 

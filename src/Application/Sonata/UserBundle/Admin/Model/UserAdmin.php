@@ -61,7 +61,6 @@ class UserAdmin extends \Sonata\UserBundle\Admin\Model\UserAdmin {
                 ->add('enabled', null, array('editable' => true))
                 ->add('locked', null, array('editable' => true))
                 ->add('createdAt')
-                ->add('passVisibles', null, array('label' => 'Pass visibles'))
         ;
 
 //        if ($this->isGranted('ROLE_ALLOWED_TO_SWITCH')) {
@@ -113,9 +112,9 @@ class UserAdmin extends \Sonata\UserBundle\Admin\Model\UserAdmin {
      * {@inheritdoc}
      */
     protected function configureFormFields(FormMapper $formMapper) {
-        
+
         $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
-        
+
         $formMapper
                 ->tab('General')
                 ->with('General', array('class' => 'col-md-6'))
@@ -153,7 +152,7 @@ class UserAdmin extends \Sonata\UserBundle\Admin\Model\UserAdmin {
                 ->end()
                 ->end()
         ;
-        
+
         if ($user->isSuperAdmin()) {
             $formMapper
                     ->tab('Administración')
@@ -162,11 +161,10 @@ class UserAdmin extends \Sonata\UserBundle\Admin\Model\UserAdmin {
                         'label' => 'form.label_roles',
                         'expanded' => true,
                         'multiple' => true,
-                        'required' => false,                       
-                    ),array(
+                        'required' => false,
+                            ), array(
                         'translation_domain' => $this->getTranslationDomain(),
                     ))
-                    //->add('roles','choice',array('choices'=>$this->getConfigurationPool()->getContainer()->getParameter('security.role_hierarchy.roles'),'multiple'=>true ))
                     ->add('locked', null, array('required' => false))
                     ->add('expired', null, array('required' => false))
                     ->add('enabled', null, array('required' => false))
