@@ -26,28 +26,41 @@ class PasswordAdmin extends Admin {
     public function createQuery($context = 'list') {
 
         $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
+//        if (!$user->isSuperAdmin()) {
         $userId = $user->getId();
         $connection = $GLOBALS['kernel']->getContainer()->get('doctrine')->getManager()->getConnection();
+        $contenedorPassLectura = array();
+        $contenedorPassEscritura = array();
 
-        /*
-
-            Leer y escribir - 11
-            Leer y no escribir - 10
-            No leer y no escribir - 0
-
-        */
-        
-        //Permisos del usuario actual [Lectura|Escritura] --------------------------------------------------
+        //Permisos del usuario actual --------------------------------------------------
         $permisosUser = $this->getUserPermits($userId, $connection);
         foreach ($permisosUser as $valor) {
-//            echo "<script>console.log('Permisos usuario | " . $valor["permisos"] ."')</script>";
+            if ($this->checkReadPermits($valor["permisos"])) {
+                array_push($contenedorPassLectura, $valor["password_id"]);
+                if ($this->checkWritePermits($valor["permisos"])) {
+                    array_push($contenedorPassEscritura, $valor["password_id"]);
+                }
+            }
         }
 
-        //Permisos del grupo actual [Lectura|Escritura] -----------------------------------------------------
+        //Permisos de los grupos del usuario actual -------------------------------------
         $permisosGrupos = $this->getGroupPermits($userId, $connection);
         foreach ($permisosGrupos as $valor) {
-//            echo "<script>console.log('Permisos grupo " . $valor["group_id"] . " | " . $valor["permisos"] ."')</script>";
+            if ($this->checkReadPermits($valor["permisos"])) {
+                array_push($contenedorPassLectura, $valor["password_id"]);
+                if ($this->checkWritePermits($valor["permisos"])) {
+                    array_push($contenedorPassEscritura, $valor["password_id"]);
+                }
+            }
         }
+
+        $IdsPassLectura = array_unique($contenedorPassLectura);
+        $IdsPassEscritura = array_unique($contenedorPassEscritura);
+
+        //Array de ids de contraseñas sobre las que tienes permisos de lectura
+        $IdsPassLectura;
+        //Array de ids de contraseñas sobre las que tienes permisos de escritura
+        $IdsPassEscritura;
 
         //Creacion de query--------------------------------------------------------------
         if (!$user->isSuperAdmin()) {
@@ -74,6 +87,31 @@ class PasswordAdmin extends Admin {
         $statement = $connection->prepare($sql);
         $statement->execute();
         return $statement->fetchAll();
+    }
+
+    /*
+      Permisos [Lectura|Escritura]:
+      Leer y escribir - 11
+      Leer y no escribir - 10
+      No leer y no escribir - 0
+     */
+
+    protected function checkReadPermits($permiso) {
+        if ($permiso == 11) {
+            return true;
+        } else if ($permiso == 10) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    protected function checkWritePermits($permiso) {
+        if ($permiso == 11) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private function buildRoutes() {
