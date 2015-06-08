@@ -10,9 +10,9 @@
 {% endblock %}
 {% block tab_menu %}{{ knp_menu_render(admin.sidemenu(action), {'currentClass' : 'active', 'template': admin_pool.getTemplate('tab_menu_template')}, 'twig') }}{% endblock %}
 {% block list_table %}
-{# CARGANDO ARBOL DE CATEGORIAS EN LA VISTA PASSWORD_LIST #}
-{% if 'Password' in admin.getClass() %}
-    {% include 'SonataAdminBundle::list.html.twig' %}
+    {# CARGANDO ARBOL DE CATEGORIAS EN LA VISTA PASSWORD_LIST #}
+    {% if 'Password' in admin.getClass() %}
+        {% include 'SonataAdminBundle::list.html.twig' %}
     <div class="col-xs-12 col-md-9">
     {% else %}
         <div class="col-xs-12 col-md-12">
@@ -113,24 +113,24 @@
                                         {% block batch %}
                                             <script>
                                                 {% block batch_javascript %}
-                                                        jQuery(document).ready(function ($) {
-                                                            $('#list_batch_checkbox').on('ifChanged', function () {
-                                                                $(this)
-                                                                        .closest('table')
-                                                                        .find('td.sonata-ba-list-field-batch input[type="checkbox"], div.sonata-ba-list-field-batch input[type="checkbox"]')
-                                                                        .iCheck($(this).is(':checked') ? 'check' : 'uncheck')
-                                                                        ;
-                                                            });
-                                                            $('td.sonata-ba-list-field-batch input[type="checkbox"], div.sonata-ba-list-field-batch input[type="checkbox"]')
-                                                                    .on('ifChanged', function () {
-                                                                        $(this)
-                                                                                .closest('tr, div.sonata-ba-list-field-batch')
-                                                                                .toggleClass('sonata-ba-list-row-selected', $(this).is(':checked'))
-                                                                                ;
-                                                                    })
-                                                                    .trigger('ifChanged')
+                                                    jQuery(document).ready(function ($) {
+                                                        $('#list_batch_checkbox').on('ifChanged', function () {
+                                                            $(this)
+                                                                    .closest('table')
+                                                                    .find('td.sonata-ba-list-field-batch input[type="checkbox"], div.sonata-ba-list-field-batch input[type="checkbox"]')
+                                                                    .iCheck($(this).is(':checked') ? 'check' : 'uncheck')
                                                                     ;
                                                         });
+                                                        $('td.sonata-ba-list-field-batch input[type="checkbox"], div.sonata-ba-list-field-batch input[type="checkbox"]')
+                                                                .on('ifChanged', function () {
+                                                                    $(this)
+                                                                            .closest('tr, div.sonata-ba-list-field-batch')
+                                                                            .toggleClass('sonata-ba-list-row-selected', $(this).is(':checked'))
+                                                                            ;
+                                                                })
+                                                                .trigger('ifChanged')
+                                                                ;
+                                                    });
                                                 {% endblock %}
                                             </script>
                                             {% block batch_actions %}

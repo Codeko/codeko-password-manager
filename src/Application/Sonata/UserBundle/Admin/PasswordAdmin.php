@@ -18,35 +18,62 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\HttpFoundation\Request;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class PasswordAdmin extends Admin {
 
     public $supportsPreviewMode = true;
-    
 
     public function createQuery($context = 'list') {
-        
+
         $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
+        $userId = $user->getId();
+        $connection = $GLOBALS['kernel']->getContainer()->get('doctrine')->getManager()->getConnection();
+
+        /*
+
+            Leer y escribir - 11
+            Leer y no escribir - 10
+            No leer y no escribir - 0
+
+        */
+        
+        //Permisos del usuario actual [Lectura|Escritura] --------------------------------------------------
+        $permisosUser = $this->getUserPermits($userId, $connection);
+        foreach ($permisosUser as $valor) {
+//            echo "<script>console.log('Permisos usuario | " . $valor["permisos"] ."')</script>";
+        }
+
+        //Permisos del grupo actual [Lectura|Escritura] -----------------------------------------------------
+        $permisosGrupos = $this->getGroupPermits($userId, $connection);
+        foreach ($permisosGrupos as $valor) {
+//            echo "<script>console.log('Permisos grupo " . $valor["group_id"] . " | " . $valor["permisos"] ."')</script>";
+        }
+
+        //Creacion de query--------------------------------------------------------------
         if (!$user->isSuperAdmin()) {
-//            if (false === $this->getConfigurationPool()->getContainer()->get('security.context')->isGranted('ROLE_EDITAR_ENTIDAD', $context)) {
-//                //Controlar Voters
-//                throw new AccessDeniedException('No eres el propietario para editar esta contraseña');
-//            } else {
             $query = parent::createQuery($context);
             $query->andWhere(
                     $query->expr()->eq($query->getRootAliases()[0] . '.user', ':user')
             );
             $query->setParameter(':user', $user);
-//            }
         } else {
             $query = parent::createQuery($context);
         }
         return $query;
     }
 
-    protected function configureRoutes(RouteCollection $collection) {
-        $collection->add('clone', $this->getRouterIdParameter() . '/clone');
+    protected function getUserPermits($userId, $connection) {
+        $sql = "SELECT * FROM PermisoUser WHERE user_id = '" . $userId . "'";
+        $statement = $connection->prepare($sql);
+        $statement->execute();
+        return $statement->fetchAll();
+    }
+
+    protected function getGroupPermits($userId, $connection) {
+        $sql = "SELECT PermisoGrupo.grupo_id, PermisoGrupo.password_id, PermisoGrupo.permisos, fos_user_user_group.user_id, fos_user_user_group.group_id FROM PermisoGrupo INNER JOIN fos_user_user_group ON fos_user_user_group.user_id=" . $userId . " WHERE fos_user_user_group.group_id=PermisoGrupo.grupo_id";
+        $statement = $connection->prepare($sql);
+        $statement->execute();
+        return $statement->fetchAll();
     }
 
     private function buildRoutes() {

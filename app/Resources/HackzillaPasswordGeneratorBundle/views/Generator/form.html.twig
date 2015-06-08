@@ -6,22 +6,17 @@
     {# ESILOS #}
     <script>
         var labels = document.getElementsByTagName('label');
+
         for (var i = 0; i < labels.length; i++) {
             labels[i].style.paddingRight = "15px";
         }
-    </script>
 
-    <script>
         function recogerPass() {
-            $('#pppp').css('display', 'block');
-            
-            $('.passwords').html($('#passTemp').find('#pppp').html());
-
+            $('#marco').css('display', 'block');
+            $('.passwords').html($('#passTemp').find('#marco').html());
             $("#passTemp").html("");
         }
-    </script>
 
-    <script>
         // GENERANDO PASS
         $(document).ready(function () {
             // process the form
@@ -100,7 +95,7 @@
         }
     </script>
 
-    <div class="passwords modal-body" id="pppp" style="display:hidden">
+    <div class="passwords modal-body" id="marco" style="display:hidden">
         <h4>{{ "HEADING_PASSWORDS"|trans }}</h4>
         <div>
             <ul>
