@@ -26,51 +26,53 @@ class PasswordAdmin extends Admin {
     public function createQuery($context = 'list') {
 
         $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
-//        if (!$user->isSuperAdmin()) {
-        $userId = $user->getId();
-        $connection = $GLOBALS['kernel']->getContainer()->get('doctrine')->getManager()->getConnection();
-        $contenedorPassLectura = array();
-        $contenedorPassEscritura = array();
 
-        //Permisos del usuario actual --------------------------------------------------
-        $permisosUser = $this->getUserPermits($userId, $connection);
-        foreach ($permisosUser as $valor) {
-            if ($this->checkReadPermits($valor["permisos"])) {
-                array_push($contenedorPassLectura, $valor["password_id"]);
-                if ($this->checkWritePermits($valor["permisos"])) {
-                    array_push($contenedorPassEscritura, $valor["password_id"]);
+        if ($user->isSuperAdmin()) {
+            $query = parent::createQuery($context);
+        } else {
+
+            $userId = $user->getId();
+            $connection = $GLOBALS['kernel']->getContainer()->get('doctrine')->getManager()->getConnection();
+            $contenedorPassLectura = array();
+            $contenedorPassEscritura = array();
+
+            //Permisos del usuario actual --------------------------------------------------
+            $permisosUser = $this->getUserPermits($userId, $connection);
+            foreach ($permisosUser as $valor) {
+                if ($this->checkReadPermits($valor["permisos"])) {
+                    array_push($contenedorPassLectura, $valor["password_id"]);
+                    if ($this->checkWritePermits($valor["permisos"])) {
+                        array_push($contenedorPassEscritura, $valor["password_id"]);
+                    }
                 }
             }
-        }
 
-        //Permisos de los grupos del usuario actual -------------------------------------
-        $permisosGrupos = $this->getGroupPermits($userId, $connection);
-        foreach ($permisosGrupos as $valor) {
-            if ($this->checkReadPermits($valor["permisos"])) {
-                array_push($contenedorPassLectura, $valor["password_id"]);
-                if ($this->checkWritePermits($valor["permisos"])) {
-                    array_push($contenedorPassEscritura, $valor["password_id"]);
+            //Permisos de los grupos del usuario actual -------------------------------------
+            $permisosGrupos = $this->getGroupPermits($userId, $connection);
+            foreach ($permisosGrupos as $valor) {
+                if ($this->checkReadPermits($valor["permisos"])) {
+                    array_push($contenedorPassLectura, $valor["password_id"]);
+                    if ($this->checkWritePermits($valor["permisos"])) {
+                        array_push($contenedorPassEscritura, $valor["password_id"]);
+                    }
                 }
             }
-        }
 
-        $IdsPassLectura = array_unique($contenedorPassLectura);
-        $IdsPassEscritura = array_unique($contenedorPassEscritura);
+            $IdsPassLectura = array_unique($contenedorPassLectura);
+            $IdsPassEscritura = array_unique($contenedorPassEscritura);
 
-        //Array de ids de contraseñas sobre las que tienes permisos de lectura
-        $IdsPassLectura;
-        //Array de ids de contraseñas sobre las que tienes permisos de escritura
-        $IdsPassEscritura;
+            //Array de ids de contraseñas sobre las que tienes permisos de lectura
+            $IdsPassLectura;
+            //Array de ids de contraseñas sobre las que tienes permisos de escritura
+            $IdsPassEscritura;
 
-        //Creacion de query--------------------------------------------------------------
-        if (!$user->isSuperAdmin()) {
+            //Creacion de query--------------------------------------------------------------
             $query = parent::createQuery($context);
             $query->andWhere(
                     $query->expr()->eq($query->getRootAliases()[0] . '.user', ':user')
             );
             $query->setParameter(':user', $user);
-        } else {
-            $query = parent::createQuery($context);
+            
         }
         return $query;
     }
