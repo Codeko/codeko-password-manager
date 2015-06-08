@@ -1,0 +1,30 @@
+tipopass:
+    path:     /
+    defaults: { _controller: "ApplicationSonataUserBundle:TipoPass:index" }
+
+tipopass_show:
+    path:     /{id}/show
+    defaults: { _controller: "ApplicationSonataUserBundle:TipoPass:show" }
+
+tipopass_new:
+    path:     /new
+    defaults: { _controller: "ApplicationSonataUserBundle:TipoPass:new" }
+
+tipopass_create:
+    path:     /create
+    defaults: { _controller: "ApplicationSonataUserBundle:TipoPass:create" }
+    methods:  POST
+
+tipopass_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ApplicationSonataUserBundle:TipoPass:edit" }
+
+tipopass_update:
+    path:     /{id}/update
+    defaults: { _controller: "ApplicationSonataUserBundle:TipoPass:update" }
+    methods:  [POST, PUT]
+
+tipopass_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ApplicationSonataUserBundle:TipoPass:delete" }
+    methods:  [POST, DELETE]

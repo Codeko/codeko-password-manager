@@ -62,6 +62,38 @@
                 <source>Tipo Pass List</source>
                 <target>Tipos de contraseñas</target>
             </trans-unit>
+            <trans-unit id="PermisoUser">
+                <source>PermisoUser</source>
+                <target>Permisos de usuario (Contraseñas)</target>
+            </trans-unit>
+            <trans-unit id="PermisoGrupo">
+                <source>PermisoGrupo</source>
+                <target>Permisos de grupo (Contraseñas)</target>
+            </trans-unit>
+            <trans-unit id="Permiso User List">
+                <source>Permiso User List</source>
+                <target>Permisos de Usuario (Contraseñas)</target>
+            </trans-unit>
+            <trans-unit id="Permiso Grupo List">
+                <source>Permiso Grupo List</source>
+                <target>Permisos de Grupo (Contraseñas)</target>
+            </trans-unit>
+            <trans-unit id="PermisoCategoriaUser">
+                <source>PermisoCategoriaUser</source>
+                <target>Permisos de usuario (Categorías)</target>
+            </trans-unit>
+            <trans-unit id="PermisoCategoriaGrupo">
+                <source>PermisoCategoriaGrupo</source>
+                <target>Permisos de grupo (Categorías)</target>
+            </trans-unit>
+            <trans-unit id="Permiso Categoria User List">
+                <source>Permiso Categoria User List</source>
+                <target>Permisos de Usuario (Categorías)</target>
+            </trans-unit>
+            <trans-unit id="Permiso Categoria Grupo List">
+                <source>Permiso Categoria Grupo List</source>
+                <target>Permisos de Grupo (Categorías)</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

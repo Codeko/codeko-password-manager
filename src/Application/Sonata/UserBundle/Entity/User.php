@@ -105,17 +105,6 @@ class User extends BaseUser {
      * 
      */
 
-    function setPermisos(PermisoUser $permiso) {
-
-        $this->permisos = $permiso;
-
-        return $this;
-    }
-
-    /*
-     * 
-     */
-
     public function addPermisos(PermisoUser $permiso) {
         $permiso->setUser($this);
         $this->permisos[] = $permiso;

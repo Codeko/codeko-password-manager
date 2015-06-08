@@ -98,8 +98,8 @@ class PasswordAdmin extends Admin {
                 ->add('enabled', null, array('editable' => true))
                 ->add('user')
                 ->add('files', null, array('label' => 'Archivos', 'associated_property' => 'getName'))
-//                ->add('usersPermitidos', null, array('label' => 'Visible para usuarios'))
-//                ->add('gruposPermitidos', null, array('label' => 'Visible para grupos'))
+                ->add('permisosUser', null, array('label' => 'Permisos de Usuarios'))
+                ->add('permisosGrupo', null, array('label' => 'Permisos de Grupos'))
                 ->add('_action', 'actions', array(
                     'actions' => array(
                         'show' => array(),
@@ -132,6 +132,8 @@ class PasswordAdmin extends Admin {
                 ->add('tipoPassword')
                 ->add('enabled')
                 ->add('category.enabled')
+                ->add('permisosUser', null, array('label' => 'Permisos de Usuarios'))
+                ->add('permisosGrupo', null, array('label' => 'Permisos de Grupos'))
         ;
     }
 
@@ -153,6 +155,8 @@ class PasswordAdmin extends Admin {
                 ->add('tipoPassword')
                 ->add('enabled')
                 ->add('files', null, array('label' => 'Archivos', 'associated_property' => 'getName'))
+                ->add('permisosUser', null, array('label' => 'Permisos de Usuarios'))
+                ->add('permisosGrupo', null, array('label' => 'Permisos de Grupos'))
                 ->end()
         ;
     }
@@ -198,26 +202,26 @@ class PasswordAdmin extends Admin {
                 // PERMISOS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 ->tab('Permisos')
                 ->with('Permisos de Usuario', array('class' => 'col-md-6'))
-//                ->add('usersPermitidos', 'sonata_type_model', array(
-//                    'label' => 'Usuarios Permitidos',
-//                    'by_reference' => false,
-//                    'multiple' => true,
-//                    'expanded' => false,
-//                    'required' => false,
-//                ))
+                ->add('permisosUser', 'sonata_type_model', array(
+                    'label' => 'Permisos de usuario',
+                    'by_reference' => false,
+                    'multiple' => true,
+                    'expanded' => false,
+                    'required' => false,
+                ))
 //                ->add('permisosUser', 'permisoUser', array(
 //                    'multiple' => true,
 //                    'required' => false,
 //                ))
                 ->end()
                 ->with('Permisos de Grupos', array('class' => 'col-md-6'))
-//                ->add('gruposPermitidos', 'sonata_type_model', array(
-//                    'label' => 'Grupos Permitidos',
-//                    'by_reference' => false,
-//                    'multiple' => true,
-//                    'expanded' => false,
-//                    'required' => false,
-//                ))
+                ->add('permisosGrupo', 'sonata_type_model', array(
+                    'label' => 'Permisos de grupo',
+                    'by_reference' => false,
+                    'multiple' => true,
+                    'expanded' => false,
+                    'required' => false,
+                ))
 //                ->add('permisosGrupo', 'permisoGrupo', array(
 //                    'multiple' => true,
 //                    'required' => false,

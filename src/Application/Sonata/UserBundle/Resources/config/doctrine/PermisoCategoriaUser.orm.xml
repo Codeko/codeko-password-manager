@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-    <entity name="Application\Sonata\UserBundle\Entity\PermisoUser">
+    <entity name="Application\Sonata\UserBundle\Entity\PermisoCategoriaUser">
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>
         </id>
@@ -11,8 +11,8 @@
                 <cascade-all/>
             </cascade>
         </many-to-one>
-        <many-to-one field="password" target-entity="Application\Sonata\UserBundle\Entity\Password" inversed-by="permisosUser">
-            <join-column name="password_id" referenced-column-name="id" nullable="true" />
+        <many-to-one field="categoria" target-entity="Application\Sonata\ClassificationBundle\Entity\Category" inversed-by="permisosUser">
+            <join-column name="category_id" referenced-column-name="id" nullable="true" />
             <cascade>
                 <cascade-all/>
             </cascade>
