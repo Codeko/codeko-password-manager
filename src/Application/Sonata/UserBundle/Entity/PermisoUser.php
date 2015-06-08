@@ -98,7 +98,7 @@ class PermisoUser {
      */
 
     public function __toString() {
-        return $this->getUser().'('.$this->getPermisos().')' ? : 'n/a';
+        return '(' . $this->getPassword() . ')(' . $this->getUser() . '(' . $this->getPermisos() . ')' ? : 'n/a';
     }
 
 }

@@ -106,7 +106,7 @@ class PermisoGrupo {
      */
 
     public function __toString() {
-        return $this->getGrupo().'('.$this->getPermisos().')' ? : 'n/a';
+        return '(' . $this->getPassword() . ')(' . $this->getGrupo() . '(' . $this->getPermisos() . ')' ? : 'n/a';
     }
 
 }

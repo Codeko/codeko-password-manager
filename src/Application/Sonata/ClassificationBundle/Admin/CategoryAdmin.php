@@ -73,8 +73,8 @@ class CategoryAdmin extends Admin {
      */
     protected function configureFormFields(FormMapper $formMapper) {
 
-        echo "<script>alert('" . $this->getSubject() . "');</script>";
         $formMapper
+                ->tab('General')
                 ->with('General', array('class' => 'col-md-6'))
                 ->add('name')
                 ->add('description', 'textarea', array('required' => false))
@@ -97,6 +97,7 @@ class CategoryAdmin extends Admin {
                 ->with('Options', array('class' => 'col-md-6'))
                 ->add('enabled', null, array('required' => false))
                 ->add('position', 'integer', array('required' => false, 'data' => 0))
+                ->end()
                 ->end()
                 // PERMISOS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 ->tab('Permisos')
