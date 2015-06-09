@@ -17,6 +17,8 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\ClassificationBundle\Entity\ContextManager;
+use Application\Sonata\UserBundle\Form\PermisoCategoriaUserType;
+use Application\Sonata\UserBundle\Form\PermisoCategoriaGrupoType;
 
 class CategoryAdmin extends Admin {
 
@@ -99,33 +101,25 @@ class CategoryAdmin extends Admin {
                 ->add('position', 'integer', array('required' => false, 'data' => 0))
                 ->end()
                 ->end()
-                // PERMISOS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                // PERMISOS 
                 ->tab('Permisos')
                 ->with('Permisos de Usuario', array('class' => 'col-md-6'))
-                ->add('permisosUser', 'sonata_type_model', array(
+                ->add('permisosUser', 'collection', array(
+                    'type' => new PermisoCategoriaUserType(),
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'required' => false,
                     'label' => 'Permisos de usuario',
-                    'by_reference' => false,
-                    'multiple' => true,
-                    'expanded' => false,
-                    'required' => false,
-                ))
-//                ->add('permisosUser', 'permisoUser', array(
-//                    'multiple' => true,
-//                    'required' => false,
-//                ))
+                    'by_reference' => false))
                 ->end()
-                ->with('Permisos de Grupos', array('class' => 'col-md-6'))
-                ->add('permisosGrupo', 'sonata_type_model', array(
-                    'label' => 'Permisos de grupo',
-                    'by_reference' => false,
-                    'multiple' => true,
-                    'expanded' => false,
+                ->with('Permisos de Grupo', array('class' => 'col-md-6'))
+                ->add('permisosGrupo', 'collection', array(
+                    'type' => new PermisoCategoriaGrupoType(),
+                    'allow_add' => true,
+                    'allow_delete' => true,
                     'required' => false,
-                ))
-//                ->add('permisosGrupo', 'permisoGrupo', array(
-//                    'multiple' => true,
-//                    'required' => false,
-//                ))
+                    'label' => 'Permisos de grupo',
+                    'by_reference' => false))
                 ->end()
                 ->end()
         ;

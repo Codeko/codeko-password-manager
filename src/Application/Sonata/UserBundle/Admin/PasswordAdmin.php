@@ -18,15 +18,15 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\HttpFoundation\Request;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Application\Sonata\UserBundle\Form\PermisoUserType;
+use Application\Sonata\UserBundle\Form\PermisoGrupoType;
 
 class PasswordAdmin extends Admin {
 
     public $supportsPreviewMode = true;
-    
 
     public function createQuery($context = 'list') {
-        
+
         $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
         if (!$user->isSuperAdmin()) {
 //            if (false === $this->getConfigurationPool()->getContainer()->get('security.context')->isGranted('ROLE_EDITAR_ENTIDAD', $context)) {
@@ -199,33 +199,25 @@ class PasswordAdmin extends Admin {
                 ))
                 ->end()
                 ->end()
-                // PERMISOS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                // PERMISOS 
                 ->tab('Permisos')
                 ->with('Permisos de Usuario', array('class' => 'col-md-6'))
-                ->add('permisosUser', 'sonata_type_model', array(
+                ->add('permisosUser', 'collection', array(
+                    'type' => new PermisoUserType(),
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'required' => false,
                     'label' => 'Permisos de usuario',
-                    'by_reference' => false,
-                    'multiple' => true,
-                    'expanded' => false,
-                    'required' => false,
-                ))
-//                ->add('permisosUser', 'permisoUser', array(
-//                    'multiple' => true,
-//                    'required' => false,
-//                ))
+                    'by_reference' => false))
                 ->end()
-                ->with('Permisos de Grupos', array('class' => 'col-md-6'))
-                ->add('permisosGrupo', 'sonata_type_model', array(
-                    'label' => 'Permisos de grupo',
-                    'by_reference' => false,
-                    'multiple' => true,
-                    'expanded' => false,
+                ->with('Permisos de Grupo', array('class' => 'col-md-6'))
+                ->add('permisosGrupo', 'collection', array(
+                    'type' => new PermisoGrupoType(),
+                    'allow_add' => true,
+                    'allow_delete' => true,
                     'required' => false,
-                ))
-//                ->add('permisosGrupo', 'permisoGrupo', array(
-//                    'multiple' => true,
-//                    'required' => false,
-//                ))
+                    'label' => 'Permisos de grupo',
+                    'by_reference' => false))
                 ->end()
                 ->end()
         ;

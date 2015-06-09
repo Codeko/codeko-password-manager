@@ -9,15 +9,16 @@
         </div>
     {% else %}
 
-        {# INTENTANDO ABRIR GENERADOR CONTRASEÑAS CON AJAX #}
+        {# ABRIENDO GENERADOR CONTRASEÑAS CON AJAX #}
 
         {% if 'Password' in admin.getClass() %}
             <script>
-                $(document).ready(function(){
+                $(document).ready(function () {
                     $('.campoPass').after($('#botonPass'));
-                    $('#botonPass').show(); 
+                    $('#botonPass').show();
                 });
             </script>
+
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-warning" id='botonPass' data-toggle="modal" data-target="#myModal" style='margin-top: 6px; display: none;'>
                 <i class="fa fa-key fa-spin"></i>

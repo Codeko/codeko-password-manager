@@ -39,7 +39,7 @@ class PermisoGrupo {
     }
 
     /**
-     * Set group
+     * Set grupo
      *
      * @param $grupo
      * @return PermisoGrupo
@@ -106,7 +106,7 @@ class PermisoGrupo {
      */
 
     public function __toString() {
-        return '(' . $this->getPassword() . ')(' . $this->getGrupo() . '(' . $this->getPermisos() . ')' ? : 'n/a';
+        return '(' . $this->getPassword() . ')(' . $this->getGrupo() . ')(' . $this->getPermisos() . ')' ? : 'n/a';
     }
 
 }
