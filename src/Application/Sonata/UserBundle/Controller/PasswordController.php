@@ -220,7 +220,7 @@ class PasswordController extends Controller {
         }
         if (false === $this->get('security.context')->isGranted('ROLE_BORRAR_ENTIDAD', $object)) {
             //Controlar Voters
-            throw new AccessDeniedException('No eres el propietario para borrar esta contraseña');
+            throw new AccessDeniedException('No tienes permiso para borrar esta contraseña');
         }
         if (false === $this->admin->isGranted('DELETE', $object)) {
             throw new AccessDeniedException();

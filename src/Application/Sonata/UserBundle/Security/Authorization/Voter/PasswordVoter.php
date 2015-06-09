@@ -39,10 +39,11 @@ class PasswordVoter implements VoterInterface {
             }
 
             $vote = VoterInterface::ACCESS_DENIED;
+            $user = $token->getUser();
+            $iduser = $user->getId();
 
             if ($attribute === 'ROLE_EDITAR_ENTIDAD' || $attribute === 'ROLE_BORRAR_ENTIDAD') {
-                $user = $token->getUser();
-                $iduser = $user->getId();
+
                 $idpasswordPropietario = $object->getUser()->getId();
                 $contraseñaId = $object->getId();
                 $IdsPassEscritura = $this->getWritePermits($user, $iduser);
@@ -61,8 +62,6 @@ class PasswordVoter implements VoterInterface {
                             $vote = VoterInterface::ACCESS_GRANTED;
                         }
                     }
-
-                    $permisosEscritura = $this->getWritePermits($user, $iduser);
 
                     return $vote;
                 } else {
@@ -102,21 +101,6 @@ class PasswordVoter implements VoterInterface {
                 }
             }
 
-//            if ($attribute === 'ROLE_LISTAR_ENTIDAD') {
-//
-//                if (!$user->isSuperAdmin()) {
-//
-//                    if ($idpasswordPropietario != $iduser) {
-//                        $vote = VoterInterface::ACCESS_DENIED;
-//                        return $vote;
-//                    }
-//                    $vote = VoterInterface::ACCESS_GRANTED;
-//                    return $vote;
-//                } else {
-//                    $vote = VoterInterface::ACCESS_GRANTED;
-//                    return $vote;
-//                }
-//            }
         }
 
         return $vote;
