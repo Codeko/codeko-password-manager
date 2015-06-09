@@ -12,7 +12,11 @@
 
         <one-to-many field="passwords" target-entity="Password" mapped-by="user" />
         <one-to-many field="files" target-entity="Application\Sonata\MediaBundle\Entity\Media" mapped-by="propietario" />
-        <one-to-many field="permisos" target-entity="PermisoUser" mapped-by="user" />
+        <one-to-many field="permisos" target-entity="PermisoUser" mapped-by="user" orphanRemoval="true">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many> 
     </entity>
 
 </doctrine-mapping>

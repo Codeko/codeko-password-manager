@@ -51,7 +51,7 @@ class PermisoUser {
      * 
      */
 
-    function setPassword(Password $password) {
+    function setPassword($password) {
         $this->password = $password;
     }
 
@@ -59,7 +59,7 @@ class PermisoUser {
      * 
      */
 
-    function setUser(User $user) {
+    function setUser($user) {
         $this->user = $user;
     }
 
@@ -92,7 +92,7 @@ class PermisoUser {
     public function getPermisos() {
         return $this->permisos;
     }
-
+    
     /*
      * 
      */

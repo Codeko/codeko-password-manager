@@ -19,6 +19,14 @@ class PermisoGrupoType extends AbstractType {
                     'class' => 'ApplicationSonataUserBundle:Group',
                     'label' => 'Grupo'
                 ))
+                ->add('perms', 'choice', array(
+                    'choices' => array('1' => 'Escritura', '2' => 'Lectura'),
+                    'multiple' => true,
+                    'expanded' => true,
+                    'required' => false,
+                    'mapped' => false,
+                    'attr' => array('inline' => true)
+                ))
         ;
     }
 

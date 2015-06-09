@@ -50,6 +50,14 @@ class PermisoGrupoAdmin extends Admin {
                     'label' => 'Grupo',
                     'class' => 'ApplicationSonataUserBundle:Group',
                 ))
+                ->add('perms', 'choice', array(
+                    'choices' => array('1' => 'Escritura', '2' => 'Lectura'),
+                    'multiple' => true,
+                    'expanded' => true,
+                    'required' => false,
+                    'mapped' => false,
+                    'attr' => array('inline' => true)
+                ))
         ;
     }
 

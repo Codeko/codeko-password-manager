@@ -19,6 +19,14 @@ class PermisoCategoriaUserType extends AbstractType {
                     'class' => 'ApplicationSonataUserBundle:User',
                     'label' => 'Usuario'
                 ))
+                ->add('perms', 'choice', array(
+                    'choices' => array('1' => 'Escritura', '2' => 'Lectura'),
+                    'multiple' => true,
+                    'expanded' => true,
+                    'required' => false,
+                    'mapped' => false,
+                    'attr' => array('inline' => true)
+                ))
         ;
     }
 

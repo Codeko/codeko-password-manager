@@ -54,6 +54,8 @@ class PasswordVoter implements VoterInterface {
                     /* @var $idpasswordPropietario type */
                     if ($idpasswordPropietario != $iduser) {
                         $vote = VoterInterface::ACCESS_DENIED;
+                    } else {
+                        $vote = VoterInterface::ACCESS_GRANTED;
                     }
 
                     //Comprobar permisos de escritura
