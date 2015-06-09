@@ -24,6 +24,8 @@ use Application\Sonata\UserBundle\Form\PermisoGrupoType;
 class PasswordAdmin extends Admin {
 
     public $supportsPreviewMode = true;
+    protected $IdsPassLectura;
+    protected $IdsPassEscritura;
 
     public function createQuery($context = 'list') {
 
@@ -61,22 +63,18 @@ class PasswordAdmin extends Admin {
             }
 
             //Creación de query--------------------------------------------------------------
-            $IdsPassLectura = array_unique($contenedorPassLectura);
-            $IdsPassEscritura = array_unique($contenedorPassEscritura);
-            $longitudArrayLectura = count($IdsPassLectura);
+            $this->IdsPassLectura = array_unique($contenedorPassLectura);
+            $this->IdsPassEscritura = array_unique($contenedorPassEscritura);
+            $longitudArrayLectura = count($this->IdsPassEscritura);
 
             $query = parent::createQuery($context);
 
             if ($longitudArrayLectura > 0) {
-                $query->andWhere(
-                        $query->expr()->in($query->getRootAliases()[0] . '.id', ':id')
-                );
-                $query->setParameter(':id', $IdsPassLectura);
+                $query->andWhere($query->expr()->in($query->getRootAliases()[0] . '.id', ':id'));
+                $query->setParameter(':id', $this->IdsPassLectura);
             }
 
-            $query->orWhere(
-                    $query->expr()->eq($query->getRootAliases()[0] . '.user', ':user')
-            );
+            $query->orWhere($query->expr()->eq($query->getRootAliases()[0] . '.user', ':user'));
             $query->setParameter(':user', $user);
         }
         return $query;
