@@ -32,7 +32,7 @@ class PasswordAdmin extends Admin {
         } else {
 
             $userId = $user->getId();
-            $connection = $GLOBALS['kernel']->getContainer()->get('doctrine')->getManager()->getConnection();
+            $connection = $this->getConnection();
             $contenedorPassLectura = array();
             $contenedorPassEscritura = array();
 
@@ -40,9 +40,9 @@ class PasswordAdmin extends Admin {
             $permisosUser = $this->getUserPermits($userId, $connection);
             foreach ($permisosUser as $valor) {
                 if ($this->checkReadPermits($valor["permisos"])) {
-                    array_push($contenedorPassLectura, $valor["password_id"]);
+                    array_push($contenedorPassLectura, intval($valor["password_id"]));
                     if ($this->checkWritePermits($valor["permisos"])) {
-                        array_push($contenedorPassEscritura, $valor["password_id"]);
+                        array_push($contenedorPassEscritura, intval($valor["password_id"]));
                     }
                 }
             }
@@ -51,28 +51,32 @@ class PasswordAdmin extends Admin {
             $permisosGrupos = $this->getGroupPermits($userId, $connection);
             foreach ($permisosGrupos as $valor) {
                 if ($this->checkReadPermits($valor["permisos"])) {
-                    array_push($contenedorPassLectura, $valor["password_id"]);
+                    array_push($contenedorPassLectura, intval($valor["password_id"]));
                     if ($this->checkWritePermits($valor["permisos"])) {
-                        array_push($contenedorPassEscritura, $valor["password_id"]);
+                        array_push($contenedorPassEscritura, intval($valor["password_id"]));
                     }
                 }
             }
 
+            //Creación de query--------------------------------------------------------------
             $IdsPassLectura = array_unique($contenedorPassLectura);
             $IdsPassEscritura = array_unique($contenedorPassEscritura);
-
-            //Array de ids de contraseñas sobre las que tienes permisos de lectura
-            $IdsPassLectura;
-            //Array de ids de contraseñas sobre las que tienes permisos de escritura
-            $IdsPassEscritura;
-
-            //Creacion de query--------------------------------------------------------------
+            $longitudArrayLectura = count($IdsPassLectura);
+            $PassLectura = $this->getStringArray($IdsPassLectura);
+            
             $query = parent::createQuery($context);
-            $query->andWhere(
+
+            if ($longitudArrayLectura > 0) {
+                $query->andWhere(
+                        $query->expr()->eq($query->getRootAliases()[0] . '.id', ':id')
+                );
+                $query->setParameter(':id', $IdsPassLectura[0]);
+            }
+
+            $query->orWhere(
                     $query->expr()->eq($query->getRootAliases()[0] . '.user', ':user')
             );
             $query->setParameter(':user', $user);
-            
         }
         return $query;
     }
@@ -89,6 +93,26 @@ class PasswordAdmin extends Admin {
         $statement = $connection->prepare($sql);
         $statement->execute();
         return $statement->fetchAll();
+    }
+    
+    protected function getStringArray($IdsPassLectura){
+        $longitudArrayLectura = count($IdsPassLectura);
+            if ($longitudArrayLectura > 0) {
+                $PassLectura = "(";
+                for ($i = 0; $i < $longitudArrayLectura; $i++) {
+                    if ($i == ($longitudArrayLectura-1)) {
+                        $PassLectura = $PassLectura . $IdsPassLectura[$i];
+                    } else {
+                        $PassLectura = $PassLectura . $IdsPassLectura[$i] . ",";
+                    }
+                }
+                $PassLectura = $PassLectura . ")";
+            }
+            return $PassLectura;
+    }
+
+    protected function getConnection() {
+        return $GLOBALS['kernel']->getContainer()->get('doctrine')->getManager()->getConnection();
     }
 
     /*
