@@ -22,6 +22,8 @@ use Application\Sonata\UserBundle\Form\PermisoCategoriaGrupoType;
 
 class CategoryAdmin extends Admin {
 
+    public $supportsPreviewMode = true;
+    
     protected $formOptions = array(
         'cascade_validation' => true
     );

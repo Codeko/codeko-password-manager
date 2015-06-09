@@ -10,6 +10,8 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class TipoPassAdmin extends Admin {
 
+    public $supportsPreviewMode = true;
+    
     /**
      * @param DatagridMapper $datagridMapper
      */

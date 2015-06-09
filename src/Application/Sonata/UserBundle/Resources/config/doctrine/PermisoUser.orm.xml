@@ -6,16 +6,10 @@
         </id>
         <field name="permisos" type="integer" column="permisos"/>
         <many-to-one field="user" target-entity="Application\Sonata\UserBundle\Entity\User" inversed-by="permisos">
-            <join-column name="user_id" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
-            <cascade>
-                <cascade-all/>
-            </cascade>
+            <join-column name="user_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
-        <many-to-one field="password" target-entity="Application\Sonata\UserBundle\Entity\Password" inversed-by="permisosUser">
-            <join-column name="password_id" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
-            <cascade>
-                <cascade-all/>
-            </cascade>
+        <many-to-one field="password" target-entity="Application\Sonata\UserBundle\Entity\Password" inversed-by="permisosUser" >
+            <join-column name="password_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
     </entity>
 </doctrine-mapping>

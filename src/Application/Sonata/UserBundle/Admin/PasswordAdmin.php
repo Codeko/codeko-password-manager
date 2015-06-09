@@ -33,12 +33,12 @@ class PasswordAdmin extends Admin {
 
         /*
 
-            Leer y escribir - 11
-            Leer y no escribir - 10
-            No leer y no escribir - 0
+          Leer y escribir - 11
+          Leer y no escribir - 10
+          No leer y no escribir - 0
 
-        */
-        
+         */
+
         //Permisos del usuario actual [Lectura|Escritura] --------------------------------------------------
         $permisosUser = $this->getUserPermits($userId, $connection);
         foreach ($permisosUser as $valor) {

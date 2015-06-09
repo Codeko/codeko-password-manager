@@ -93,6 +93,9 @@ class PermisoUser {
         return $this->permisos;
     }
 
+    
+    
+    
     /*
      * 
      */
