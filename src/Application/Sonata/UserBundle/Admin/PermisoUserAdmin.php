@@ -46,10 +46,18 @@ class PermisoUserAdmin extends Admin {
     protected function configureFormFields(FormMapper $formMapper) {
 
         $formMapper
-                ->add('permisos')
+                //->add('permisos')
                 ->add('user', 'entity', array(
                     'class' => 'ApplicationSonataUserBundle:User',
                     'label' => 'Usuario'
+                ))
+                ->add('escritura', 'checkbox', array(
+                    'required' => false,
+                    'mapped' => false
+                ))
+                ->add('lectura', 'checkbox', array(
+                    'required' => false,
+                    'mapped' => false
                 ))
         ;
     }
@@ -64,4 +72,5 @@ class PermisoUserAdmin extends Admin {
                 ->add('password')
         ;
     }
+
 }

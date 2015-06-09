@@ -441,7 +441,7 @@ class Password {
      * 
      */
 
-    function setPermisosUser(PermisoUser $permiso) {
+    function setPermisosUser($permiso) {
 
         $this->permisosUser = $permiso;
 
@@ -464,6 +464,7 @@ class Password {
 
     public function removePermisosUser(PermisoUser $permiso) {
         $this->permisosUser->removeElement($permiso);
+        $permiso->setPassword(null);
     }
 
     /*

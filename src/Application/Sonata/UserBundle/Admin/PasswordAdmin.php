@@ -340,6 +340,7 @@ class PasswordAdmin extends Admin {
         }
 
         $pass->setFiles($pass->getFiles());
+        $pass->setPermisosUser($pass->getPermisosUser());
     }
 
     public function prePersist($pass) {

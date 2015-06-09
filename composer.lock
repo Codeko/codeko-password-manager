@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1d664b4c9525842b5df9f747adc122ee",
+    "hash": "68f18b2e19851d066f6153dcac907bf0",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2418,6 +2418,118 @@
             "time": "2015-03-09 09:58:04"
         },
         {
+            "name": "mopa/bootstrap-bundle",
+            "version": "v2.3.1",
+            "target-dir": "Mopa/Bundle/BootstrapBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phiamo/MopaBootstrapBundle.git",
+                "reference": "82523811144266910868d51f5396d110338d7fea"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phiamo/MopaBootstrapBundle/zipball/82523811144266910868d51f5396d110338d7fea",
+                "reference": "82523811144266910868d51f5396d110338d7fea",
+                "shasum": ""
+            },
+            "require": {
+                "mopa/composer-bridge": "1.3.*",
+                "symfony/symfony": "~2.3"
+            },
+            "suggest": {
+                "craue/formflow-bundle": "dev-master",
+                "jlong/sass-twitter-bootstrap": "dev-master",
+                "knplabs/knp-menu-bundle": "2.0.*",
+                "knplabs/knp-paginator-bundle": "dev-master",
+                "mopa/bootstrap-sandbox-bundle": "~2.3",
+                "twbs/bootstrap": "2.*"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Mopa\\Bundle\\BootstrapBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Community contributions",
+                    "homepage": "https://github.com/phiamo/MopaBootstrapBundle/contributors"
+                },
+                {
+                    "name": "Philipp A. Mohrenweiser",
+                    "email": "phiamo@googlemail.com"
+                }
+            ],
+            "description": "Easy integration of twitters bootstrap into symfony2",
+            "keywords": [
+                "bootstrap",
+                "bootstrap form",
+                "extra form",
+                "form",
+                "template"
+            ],
+            "time": "2014-08-26 22:53:53"
+        },
+        {
+            "name": "mopa/composer-bridge",
+            "version": "v1.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phiamo/MopaComposerBridge.git",
+                "reference": "bbbd9b4595993cda248a996f21af3298f12fa331"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phiamo/MopaComposerBridge/zipball/bbbd9b4595993cda248a996f21af3298f12fa331",
+                "reference": "bbbd9b4595993cda248a996f21af3298f12fa331",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/console": ">=2.0.0"
+            },
+            "type": "symfony-bridge",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Mopa\\Bridge\\Composer": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Community contributions",
+                    "homepage": "https://github.com/phiamo/MopaComposerBridge/contributors"
+                },
+                {
+                    "name": "Philipp A. Mohrenweiser",
+                    "email": "phiamo@googlemail.com"
+                }
+            ],
+            "description": "Symfony2 Composer Bridge",
+            "homepage": "http://bootstrap.mohrenweiserpartner.de",
+            "keywords": [
+                "Symfony2",
+                "composer"
+            ],
+            "time": "2014-12-29 13:24:12"
+        },
+        {
             "name": "myclabs/deep-copy",
             "version": "1.3.0",
             "source": {
@@ -3008,7 +3120,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/d4e992a29baa62456a311badc50282d9af716dc8",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/61300928d08bf9a20fae974266759e4f76cb54e2",
                 "reference": "d4e992a29baa62456a311badc50282d9af716dc8",
                 "shasum": ""
             },
@@ -3094,7 +3206,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataBlockBundle/zipball/4257d3d2b4c16eec3030c2afbcfd6cb68f9e7fd4",
+                "url": "https://api.github.com/repos/sonata-project/SonataBlockBundle/zipball/271c3cb9baf750110ccc97280dc3bd788c6630da",
                 "reference": "4257d3d2b4c16eec3030c2afbcfd6cb68f9e7fd4",
                 "shasum": ""
             },
@@ -3218,7 +3330,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataCacheBundle/zipball/cb3af3a201bc6bd46138e39947479212e8878e36",
+                "url": "https://api.github.com/repos/sonata-project/SonataCacheBundle/zipball/56ff912d829760d63259a222226214ec577fbb01",
                 "reference": "cb3af3a201bc6bd46138e39947479212e8878e36",
                 "shasum": ""
             },
@@ -3288,7 +3400,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataClassificationBundle/zipball/420482a683325dc8f2585afb9d23dd98764ae612",
+                "url": "https://api.github.com/repos/sonata-project/SonataClassificationBundle/zipball/afd0e4c9ea6b17300d186b0d74700bc0b21a0cba",
                 "reference": "420482a683325dc8f2585afb9d23dd98764ae612",
                 "shasum": ""
             },
@@ -3582,7 +3694,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/43096bfc8700e49c06f32a5bfcba6143c360834d",
+                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/6299bc8d1050a820dc93c6af42134d9bde588908",
                 "reference": "43096bfc8700e49c06f32a5bfcba6143c360834d",
                 "shasum": ""
             },
@@ -3945,7 +4057,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/5f6866c20d7695b2cc6b9ce6a208acdc3aafa050",
+                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/80873da2d12ee85262d1895c8f75b79ad2b14aef",
                 "reference": "5f6866c20d7695b2cc6b9ce6a208acdc3aafa050",
                 "shasum": ""
             },
@@ -4178,7 +4290,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataPageBundle/zipball/7204c522c1f189fc251e488b6bf6d0ee832dd74d",
+                "url": "https://api.github.com/repos/sonata-project/SonataPageBundle/zipball/d135acb5acb6272ab7b07319606101a11340b473",
                 "reference": "7204c522c1f189fc251e488b6bf6d0ee832dd74d",
                 "shasum": ""
             },
@@ -4402,7 +4514,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/eccfe2def49df4a9c69cdc03e674dd338d6587cb",
+                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/f28cc89bbc2c201b736b17b6519e126c95b511dc",
                 "reference": "eccfe2def49df4a9c69cdc03e674dd338d6587cb",
                 "shasum": ""
             },
@@ -5060,6 +5172,59 @@
                 "framework"
             ],
             "time": "2015-05-27 00:17:10"
+        },
+        {
+            "name": "twbs/bootstrap-sass",
+            "version": "v3.3.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twbs/bootstrap-sass.git",
+                "reference": "1a5c521451d18e72ca57dea2af870ab552f4b42a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twbs/bootstrap-sass/zipball/1a5c521451d18e72ca57dea2af870ab552f4b42a",
+                "reference": "1a5c521451d18e72ca57dea2af870ab552f4b42a",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.3.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Otto"
+                },
+                {
+                    "name": "Thomas McDonald"
+                },
+                {
+                    "name": "Tristan Harward"
+                },
+                {
+                    "name": "Peter Gumeson"
+                },
+                {
+                    "name": "Gleb Mazovetskiy"
+                },
+                {
+                    "name": "Jacob Thornton"
+                }
+            ],
+            "description": "bootstrap-sass is a Sass-powered version of Bootstrap, ready to drop right into your Sass powered applications.",
+            "homepage": "http://github.com/twbs/bootstrap-sass",
+            "keywords": [
+                "bootstrap",
+                "css",
+                "sass"
+            ],
+            "time": "2015-03-16 16:23:24"
         },
         {
             "name": "twig/extensions",
