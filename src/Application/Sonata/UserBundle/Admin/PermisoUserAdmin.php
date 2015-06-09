@@ -44,26 +44,12 @@ class PermisoUserAdmin extends Admin {
      * @param FormMapper $formMapper
      */
     protected function configureFormFields(FormMapper $formMapper) {
-        // AQUI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //echo "<script>alert('".$this->getForm()."');</script>";    
-        
+
         $formMapper
                 ->add('permisos')
-                ->add('user', 'sonata_type_model', array(
-                    'label' => 'Usuario',
-                    'expanded' => false,
-                    'by_reference' => false,
-                    'multiple' => false,
-                    'required' => false,
-                    'btn_add' => false
-                ))
-                ->add('password', 'sonata_type_model', array(
-                    'label' => 'Contraseña',
-                    'expanded' => false,
-                    'by_reference' => false,
-                    'multiple' => false,
-                    'required' => false,
-                    'btn_add' => false
+                ->add('user', 'entity', array(
+                    'class' => 'ApplicationSonataUserBundle:User',
+                    'label' => 'Usuario'
                 ))
         ;
     }
@@ -78,19 +64,4 @@ class PermisoUserAdmin extends Admin {
                 ->add('password')
         ;
     }
-
-//
-//    public function getNewInstance() {
-//
-//        $request = Request::createFromGlobals();
-//
-//        $valorPass = $request->query->get('idPass');
-//        if ($valorPass !== null) {
-//            $entityManager = $this->getModelManager()->getEntityManager('Application\Sonata\UserBundle\Entity\Password');
-//            $reference = $entityManager->getReference('Application\Sonata\UserBundle\Entity\Password', $valorPass);
-//
-//            $instance->setPassword($reference);
-//        }
-//        return $instance;
-//    }
 }

@@ -18,6 +18,8 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\HttpFoundation\Request;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Application\Sonata\UserBundle\Form\PermisoUserType;
+use Application\Sonata\UserBundle\Form\PermisoGrupoType;
 
 class PasswordAdmin extends Admin {
 
@@ -62,15 +64,14 @@ class PasswordAdmin extends Admin {
             $IdsPassLectura = array_unique($contenedorPassLectura);
             $IdsPassEscritura = array_unique($contenedorPassEscritura);
             $longitudArrayLectura = count($IdsPassLectura);
-            $PassLectura = $this->getStringArray($IdsPassLectura);
-            
+
             $query = parent::createQuery($context);
 
             if ($longitudArrayLectura > 0) {
                 $query->andWhere(
-                        $query->expr()->eq($query->getRootAliases()[0] . '.id', ':id')
+                        $query->expr()->in($query->getRootAliases()[0] . '.id', ':id')
                 );
-                $query->setParameter(':id', $IdsPassLectura[0]);
+                $query->setParameter(':id', $IdsPassLectura);
             }
 
             $query->orWhere(
@@ -93,22 +94,6 @@ class PasswordAdmin extends Admin {
         $statement = $connection->prepare($sql);
         $statement->execute();
         return $statement->fetchAll();
-    }
-    
-    protected function getStringArray($IdsPassLectura){
-        $longitudArrayLectura = count($IdsPassLectura);
-            if ($longitudArrayLectura > 0) {
-                $PassLectura = "(";
-                for ($i = 0; $i < $longitudArrayLectura; $i++) {
-                    if ($i == ($longitudArrayLectura-1)) {
-                        $PassLectura = $PassLectura . $IdsPassLectura[$i];
-                    } else {
-                        $PassLectura = $PassLectura . $IdsPassLectura[$i] . ",";
-                    }
-                }
-                $PassLectura = $PassLectura . ")";
-            }
-            return $PassLectura;
     }
 
     protected function getConnection() {
@@ -290,33 +275,25 @@ class PasswordAdmin extends Admin {
                 ))
                 ->end()
                 ->end()
-                // PERMISOS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                // PERMISOS 
                 ->tab('Permisos')
                 ->with('Permisos de Usuario', array('class' => 'col-md-6'))
-                ->add('permisosUser', 'sonata_type_model', array(
+                ->add('permisosUser', 'collection', array(
+                    'type' => new PermisoUserType(),
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'required' => false,
                     'label' => 'Permisos de usuario',
-                    'by_reference' => false,
-                    'multiple' => true,
-                    'expanded' => false,
-                    'required' => false,
-                ))
-//                ->add('permisosUser', 'permisoUser', array(
-//                    'multiple' => true,
-//                    'required' => false,
-//                ))
+                    'by_reference' => false))
                 ->end()
-                ->with('Permisos de Grupos', array('class' => 'col-md-6'))
-                ->add('permisosGrupo', 'sonata_type_model', array(
-                    'label' => 'Permisos de grupo',
-                    'by_reference' => false,
-                    'multiple' => true,
-                    'expanded' => false,
+                ->with('Permisos de Grupo', array('class' => 'col-md-6'))
+                ->add('permisosGrupo', 'collection', array(
+                    'type' => new PermisoGrupoType(),
+                    'allow_add' => true,
+                    'allow_delete' => true,
                     'required' => false,
-                ))
-//                ->add('permisosGrupo', 'permisoGrupo', array(
-//                    'multiple' => true,
-//                    'required' => false,
-//                ))
+                    'label' => 'Permisos de grupo',
+                    'by_reference' => false))
                 ->end()
                 ->end()
         ;
