@@ -503,6 +503,8 @@ class Password {
 
     public function removePermisosGrupo(PermisoGrupo $permiso) {
         $this->permisosGrupo->removeElement($permiso);
+        $permiso->setPassword(null);
+        $permiso->setGrupo(null);
     }
 
 }

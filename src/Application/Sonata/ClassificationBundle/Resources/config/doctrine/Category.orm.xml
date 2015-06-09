@@ -31,14 +31,14 @@
         </many-to-one>  
 
         <many-to-many field="passwords" mapped-by="category" target-entity="Application\Sonata\UserBundle\Entity\Password"/>
-        <one-to-many field="permisosUser" target-entity="Application\Sonata\UserBundle\Entity\PermisoCategoriaUser" mapped-by="categoria">
+        <one-to-many field="permisosUser" target-entity="Application\Sonata\UserBundle\Entity\PermisoCategoriaUser" mapped-by="categoria" orphanRemoval="true">
             <cascade>
-                <cascade-persist/>
+                <cascade-all/>
             </cascade>
         </one-to-many> 
-        <one-to-many field="permisosGrupo" target-entity="Application\Sonata\UserBundle\Entity\PermisoCategoriaGrupo" mapped-by="categoria">
+        <one-to-many field="permisosGrupo" target-entity="Application\Sonata\UserBundle\Entity\PermisoCategoriaGrupo" mapped-by="categoria" orphanRemoval="true">
             <cascade>
-                <cascade-persist/>
+                <cascade-all/>
             </cascade>
         </one-to-many>
     </entity>
