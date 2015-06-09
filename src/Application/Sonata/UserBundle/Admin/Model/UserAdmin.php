@@ -112,9 +112,9 @@ class UserAdmin extends \Sonata\UserBundle\Admin\Model\UserAdmin {
      * {@inheritdoc}
      */
     protected function configureFormFields(FormMapper $formMapper) {
-        
+
         $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
-        
+
         $formMapper
                 ->tab('General')
                 ->with('General', array('class' => 'col-md-6'))
@@ -152,7 +152,7 @@ class UserAdmin extends \Sonata\UserBundle\Admin\Model\UserAdmin {
                 ->end()
                 ->end()
         ;
-        
+
         if ($user->isSuperAdmin()) {
             $formMapper
                     ->tab('Administración')
@@ -161,8 +161,8 @@ class UserAdmin extends \Sonata\UserBundle\Admin\Model\UserAdmin {
                         'label' => 'form.label_roles',
                         'expanded' => true,
                         'multiple' => true,
-                        'required' => false,                       
-                    ),array(
+                        'required' => false,
+                            ), array(
                         'translation_domain' => $this->getTranslationDomain(),
                     ))
                     ->add('locked', null, array('required' => false))

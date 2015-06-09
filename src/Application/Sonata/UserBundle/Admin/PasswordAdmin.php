@@ -18,20 +18,27 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\HttpFoundation\Request;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Hackzilla\PasswordGenerator\Generator\HybridPasswordGenerator;
+use Application\Sonata\UserBundle\Form\PermisoUserType;
+use Application\Sonata\UserBundle\Form\PermisoGrupoType;
 
 class PasswordAdmin extends Admin {
 
     public $supportsPreviewMode = true;
 
     public function createQuery($context = 'list') {
+
         $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
         if (!$user->isSuperAdmin()) {
+//            if (false === $this->getConfigurationPool()->getContainer()->get('security.context')->isGranted('ROLE_EDITAR_ENTIDAD', $context)) {
+//                //Controlar Voters
+//                throw new AccessDeniedException('No eres el propietario para editar esta contraseña');
+//            } else {
             $query = parent::createQuery($context);
             $query->andWhere(
                     $query->expr()->eq($query->getRootAliases()[0] . '.user', ':user')
             );
             $query->setParameter(':user', $user);
+//            }
         } else {
             $query = parent::createQuery($context);
         }
@@ -77,7 +84,7 @@ class PasswordAdmin extends Admin {
      */
     protected function configureListFields(ListMapper $listMapper) {
         unset($this->listModes['mosaic']);
-        
+
         $listMapper
                 ->addIdentifier('titulo')
                 ->add('usernamePass')
@@ -91,6 +98,8 @@ class PasswordAdmin extends Admin {
                 ->add('enabled', null, array('editable' => true))
                 ->add('user')
                 ->add('files', null, array('label' => 'Archivos', 'associated_property' => 'getName'))
+                ->add('permisosUser', null, array('label' => 'Permisos de Usuarios'))
+                ->add('permisosGrupo', null, array('label' => 'Permisos de Grupos'))
                 ->add('_action', 'actions', array(
                     'actions' => array(
                         'show' => array(),
@@ -123,6 +132,8 @@ class PasswordAdmin extends Admin {
                 ->add('tipoPassword')
                 ->add('enabled')
                 ->add('category.enabled')
+                ->add('permisosUser', null, array('label' => 'Permisos de Usuarios'))
+                ->add('permisosGrupo', null, array('label' => 'Permisos de Grupos'))
         ;
     }
 
@@ -144,6 +155,8 @@ class PasswordAdmin extends Admin {
                 ->add('tipoPassword')
                 ->add('enabled')
                 ->add('files', null, array('label' => 'Archivos', 'associated_property' => 'getName'))
+                ->add('permisosUser', null, array('label' => 'Permisos de Usuarios'))
+                ->add('permisosGrupo', null, array('label' => 'Permisos de Grupos'))
                 ->end()
         ;
     }
@@ -155,6 +168,7 @@ class PasswordAdmin extends Admin {
         $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
 
         $formMapper
+                ->tab('General')
                 ->with('Contraseña:', array('class' => 'col-md-6'))
                 ->add('titulo');
         if ($user->isSuperAdmin()) {
@@ -169,10 +183,10 @@ class PasswordAdmin extends Admin {
                 ))
                 ->add('comentario', 'textarea', array('required' => false))
                 ->add('fechaExpira', 'sonata_type_datetime_picker', array('required' => false))
-                ->add('tipoPassword', 'sonata_type_model', array('required' => false))
                 ->end()
-                ->with('Categorias', array('class' => 'col-md-6'))
+                ->with('Categorias y tipos', array('class' => 'col-md-6'))
                 ->add('category', 'sonata_type_model', array('label' => 'Categorias', 'expanded' => false, 'by_reference' => false, 'multiple' => true, 'required' => false))
+                ->add('tipoPassword', 'sonata_type_model', array('required' => false))
                 ->add('enabled', null, array('required' => false, 'data' => true))
                 ->end()
                 ->with('Archivos', array('class' => 'col-md-6'))
@@ -183,6 +197,29 @@ class PasswordAdmin extends Admin {
                     'expanded' => true,
                     'required' => false
                 ))
+                ->end()
+                ->end()
+                // PERMISOS 
+                ->tab('Permisos')
+                ->with('Permisos de Usuario', array('class' => 'col-md-6'))
+                ->add('permisosUser', 'collection', array(
+                    'type' => new PermisoUserType(),
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'required' => false,
+                    'label' => 'Permisos de usuario',
+                    'by_reference' => false))
+                ->end()
+                ->with('Permisos de Grupo', array('class' => 'col-md-6'))
+                ->add('permisosGrupo', 'collection', array(
+                    'type' => new PermisoGrupoType(),
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'required' => false,
+                    'label' => 'Permisos de grupo',
+                    'by_reference' => false))
+                ->end()
+                ->end()
         ;
     }
 
@@ -235,7 +272,7 @@ class PasswordAdmin extends Admin {
             $url = $pass->getUrl();
             $pass->setUrl('http://' . $url);
         }
-        
+
         // CATEGORIA DEFAULT SI NO SE SELECCIONA NINGUNA EN EL FORMULARIO
         if (count($pass->getCategory()) === 0) {
             $pass->addCategory($this->getConfigurationPool()->getContainer()->get('doctrine')->getRepository('Application\Sonata\ClassificationBundle\Entity\Category')->find(1));

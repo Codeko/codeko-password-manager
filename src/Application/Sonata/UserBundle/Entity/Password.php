@@ -4,7 +4,6 @@ namespace Application\Sonata\UserBundle\Entity;
 
 use Application\Sonata\UserBundle\Validator\Constraints as RollerworksPassword;
 use Doctrine\ORM\Mapping as ORM;
-
 use Application\Sonata\ClassificationBundle\Entity\Category;
 use Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -63,10 +62,30 @@ class Password {
      * @var \DateTime
      */
     private $fechaModificacion;
+    /*
+     * 
+     */
     private $category;
+    /*
+     * 
+     */
     private $tipoPassword;
+    /*
+     * 
+     */
     protected $enabled;
+    /*
+     * 
+     */
     private $files;
+    /*
+     * 
+     */
+    private $permisosUser;
+    /*
+     * 
+     */
+    private $permisosGrupo;
 
     /**
      * Plain password. Used for model validation. Must not be persisted.
@@ -128,9 +147,17 @@ class Password {
         return $this->user;
     }
 
+    /*
+     * 
+     */
+
     function getUsernamePass() {
         return $this->usernamePass;
     }
+
+    /*
+     * 
+     */
 
     function setUsernamePass($usernamePass) {
         $this->usernamePass = $usernamePass;
@@ -262,33 +289,63 @@ class Password {
         return $this->fechaModificacion;
     }
 
+    /*
+     * 
+     */
+
     function getCategory() {
         return $this->category;
     }
+
+    /*
+     * 
+     */
 
     function getTipoPassword() {
         return $this->tipoPassword;
     }
 
+    /*
+     * 
+     */
+
     function setTipoPassword($tipoPassword) {
         $this->tipoPassword = $tipoPassword;
     }
+
+    /*
+     * 
+     */
 
     public function __construct() {
         $this->category = new ArrayCollection();
         $this->fechaCreacion = new \DateTime();
         $this->files = new ArrayCollection();
+        $this->permisosUser = new ArrayCollection();
+        $this->permisosGrupo = new ArrayCollection();
     }
+
+    /*
+     * 
+     */
 
     public function addCategory(Category $category) {
         $category->addPassword($this);
         $this->category[] = $category;
     }
 
+    /*
+     * 
+     */
+
     public function removeCategory(Category $category) {
         $this->category->removeElement($category);
         $category->removePassword($this);
     }
+
+    /*
+     * 
+     */
 
     public function __toString() {
         return $this->getTitulo() ? : 'n/a';
@@ -308,6 +365,10 @@ class Password {
         return $this->enabled;
     }
 
+    /*
+     * 
+     */
+
     public function setFiles($files) {
         if (count($files) > 0) {
             foreach ($files as $i) {
@@ -320,9 +381,17 @@ class Password {
         return $this;
     }
 
+    /*
+     * 
+     */
+
     public function getFiles() {
         return $this->files;
     }
+
+    /*
+     * 
+     */
 
     public function addFile(Media $file) {
         $file->setPassword($this);
@@ -332,20 +401,106 @@ class Password {
         return $this;
     }
 
+    /*
+     * 
+     */
+
     public function removeFile(Media $file) {
         $this->files->removeElement($file);
         $file->setPassword(null);
         $file->setPropietario(null);
     }
 
+    /*
+     * 
+     */
+
     public function getPlainPassword() {
         return $this->plainPassword;
     }
+
+    /*
+     * 
+     */
 
     public function setPlainPassword($password) {
         $this->plainPassword = $password;
 
         return $this;
+    }
+
+    /*
+     * 
+     */
+
+    function getPermisosUser() {
+        return $this->permisosUser;
+    }
+
+    /*
+     * 
+     */
+
+    function setPermisosUser(PermisoUser $permiso) {
+
+        $this->permisosUser = $permiso;
+
+        return $this;
+    }
+
+    /*
+     * 
+     */
+
+    public function addPermisosUser(PermisoUser $permiso) {
+        $permiso->setPassword($this);
+        $this->permisosUser[] = $permiso;
+        return $this;
+    }
+
+    /*
+     * 
+     */
+
+    public function removePermisosUser(PermisoUser $permiso) {
+        $this->permisosUser->removeElement($permiso);
+    }
+
+    /*
+     * 
+     */
+
+    function getPermisosGrupo() {
+        return $this->permisosGrupo;
+    }
+
+    /*
+     * 
+     */
+
+    function setPermisosGrupo(PermisoGrupo $permiso) {
+
+        $this->permisosGrupo = $permiso;
+
+        return $this;
+    }
+
+    /*
+     * 
+     */
+
+    public function addPermisosGrupo(PermisoGrupo $permiso) {
+        $permiso->setPassword($this);
+        $this->permisosGrupo[] = $permiso;
+        return $this;
+    }
+
+    /*
+     * 
+     */
+
+    public function removePermisosGrupo(PermisoGrupo $permiso) {
+        $this->permisosGrupo->removeElement($permiso);
     }
 
 }

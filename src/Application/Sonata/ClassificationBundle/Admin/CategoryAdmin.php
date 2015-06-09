@@ -17,6 +17,8 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\ClassificationBundle\Entity\ContextManager;
+use Application\Sonata\UserBundle\Form\PermisoCategoriaUserType;
+use Application\Sonata\UserBundle\Form\PermisoCategoriaGrupoType;
 
 class CategoryAdmin extends Admin {
 
@@ -72,7 +74,9 @@ class CategoryAdmin extends Admin {
      * {@inheritdoc}
      */
     protected function configureFormFields(FormMapper $formMapper) {
+
         $formMapper
+                ->tab('General')
                 ->with('General', array('class' => 'col-md-6'))
                 ->add('name')
                 ->add('description', 'textarea', array('required' => false))
@@ -96,6 +100,28 @@ class CategoryAdmin extends Admin {
                 ->add('enabled', null, array('required' => false))
                 ->add('position', 'integer', array('required' => false, 'data' => 0))
                 ->end()
+                ->end()
+                // PERMISOS 
+                ->tab('Permisos')
+                ->with('Permisos de Usuario', array('class' => 'col-md-6'))
+                ->add('permisosUser', 'collection', array(
+                    'type' => new PermisoCategoriaUserType(),
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'required' => false,
+                    'label' => 'Permisos de usuario',
+                    'by_reference' => false))
+                ->end()
+                ->with('Permisos de Grupo', array('class' => 'col-md-6'))
+                ->add('permisosGrupo', 'collection', array(
+                    'type' => new PermisoCategoriaGrupoType(),
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'required' => false,
+                    'label' => 'Permisos de grupo',
+                    'by_reference' => false))
+                ->end()
+                ->end()
         ;
     }
 
@@ -111,6 +137,8 @@ class CategoryAdmin extends Admin {
         $datagridMapper
                 ->add('name')
                 ->add('enabled')
+                ->add('permisosUser', null, array('label' => 'Permisos de Usuarios'))
+                ->add('permisosGrupo', null, array('label' => 'Permisos de Grupos'))
         ;
     }
 
@@ -126,6 +154,8 @@ class CategoryAdmin extends Admin {
                 ->add('enabled', null, array('editable' => true))
                 ->add('position')
                 ->add('parent')
+                ->add('permisosUser', null, array('label' => 'Permisos de Usuarios'))
+                ->add('permisosGrupo', null, array('label' => 'Permisos de Grupos'))
         ;
     }
 

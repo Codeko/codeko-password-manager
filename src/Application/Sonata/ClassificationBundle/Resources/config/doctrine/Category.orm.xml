@@ -31,6 +31,15 @@
         </many-to-one>  
 
         <many-to-many field="passwords" mapped-by="category" target-entity="Application\Sonata\UserBundle\Entity\Password"/>
-
+        <one-to-many field="permisosUser" target-entity="Application\Sonata\UserBundle\Entity\PermisoCategoriaUser" mapped-by="categoria">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+        </one-to-many> 
+        <one-to-many field="permisosGrupo" target-entity="Application\Sonata\UserBundle\Entity\PermisoCategoriaGrupo" mapped-by="categoria">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+        </one-to-many>
     </entity>
 </doctrine-mapping>

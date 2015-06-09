@@ -51,7 +51,11 @@ root {
 }
 
 .sonata-tree__item__edit, .sonata-tree__item {
-    padding-right: 100%;
+    padding: 8px 0px 8px 5px !important;
+}
+
+ul.sonata-tree {
+    margin-right: 0px !important;
 }
 
 th, td {

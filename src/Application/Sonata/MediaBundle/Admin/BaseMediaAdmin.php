@@ -67,7 +67,8 @@ abstract class BaseMediaAdmin extends Admin {
                 ->addIdentifier('name')
                 ->add('description')
                 ->add('enabled')
-                ->add('password.titulo', null, array('label' => 'Pass asociado', 'associated_property' => 'getName'))
+                ->add('password', null, array('label' => 'Pass asociado', 'associated_tostring' => 'getPassword'))
+                ->add('propietario', null, array('label' => 'Propietario', 'associated_tostring' => 'getPropietario'))
         ;
     }
 
@@ -93,7 +94,7 @@ abstract class BaseMediaAdmin extends Admin {
 
         if ($media->getId()) {
             $formMapper->add('password', 'sonata_type_model', array('label' => 'Pass asociado', 'attr' => array('allow_add' => false)));
-            //$formMapper->add('propietario', 'sonata_type_model', array('label' => 'Propietario asociado', 'attr' => array('allow_add' => false)));
+            $formMapper->add('propietario', 'sonata_type_model', array('label' => 'Propietario asociado', 'attr' => array('allow_add' => false)));
             $provider->buildEditForm($formMapper);
         } else {
             $provider->buildCreateForm($formMapper);

@@ -55,7 +55,32 @@ services:
             - sonata.admin.block.search_result
             - @templating
             - @sonata.admin.pool
-            - @sonata.adminbundle.search.handler      
+            - @sonata.adminbundle.search.handler    
+            
+    application_sonata_user.admin.permiso_user:
+        class: Application\Sonata\UserBundle\Admin\PermisoUserAdmin
+        arguments: [~, Application\Sonata\UserBundle\Entity\PermisoUser, ApplicationSonataUserBundle:PermisoUserAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: PermisoUser}
+
+    application_sonata_user.admin.permiso_grupo:
+        class: Application\Sonata\UserBundle\Admin\PermisoGrupoAdmin
+        arguments: [~, Application\Sonata\UserBundle\Entity\PermisoGrupo, ApplicationSonataUserBundle:PermisoGrupoAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: PermisoGrupo}
+
+    application_sonata_user.admin.permiso_categoria_user:
+        class: Application\Sonata\UserBundle\Admin\PermisoCategoriaUserAdmin
+        arguments: [~, Application\Sonata\UserBundle\Entity\PermisoCategoriaUser, ApplicationSonataUserBundle:PermisoCategoriaUserAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: PermisoCategoriaUser}
+
+    application_sonata_user.admin.permiso_categoria_grupo:
+        class: Application\Sonata\UserBundle\Admin\PermisoCategoriaGrupoAdmin
+        arguments: [~, Application\Sonata\UserBundle\Entity\PermisoCategoriaGrupo, ApplicationSonataUserBundle:PermisoCategoriaGrupoAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: PermisoCategoriaGrupo}
+
     
 imports:
     - { resource: sonata/classification_admin.xml }

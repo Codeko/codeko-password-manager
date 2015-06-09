@@ -21,24 +21,55 @@ use Sonata\UserBundle\Entity\BaseGroup as BaseGroup;
  *
  * @author <yourname> <youremail>
  */
-class Group extends BaseGroup
-{
+class Group extends BaseGroup {
+
     /**
      * @var integer $id
      */
     protected $id;
+
+    /*
+     * @var ArrayCollection $permisos
+     */
+    protected $permisos;
 
     /**
      * Get id
      *
      * @return integer $id
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
-    
+
     public function __toString() {
-        return $this->getName()?: 'n/a';
+        return $this->getName()? : 'n/a';
     }
+
+    /*
+     * 
+     */
+
+    function getPermisos() {
+        return $this->permisos;
+    }
+
+    /*
+     * 
+     */
+
+    public function addPermisos(PermisoGrupo $permiso) {
+        $permiso->setGrupo($this);
+        $this->permisos[] = $permiso;
+        return $this;
+    }
+
+    /*
+     * 
+     */
+
+    public function removePermisos(PermisoGrupo $permiso) {
+        $this->permisos->removeElement($permiso);
+    }
+
 }
