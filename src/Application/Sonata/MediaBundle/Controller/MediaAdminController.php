@@ -104,8 +104,7 @@ class MediaAdminController extends Controller {
                     'datagrid' => $datagrid,
                     'root_category' => $category,
                     'csrf_token' => $this->getCsrfToken('sonata.batch'),
-                    'no_button' => 1,
-                    'is_media' => 1,
+                    'no_action' => true,
         ));
     }
 

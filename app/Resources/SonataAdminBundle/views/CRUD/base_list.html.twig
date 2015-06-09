@@ -1,6 +1,6 @@
 {% extends base_template %}
 {% block actions %}
-{% if is_media is defined and is_media %}{% else %}
+{% if no_action is defined and no_action %}{% else %}
     {% spaceless %}
         {% if admin.hasRoute('create') and admin.isGranted('CREATE')%}
             <li>{% include 'SonataAdminBundle:Core:create_button.html.twig' %}</li>
@@ -10,9 +10,9 @@
 {% endblock %}
 {% block tab_menu %}{{ knp_menu_render(admin.sidemenu(action), {'currentClass' : 'active', 'template': admin_pool.getTemplate('tab_menu_template')}, 'twig') }}{% endblock %}
 {% block list_table %}
-{# CARGANDO ARBOL DE CATEGORIAS EN LA VISTA PASSWORD_LIST #}
-{% if 'Password' in admin.getClass() %}
-    {% include 'SonataAdminBundle::list.html.twig' %}
+    {# CARGANDO ARBOL DE CATEGORIAS EN LA VISTA PASSWORD_LIST #}
+    {% if 'Password' in admin.getClass() %}
+        {% include 'SonataAdminBundle::list.html.twig' %}
     <div class="col-xs-12 col-md-9">
     {% else %}
         <div class="col-xs-12 col-md-12">
@@ -74,7 +74,7 @@
                         {% endblock %}
                     </table>
                 {% else %}
-                    {% if is_media is defined and is_media %}
+                    {% if no_action is defined and no_action %}
                         <div class="info-box">
                             <span class="info-box-icon bg-aqua"><i class="fa fa-arrow-circle-right"></i></span>
                             <div class="info-box-content">
@@ -113,24 +113,24 @@
                                         {% block batch %}
                                             <script>
                                                 {% block batch_javascript %}
-                                                        jQuery(document).ready(function ($) {
-                                                            $('#list_batch_checkbox').on('ifChanged', function () {
-                                                                $(this)
-                                                                        .closest('table')
-                                                                        .find('td.sonata-ba-list-field-batch input[type="checkbox"], div.sonata-ba-list-field-batch input[type="checkbox"]')
-                                                                        .iCheck($(this).is(':checked') ? 'check' : 'uncheck')
-                                                                        ;
-                                                            });
-                                                            $('td.sonata-ba-list-field-batch input[type="checkbox"], div.sonata-ba-list-field-batch input[type="checkbox"]')
-                                                                    .on('ifChanged', function () {
-                                                                        $(this)
-                                                                                .closest('tr, div.sonata-ba-list-field-batch')
-                                                                                .toggleClass('sonata-ba-list-row-selected', $(this).is(':checked'))
-                                                                                ;
-                                                                    })
-                                                                    .trigger('ifChanged')
+                                                    jQuery(document).ready(function ($) {
+                                                        $('#list_batch_checkbox').on('ifChanged', function () {
+                                                            $(this)
+                                                                    .closest('table')
+                                                                    .find('td.sonata-ba-list-field-batch input[type="checkbox"], div.sonata-ba-list-field-batch input[type="checkbox"]')
+                                                                    .iCheck($(this).is(':checked') ? 'check' : 'uncheck')
                                                                     ;
                                                         });
+                                                        $('td.sonata-ba-list-field-batch input[type="checkbox"], div.sonata-ba-list-field-batch input[type="checkbox"]')
+                                                                .on('ifChanged', function () {
+                                                                    $(this)
+                                                                            .closest('tr, div.sonata-ba-list-field-batch')
+                                                                            .toggleClass('sonata-ba-list-row-selected', $(this).is(':checked'))
+                                                                            ;
+                                                                })
+                                                                .trigger('ifChanged')
+                                                                ;
+                                                    });
                                                 {% endblock %}
                                             </script>
                                             {% block batch_actions %}
@@ -153,7 +153,7 @@
                                 </div>
                                 <div class="pull-right">
 
-                                    {% if no_button is defined and no_button %}
+                                    {% if no_action is defined and no_action %}
                                         &nbsp; 
                                     {% else %}        
                                         <span class="btn-group" style="padding: 10px;margin-right:10px;">
