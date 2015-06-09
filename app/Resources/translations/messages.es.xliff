@@ -94,6 +94,22 @@
                 <source>Permiso Categoria Grupo List</source>
                 <target>Permisos de Grupo (Categorías)</target>
             </trans-unit>
+            <trans-unit id="users">
+                <source>users</source>
+                <target>Usuarios</target>
+            </trans-unit>
+            <trans-unit id="groups">
+                <source>groups</source>
+                <target>Grupos</target>
+            </trans-unit>
+            <trans-unit id="label_categories">
+                <source>label_categories</source>
+                <target>Categorías</target>
+            </trans-unit>
+            <trans-unit id="media">
+                <source>media</source>
+                <target>Multimedia</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -464,7 +464,6 @@ class Password {
 
     public function removePermisosUser(PermisoUser $permiso) {
         $this->permisosUser->removeElement($permiso);
-        $permiso->setPassword(null);
     }
 
     /*
