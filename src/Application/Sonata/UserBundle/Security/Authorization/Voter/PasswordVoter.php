@@ -44,15 +44,26 @@ class PasswordVoter implements VoterInterface {
                 $user = $token->getUser();
                 $iduser = $user->getId();
                 $idpasswordPropietario = $object->getUser()->getId();
+                $contraseñaId = $object->getId();
+                $IdsPassEscritura = $this->getWritePermits($user, $iduser);
+                $tamañoPassEscritura = count($IdsPassEscritura);
 
                 if (!$user->isSuperAdmin()) {
 
                     /* @var $idpasswordPropietario type */
                     if ($idpasswordPropietario != $iduser) {
                         $vote = VoterInterface::ACCESS_DENIED;
-                        return $vote;
                     }
-                    $vote = VoterInterface::ACCESS_GRANTED;
+
+                    //Comprobar permisos de escritura
+                    for ($i = 0; $i < $tamañoPassEscritura; $i++) {
+                        if ($IdsPassEscritura[$i] == $contraseñaId) {
+                            $vote = VoterInterface::ACCESS_GRANTED;
+                        }
+                    }
+
+                    $permisosEscritura = $this->getWritePermits($user, $iduser);
+
                     return $vote;
                 } else {
                     $vote = VoterInterface::ACCESS_GRANTED;
@@ -61,9 +72,6 @@ class PasswordVoter implements VoterInterface {
             }
 
             if ($attribute === 'ROLE_EDITAR_MULTIMEDIA' || $attribute === 'ROLE_BORRAR_MULTIMEDIA') {
-                $user = $token->getUser();
-                $iduser = $user->getId();
-                $idpasswordPropietario = $object->getPassword()->getUser()->getId();
 
                 if (!$user->isSuperAdmin()) {
                     if ($idpasswordPropietario != $iduser) {
@@ -79,9 +87,6 @@ class PasswordVoter implements VoterInterface {
             }
 
             if ($attribute === 'ROLE_EDITAR_USUARIO') {
-                $user = $token->getUser();
-                $iduser = $user->getId();
-                $idUsuarioPropietario = $object->getId();
 
                 if (!$user->isSuperAdmin()) {
 
@@ -98,9 +103,6 @@ class PasswordVoter implements VoterInterface {
             }
 
 //            if ($attribute === 'ROLE_LISTAR_ENTIDAD') {
-//                $user = $token->getUser();
-//                $iduser = $user->getId();
-//                $idpasswordPropietario = $object->getUser()->getId();
 //
 //                if (!$user->isSuperAdmin()) {
 //
@@ -118,6 +120,68 @@ class PasswordVoter implements VoterInterface {
         }
 
         return $vote;
+    }
+
+    protected function getWritePermits($user, $userId) {
+        $connection = $this->getConnection();
+        $contenedorPassEscritura = array();
+
+        $permisosUser = $this->getUserPermits($userId, $connection);
+        foreach ($permisosUser as $valor) {
+            if ($this->checkReadPermits($valor["permisos"])) {
+                if ($this->checkWritePermits($valor["permisos"])) {
+                    array_push($contenedorPassEscritura, intval($valor["password_id"]));
+                }
+            }
+        }
+
+        $permisosGrupos = $this->getGroupPermits($userId, $connection);
+        foreach ($permisosGrupos as $valor) {
+            if ($this->checkReadPermits($valor["permisos"])) {
+                if ($this->checkWritePermits($valor["permisos"])) {
+                    array_push($contenedorPassEscritura, intval($valor["password_id"]));
+                }
+            }
+        }
+
+        $IdsPassEscritura = array_unique($contenedorPassEscritura);
+        return $IdsPassEscritura;
+    }
+
+    protected function getUserPermits($userId, $connection) {
+        $sql = "SELECT * FROM PermisoUser WHERE user_id = '" . $userId . "'";
+        $statement = $connection->prepare($sql);
+        $statement->execute();
+        return $statement->fetchAll();
+    }
+
+    protected function getGroupPermits($userId, $connection) {
+        $sql = "SELECT PermisoGrupo.grupo_id, PermisoGrupo.password_id, PermisoGrupo.permisos, fos_user_user_group.user_id, fos_user_user_group.group_id FROM PermisoGrupo INNER JOIN fos_user_user_group ON fos_user_user_group.user_id=" . $userId . " WHERE fos_user_user_group.group_id=PermisoGrupo.grupo_id";
+        $statement = $connection->prepare($sql);
+        $statement->execute();
+        return $statement->fetchAll();
+    }
+
+    protected function getConnection() {
+        return $GLOBALS['kernel']->getContainer()->get('doctrine')->getManager()->getConnection();
+    }
+
+    protected function checkReadPermits($permiso) {
+        if ($permiso == 11) {
+            return true;
+        } else if ($permiso == 10) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    protected function checkWritePermits($permiso) {
+        if ($permiso == 11) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

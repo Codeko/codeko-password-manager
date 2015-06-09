@@ -409,7 +409,7 @@
             <trans-unit id="TipoPass">
                 <source>TipoPass</source>
                 <target>Tipos de contraseñas</target>
-            </trans-unit>
+            </trans-unit> 
         </body>
     </file>
 </xliff>

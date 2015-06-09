@@ -19,6 +19,7 @@ class PasswordController extends Controller {
         $modelManager = $this->admin->getModelManager();
         $ids = $request->get('idx');
         $cantidad = count($ids);
+        $user = $this->get('security.context')->getToken()->getUser();
 
         for ($i = 0; $i < $cantidad; $i++) {
             $target = $modelManager->find($this->admin->getClass(), $ids[$i]);
@@ -31,6 +32,7 @@ class PasswordController extends Controller {
             $passDecript = $this->get('nzo_url_encryptor')->decrypt($passOrigen);
             $clonedObject = clone $target;
             $clonedObject->setPassword($passDecript);
+            $clonedObject->setUser($user);
             $clonedObject->setTitulo($target->getTitulo() . " (Copia)");
             $this->admin->create($clonedObject);
         }
@@ -57,7 +59,7 @@ class PasswordController extends Controller {
         }
         if (false === $this->get('security.context')->isGranted('ROLE_EDITAR_ENTIDAD', $object)) {
             //Controlar Voters
-            throw new AccessDeniedException('No eres el propietario para editar esta contraseña');
+            throw new AccessDeniedException('No tienes permiso para editar esta contraseña');
         }
         if (false === $this->admin->isGranted('EDIT', $object)) {
             throw new AccessDeniedException();

@@ -24,12 +24,10 @@ use Application\Sonata\UserBundle\Form\PermisoGrupoType;
 class PasswordAdmin extends Admin {
 
     public $supportsPreviewMode = true;
-    protected $IdsPassLectura;
-    protected $IdsPassEscritura;
 
     public function createQuery($context = 'list') {
-
-        $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
+        $IdsPassLectura = array();
+        $user = $this->getActiveUser();
 
         if ($user->isSuperAdmin()) {
             $query = parent::createQuery($context);
@@ -38,16 +36,12 @@ class PasswordAdmin extends Admin {
             $userId = $user->getId();
             $connection = $this->getConnection();
             $contenedorPassLectura = array();
-            $contenedorPassEscritura = array();
 
             //Permisos del usuario actual --------------------------------------------------
             $permisosUser = $this->getUserPermits($userId, $connection);
             foreach ($permisosUser as $valor) {
                 if ($this->checkReadPermits($valor["permisos"])) {
                     array_push($contenedorPassLectura, intval($valor["password_id"]));
-                    if ($this->checkWritePermits($valor["permisos"])) {
-                        array_push($contenedorPassEscritura, intval($valor["password_id"]));
-                    }
                 }
             }
 
@@ -56,22 +50,18 @@ class PasswordAdmin extends Admin {
             foreach ($permisosGrupos as $valor) {
                 if ($this->checkReadPermits($valor["permisos"])) {
                     array_push($contenedorPassLectura, intval($valor["password_id"]));
-                    if ($this->checkWritePermits($valor["permisos"])) {
-                        array_push($contenedorPassEscritura, intval($valor["password_id"]));
-                    }
                 }
             }
 
             //Creación de query--------------------------------------------------------------
-            $this->IdsPassLectura = array_unique($contenedorPassLectura);
-            $this->IdsPassEscritura = array_unique($contenedorPassEscritura);
-            $longitudArrayLectura = count($this->IdsPassEscritura);
+            $IdsPassLectura = array_unique($contenedorPassLectura);
+            $longitudArrayLectura = count($IdsPassLectura);
 
             $query = parent::createQuery($context);
 
             if ($longitudArrayLectura > 0) {
                 $query->andWhere($query->expr()->in($query->getRootAliases()[0] . '.id', ':id'));
-                $query->setParameter(':id', $this->IdsPassLectura);
+                $query->setParameter(':id', $IdsPassLectura);
             }
 
             $query->orWhere($query->expr()->eq($query->getRootAliases()[0] . '.user', ':user'));
@@ -96,6 +86,10 @@ class PasswordAdmin extends Admin {
 
     protected function getConnection() {
         return $GLOBALS['kernel']->getContainer()->get('doctrine')->getManager()->getConnection();
+    }
+
+    protected function getActiveUser() {
+        return $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
     }
 
     /*
@@ -158,7 +152,7 @@ class PasswordAdmin extends Admin {
      */
     protected function configureListFields(ListMapper $listMapper) {
         unset($this->listModes['mosaic']);
-
+  
         $listMapper
                 ->addIdentifier('titulo')
                 ->add('usernamePass')
@@ -187,7 +181,8 @@ class PasswordAdmin extends Admin {
      * {@inheritdoc}
      */
     protected function configureDatagridFilters(DatagridMapper $filterMapper) {
-        $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
+        $user = $this->getActiveUser();
+
         $filterMapper
                 ->add('titulo');
         if ($user->isSuperAdmin()) {
@@ -239,7 +234,7 @@ class PasswordAdmin extends Admin {
      * {@inheritdoc}
      */
     protected function configureFormFields(FormMapper $formMapper) {
-        $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
+        $user = $this->getActiveUser();
 
         $formMapper
                 ->tab('General')
@@ -298,10 +293,10 @@ class PasswordAdmin extends Admin {
     }
 
     public function getNewInstance() {
-        $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
+        $user = $this->getActiveUser();
         if (!$user->isSuperAdmin()) {
             $instance = parent::getNewInstance();
-            $instance->setUser($this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser());
+            $instance->setUser($user);
         } else {
             $instance = parent::getNewInstance();
         }
@@ -324,6 +319,7 @@ class PasswordAdmin extends Admin {
             $url = $pass->getUrl();
             $pass->setUrl('http://' . $url);
         }
+        
         // CODIFICANDO CONTRASEÑAS
         if ($pass->getPlainPassword() !== null) {
             $pass->setPassword($this->getConfigurationPool()->getContainer()->get('nzo_url_encryptor')->encrypt($pass->getPlainPassword()));
@@ -357,13 +353,11 @@ class PasswordAdmin extends Admin {
     }
 
     public function getBatchActions() {
-        // retrieve the default (currently only the delete action) actions
         $actions = parent::getBatchActions();
 
-        // check user permissions
         $actions['clone'] = [
             'label' => 'Duplicar',
-            'ask_confirmation' => false, // If true, a confirmation will be asked before performing the action
+            'ask_confirmation' => false,
         ];
 
         return $actions;
