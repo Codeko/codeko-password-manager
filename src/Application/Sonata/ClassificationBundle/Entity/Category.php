@@ -147,6 +147,8 @@ class Category extends BaseCategory {
 
     public function removePermisosUser(PermisoCategoriaUser $permiso) {
         $this->permisosUser->removeElement($permiso);
+        $permiso->setCategoria(null);
+        $permiso->setUser(null);
     }
 
     /*
@@ -184,6 +186,8 @@ class Category extends BaseCategory {
 
     public function removePermisosGrupo(PermisoCategoriaGrupo $permiso) {
         $this->permisosGrupo->removeElement($permiso);
+        $permiso->setCategoria(null);
+        $permiso->setGrupo(null);
     }
 
 }
