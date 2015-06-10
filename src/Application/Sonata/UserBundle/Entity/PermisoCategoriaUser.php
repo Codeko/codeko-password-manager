@@ -80,7 +80,7 @@ class PermisoCategoriaUser {
      * 
      */
 
-    function setCategoria(Category $categoria) {
+    function setCategoria($categoria) {
         $this->categoria = $categoria;
     }
 
@@ -88,7 +88,7 @@ class PermisoCategoriaUser {
      * 
      */
 
-    function setUser(User $user) {
+    function setUser($user) {
         $this->user = $user;
     }
 

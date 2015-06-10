@@ -14,10 +14,11 @@ class PermisoUserType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-                ->add('permisos')
+                //->add('permisos')
                 ->add('user', 'entity', array(
                     'class' => 'ApplicationSonataUserBundle:User',
-                    'label' => 'Usuario'
+                    'label' => 'Usuario',
+                    'required' => true
                 ))
                 ->add('perms', 'choice', array(
                     'choices' => array('1' => 'Escritura', '2' => 'Lectura'),
@@ -26,9 +27,12 @@ class PermisoUserType extends AbstractType {
                     'required' => false,
                     'mapped' => false,
                     'by_reference' => false,
+                    'label' => 'Permisos',
                     'attr' => array('inline' => true)
                 ))
         ;
+        
+
     }
 
     /**

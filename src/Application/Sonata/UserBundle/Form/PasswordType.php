@@ -41,7 +41,25 @@ class PasswordType extends AbstractType {
                     'allow_delete' => true,
                     'required' => true,
                 ))
+
+                // PERMISOS 
+                ->add('permisosUser', 'collection', array(
+                    'type' => new PermisoUserType(),
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'required' => false,
+                    'label' => 'Permisos de usuario',
+                    'by_reference' => false))
+                ->add('permisosGrupo', 'collection', array(
+                    'type' => new PermisoGrupoType(),
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'required' => false,
+                    'label' => 'Permisos de grupo',
+                    'by_reference' => false))
         ;
+
+        // EVENT LISTENER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
 
     /**

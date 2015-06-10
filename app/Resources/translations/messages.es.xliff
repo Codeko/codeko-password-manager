@@ -110,6 +110,26 @@
                 <source>media</source>
                 <target>Multimedia</target>
             </trans-unit>
+            <trans-unit id="ROLE_USER:">
+                <source></source>
+                <target>Usuario común (Sin privilegios)</target>
+            </trans-unit>
+            <trans-unit id="ROLE_ADMIN: ROLE_USER">
+                <source>ROLE_ADMIN: ROLE_USER</source>
+                <target>Administrador (Privilegios de usuario)</target>
+            </trans-unit>
+            <trans-unit id="ROLE_SUPER_ADMIN: ROLE_USER, ROLE_ADMIN, ROLE_SONATA_ADMIN, ROLE_ALLOWED_TO_SWITCH">
+                <source>ROLE_SUPER_ADMIN: ROLE_USER, ROLE_ADMIN, ROLE_SONATA_ADMIN, ROLE_ALLOWED_TO_SWITCH</source>
+                <target>Super Administrador (Todos los privilegios</target>
+            </trans-unit>
+            <trans-unit id="ROLE_SONATA_ADMIN">
+                <source>ROLE_SONATA_ADMIN</source>
+                <target>Administrador Sonata (Privilegios especiales administración)</target>
+            </trans-unit>
+            <trans-unit id="ROLE_ALLOWED_TO_SWITCH">
+                <source>ROLE_ALLOWED_TO_SWITCH</source>
+                <target>Puede suplantar usuario(s)</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
