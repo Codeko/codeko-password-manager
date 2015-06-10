@@ -1,0 +1,7 @@
+{% extends admin.getTemplate('base_list_field') %}
+
+{% block field %}
+    {% if value %}
+            {{ value|render_relation_element(field_description) }}
+    {% endif %}
+{% endblock %}

@@ -4,8 +4,9 @@ namespace Application\Sonata\UserBundle\Security\Authorization\Voter;
 
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Application\Sonata\UserBundle\Security\Permits\Permits;
 
-class PasswordVoter implements VoterInterface {
+class PasswordVoter extends Permits implements VoterInterface {
 
     const VERPASSWORD = 'ROLE_LISTAR_ENTIDAD';
     const EDITARPASSWORD = 'ROLE_EDITAR_ENTIDAD';
@@ -102,72 +103,9 @@ class PasswordVoter implements VoterInterface {
                     return $vote;
                 }
             }
-
         }
 
         return $vote;
-    }
-
-    protected function getWritePermits($user, $userId) {
-        $connection = $this->getConnection();
-        $contenedorPassEscritura = array();
-
-        $permisosUser = $this->getUserPermits($userId, $connection);
-        foreach ($permisosUser as $valor) {
-            if ($this->checkReadPermits($valor["permisos"])) {
-                if ($this->checkWritePermits($valor["permisos"])) {
-                    array_push($contenedorPassEscritura, intval($valor["password_id"]));
-                }
-            }
-        }
-
-        $permisosGrupos = $this->getGroupPermits($userId, $connection);
-        foreach ($permisosGrupos as $valor) {
-            if ($this->checkReadPermits($valor["permisos"])) {
-                if ($this->checkWritePermits($valor["permisos"])) {
-                    array_push($contenedorPassEscritura, intval($valor["password_id"]));
-                }
-            }
-        }
-
-        $IdsPassEscritura = array_unique($contenedorPassEscritura);
-        return $IdsPassEscritura;
-    }
-
-    protected function getUserPermits($userId, $connection) {
-        $sql = "SELECT * FROM PermisoUser WHERE user_id = '" . $userId . "'";
-        $statement = $connection->prepare($sql);
-        $statement->execute();
-        return $statement->fetchAll();
-    }
-
-    protected function getGroupPermits($userId, $connection) {
-        $sql = "SELECT PermisoGrupo.grupo_id, PermisoGrupo.password_id, PermisoGrupo.permisos, fos_user_user_group.user_id, fos_user_user_group.group_id FROM PermisoGrupo INNER JOIN fos_user_user_group ON fos_user_user_group.user_id=" . $userId . " WHERE fos_user_user_group.group_id=PermisoGrupo.grupo_id";
-        $statement = $connection->prepare($sql);
-        $statement->execute();
-        return $statement->fetchAll();
-    }
-
-    protected function getConnection() {
-        return $GLOBALS['kernel']->getContainer()->get('doctrine')->getManager()->getConnection();
-    }
-
-    protected function checkReadPermits($permiso) {
-        if ($permiso == 11) {
-            return true;
-        } else if ($permiso == 10) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    protected function checkWritePermits($permiso) {
-        if ($permiso == 11) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
 }

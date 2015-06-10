@@ -259,6 +259,43 @@ class PasswordController extends Controller {
                         ), null, $request);
     }
 
+    public function batchActionDelete(ProxyQueryInterface $query) {
+
+        if (false === $this->admin->isGranted('DELETE')) {
+            throw new AccessDeniedException();
+        }
+
+        $request = $this->get('request');
+        $modelManager = $this->admin->getModelManager();
+        $ids = $request->get('idx');
+        $cantidad = count($ids);
+
+        try {
+            if ($cantidad > 0) {
+                for ($i = 0; $i < $cantidad; $i++) {
+                    $target = $modelManager->find($this->admin->getClass(), $ids[$i]);
+
+                    if (false === $this->get('security.context')->isGranted('ROLE_BORRAR_ENTIDAD', $target)) {
+                        $this->addFlash('sonata_flash_error', 'No tienes permiso para borrar el elemento ' . $target->getTitulo() . '.');
+                    } else {
+                        $this->admin->delete($target);
+                        $this->addFlash('sonata_flash_success', 'Elementos han sido eliminados');
+                    }
+                }
+            } else {
+                $this->addFlash('sonata_flash_error', 'No se selecciono ningun elemento');
+                return new RedirectResponse($this->admin->generateUrl('list', array('filter' => $this->admin->getFilterParameters())));
+            }
+        } catch (ModelManagerException $e) {
+            $this->handleModelManagerException($e);
+            $this->addFlash('sonata_flash_error', 'flash_batch_delete_error');
+        }
+
+        return new RedirectResponse($this->admin->generateUrl(
+                        'list', array('filter' => $this->admin->getFilterParameters())
+        ));
+    }
+
     // FUNCION PRIVADA DE SONATAADMIN-CRUDCONTROLLER, HAY QUE LLAMARLA DESDE AQUI
     /**
      * To keep backwards compatibility with older Sonata Admin code.

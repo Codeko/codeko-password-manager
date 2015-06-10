@@ -20,35 +20,40 @@ use Symfony\Component\HttpFoundation\Request;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Application\Sonata\UserBundle\Form\PermisoUserType;
 use Application\Sonata\UserBundle\Form\PermisoGrupoType;
+use Application\Sonata\UserBundle\Security\Permits\Permits;
 
 class PasswordAdmin extends Admin {
 
     public $supportsPreviewMode = true;
+    private $permits;
 
+    /**
+     * {@inheritdoc}
+     */
     public function createQuery($context = 'list') {
         $IdsPassLectura = array();
         $user = $this->getActiveUser();
+        $this->permits = new Permits();
 
         if ($user->isSuperAdmin()) {
             $query = parent::createQuery($context);
         } else {
 
             $userId = $user->getId();
-            $connection = $this->getConnection();
             $contenedorPassLectura = array();
 
             //Permisos del usuario actual --------------------------------------------------
-            $permisosUser = $this->getUserPermits($userId, $connection);
+            $permisosUser = $this->permits->getUserPermits($userId);
             foreach ($permisosUser as $valor) {
-                if ($this->checkReadPermits($valor["permisos"])) {
+                if ($this->permits->checkReadPermits($valor["permisos"])) {
                     array_push($contenedorPassLectura, intval($valor["password_id"]));
                 }
             }
 
             //Permisos de los grupos del usuario actual -------------------------------------
-            $permisosGrupos = $this->getGroupPermits($userId, $connection);
+            $permisosGrupos = $this->permits->getGroupPermits($userId);
             foreach ($permisosGrupos as $valor) {
-                if ($this->checkReadPermits($valor["permisos"])) {
+                if ($this->permits->checkReadPermits($valor["permisos"])) {
                     array_push($contenedorPassLectura, intval($valor["password_id"]));
                 }
             }
@@ -70,53 +75,13 @@ class PasswordAdmin extends Admin {
         return $query;
     }
 
-    protected function getUserPermits($userId, $connection) {
-        $sql = "SELECT * FROM PermisoUser WHERE user_id = '" . $userId . "'";
-        $statement = $connection->prepare($sql);
-        $statement->execute();
-        return $statement->fetchAll();
-    }
-
-    protected function getGroupPermits($userId, $connection) {
-        $sql = "SELECT PermisoGrupo.grupo_id, PermisoGrupo.password_id, PermisoGrupo.permisos, fos_user_user_group.user_id, fos_user_user_group.group_id FROM PermisoGrupo INNER JOIN fos_user_user_group ON fos_user_user_group.user_id=" . $userId . " WHERE fos_user_user_group.group_id=PermisoGrupo.grupo_id";
-        $statement = $connection->prepare($sql);
-        $statement->execute();
-        return $statement->fetchAll();
-    }
-
-    protected function getConnection() {
-        return $GLOBALS['kernel']->getContainer()->get('doctrine')->getManager()->getConnection();
-    }
-
     protected function getActiveUser() {
         return $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
     }
 
-    /*
-      Permisos [Lectura|Escritura]:
-      Leer y escribir - 11
-      Leer y no escribir - 10
-      No leer y no escribir - 0
+    /**
+     * {@inheritdoc}
      */
-
-    protected function checkReadPermits($permiso) {
-        if ($permiso == 11) {
-            return true;
-        } else if ($permiso == 10) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    protected function checkWritePermits($permiso) {
-        if ($permiso == 11) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     private function buildRoutes() {
         if ($this->loaded['routes']) {
             return;
@@ -152,7 +117,8 @@ class PasswordAdmin extends Admin {
      */
     protected function configureListFields(ListMapper $listMapper) {
         unset($this->listModes['mosaic']);
-  
+        $user = $this->getActiveUser();
+
         $listMapper
                 ->addIdentifier('titulo')
                 ->add('usernamePass')
@@ -162,9 +128,17 @@ class PasswordAdmin extends Admin {
                 ->add('comentario', 'text')
                 ->add('tipoPassword')
                 ->add('fechaExpira')
-                ->add('category', null, array('associated_property' => 'getName'))
-                ->add('enabled', null, array('editable' => true))
-                ->add('user')
+                ->add('category', null, array('associated_property' => 'getName'));
+        if ($user->isSuperAdmin()) {
+            $listMapper
+                    ->add('enabled', null, array('editable' => true))
+                    ->add('user');
+        } else {
+            $listMapper
+                    ->add('enabled', null, array('editable' => false))
+                    ->add('user', null, array('template' => 'SonataAdminBundle:CRUD:list_no_edit.html.twig'));
+        }
+        $listMapper
                 ->add('files', null, array('label' => 'Archivos', 'associated_property' => 'getName'))
                 ->add('permisosUser', null, array('label' => 'Permisos de Usuarios'))
                 ->add('permisosGrupo', null, array('label' => 'Permisos de Grupos'))
@@ -319,7 +293,7 @@ class PasswordAdmin extends Admin {
             $url = $pass->getUrl();
             $pass->setUrl('http://' . $url);
         }
-        
+
         // CODIFICANDO CONTRASEÑAS
         if ($pass->getPlainPassword() !== null) {
             $pass->setPassword($this->getConfigurationPool()->getContainer()->get('nzo_url_encryptor')->encrypt($pass->getPlainPassword()));
