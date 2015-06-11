@@ -123,7 +123,9 @@ class PasswordAdmin extends Admin {
         $tamañoPermisosUser = count($permisosUser);
 
         $listMapper
-                ->addIdentifier('titulo',null, array('permisos_edicion' => $permisosUser,'usuario_activo' => $user, 'tam_permisos_edicion' => $tamañoPermisosUser))
+                ->addIdentifier('titulo',null, array('permisos_edicion' => $permisosUser,
+                    'usuario_activo' => $user,
+                    'tam_permisos_edicion' => $tamañoPermisosUser))
                 ->add('usernamePass')
                 ->add('url', 'url', array(
                     'hide_protocol' => true
@@ -310,8 +312,16 @@ class PasswordAdmin extends Admin {
             $pass->addCategory($this->getConfigurationPool()->getContainer()->get('doctrine')->getRepository('Application\Sonata\ClassificationBundle\Entity\Category')->find(1));
         }
 
+        // PERMISOS
+//        $escr = $this->getForm()->get('permisosUser')->get('perms')->getData();
+//        $lect = $this->getForm()->get('permisosUser')->get('perms')->getData();    .',lect:'.$lect
+//        throw new \Symfony\Component\Finder\Exception\AccessDeniedException('escr:'.$escr);
+        //
+        
         $pass->setFiles($pass->getFiles());
         $pass->setPermisosUser($pass->getPermisosUser());
+        
+        
     }
 
     public function prePersist($pass) {

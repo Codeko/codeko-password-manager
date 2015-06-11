@@ -30,7 +30,7 @@ file that was distributed with this source code.
             </a>
         {% else %}
             {% if field_description.options.permisos_edicion is defined %}
-                {% if field_description.options.tam_permisos_edicion > 0%}
+                {% if field_description.options.tam_permisos_edicion > 0 %}
                     {% for id in field_description.options.permisos_edicion %}
                         {% if id == admin.id(object) %}
                             <a class="sonata-link-identifier" href="{{ admin.generateObjectUrl(route, object, field_description.options.route.parameters) }}">
@@ -50,9 +50,9 @@ file that was distributed with this source code.
             {% endif %}              
         {% endif %} 
     {% else %}
-        <span class="sonata-link-identifier">
+        <a class="sonata-link-identifier" href="{{ admin.generateObjectUrl(route, object, field_description.options.route.parameters) }}">
             {{ value }}
-        </span>
+        </a>
     {% endif%}
 
     {% endblock -%}

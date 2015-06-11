@@ -76,7 +76,7 @@
             </script>
         {% endif %}
 
-        {# TRADUCIENDO ROLES #}
+        {# TRADUCIENDO ROL USUARIO #}
         {% if admin is defined %}
             {% if admin.getClass() ends with 'Group' or 'User' %}
                 <script>
@@ -85,15 +85,7 @@
                         for (var i = 0; i < span.length; i++) {
                             if (span[i].innerHTML.match('ROLE_USER:')) {
                                 span[i].innerHTML = " Usuario común (Sin privilegios)";
-                            } else if (span[i].innerHTML.match('ROLE_ADMIN: ROLE_USER')) {
-                                span[i].innerHTML = " Administrador (Privilegios de usuario)";
-                            } else if (span[i].innerHTML.match('ROLE_SUPER_ADMIN: ROLE_USER, ROLE_ADMIN, ROLE_SONATA_ADMIN, ROLE_ALLOWED_TO_SWITCH')) {
-                                span[i].innerHTML = " Super Administrador (Todos los privilegios)";
-                            } else if (span[i].innerHTML.match('ROLE_SONATA_ADMIN')) {
-                                span[i].innerHTML = " Administrador Sonata (Privilegios especiales administración)";
-                            } else if (span[i].innerHTML.match('ROLE_ALLOWED_TO_SWITCH')) {
-                                span[i].innerHTML = " Puede suplantar usuario(s)";
-                            }
+                            } 
                         }
                     });
                 </script>
@@ -137,7 +129,7 @@
                 {% block logo %}
                     {% if admin_pool is defined %}
                         {% spaceless %}
-                                {% if animate_logo is defined and animate_logo %}
+                            {% if animate_logo is defined and animate_logo %}
                                 <a class="logo" href="{{ path('sonata_admin_dashboard') }}"><img class="rubberBand animated" src="{{ asset('bundles/applicationsonatauser/images/headerMenu.png') }}"/></a>    
                                 {% else %}
                                 <a class="logo" href="{{ path('sonata_admin_dashboard') }}"><img src="{{ asset('bundles/applicationsonatauser/images/headerMenu.png') }}"/></a>
@@ -230,8 +222,7 @@
 
                             {% block side_bar_before_nav %} {% endblock %}
                             {% block side_bar_nav %}
-                                {% if app.security.token or is_granted('ROLE_SONATA_ADMIN') %}              
-                                    {#{{ knp_menu_render(sonata_knp_menu_build(app.request), {'template' : admin_pool.getTemplate('knp_menu_template')}) }}  #}
+                                {% if app.security.token or is_granted('ROLE_SONATA_ADMIN') %}                          
                                     {{ knp_menu_render('sonata_admin_sidebar', {template: admin_pool.getTemplate('knp_menu_template')}) }}
                                 {% endif %}
                             {% endblock side_bar_nav %}

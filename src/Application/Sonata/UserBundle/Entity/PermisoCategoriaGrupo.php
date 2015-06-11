@@ -80,7 +80,7 @@ class PermisoCategoriaGrupo {
      * 
      */
 
-    function setCategoria(Category $categoria) {
+    function setCategoria($categoria) {
         $this->categoria = $categoria;
     }
 
@@ -88,7 +88,7 @@ class PermisoCategoriaGrupo {
      * 
      */
 
-    function setGrupo(Group $grupo) {
+    function setGrupo($grupo) {
         $this->grupo = $grupo;
     }
 

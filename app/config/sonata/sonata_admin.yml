@@ -59,7 +59,7 @@ sonata_admin:
                     - application_sonata_user.admin.permiso_categoria_user
                     - application_sonata_user.admin.permiso_categoria_grupo
                                       
-                roles: [ROLE_USER]
+                roles: [ROLE_ADMIN]
                 
     options:
         use_select2:    true 

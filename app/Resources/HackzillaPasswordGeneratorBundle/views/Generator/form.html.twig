@@ -3,18 +3,21 @@
     {{ form_errors(form) }}
     {{ form_rest(form) }}
 
-    {# ESILOS #}
     <script>
+        // ESTILOS
         var labels = document.getElementsByTagName('label');
 
         for (var i = 0; i < labels.length; i++) {
             labels[i].style.paddingRight = "15px";
         }
 
-        function recogerPass() {
-            $('#marco').css('display', 'block');
-            $('.passwords').html($('#passTemp').find('#marco').html());
-            $("#passTemp").html("");
+        $('label[for="segment_count"]').removeClass('optional');
+        $('label[for="segment_length"]').removeClass('optional');
+        $('label[for="segment_count"] > span').text('');
+        $('label[for="segment_length"] > span').text('');
+        $('label.optional').hide(true);
+        if (!$("span[label_catalogue='SonataAdminBundle']")) {
+            $('span').text('');
         }
 
         // GENERANDO PASS
@@ -25,12 +28,13 @@
                 $('.icheckbox_flat-blue').addClass('checked');
                 $('input[type=checkbox]').attr('checked', true);
                 $('input[name=symbols]').parent().removeClass('checked');
-                $('input[name=segment_count]').val(4);
-                $('input[name=segment_length]').val(3);
+                $('input[name=segment_count]').val(1);
+                $('input[name=segment_length]').val(6);
+
                 event.preventDefault();
                 event.stopPropagation();
             });
-            $('#prueba form').submit(function (event) {
+            $('#prueba form').one("submit", function (event) {
                 // get the form data
                 // there are many ways to get this data using jQuery (you can use the class or id also)
                 var formData = {
@@ -89,6 +93,12 @@
     <div id="passTemp" style="display:none;"></div>
 
     <script>
+        function recogerPass() {
+            $('#marco').css('display', 'block');
+            $('.passwords').html($('#passTemp').find('#marco').html());
+            $("#passTemp").html("");
+        }
+
         function selectPass(pass) {
             $(".campoPass").val(pass);
             $("#myModal").modal('hide');
@@ -96,7 +106,9 @@
     </script>
 
     <div class="passwords modal-body" id="marco" style="display:hidden">
-        <h4>{{ "HEADING_PASSWORDS"|trans }}</h4>
+        {% if passwords is not null %}
+            <h4>{{ "HEADING_PASSWORDS"|trans }}</h4>
+        {% endif %}
         <div>
             <ul>
                 {% for password in passwords -%}

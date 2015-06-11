@@ -17,7 +17,8 @@ class PermisoGrupoType extends AbstractType {
                 ->add('permisos')
                 ->add('grupo', 'entity', array(
                     'class' => 'ApplicationSonataUserBundle:Group',
-                    'label' => 'Grupo'
+                    'label' => 'Grupo',
+                    'required' => true
                 ))
                 ->add('perms', 'choice', array(
                     'choices' => array('1' => 'Escritura', '2' => 'Lectura'),
@@ -28,6 +29,20 @@ class PermisoGrupoType extends AbstractType {
                     'attr' => array('inline' => true)
                 ))
         ;
+
+        // $transformer = new PermisosUserTransformer($array);
+        // add a normal text field, but add your transformer to it
+        //        $builder->add(
+        //                $builder->create('issue', 'text')
+        //                        ->addModelTransformer($transformer)
+        //        );
+
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            if (null != $event->getData()) {
+                //                var_dump($event->getData());
+                //                exit();
+            }
+        });
     }
 
     /**
