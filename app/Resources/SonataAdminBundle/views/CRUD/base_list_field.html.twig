@@ -29,26 +29,27 @@ file that was distributed with this source code.
                 {{ value }}
             </a>
         {% else %}
-            {% if field_description.options.permisos_edicion is defined %}
-                {% if field_description.options.tam_permisos_edicion > 0 %}
-                    {% for id in field_description.options.permisos_edicion %}
-                        {% if id == admin.id(object) %}
-                            <a class="sonata-link-identifier" href="{{ admin.generateObjectUrl(route, object, field_description.options.route.parameters) }}">
-                                {{ value }}
-                            </a>
-                        {% else %}
-                            <span class="sonata-link-identifier">
-                                {{ value }}
-                            </span>
-                        {% endif %}
-                    {% endfor %}
-                {% else %}
-                    <span class="sonata-link-identifier">
-                        {{ value }}
-                    </span>
-                {% endif%}
-            {% endif %}              
-        {% endif %} 
+                {% if field_description.options.permisos_edicion is defined %}
+                    {% if field_description.options.tam_permisos_edicion > 0 %}
+                        {% for id in field_description.options.permisos_edicion %}
+                            {% if id == admin.id(object) %}
+                                <a class="sonata-link-identifier" href="{{ admin.generateObjectUrl(route, object, field_description.options.route.parameters) }}">
+                                    {{ value }}
+                                </a>
+                            {% else %}
+                                <span class="sonata-link-identifier">
+                                    {{ value }}
+                                </span>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <span class="sonata-link-identifier">
+                            {{ value }}
+                        </span>
+                    {% endif%}
+                {% endif %}              
+            {% endif %} 
+
     {% else %}
         <a class="sonata-link-identifier" href="{{ admin.generateObjectUrl(route, object, field_description.options.route.parameters) }}">
             {{ value }}

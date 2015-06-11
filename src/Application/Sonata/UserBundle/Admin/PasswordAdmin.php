@@ -122,10 +122,18 @@ class PasswordAdmin extends Admin {
         $permisosUser = $this->permits->getWritePermits($user->getId());
         $tamañoPermisosUser = count($permisosUser);
 
+        if ($user->isSuperAdmin()) {
+            $listMapper
+                    ->addIdentifier('titulo');
+        } else {
+            $listMapper
+                    ->addIdentifier('titulo', null, array('permisos_edicion' => $permisosUser,
+                        'usuario_activo' => $user,
+                        'tam_permisos_edicion' => $tamañoPermisosUser,
+                        'isAdmin' => $user->isSuperAdmin()
+            ));
+        }
         $listMapper
-                ->addIdentifier('titulo',null, array('permisos_edicion' => $permisosUser,
-                    'usuario_activo' => $user,
-                    'tam_permisos_edicion' => $tamañoPermisosUser))
                 ->add('usernamePass')
                 ->add('url', 'url', array(
                     'hide_protocol' => true
@@ -320,8 +328,6 @@ class PasswordAdmin extends Admin {
         
         $pass->setFiles($pass->getFiles());
         $pass->setPermisosUser($pass->getPermisosUser());
-        
-        
     }
 
     public function prePersist($pass) {
