@@ -5,6 +5,8 @@ namespace Application\Sonata\UserBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 class PermisoUserType extends AbstractType {
 
@@ -14,7 +16,7 @@ class PermisoUserType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-                //->add('permisos')
+//->add('permisos')
                 ->add('user', 'entity', array(
                     'class' => 'ApplicationSonataUserBundle:User',
                     'label' => 'Usuario',
@@ -31,8 +33,10 @@ class PermisoUserType extends AbstractType {
                     'attr' => array('inline' => true)
                 ))
         ;
-        
 
+        $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) {
+        if (null != $event->getData()) {}
+        });
     }
 
     /**

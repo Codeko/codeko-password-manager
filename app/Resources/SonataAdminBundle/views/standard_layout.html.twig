@@ -76,7 +76,7 @@
             </script>
         {% endif %}
 
-        {# TRADUCIENDO ROLES #}
+        {# TRADUCIENDO ROL USUARIO #}
         {% if admin is defined %}
             {% if admin.getClass() ends with 'Group' or 'User' %}
                 <script>
@@ -225,8 +225,7 @@
 
                             {% block side_bar_before_nav %} {% endblock %}
                             {% block side_bar_nav %}
-                                {% if app.security.token or is_granted('ROLE_SONATA_ADMIN') %}              
-                                    {#{{ knp_menu_render(sonata_knp_menu_build(app.request), {'template' : admin_pool.getTemplate('knp_menu_template')}) }}                #}
+                                {% if app.security.token or is_granted('ROLE_SONATA_ADMIN') %}                          
                                     {{ knp_menu_render('sonata_admin_sidebar', {template: admin_pool.getTemplate('knp_menu_template')}) }}
                                 {% endif %}
                             {% endblock side_bar_nav %}

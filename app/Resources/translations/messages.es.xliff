@@ -111,7 +111,7 @@
                 <target>Multimedia</target>
             </trans-unit>
             <trans-unit id="ROLE_USER:">
-                <source></source>
+                <source>ROLE_USER:</source>
                 <target>Usuario común (Sin privilegios)</target>
             </trans-unit>
             <trans-unit id="ROLE_ADMIN: ROLE_USER">
