@@ -58,8 +58,6 @@ class PasswordType extends AbstractType {
                     'label' => 'Permisos de grupo',
                     'by_reference' => false))
         ;
-
-        // EVENT LISTENER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
 
     /**

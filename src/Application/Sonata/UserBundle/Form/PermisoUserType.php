@@ -15,8 +15,9 @@ class PermisoUserType extends AbstractType {
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
+
         $builder
-//->add('permisos')
+                ->add('permisos')
                 ->add('user', 'entity', array(
                     'class' => 'ApplicationSonataUserBundle:User',
                     'label' => 'Usuario',
@@ -34,8 +35,19 @@ class PermisoUserType extends AbstractType {
                 ))
         ;
 
-        $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) {
-        if (null != $event->getData()) {}
+        // $transformer = new PermisosUserTransformer($array);
+
+        // add a normal text field, but add your transformer to it
+        //        $builder->add(
+        //                $builder->create('issue', 'text')
+        //                        ->addModelTransformer($transformer)
+        //        );
+
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            if (null != $event->getData()) {
+        //                var_dump($event->getData());
+        //                exit();
+            }
         });
     }
 
