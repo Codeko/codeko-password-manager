@@ -7,12 +7,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
+use Application\Sonata\UserBundle\Security\Permits\Permits;
 
 /**
  * Password controller.
  *
  */
 class PasswordController extends Controller {
+
+    private $permits;
 
     public function batchActionClone(ProxyQueryInterface $query) {
         $request = $this->get('request');
@@ -151,6 +154,10 @@ class PasswordController extends Controller {
                         ), null, $request);
     }
 
+    protected function getActiveUser() {
+        return $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
+    }
+
     /*
      *
      * Acción de listar contraseñas
@@ -196,13 +203,13 @@ class PasswordController extends Controller {
 
         $formView = $datagrid->getForm()->createView();
         $this->get('twig')->getExtension('form')->renderer->setTheme($formView, $this->admin->getFilterTheme());
-        return $this->render($this->admin->getTemplate('list'), array(
-                    'action' => 'list',
-                    'form' => $formView,
-                    'datagrid' => $datagrid,
-                    'root_category' => $category,
-                    'csrf_token' => $this->getCsrfToken('sonata.batch'),
-        ));
+            return $this->render($this->admin->getTemplate('list'), array(
+                        'action' => 'list',
+                        'form' => $formView,
+                        'datagrid' => $datagrid,
+                        'root_category' => $category,
+                        'csrf_token' => $this->getCsrfToken('sonata.batch')
+            ));      
     }
 
     /*

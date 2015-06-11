@@ -47,7 +47,7 @@ class PasswordVoter extends Permits implements VoterInterface {
 
                 $idpasswordPropietario = $object->getUser()->getId();
                 $contraseñaId = $object->getId();
-                $IdsPassEscritura = $this->getWritePermits($user, $iduser);
+                $IdsPassEscritura = $this->getWritePermits($iduser);
                 $tamañoPassEscritura = count($IdsPassEscritura);
 
                 if (!$user->isSuperAdmin()) {

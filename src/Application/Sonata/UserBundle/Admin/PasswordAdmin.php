@@ -118,9 +118,12 @@ class PasswordAdmin extends Admin {
     protected function configureListFields(ListMapper $listMapper) {
         unset($this->listModes['mosaic']);
         $user = $this->getActiveUser();
+        $this->permits = new Permits();
+        $permisosUser = $this->permits->getWritePermits($user->getId());
+        $tamañoPermisosUser = count($permisosUser);
 
         $listMapper
-                ->addIdentifier('titulo')
+                ->addIdentifier('titulo',null, array('permisos_edicion' => $permisosUser,'usuario_activo' => $user, 'tam_permisos_edicion' => $tamañoPermisosUser))
                 ->add('usernamePass')
                 ->add('url', 'url', array(
                     'hide_protocol' => true

@@ -9,6 +9,7 @@ file that was distributed with this source code.
 
 #}
 
+
 <td class="sonata-ba-list-field sonata-ba-list-field-{{ field_description.type }}" objectId="{{ admin.id(object) }}">
     {% set route = field_description.options.route.name|default(null) %}
     {% set action = route == 'show' ? 'VIEW' : route|upper %}
@@ -21,15 +22,39 @@ file that was distributed with this source code.
         and admin.isGranted(action, action in ['VIEW', 'EDIT'] ? object : null)
     %}
     {%- block field %}
-    {% if true %}
-        <a class="sonata-link-identifier" href="{{ admin.generateObjectUrl(route, object, field_description.options.route.parameters) }}">
-            {{ value }}
-        </a>
+
+    {% if field_description.options.usuario_activo is defined %}
+        {% if object.user == field_description.options.usuario_activo %}
+            <a class="sonata-link-identifier" href="{{ admin.generateObjectUrl(route, object, field_description.options.route.parameters) }}">
+                {{ value }}
+            </a>
+        {% else %}
+            {% if field_description.options.permisos_edicion is defined %}
+                {% if field_description.options.tam_permisos_edicion > 0%}
+                    {% for id in field_description.options.permisos_edicion %}
+                        {% if id == admin.id(object) %}
+                            <a class="sonata-link-identifier" href="{{ admin.generateObjectUrl(route, object, field_description.options.route.parameters) }}">
+                                {{ value }}
+                            </a>
+                        {% else %}
+                            <span class="sonata-link-identifier">
+                                {{ value }}
+                            </span>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <span class="sonata-link-identifier">
+                        {{ value }}
+                    </span>
+                {% endif%}
+            {% endif %}              
+        {% endif %} 
     {% else %}
         <span class="sonata-link-identifier">
             {{ value }}
         </span>
-    {% endif %}
+    {% endif%}
+
     {% endblock -%}
         {% else %}
             {% set isEditable = field_description.options.editable is defined and field_description.options.editable and admin.isGranted('EDIT', object) %}
@@ -44,4 +69,5 @@ file that was distributed with this source code.
                 {{ block('field') }}
             {% endif %}
             {% endif %}
+
             </td>

@@ -1,5 +1,5 @@
 {% extends base_template %}
-{% block actions %}
+{% block actions %}  
 {% if no_action is defined and no_action %}{% else %}
     {% spaceless %}
         {% if admin.hasRoute('create') and admin.isGranted('CREATE')%}
@@ -128,15 +128,19 @@
                                                                             .toggleClass('sonata-ba-list-row-selected', $(this).is(':checked'))
                                                                             ;
                                                                 })
-                                                                .trigger('ifChanged')
-                                                                ;
+                                                                .trigger('ifChanged');
+
+                                                        $('div input[type="checkbox"].todos').on('ifChanged', function () {
+
+                                                        });
                                                     });
+
                                                 {% endblock %}
                                             </script>
                                             {% block batch_actions %}
                                                 <!-- -->
-                                                <label class="checkbox todos" for="{{ admin.uniqid }}_all_elements">
-                                                    <input type="checkbox" name="all_elements" id="{{ admin.uniqid }}_all_elements">
+                                                <label class="checkbox" for="{{ admin.uniqid }}_all_elements">
+                                                    <input type="checkbox" class="todos" name="all_elements" id="{{ admin.uniqid }}_all_elements">
                                                     {{ 'all_elements'|trans({}, 'SonataAdminBundle') }}
                                                     ({{ admin.datagrid.pager.nbresults }})
                                                 </label>

@@ -2,6 +2,6 @@
 
 {% block field %}
     {% if value %}
-            {{ value|render_relation_element(field_description) }}
+        <span style="cursor:default;">{{ value|render_relation_element(field_description) }}</span>
     {% endif %}
 {% endblock %}

@@ -581,7 +581,7 @@ class CRUDController extends Controller {
                             ), null, $request);
         }
 
-// execute the action, batchActionXxxxx
+// execute the action, batchAction
         $finalAction = sprintf('batchAction%s', ucfirst($camelizedAction));
         if (!is_callable(array($this, $finalAction))) {
             throw new \RuntimeException(sprintf('A `%s::%s` method must be callable', get_class($this), $finalAction));
