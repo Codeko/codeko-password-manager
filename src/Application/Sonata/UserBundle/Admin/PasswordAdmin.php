@@ -155,12 +155,12 @@ class PasswordAdmin extends Admin {
                     ))
                     ->add('user', null, array('editable' => true,
                         'usuario_activo' => $user
-                    ));
+            ));
         }
         $listMapper
                 ->add('files', null, array('label' => 'Archivos', 'associated_property' => 'getName'))
-                ->add('permisosUser', null, array('label' => 'Permisos de Usuarios'))
-                ->add('permisosGrupo', null, array('label' => 'Permisos de Grupos'))
+                ->add('permisosUser', null, array('label' => 'Permisos Usuarios'))
+                ->add('permisosGrupo', null, array('label' => 'Permisos Grupos'))
                 ->add('_action', 'actions', array(
                     'actions' => array(
                         'show' => array(),
@@ -192,8 +192,8 @@ class PasswordAdmin extends Admin {
                     'show_filter' => false,
                 ))
                 ->add('tipoPassword')
-                ->add('enabled')
-                ->add('category.enabled')
+//                ->add('enabled')
+//                ->add('category.enabled')
                 ->add('permisosUser', null, array('label' => 'Permisos de Usuarios'))
                 ->add('permisosGrupo', null, array('label' => 'Permisos de Grupos'))
         ;
