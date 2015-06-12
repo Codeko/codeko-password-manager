@@ -1,7 +1,0 @@
-{% extends admin.getTemplate('base_list_field') %}
-
-{% block field %}
-    {% if value %}
-        <span style="cursor:default;">{{ value|render_relation_element(field_description) }}</span>
-    {% endif %}
-{% endblock %}

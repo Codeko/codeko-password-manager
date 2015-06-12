@@ -71,6 +71,7 @@ class PasswordAdmin extends Admin {
 
             $query->orWhere($query->expr()->eq($query->getRootAliases()[0] . '.user', ':user'));
             $query->setParameter(':user', $user);
+            $query->orderBy($query->getRootAliases()[0] . '.enabled', 'DESC');
         }
         return $query;
     }
