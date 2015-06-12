@@ -31,6 +31,7 @@ file that was distributed with this source code.
         {% else %}
             {% if field_description.options.permisos_edicion is defined %}
                 {% if field_description.options.tam_permisos_edicion > 0 %}
+                    
                     {% set arrayPermisos = field_description.options.permisos_edicion %}
                     {% set idEditables = [] %}
 
@@ -40,21 +41,19 @@ file that was distributed with this source code.
                         {% endif %}
                     {% endfor %}
 
-                    {% for id in idEditables %}
+                    {% if object.id in idEditables %}
                         <a class="sonata-link-identifier" href="{{ admin.generateObjectUrl(route, object, field_description.options.route.parameters) }}">
                             {{ value }}
                         </a>
-                    {% endfor %}
-
-                    {% if object.id not in idEditables %}
-                        <span class="sonata-link-identifier">
+                    {% else %}
+                        <span style="cursor:default;" title="No tienes permiso de edición sobre esta contraseña" class="sonata-link-identifier">
                             {{ value }}
                         </span> 
                     {% endif %}
+
                 {% endif %}
             {% endif %}              
         {% endif %} 
-
     {% else %}
         <a class="sonata-link-identifier" href="{{ admin.generateObjectUrl(route, object, field_description.options.route.parameters) }}">
             {{ value }}

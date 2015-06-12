@@ -129,7 +129,7 @@ class PasswordAdmin extends Admin {
             $listMapper
                     ->addIdentifier('titulo', null, array('permisos_edicion' => $permisosUser,
                         'usuario_activo' => $user,
-                        'tam_permisos_edicion' => $tamañoPermisosUser,
+                        'tam_permisos_edicion' => $tamañoPermisosUser
             ));
         }
         $listMapper
@@ -147,7 +147,11 @@ class PasswordAdmin extends Admin {
                     ->add('user');
         } else {
             $listMapper
-                    ->add('enabled', null, array('editable' => false))
+                    ->add('enabled', null, array('editable' => true,
+                        'permisos_edicion' => $permisosUser,
+                        'usuario_activo' => $user,
+                        'tam_permisos_edicion' => $tamañoPermisosUser
+                    ))
                     ->add('user', null, array('template' => 'SonataAdminBundle:CRUD:list_no_edit.html.twig'));
         }
         $listMapper

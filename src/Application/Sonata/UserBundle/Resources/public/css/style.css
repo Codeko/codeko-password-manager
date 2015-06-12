@@ -62,6 +62,11 @@ th, td {
     vertical-align: middle !important;
 }
 
+.label-disabled {
+    background-color: grey !important;
+}
+
+
 .skin-black .sidebar > .sidebar-menu > li > a:hover, .skin-black .sidebar > .sidebar-menu > li.active > a {
     border-left-color: #4CAE4C !important;
 }
