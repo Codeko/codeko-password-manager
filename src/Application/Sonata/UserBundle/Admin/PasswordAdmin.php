@@ -130,7 +130,6 @@ class PasswordAdmin extends Admin {
                     ->addIdentifier('titulo', null, array('permisos_edicion' => $permisosUser,
                         'usuario_activo' => $user,
                         'tam_permisos_edicion' => $tamañoPermisosUser,
-                        'isAdmin' => $user->isSuperAdmin()
             ));
         }
         $listMapper
