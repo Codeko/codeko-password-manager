@@ -375,7 +375,7 @@ class CRUDController extends Controller {
         if (!$object) {
             throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
         }
-
+        
         if (false === $this->get('security.context')->isGranted('ROLE_EDITAR_USUARIO', $object)) {
 //Controlar Voters
             throw new AccessDeniedException('No eres el propietario para editar este usuario');

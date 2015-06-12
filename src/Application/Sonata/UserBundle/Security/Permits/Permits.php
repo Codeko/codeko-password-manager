@@ -5,7 +5,7 @@ namespace Application\Sonata\UserBundle\Security\Permits;
 class Permits {
 
     function getWritePermits($userId) {
-        $contenedorPassEscritura = array();
+        $contenedorPassEscritura = array(0);
 
         $permisosUser = $this->getUserPermits($userId);
         foreach ($permisosUser as $valor) {

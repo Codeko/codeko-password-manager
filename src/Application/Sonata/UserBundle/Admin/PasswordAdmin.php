@@ -152,7 +152,9 @@ class PasswordAdmin extends Admin {
                         'usuario_activo' => $user,
                         'tam_permisos_edicion' => $tamañoPermisosUser
                     ))
-                    ->add('user', null, array('template' => 'SonataAdminBundle:CRUD:list_no_edit.html.twig'));
+                    ->add('user', null, array('editable' => true,
+                        'usuario_activo' => $user
+                    ));
         }
         $listMapper
                 ->add('files', null, array('label' => 'Archivos', 'associated_property' => 'getName'))
@@ -200,10 +202,20 @@ class PasswordAdmin extends Admin {
      * {@inheritdoc}
      */
     protected function configureShowFields(ShowMapper $showMapper) {
+        $user = $this->getActiveUser();
         $showMapper
                 ->with('General')
-                ->add('titulo')
-                ->add('user')
+                ->add('titulo');
+        if ($user->isSuperAdmin()) {
+            $showMapper
+                    ->add('user');
+        } else {
+            $showMapper
+                    ->add('user', null, array('editable' => true,
+                        'usuario_activo' => $user
+            ));
+        }
+        $showMapper
                 ->add('usernamePass')
                 ->add('url')
                 ->add('password', 'password', array('label' => 'Contraseña'))

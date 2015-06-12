@@ -89,7 +89,9 @@ class PasswordVoter extends Permits implements VoterInterface {
             }
 
             if ($attribute === 'ROLE_EDITAR_USUARIO') {
-
+                
+                $idUsuarioPropietario = $object->getId();
+                
                 if (!$user->isSuperAdmin()) {
 
                     if ($idUsuarioPropietario != $iduser) {
