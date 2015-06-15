@@ -75,13 +75,15 @@ class PasswordVoter extends Permits implements VoterInterface {
 
             if ($attribute === 'ROLE_EDITAR_MULTIMEDIA' || $attribute === 'ROLE_BORRAR_MULTIMEDIA') {
 
+                $idpasswordPropietario = $object->getPropietario()->getId();
                 if (!$user->isSuperAdmin()) {
                     if ($idpasswordPropietario != $iduser) {
                         $vote = VoterInterface::ACCESS_DENIED;
                         return $vote;
+                    } else {
+                        $vote = VoterInterface::ACCESS_GRANTED;
+                        return $vote;
                     }
-                    $vote = VoterInterface::ACCESS_GRANTED;
-                    return $vote;
                 } else {
                     $vote = VoterInterface::ACCESS_GRANTED;
                     return $vote;
@@ -89,9 +91,9 @@ class PasswordVoter extends Permits implements VoterInterface {
             }
 
             if ($attribute === 'ROLE_EDITAR_USUARIO') {
-                
+
                 $idUsuarioPropietario = $object->getId();
-                
+
                 if (!$user->isSuperAdmin()) {
 
                     if ($idUsuarioPropietario != $iduser) {

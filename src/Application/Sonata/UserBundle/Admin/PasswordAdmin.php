@@ -192,8 +192,8 @@ class PasswordAdmin extends Admin {
                     'show_filter' => false,
                 ))
                 ->add('tipoPassword')
-//                ->add('enabled')
-//                ->add('category.enabled')
+                ->add('enabled')
+                ->add('category.enabled')
                 ->add('permisosUser', null, array('label' => 'Permisos de Usuarios'))
                 ->add('permisosGrupo', null, array('label' => 'Permisos de Grupos'))
         ;

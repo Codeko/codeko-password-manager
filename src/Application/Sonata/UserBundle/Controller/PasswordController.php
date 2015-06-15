@@ -7,15 +7,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
-use Application\Sonata\UserBundle\Security\Permits\Permits;
 
 /**
  * Password controller.
  *
  */
 class PasswordController extends Controller {
-
-    private $permits;
 
     public function batchActionClone(ProxyQueryInterface $query) {
         $request = $this->get('request');
