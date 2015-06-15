@@ -30,6 +30,7 @@ class PermisoCategoriaUserAdmin extends Admin {
                 ->addIdentifier('categoria', null, array('label' => 'Categoría'))
                 ->addIdentifier('user', null, array('label' => 'Usuario'))
                 ->add('permisos')
+                ->add('perms')
                 ->add('_action', 'actions', array(
                     'label' => 'Acciones',
                     'actions' => array(
@@ -46,7 +47,7 @@ class PermisoCategoriaUserAdmin extends Admin {
      */
     protected function configureFormFields(FormMapper $formMapper) {
         $formMapper
-                //->add('permisos')
+                ->add('permisos', 'hidden')
                 ->add('user', 'entity', array(
                     'class' => 'ApplicationSonataUserBundle:User',
                     'label' => 'Usuario',
@@ -60,8 +61,7 @@ class PermisoCategoriaUserAdmin extends Admin {
                     'mapped' => false,
                     'by_reference' => false,
                     'label' => 'Permisos',
-                    'attr' => array('inline' => true)
-                ))
+                    'attr' => array('inline' => true)))
         ;
     }
 

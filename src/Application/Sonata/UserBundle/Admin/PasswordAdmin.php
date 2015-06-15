@@ -245,7 +245,7 @@ class PasswordAdmin extends Admin {
                     'allow_add' => true,
                     'allow_delete' => true,
                     'required' => false,
-                    'label' => 'Permisos de grupo',
+                    'label' => 'Permisos de grupo',                   
                     'by_reference' => false))
                 ->end()
                 ->end()
@@ -274,7 +274,7 @@ class PasswordAdmin extends Admin {
     }
 
     public function preUpdate($pass) {
-        // AÑADIENDO HTTP DELANTE DE URL
+        // AÑADIENDO HTTP DELANTE DE URL        
         if (substr($pass->getUrl(), 0, 4) !== 'http' && $pass->getUrl() !== null) {
             $url = $pass->getUrl();
             $pass->setUrl('http://' . $url);
@@ -292,16 +292,69 @@ class PasswordAdmin extends Admin {
             $pass->addCategory($this->getConfigurationPool()->getContainer()->get('doctrine')->getRepository('Application\Sonata\ClassificationBundle\Entity\Category')->find(1));
         }
 
-        // PERMISOS
-//        $escr = $this->getForm()->get('permisosUser')->get('perms')->getData();
-//        $lect = $this->getForm()->get('permisosUser')->get('perms')->getData();    .',lect:'.$lect
-//        throw new \Symfony\Component\Finder\Exception\AccessDeniedException('escr:'.$escr);
-        //
+        // PERMISOS USER
+        $form = $this->getForm()->get('permisosUser');
+
+        for ($i = 0; $i < $form->count(); $i++) {
+            $escr = $form[$i]->get('perms')[0]->getData();
+            $lect = $form[$i]->get('perms')[1]->getData();
+            $user = $form[$i]->get('user')->getData();
+
+            if ($escr == 1 && $lect == 1) {
+                for ($j = 0; $j < $pass->getPermisosUser()->count(); $j++) {
+                    if ($pass->getPermisosUser()[$j]->getUser() == $user) {
+                        $pass->getPermisosUser()[$j]->setPermisos(11);
+                    }
+                }
+            } elseif ($escr == 0 && $lect == 1) {
+                for ($j = 0; $j < $pass->getPermisosUser()->count(); $j++) {
+                    if ($pass->getPermisosUser()[$j]->getUser() == $user) {
+                        $pass->getPermisosUser()[$j]->setPermisos(10);
+                    }
+                }
+            } elseif ($escr == 0 && $lect == 0) {
+                for ($j = 0; $j < $pass->getPermisosUser()->count(); $j++) {
+                    if ($pass->getPermisosUser()[$j]->getUser() == $user) {
+                        $pass->getPermisosUser()[$j]->setPermisos(0);
+                    }
+                }
+            } else {
+                throw new ModelManagerException('Debe disponer de permisos de lectura para poder escribir/editar');
+            }
+        }
         
+        // PERMISOS GRUPOS
+        $form2 = $this->getForm()->get('permisosGrupo');
+        for ($i = 0; $i < $form2->count(); $i++) {
+            $escr = $form2[$i]->get('perms')[0]->getData();
+            $lect = $form2[$i]->get('perms')[1]->getData();
+            $grupo = $form2[$i]->get('grupo')->getData();
+
+            if ($escr == 1 && $lect == 1) {
+                for ($j = 0; $j < $pass->getPermisosGrupo()->count(); $j++) {
+                    if ($pass->getPermisosGrupo()[$j]->getGrupo() == $grupo) {
+                        $pass->getPermisosGrupo()[$j]->setPermisos(11);
+                    }
+                }
+            } elseif ($escr == 0 && $lect == 1) {
+                for ($j = 0; $j < $pass->getPermisosGrupo()->count(); $j++) {
+                    if ($pass->getPermisosGrupo()[$j]->getGrupo() == $grupo) {
+                        $pass->getPermisosGrupo()[$j]->setPermisos(10);
+                    }
+                }
+            } elseif ($escr == 0 && $lect == 0) {
+                for ($j = 0; $j < $pass->getPermisosGrupo()->count(); $j++) {
+                    if ($pass->getPermisosGrupo()[$j]->getGrupo() == $grupo) {
+                        $pass->getPermisosGrupo()[$j]->setPermisos(0);
+                    }
+                }
+            } else {
+                throw new ModelManagerException('Debe disponer de permisos de lectura para poder escribir/editar');
+            }
+        }
+
         $pass->setFiles($pass->getFiles());
         $pass->setPermisosUser($pass->getPermisosUser());
-        
-        
     }
 
     public function prePersist($pass) {
@@ -318,7 +371,7 @@ class PasswordAdmin extends Admin {
 
         $this->preUpdate($pass);
     }
-
+    
     public function getBatchActions() {
         // retrieve the default (currently only the delete action) actions
         $actions = parent::getBatchActions();

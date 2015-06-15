@@ -92,7 +92,7 @@ class PermisoUser {
     public function getPermisos() {
         return $this->permisos;
     }
-    
+
     /*
      * 
      */

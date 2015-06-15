@@ -5,8 +5,6 @@ namespace Application\Sonata\UserBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 
 class PermisoUserType extends AbstractType {
 
@@ -17,7 +15,7 @@ class PermisoUserType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
 
         $builder
-                ->add('permisos')
+                ->add('permisos','hidden')
                 ->add('user', 'entity', array(
                     'class' => 'ApplicationSonataUserBundle:User',
                     'label' => 'Usuario',
@@ -31,24 +29,8 @@ class PermisoUserType extends AbstractType {
                     'mapped' => false,
                     'by_reference' => false,
                     'label' => 'Permisos',
-                    'attr' => array('inline' => true)
-                ))
+                    'attr' => array('inline' => true)))
         ;
-
-        // $transformer = new PermisosUserTransformer($array);
-
-        // add a normal text field, but add your transformer to it
-        //        $builder->add(
-        //                $builder->create('issue', 'text')
-        //                        ->addModelTransformer($transformer)
-        //        );
-
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-            if (null != $event->getData()) {
-        //                var_dump($event->getData());
-        //                exit();
-            }
-        });
     }
 
     /**

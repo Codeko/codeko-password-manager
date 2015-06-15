@@ -5,6 +5,8 @@ namespace Application\Sonata\UserBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormEvent;
 
 class PermisoGrupoType extends AbstractType {
 
@@ -14,7 +16,7 @@ class PermisoGrupoType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-                ->add('permisos')
+                ->add('permisos','hidden')
                 ->add('grupo', 'entity', array(
                     'class' => 'ApplicationSonataUserBundle:Group',
                     'label' => 'Grupo',
@@ -29,20 +31,6 @@ class PermisoGrupoType extends AbstractType {
                     'attr' => array('inline' => true)
                 ))
         ;
-
-        // $transformer = new PermisosUserTransformer($array);
-        // add a normal text field, but add your transformer to it
-        //        $builder->add(
-        //                $builder->create('issue', 'text')
-        //                        ->addModelTransformer($transformer)
-        //        );
-
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-            if (null != $event->getData()) {
-                //                var_dump($event->getData());
-                //                exit();
-            }
-        });
     }
 
     /**
