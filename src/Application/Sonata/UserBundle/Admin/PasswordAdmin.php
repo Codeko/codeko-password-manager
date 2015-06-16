@@ -21,6 +21,7 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Application\Sonata\UserBundle\Form\PermisoUserType;
 use Application\Sonata\UserBundle\Form\PermisoGrupoType;
 use Sonata\AdminBundle\Exception\ModelManagerException;
+use Application\Sonata\UserBundle\Security\Permits\Permits;
 
 class PasswordAdmin extends Admin {
 
