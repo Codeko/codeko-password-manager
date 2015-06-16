@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Application\Sonata\UserBundle\Form\PermisoUserType;
 use Application\Sonata\UserBundle\Form\PermisoGrupoType;
-use Application\Sonata\UserBundle\Security\Permits\Permits;
+use Sonata\AdminBundle\Exception\ModelManagerException;
 
 class PasswordAdmin extends Admin {
 
@@ -286,7 +286,7 @@ class PasswordAdmin extends Admin {
                     'allow_add' => true,
                     'allow_delete' => true,
                     'required' => false,
-                    'label' => 'Permisos de grupo',                   
+                    'label' => 'Permisos de grupo',
                     'by_reference' => false))
                 ->end()
                 ->end()
@@ -314,32 +314,57 @@ class PasswordAdmin extends Admin {
         return $instance;
     }
 
-    public function preUpdate($pass) {       
+    public function preUpdate($pass) {
+        // AÑADIENDO HTTP DELANTE DE URL
         if (substr($pass->getUrl(), 0, 4) !== 'http' && $pass->getUrl() !== null) {
             $url = $pass->getUrl();
             $pass->setUrl('http://' . $url);
         }
-
+        // CODIFICANDO CONTRASEÑAS
         if ($pass->getPlainPassword() !== null) {
             $pass->setPassword($this->getConfigurationPool()->getContainer()->get('nzo_url_encryptor')->encrypt($pass->getPlainPassword()));
         } else {
             $pass->setPassword($this->getConfigurationPool()->getContainer()->get('nzo_url_encryptor')->encrypt($pass->getPassword()));
         }
-        
         $this->getModelManager()->getEntityManager('Application\Sonata\UserBundle\Entity\Password')->persist($pass);
         $this->getModelManager()->getEntityManager('Application\Sonata\UserBundle\Entity\Password')->flush();
-
+        // CATEGORIA DEFAULT SI NO SE SELECCIONA NINGUNA EN EL FORMULARIO
         if (count($pass->getCategory()) === 0) {
             $pass->addCategory($this->getConfigurationPool()->getContainer()->get('doctrine')->getRepository('Application\Sonata\ClassificationBundle\Entity\Category')->find(1));
         }
-
+        // PERMISOS USER // REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         $form = $this->getForm()->get('permisosUser');
-
-        for ($i = 0; $i < $form->count(); $i++) {
-            $escr = $form[$i]->get('perms')[0]->getData();
-            $lect = $form[$i]->get('perms')[1]->getData();
-            $user = $form[$i]->get('user')->getData();
-
+        if ($form->has('permisos')) {
+            for ($i = 0; $i < $form->count(); $i++) {
+                $escr = $form[$i]->get('perms')[0]->getData();
+                $lect = $form[$i]->get('perms')[1]->getData();
+                $user = $form[$i]->get('user')->getData();
+                if ($escr == 1 && $lect == 1) {
+                    for ($j = 0; $j < $pass->getPermisosUser()->count(); $j++) {
+                        if ($pass->getPermisosUser()[$j]->getUser() == $user) {
+                            $pass->getPermisosUser()[$j]->setPermisos(11);
+                        }
+                    }
+                } elseif ($escr == 0 && $lect == 1) {
+                    for ($j = 0; $j < $pass->getPermisosUser()->count(); $j++) {
+                        if ($pass->getPermisosUser()[$j]->getUser() == $user) {
+                            $pass->getPermisosUser()[$j]->setPermisos(10);
+                        }
+                    }
+                } elseif ($escr == 0 && $lect == 0) {
+                    for ($j = 0; $j < $pass->getPermisosUser()->count(); $j++) {
+                        if ($pass->getPermisosUser()[$j]->getUser() == $user) {
+                            $pass->getPermisosUser()[$j]->setPermisos(0);
+                        }
+                    }
+                } else {
+                    throw new ModelManagerException('Debe disponer de permisos de lectura para poder escribir/editar');
+                }
+            }
+        } else {
+            $escr = $form[0]->get('perms')[0]->getData();
+            $lect = $form[0]->get('perms')[1]->getData();
+            $user = $form[0]->get('user')->getData();
             if ($escr == 1 && $lect == 1) {
                 for ($j = 0; $j < $pass->getPermisosUser()->count(); $j++) {
                     if ($pass->getPermisosUser()[$j]->getUser() == $user) {
@@ -362,13 +387,39 @@ class PasswordAdmin extends Admin {
                 throw new ModelManagerException('Debe disponer de permisos de lectura para poder escribir/editar');
             }
         }
-        
+// PERMISOS GRUPOS // REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         $form2 = $this->getForm()->get('permisosGrupo');
-        for ($i = 0; $i < $form2->count(); $i++) {
-            $escr = $form2[$i]->get('perms')[0]->getData();
-            $lect = $form2[$i]->get('perms')[1]->getData();
-            $grupo = $form2[$i]->get('grupo')->getData();
-
+        if ($form2->has('permisos')) {
+            for ($i = 0; $i < $form2->count(); $i++) {
+                $escr = $form2[$i]->get('perms')[0]->getData();
+                $lect = $form2[$i]->get('perms')[1]->getData();
+                $grupo = $form2[$i]->get('grupo')->getData();
+                if ($escr == 1 && $lect == 1) {
+                    for ($j = 0; $j < $pass->getPermisosGrupo()->count(); $j++) {
+                        if ($pass->getPermisosGrupo()[$j]->getGrupo() == $grupo) {
+                            $pass->getPermisosGrupo()[$j]->setPermisos(11);
+                        }
+                    }
+                } elseif ($escr == 0 && $lect == 1) {
+                    for ($j = 0; $j < $pass->getPermisosGrupo()->count(); $j++) {
+                        if ($pass->getPermisosGrupo()[$j]->getGrupo() == $grupo) {
+                            $pass->getPermisosGrupo()[$j]->setPermisos(10);
+                        }
+                    }
+                } elseif ($escr == 0 && $lect == 0) {
+                    for ($j = 0; $j < $pass->getPermisosGrupo()->count(); $j++) {
+                        if ($pass->getPermisosGrupo()[$j]->getGrupo() == $grupo) {
+                            $pass->getPermisosGrupo()[$j]->setPermisos(0);
+                        }
+                    }
+                } else {
+                    throw new ModelManagerException('Debe disponer de permisos de lectura para poder escribir/editar');
+                }
+            }
+        } else {
+            $escr = $form2[0]->get('perms')[0]->getData();
+            $lect = $form2[0]->get('perms')[1]->getData();
+            $grupo = $form2[0]->get('grupo')->getData();
             if ($escr == 1 && $lect == 1) {
                 for ($j = 0; $j < $pass->getPermisosGrupo()->count(); $j++) {
                     if ($pass->getPermisosGrupo()[$j]->getGrupo() == $grupo) {
@@ -391,33 +442,32 @@ class PasswordAdmin extends Admin {
                 throw new ModelManagerException('Debe disponer de permisos de lectura para poder escribir/editar');
             }
         }
-
         $pass->setFiles($pass->getFiles());
         $pass->setPermisosUser($pass->getPermisosUser());
+        $pass->setPermisosGrupo($pass->getPermisosGrupo());
     }
 
     public function prePersist($pass) {
-
+// AÑADIENDO HTTP DELANTE DE URL
         if (substr($pass->getUrl(), 0, 4) !== 'http' && $pass->getUrl() !== null) {
             $url = $pass->getUrl();
             $pass->setUrl('http://' . $url);
         }
-
+// CATEGORIA DEFAULT SI NO SE SELECCIONA NINGUNA EN EL FORMULARIO
         if (count($pass->getCategory()) === 0) {
             $pass->addCategory($this->getConfigurationPool()->getContainer()->get('doctrine')->getRepository('Application\Sonata\ClassificationBundle\Entity\Category')->find(1));
         }
-
         $this->preUpdate($pass);
     }
-    
-    public function getBatchActions() {
-        $actions = parent::getBatchActions();
 
+    public function getBatchActions() {
+// retrieve the default (currently only the delete action) actions
+        $actions = parent::getBatchActions();
+// check user permissions
         $actions['clone'] = [
             'label' => 'Duplicar',
-            'ask_confirmation' => false,
+            'ask_confirmation' => false, // If true, a confirmation will be asked before performing the action
         ];
-
         return $actions;
     }
 
