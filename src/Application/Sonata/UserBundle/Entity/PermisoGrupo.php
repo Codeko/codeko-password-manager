@@ -106,7 +106,13 @@ class PermisoGrupo {
      */
 
     public function __toString() {
-        return '(' . $this->getPassword() . ')(' . $this->getGrupo() . ')(' . $this->getPermisos() . ')' ? : 'n/a';
+        if ($this->getPermisos() == 10) {
+            return "[" . $this->getGrupo() . '][' . $this->getPassword() . '][Lectura]';
+        } else if ($this->getPermisos() == 11) {
+            return "[" . $this->getGrupo() . '][' . $this->getPassword() . '][Lectura/Escritura]';
+        } else {
+            return "n/a";
+        }
     }
 
 }

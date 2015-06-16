@@ -98,7 +98,13 @@ class PermisoUser {
      */
 
     public function __toString() {
-        return '(' . $this->getPassword() . ')(' . $this->getUser() . ')(' . $this->getPermisos() . ')' ? : 'n/a';
+        if($this->getPermisos()==10){
+            return "[".$this->getUser() . '][' . $this->getPassword() . '][Lectura]';
+        } else if($this->getPermisos()==11) {
+            return "[".$this->getUser() . '][' . $this->getPassword() . '][Lectura/Escritura]';
+        } else {
+            return "n/a";
+        }
     }
 
 }
