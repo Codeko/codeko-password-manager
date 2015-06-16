@@ -107,9 +107,9 @@ class PermisoGrupo {
 
     public function __toString() {
         if ($this->getPermisos() == 10) {
-            return $this->getGrupo() . ' [Lectura]';
+            return $this->getGrupo() . ' [Ver]';
         } else if ($this->getPermisos() == 11) {
-            return $this->getGrupo() . ' [Lectura/Escritura]';
+            return $this->getGrupo() . ' [Ver/Modificar]';
         } else {
             return $this->getGrupo() . ' [n/a]';
         }

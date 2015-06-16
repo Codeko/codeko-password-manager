@@ -99,9 +99,9 @@ class PermisoUser {
 
     public function __toString() {
         if($this->getPermisos()==10){
-            return $this->getUser() . ' [Lectura]';
+            return $this->getUser() . ' [Ver]';
         } else if($this->getPermisos()==11) {
-            return $this->getUser() . ' [Lectura/Escritura]';
+            return $this->getUser() . ' [Ver/Modificar]';
         } else {
             return $this->getUser() . ' [n/a]';
         }
