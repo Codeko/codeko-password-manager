@@ -24,7 +24,7 @@ class PasswordController extends Controller {
 
                 if ($target === null) {
                     $this->addFlash('sonata_flash_error', 'No se selecciono ningun elemento');
-                    return new RedirectResponse($this->admin->generateUrl('list', array('filter' => $this->admin->getFilterParameters())));
+                    return new RedirectResponse($this->admin->generateUrl('list'));
                 }
 
                 $passOrigen = $target->getPassword();
@@ -55,7 +55,8 @@ class PasswordController extends Controller {
         }
 
         if (false === $this->get('security.context')->isGranted('ROLE_EDITAR_ENTIDAD', $object)) {
-            throw new AccessDeniedException('No tienes permiso para editar esta contraseña');
+            $this->addFlash('sonata_flash_error', 'No tienes permiso para acceder a esa url');
+            return new RedirectResponse($this->container->get('router')->generate('admin_sonata_user_password_list'));
         }
 
         if (false === $this->admin->isGranted('EDIT', $object)) {
@@ -202,7 +203,8 @@ class PasswordController extends Controller {
         }
 
         if (false === $this->get('security.context')->isGranted('ROLE_BORRAR_ENTIDAD', $object)) {
-            throw new AccessDeniedException('No tienes permiso para borrar esta contraseña');
+            $this->addFlash('sonata_flash_error', 'No tienes permiso para borrar esta clave');
+            return new RedirectResponse($this->container->get('router')->generate('admin_sonata_user_password_list'));
         }
 
         if (false === $this->admin->isGranted('DELETE', $object)) {
@@ -278,9 +280,10 @@ class PasswordController extends Controller {
                 if ($mensaje) {
                     $this->addFlash('sonata_flash_success', 'Elementos han sido eliminados');
                 }
+                return new RedirectResponse($this->admin->generateUrl('list'));
             } else {
                 $this->addFlash('sonata_flash_error', 'No se selecciono ningun elemento');
-                return new RedirectResponse($this->admin->generateUrl('list', array('filter' => $this->admin->getFilterParameters())));
+                return new RedirectResponse($this->admin->generateUrl('list'));
             }
         } catch (ModelManagerException $e) {
             $this->handleModelManagerException($e);

@@ -375,10 +375,10 @@ class CRUDController extends Controller {
         if (!$object) {
             throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
         }
-        
+
         if (false === $this->get('security.context')->isGranted('ROLE_EDITAR_USUARIO', $object)) {
-//Controlar Voters
-            throw new AccessDeniedException('No eres el propietario para editar este usuario');
+            $this->addFlash('sonata_flash_error', 'No tienes permiso para acceder a esa url');
+            return new RedirectResponse($this->container->get('router')->generate('admin_sonata_user_password_list'));
         }
 
         if (false === $this->admin->isGranted('EDIT', $object)) {
