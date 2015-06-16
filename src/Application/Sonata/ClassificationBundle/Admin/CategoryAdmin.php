@@ -19,6 +19,7 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\ClassificationBundle\Entity\ContextManager;
 use Application\Sonata\UserBundle\Form\PermisoCategoriaUserType;
 use Application\Sonata\UserBundle\Form\PermisoCategoriaGrupoType;
+use Sonata\AdminBundle\Exception\ModelManagerException;
 
 class CategoryAdmin extends Admin {
 
@@ -161,16 +162,13 @@ class CategoryAdmin extends Admin {
     }
 
     public function preUpdate($categoria) {
-
-        // REVISAR!
-
         $this->getModelManager()->getEntityManager('Application\Sonata\ClassificationBundle\Entity\Category')->persist($categoria);
         $this->getModelManager()->getEntityManager('Application\Sonata\ClassificationBundle\Entity\Category')->flush();
 
-        // PERMISOS USER
+        // PERMISOS USER // REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         $form = $this->getForm()->get('permisosUser');
 
-        if ($form) {
+        if ($form->has('permisos')) {
             for ($i = 0; $i < $form->count(); $i++) {
 
                 $escr = $form[$i]->get('perms')[0]->getData();
@@ -199,11 +197,37 @@ class CategoryAdmin extends Admin {
                     throw new ModelManagerException('Debe disponer de permisos de lectura para poder escribir/editar');
                 }
             }
+        } else {
+            $escr = $form[0]->get('perms')[0]->getData();
+            $lect = $form[0]->get('perms')[1]->getData();
+            $user = $form[0]->get('user')->getData();
+
+            if ($escr == 1 && $lect == 1) {
+                for ($j = 0; $j < $categoria->getPermisosUser()->count(); $j++) {
+                    if ($categoria->getPermisosUser()[$j]->getUser() == $user) {
+                        $categoria->getPermisosUser()[$j]->setPermisos(11);
+                    }
+                }
+            } elseif ($escr == 0 && $lect == 1) {
+                for ($j = 0; $j < $categoria->getPermisosUser()->count(); $j++) {
+                    if ($categoria->getPermisosUser()[$j]->getUser() == $user) {
+                        $categoria->getPermisosUser()[$j]->setPermisos(10);
+                    }
+                }
+            } elseif ($escr == 0 && $lect == 0) {
+                for ($j = 0; $j < $categoria->getPermisosUser()->count(); $j++) {
+                    if ($categoria->getPermisosUser()[$j]->getUser() == $user) {
+                        $categoria->getPermisosUser()[$j]->setPermisos(0);
+                    }
+                }
+            } else {
+                throw new ModelManagerException('Debe disponer de permisos de lectura para poder escribir/editar');
+            }
         }
 
-        // PERMISOS GRUPOS
+        // PERMISOS GRUPOS // REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         $form2 = $this->getForm()->get('permisosGrupo');
-        if ($form2) {
+        if ($form2->has('permisos')) {
             for ($i = 0; $i < $form2->count(); $i++) {
                 $escr = $form2[$i]->get('perms')[0]->getData();
                 $lect = $form2[$i]->get('perms')[1]->getData();
@@ -230,6 +254,32 @@ class CategoryAdmin extends Admin {
                 } else {
                     throw new ModelManagerException('Debe disponer de permisos de lectura para poder escribir/editar');
                 }
+            }
+        } else {
+            $escr = $form2[0]->get('perms')[0]->getData();
+            $lect = $form2[0]->get('perms')[1]->getData();
+            $grupo = $form2[0]->get('grupo')->getData();
+
+            if ($escr == 1 && $lect == 1) {
+                for ($j = 0; $j < $categoria->getPermisosGrupo()->count(); $j++) {
+                    if ($categoria->getPermisosGrupo()[$j]->getGrupo() == $grupo) {
+                        $categoria->getPermisosGrupo()[$j]->setPermisos(11);
+                    }
+                }
+            } elseif ($escr == 0 && $lect == 1) {
+                for ($j = 0; $j < $categoria->getPermisosGrupo()->count(); $j++) {
+                    if ($categoria->getPermisosGrupo()[$j]->getGrupo() == $grupo) {
+                        $categoria->getPermisosGrupo()[$j]->setPermisos(10);
+                    }
+                }
+            } elseif ($escr == 0 && $lect == 0) {
+                for ($j = 0; $j < $categoria->getPermisosGrupo()->count(); $j++) {
+                    if ($categoria->getPermisosGrupo()[$j]->getGrupo() == $grupo) {
+                        $categoria->getPermisosGrupo()[$j]->setPermisos(0);
+                    }
+                }
+            } else {
+                throw new ModelManagerException('Debe disponer de permisos de lectura para poder escribir/editar');
             }
         }
 

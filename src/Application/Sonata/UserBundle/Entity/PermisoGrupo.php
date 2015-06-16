@@ -44,7 +44,7 @@ class PermisoGrupo {
      * @param $grupo
      * @return PermisoGrupo
      */
-    public function setGrupo(Group $grupo) {
+    public function setGrupo($grupo) {
         $this->grupo = $grupo;
 
         return $this;
@@ -65,7 +65,7 @@ class PermisoGrupo {
      * @param Password $password
      * @return PermisoGrupo
      */
-    public function setPassword(Password $password) {
+    public function setPassword($password) {
         $this->password = $password;
 
         return $this;

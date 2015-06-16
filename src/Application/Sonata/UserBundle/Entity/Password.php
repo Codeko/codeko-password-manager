@@ -443,6 +443,12 @@ class Password {
 
     function setPermisosUser($permiso) {
 
+        if (count($permiso) > 0) {
+            foreach ($permiso as $i) {
+                $this->addPermisosUser($i);
+            }
+        }
+
         $this->permisosUser = $permiso;
 
         return $this;
@@ -481,6 +487,12 @@ class Password {
      */
 
     function setPermisosGrupo($permiso) {
+
+        if (count($permiso) > 0) {
+            foreach ($permiso as $i) {
+                $this->addPermisosGrupo($i);
+            }
+        }
 
         $this->permisosGrupo = $permiso;
 

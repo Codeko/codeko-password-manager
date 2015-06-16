@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Application\Sonata\UserBundle\Form\PermisoUserType;
 use Application\Sonata\UserBundle\Form\PermisoGrupoType;
+use Sonata\AdminBundle\Exception\ModelManagerException;
 
 class PasswordAdmin extends Admin {
 
@@ -292,10 +293,10 @@ class PasswordAdmin extends Admin {
             $pass->addCategory($this->getConfigurationPool()->getContainer()->get('doctrine')->getRepository('Application\Sonata\ClassificationBundle\Entity\Category')->find(1));
         }
 
-// PERMISOS USER
+// PERMISOS USER // REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         $form = $this->getForm()->get('permisosUser');
 
-        if ($form) {
+        if ($form->has('permisos')) {
             for ($i = 0; $i < $form->count(); $i++) {
                 $escr = $form[$i]->get('perms')[0]->getData();
                 $lect = $form[$i]->get('perms')[1]->getData();
@@ -323,11 +324,39 @@ class PasswordAdmin extends Admin {
                     throw new ModelManagerException('Debe disponer de permisos de lectura para poder escribir/editar');
                 }
             }
+        } else {
+
+            $escr = $form[0]->get('perms')[0]->getData();
+            $lect = $form[0]->get('perms')[1]->getData();
+            $user = $form[0]->get('user')->getData();
+
+            if ($escr == 1 && $lect == 1) {
+                for ($j = 0; $j < $pass->getPermisosUser()->count(); $j++) {
+                    if ($pass->getPermisosUser()[$j]->getUser() == $user) {
+                        $pass->getPermisosUser()[$j]->setPermisos(11);
+                    }
+                }
+            } elseif ($escr == 0 && $lect == 1) {
+                for ($j = 0; $j < $pass->getPermisosUser()->count(); $j++) {
+                    if ($pass->getPermisosUser()[$j]->getUser() == $user) {
+                        $pass->getPermisosUser()[$j]->setPermisos(10);
+                    }
+                }
+            } elseif ($escr == 0 && $lect == 0) {
+                for ($j = 0; $j < $pass->getPermisosUser()->count(); $j++) {
+                    if ($pass->getPermisosUser()[$j]->getUser() == $user) {
+                        $pass->getPermisosUser()[$j]->setPermisos(0);
+                    }
+                }
+            } else {
+                throw new ModelManagerException('Debe disponer de permisos de lectura para poder escribir/editar');
+            }
         }
 
-// PERMISOS GRUPOS
+// PERMISOS GRUPOS // REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         $form2 = $this->getForm()->get('permisosGrupo');
-        if ($form2) {
+
+        if ($form2->has('permisos')) {
             for ($i = 0; $i < $form2->count(); $i++) {
                 $escr = $form2[$i]->get('perms')[0]->getData();
                 $lect = $form2[$i]->get('perms')[1]->getData();
@@ -354,6 +383,32 @@ class PasswordAdmin extends Admin {
                 } else {
                     throw new ModelManagerException('Debe disponer de permisos de lectura para poder escribir/editar');
                 }
+            }
+        } else {
+            $escr = $form2[0]->get('perms')[0]->getData();
+            $lect = $form2[0]->get('perms')[1]->getData();
+            $grupo = $form2[0]->get('grupo')->getData();
+
+            if ($escr == 1 && $lect == 1) {
+                for ($j = 0; $j < $pass->getPermisosGrupo()->count(); $j++) {
+                    if ($pass->getPermisosGrupo()[$j]->getGrupo() == $grupo) {
+                        $pass->getPermisosGrupo()[$j]->setPermisos(11);
+                    }
+                }
+            } elseif ($escr == 0 && $lect == 1) {
+                for ($j = 0; $j < $pass->getPermisosGrupo()->count(); $j++) {
+                    if ($pass->getPermisosGrupo()[$j]->getGrupo() == $grupo) {
+                        $pass->getPermisosGrupo()[$j]->setPermisos(10);
+                    }
+                }
+            } elseif ($escr == 0 && $lect == 0) {
+                for ($j = 0; $j < $pass->getPermisosGrupo()->count(); $j++) {
+                    if ($pass->getPermisosGrupo()[$j]->getGrupo() == $grupo) {
+                        $pass->getPermisosGrupo()[$j]->setPermisos(0);
+                    }
+                }
+            } else {
+                throw new ModelManagerException('Debe disponer de permisos de lectura para poder escribir/editar');
             }
         }
 
