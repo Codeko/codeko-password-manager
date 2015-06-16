@@ -161,70 +161,80 @@ class CategoryAdmin extends Admin {
     }
 
     public function preUpdate($categoria) {
-        // PERMISOS USER
-        $form = $this->getForm()->get('permisosUser');  
-        var_dump($form);
-        exit();
-        for ($i = 0; $i < $form->count(); $i++) {
-            $escr = $form[$i]->get('perms')[0]->getData();
-            $lect = $form[$i]->get('perms')[1]->getData();
-            $user = $form[$i]->get('user')->getData();
 
-            if ($escr == 1 && $lect == 1) {
-                for ($j = 0; $j < $categoria->getPermisosUser()->count(); $j++) {
-                    if ($categoria->getPermisosUser()[$j]->getUser() == $user) {
-                        $categoria->getPermisosUser()[$j]->setPermisos(11);
+        // REVISAR!
+
+        $this->getModelManager()->getEntityManager('Application\Sonata\ClassificationBundle\Entity\Category')->persist($categoria);
+        $this->getModelManager()->getEntityManager('Application\Sonata\ClassificationBundle\Entity\Category')->flush();
+
+        // PERMISOS USER
+        $form = $this->getForm()->get('permisosUser');
+
+        if ($form) {
+            for ($i = 0; $i < $form->count(); $i++) {
+
+                $escr = $form[$i]->get('perms')[0]->getData();
+                $lect = $form[$i]->get('perms')[1]->getData();
+                $user = $form[$i]->get('user')->getData();
+
+                if ($escr == 1 && $lect == 1) {
+                    for ($j = 0; $j < $categoria->getPermisosUser()->count(); $j++) {
+                        if ($categoria->getPermisosUser()[$j]->getUser() == $user) {
+                            $categoria->getPermisosUser()[$j]->setPermisos(11);
+                        }
                     }
-                }
-            } elseif ($escr == 0 && $lect == 1) {
-                for ($j = 0; $j < $categoria->getPermisosUser()->count(); $j++) {
-                    if ($categoria->getPermisosUser()[$j]->getUser() == $user) {
-                        $categoria->getPermisosUser()[$j]->setPermisos(10);
+                } elseif ($escr == 0 && $lect == 1) {
+                    for ($j = 0; $j < $categoria->getPermisosUser()->count(); $j++) {
+                        if ($categoria->getPermisosUser()[$j]->getUser() == $user) {
+                            $categoria->getPermisosUser()[$j]->setPermisos(10);
+                        }
                     }
-                }
-            } elseif ($escr == 0 && $lect == 0) {
-                for ($j = 0; $j < $categoria->getPermisosUser()->count(); $j++) {
-                    if ($categoria->getPermisosUser()[$j]->getUser() == $user) {
-                        $categoria->getPermisosUser()[$j]->setPermisos(0);
+                } elseif ($escr == 0 && $lect == 0) {
+                    for ($j = 0; $j < $categoria->getPermisosUser()->count(); $j++) {
+                        if ($categoria->getPermisosUser()[$j]->getUser() == $user) {
+                            $categoria->getPermisosUser()[$j]->setPermisos(0);
+                        }
                     }
+                } else {
+                    throw new ModelManagerException('Debe disponer de permisos de lectura para poder escribir/editar');
                 }
-            } else {
-                throw new ModelManagerException('Debe disponer de permisos de lectura para poder escribir/editar');
             }
         }
 
         // PERMISOS GRUPOS
         $form2 = $this->getForm()->get('permisosGrupo');
-        for ($i = 0; $i < $form2->count(); $i++) {
-            $escr = $form2[$i]->get('perms')[0]->getData();
-            $lect = $form2[$i]->get('perms')[1]->getData();
-            $grupo = $form2[$i]->get('grupo')->getData();
+        if ($form2) {
+            for ($i = 0; $i < $form2->count(); $i++) {
+                $escr = $form2[$i]->get('perms')[0]->getData();
+                $lect = $form2[$i]->get('perms')[1]->getData();
+                $grupo = $form2[$i]->get('grupo')->getData();
 
-            if ($escr == 1 && $lect == 1) {
-                for ($j = 0; $j < $categoria->getPermisosGrupo()->count(); $j++) {
-                    if ($categoria->getPermisosGrupo()[$j]->getGrupo() == $grupo) {
-                        $categoria->getPermisosGrupo()[$j]->setPermisos(11);
+                if ($escr == 1 && $lect == 1) {
+                    for ($j = 0; $j < $categoria->getPermisosGrupo()->count(); $j++) {
+                        if ($categoria->getPermisosGrupo()[$j]->getGrupo() == $grupo) {
+                            $categoria->getPermisosGrupo()[$j]->setPermisos(11);
+                        }
                     }
-                }
-            } elseif ($escr == 0 && $lect == 1) {
-                for ($j = 0; $j < $categoria->getPermisosGrupo()->count(); $j++) {
-                    if ($categoria->getPermisosGrupo()[$j]->getGrupo() == $grupo) {
-                        $categoria->getPermisosGrupo()[$j]->setPermisos(10);
+                } elseif ($escr == 0 && $lect == 1) {
+                    for ($j = 0; $j < $categoria->getPermisosGrupo()->count(); $j++) {
+                        if ($categoria->getPermisosGrupo()[$j]->getGrupo() == $grupo) {
+                            $categoria->getPermisosGrupo()[$j]->setPermisos(10);
+                        }
                     }
-                }
-            } elseif ($escr == 0 && $lect == 0) {
-                for ($j = 0; $j < $categoria->getPermisosGrupo()->count(); $j++) {
-                    if ($categoria->getPermisosGrupo()[$j]->getGrupo() == $grupo) {
-                        $categoria->getPermisosGrupo()[$j]->setPermisos(0);
+                } elseif ($escr == 0 && $lect == 0) {
+                    for ($j = 0; $j < $categoria->getPermisosGrupo()->count(); $j++) {
+                        if ($categoria->getPermisosGrupo()[$j]->getGrupo() == $grupo) {
+                            $categoria->getPermisosGrupo()[$j]->setPermisos(0);
+                        }
                     }
+                } else {
+                    throw new ModelManagerException('Debe disponer de permisos de lectura para poder escribir/editar');
                 }
-            } else {
-                throw new ModelManagerException('Debe disponer de permisos de lectura para poder escribir/editar');
             }
         }
 
-        $pass->setFiles($pass->getFiles());
-        $pass->setPermisosUser($pass->getPermisosUser());
+        $categoria->setPermisosUser($categoria->getPermisosUser());
+        $categoria->setPermisosGrupo($categoria->getPermisosGrupo());
     }
 
     public function prePersist($categoria) {

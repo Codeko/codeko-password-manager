@@ -480,7 +480,7 @@ class Password {
      * 
      */
 
-    function setPermisosGrupo(PermisoGrupo $permiso) {
+    function setPermisosGrupo($permiso) {
 
         $this->permisosGrupo = $permiso;
 
