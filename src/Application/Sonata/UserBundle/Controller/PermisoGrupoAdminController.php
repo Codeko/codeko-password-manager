@@ -3,7 +3,7 @@
 namespace Application\Sonata\UserBundle\Controller;
 
 use Sonata\AdminBundle\Controller\CRUDController;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class PermisoGrupoAdminController extends CRUDController {
