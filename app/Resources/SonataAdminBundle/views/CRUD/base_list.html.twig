@@ -16,11 +16,10 @@
     {% else %}
         <div class="col-xs-12 col-md-12">
         {% endif %}
-        {# #}
         {% if admin.hasRoute('batch') %}
             <form action="{{ admin.generateUrl('batch', {'filter': admin.filterParameters})}}" method="POST" >
                 <input type="hidden" name="_sonata_csrf_token" value="{{ csrf_token }}">
-            {% endif %}#}
+            {% endif %}
             <div class="box box-primary" {% if admin.datagrid.pager.lastPage == 1 %}style="margin-bottom: 100px;"{% endif %}>
                 <div class="box-body {% if admin.datagrid.results|length > 0 %}table-responsive no-padding{% endif %}">
                     {{ sonata_block_render_event('sonata.admin.list.table.top', { 'admin': admin }) }}
