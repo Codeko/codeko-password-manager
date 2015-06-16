@@ -1,5 +1,5 @@
 {% extends admin.getTemplate('base_list_field') %}
 
 {% block field %}
-    <input type="checkbox" class="opcionBorrar" name="idx[]" value="{{ admin.id(object) }}" />
+    <input type="checkbox" class="checkboxId" name="idx[]" value="{{ admin.id(object) }}" />
 {% endblock %}

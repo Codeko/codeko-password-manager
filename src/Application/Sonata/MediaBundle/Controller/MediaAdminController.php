@@ -15,6 +15,8 @@ use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class MediaAdminController extends Controller {
 
@@ -36,6 +38,33 @@ class MediaAdminController extends Controller {
         }
 
         return parent::createAction();
+    }
+
+    public function batchActionDelete(ProxyQueryInterface $query) {
+        if (false === $this->admin->isGranted('DELETE')) {
+            throw new AccessDeniedException();
+        }
+
+        $request = $this->get('request');
+        $modelManager = $this->admin->getModelManager();
+        $ids = $request->get('idx');
+        $cantidad = count($ids);
+        $connection = $GLOBALS['kernel']->getContainer()->get('doctrine')->getManager()->getConnection();
+
+        if ($cantidad > 0) {
+            for ($i = 0; $i < $cantidad; $i++) {
+                $sql = "DELETE FROM media__media WHERE id = " . $ids[$i];
+                $statement = $connection->prepare($sql);
+                $statement->execute();
+                $this->addFlash('sonata_flash_success', 'flash_batch_delete_success');
+            }
+        } else {
+            $this->addFlash('sonata_flash_error', 'flash_batch_delete_error');
+        }
+
+        return new RedirectResponse($this->admin->generateUrl(
+                        'list', array('filter' => $this->admin->getFilterParameters())
+        ));
     }
 
     /**
@@ -126,11 +155,6 @@ class MediaAdminController extends Controller {
 
         if (!$object) {
             throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
-        }
-
-        if (false === $this->get('security.context')->isGranted('ROLE_BORRAR_MULTIMEDIA', $object)) {
-            //Controlar Voters
-            throw new AccessDeniedException('No eres el propietario para borrar este fichero');
         }
 
         if (false === $this->admin->isGranted('DELETE', $object)) {
