@@ -157,8 +157,8 @@ class PasswordAdmin extends Admin {
         $listMapper
                 ->add('files', null, array('label' => 'Archivos', 'associated_property' => 'getName'))
                 //Permisos en vista/////////////////////////////////////////////////////
-//                ->add('permisosUser', null, array('label' => 'Permisos Usuarios'))
-//                ->add('permisosGrupo', null, array('label' => 'Permisos Grupos'))
+                ->add('permisosUser', null, array('label' => 'Permisos Usuarios'))
+                ->add('permisosGrupo', null, array('label' => 'Permisos Grupos'))
                 ////////////////////////////////////////////////////////////////////////
                 ->add('_action', 'actions', array(
                     'actions' => array(

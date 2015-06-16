@@ -99,11 +99,11 @@ class PermisoUser {
 
     public function __toString() {
         if($this->getPermisos()==10){
-            return "[".$this->getUser() . '][' . $this->getPassword() . '][Lectura]';
+            return $this->getUser() . ' [Lectura]';
         } else if($this->getPermisos()==11) {
-            return "[".$this->getUser() . '][' . $this->getPassword() . '][Lectura/Escritura]';
+            return $this->getUser() . ' [Lectura/Escritura]';
         } else {
-            return "n/a";
+            return $this->getUser() . ' [n/a]';
         }
     }
 
