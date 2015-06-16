@@ -135,7 +135,7 @@ class Category extends BaseCategory {
      * 
      */
 
-    public function addPermisosUser($permiso) {
+    public function addPermisosUser(PermisoCategoriaUser $permiso) {
         $permiso->setCategoria($this);
         $this->permisosUser[] = $permiso;
         return $this;
@@ -145,7 +145,7 @@ class Category extends BaseCategory {
      * 
      */
 
-    public function removePermisosUser($permiso) {
+    public function removePermisosUser(PermisoCategoriaUser $permiso) {
         $this->permisosUser->removeElement($permiso);
         $permiso->setCategoria(null);
         $permiso->setUser(null);
@@ -174,7 +174,7 @@ class Category extends BaseCategory {
      * 
      */
 
-    public function addPermisosGrupo($permiso) {
+    public function addPermisosGrupo(PermisoCategoriaGrupo $permiso) {
         $permiso->setCategoria($this);
         $this->permisosGrupo[] = $permiso;
         return $this;
@@ -184,7 +184,7 @@ class Category extends BaseCategory {
      * 
      */
 
-    public function removePermisosGrupo($permiso) {
+    public function removePermisosGrupo(PermisoCategoriaGrupo $permiso) {
         $this->permisosGrupo->removeElement($permiso);
         $permiso->setCategoria(null);
         $permiso->setGrupo(null);

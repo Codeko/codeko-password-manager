@@ -42,7 +42,6 @@ class PasswordAdmin extends Admin {
             $userId = $user->getId();
             $contenedorPassLectura = array();
 
-            //Permisos del usuario actual --------------------------------------------------
             $permisosUser = $this->permits->getUserPermits($userId);
             foreach ($permisosUser as $valor) {
                 if ($this->permits->checkReadPermits($valor["permisos"])) {
@@ -50,7 +49,6 @@ class PasswordAdmin extends Admin {
                 }
             }
 
-            //Permisos de los grupos del usuario actual -------------------------------------
             $permisosGrupos = $this->permits->getGroupPermits($userId);
             foreach ($permisosGrupos as $valor) {
                 if ($this->permits->checkReadPermits($valor["permisos"])) {
@@ -58,7 +56,6 @@ class PasswordAdmin extends Admin {
                 }
             }
 
-            //Creación de query--------------------------------------------------------------
             $IdsPassLectura = array_unique($contenedorPassLectura);
             $longitudArrayLectura = count($IdsPassLectura);
 
@@ -107,7 +104,6 @@ class PasswordAdmin extends Admin {
      * {@inheritdoc}
      */
     public function getExportFields() {
-        // avoid security field to be exported
         return array_filter(parent::getExportFields(), function($v) {
             return !in_array($v, array('password', 'salt'));
         });
@@ -159,8 +155,10 @@ class PasswordAdmin extends Admin {
         }
         $listMapper
                 ->add('files', null, array('label' => 'Archivos', 'associated_property' => 'getName'))
+                //Permisos en vista/////////////////////////////////////////////////////
                 ->add('permisosUser', null, array('label' => 'Permisos Usuarios'))
                 ->add('permisosGrupo', null, array('label' => 'Permisos Grupos'))
+                ////////////////////////////////////////////////////////////////////////
                 ->add('_action', 'actions', array(
                     'actions' => array(
                         'show' => array(),
@@ -271,7 +269,7 @@ class PasswordAdmin extends Admin {
                 ))
                 ->end()
                 ->end()
-                // PERMISOS 
+                // SECCIÓN PERMISOS 
                 ->tab('Permisos')
                 ->with('Permisos de Usuario', array('class' => 'col-md-6'))
                 ->add('permisosUser', 'collection', array(
@@ -317,43 +315,94 @@ class PasswordAdmin extends Admin {
     }
 
     public function preUpdate($pass) {
-        // AÑADIENDO HTTP DELANTE DE URL
         if (substr($pass->getUrl(), 0, 4) !== 'http' && $pass->getUrl() !== null) {
             $url = $pass->getUrl();
             $pass->setUrl('http://' . $url);
         }
 
-        // CODIFICANDO CONTRASEÑAS
         if ($pass->getPlainPassword() !== null) {
             $pass->setPassword($this->getConfigurationPool()->getContainer()->get('nzo_url_encryptor')->encrypt($pass->getPlainPassword()));
         } else {
             $pass->setPassword($this->getConfigurationPool()->getContainer()->get('nzo_url_encryptor')->encrypt($pass->getPassword()));
         }
+
         $this->getModelManager()->getEntityManager('Application\Sonata\UserBundle\Entity\Password')->persist($pass);
         $this->getModelManager()->getEntityManager('Application\Sonata\UserBundle\Entity\Password')->flush();
-        // CATEGORIA DEFAULT SI NO SE SELECCIONA NINGUNA EN EL FORMULARIO
+
         if (count($pass->getCategory()) === 0) {
             $pass->addCategory($this->getConfigurationPool()->getContainer()->get('doctrine')->getRepository('Application\Sonata\ClassificationBundle\Entity\Category')->find(1));
         }
 
-        // PERMISOS
-//        $escr = $this->getForm()->get('permisosUser')->get('perms')->getData();
-//        $lect = $this->getForm()->get('permisosUser')->get('perms')->getData();    .',lect:'.$lect
-//        throw new \Symfony\Component\Finder\Exception\AccessDeniedException('escr:'.$escr);
-        //
-        
+        $form = $this->getForm()->get('permisosUser');
+
+        for ($i = 0; $i < $form->count(); $i++) {
+            $escr = $form[$i]->get('perms')[0]->getData();
+            $lect = $form[$i]->get('perms')[1]->getData();
+            $user = $form[$i]->get('user')->getData();
+
+            if ($escr == 1 && $lect == 1) {
+                for ($j = 0; $j < $pass->getPermisosUser()->count(); $j++) {
+                    if ($pass->getPermisosUser()[$j]->getUser() == $user) {
+                        $pass->getPermisosUser()[$j]->setPermisos(11);
+                    }
+                }
+            } elseif ($escr == 0 && $lect == 1) {
+                for ($j = 0; $j < $pass->getPermisosUser()->count(); $j++) {
+                    if ($pass->getPermisosUser()[$j]->getUser() == $user) {
+                        $pass->getPermisosUser()[$j]->setPermisos(10);
+                    }
+                }
+            } elseif ($escr == 0 && $lect == 0) {
+                for ($j = 0; $j < $pass->getPermisosUser()->count(); $j++) {
+                    if ($pass->getPermisosUser()[$j]->getUser() == $user) {
+                        $pass->getPermisosUser()[$j]->setPermisos(0);
+                    }
+                }
+            } else {
+                throw new ModelManagerException('Debe disponer de permisos de lectura para poder escribir/editar');
+            }
+        }
+
+        $form2 = $this->getForm()->get('permisosGrupo');
+        for ($i = 0; $i < $form2->count(); $i++) {
+            $escr = $form2[$i]->get('perms')[0]->getData();
+            $lect = $form2[$i]->get('perms')[1]->getData();
+            $grupo = $form2[$i]->get('grupo')->getData();
+
+            if ($escr == 1 && $lect == 1) {
+                for ($j = 0; $j < $pass->getPermisosGrupo()->count(); $j++) {
+                    if ($pass->getPermisosGrupo()[$j]->getGrupo() == $grupo) {
+                        $pass->getPermisosGrupo()[$j]->setPermisos(11);
+                    }
+                }
+            } elseif ($escr == 0 && $lect == 1) {
+                for ($j = 0; $j < $pass->getPermisosGrupo()->count(); $j++) {
+                    if ($pass->getPermisosGrupo()[$j]->getGrupo() == $grupo) {
+                        $pass->getPermisosGrupo()[$j]->setPermisos(10);
+                    }
+                }
+            } elseif ($escr == 0 && $lect == 0) {
+                for ($j = 0; $j < $pass->getPermisosGrupo()->count(); $j++) {
+                    if ($pass->getPermisosGrupo()[$j]->getGrupo() == $grupo) {
+                        $pass->getPermisosGrupo()[$j]->setPermisos(0);
+                    }
+                }
+            } else {
+                throw new ModelManagerException('Debe disponer de permisos de lectura para poder escribir/editar');
+            }
+        }
+
         $pass->setFiles($pass->getFiles());
         $pass->setPermisosUser($pass->getPermisosUser());
     }
 
     public function prePersist($pass) {
-        // AÑADIENDO HTTP DELANTE DE URL
+
         if (substr($pass->getUrl(), 0, 4) !== 'http' && $pass->getUrl() !== null) {
             $url = $pass->getUrl();
             $pass->setUrl('http://' . $url);
         }
 
-        // CATEGORIA DEFAULT SI NO SE SELECCIONA NINGUNA EN EL FORMULARIO
         if (count($pass->getCategory()) === 0) {
             $pass->addCategory($this->getConfigurationPool()->getContainer()->get('doctrine')->getRepository('Application\Sonata\ClassificationBundle\Entity\Category')->find(1));
         }

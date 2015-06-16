@@ -10,7 +10,6 @@
 {% endblock %}
 {% block tab_menu %}{{ knp_menu_render(admin.sidemenu(action), {'currentClass' : 'active', 'template': admin_pool.getTemplate('tab_menu_template')}, 'twig') }}{% endblock %}
 {% block list_table %}
-    {# CARGANDO ARBOL DE CATEGORIAS EN LA VISTA PASSWORD_LIST #}
     {% if 'Password' in admin.getClass() %}
         {% include 'SonataAdminBundle::list.html.twig' %}
     <div class="col-xs-12 col-md-9">
@@ -21,8 +20,7 @@
         {% if admin.hasRoute('batch') %}
             <form action="{{ admin.generateUrl('batch', {'filter': admin.filterParameters})}}" method="POST" >
                 <input type="hidden" name="_sonata_csrf_token" value="{{ csrf_token }}">
-            {% endif %}
-            {# Add a margin if no pager to prevent dropdown cropping on window #}
+            {% endif %}#}
             <div class="box box-primary" {% if admin.datagrid.pager.lastPage == 1 %}style="margin-bottom: 100px;"{% endif %}>
                 <div class="box-body {% if admin.datagrid.results|length > 0 %}table-responsive no-padding{% endif %}">
                     {{ sonata_block_render_event('sonata.admin.list.table.top', { 'admin': admin }) }}
@@ -41,9 +39,7 @@
                                         {% elseif field_description.getOption('code') == '_select' %}
                                             <th class="sonata-ba-list-field-header sonata-ba-list-field-header-select"></th>
                                             {% elseif field_description.name == '_action' and app.request.isXmlHttpRequest %}
-                                                {# Action buttons disabled in ajax view! #}
                                             {% elseif field_description.getOption('ajax_hidden') == true and app.request.isXmlHttpRequest %}
-                                                {# Disable fields with 'ajax_hidden' option set to true #}
                                             {% else %}
                                                 {% set sortable = false %}
                                                 {% if field_description.options.sortable is defined and field_description.options.sortable %}
@@ -82,7 +78,7 @@
                                 <div class="progress">
                                     <div class="progress-bar" style="width: 0%"></div>
                                 </div>
-                            </div><!-- /.info-box-content -->
+                            </div>
                         </div>
                     {% else %}
                         <div class="info-box">
@@ -97,7 +93,7 @@
                                         {% include 'SonataAdminBundle:Button:create_button.html.twig' %}
                                     {% endif %}
                                 </span>
-                            </div><!-- /.info-box-content -->
+                            </div>
                         </div>
                     {% endif %}
                 {% endif %}
@@ -130,22 +126,23 @@
                                                                 })
                                                                 .trigger('ifChanged');
 
-                                                        $('div input[type="checkbox"].todos').on('ifChanged', function () {
-
+                                                        $('div input.allElements').on('ifChanged', function () {
+                                                            if ($('div input.allElements').is(':checked') === true) {
+                                                                $('.checkboxId').prop('checked', true);
+                                                            } else {
+                                                                $('.checkboxId').removeAttr('checked');
+                                                            }
                                                         });
                                                     });
-
                                                 {% endblock %}
                                             </script>
                                             {% block batch_actions %}
-                                                <!-- -->
                                                 <label class="checkbox" for="{{ admin.uniqid }}_all_elements">
-                                                    <input type="checkbox" class="todos" name="all_elements" id="{{ admin.uniqid }}_all_elements">
+                                                    <input type="checkbox" name="all_elements" class="allElements" id="{{ admin.uniqid }}_all_elements">
                                                     {{ 'all_elements'|trans({}, 'SonataAdminBundle') }}
                                                     ({{ admin.datagrid.pager.nbresults }})
                                                 </label>
-                                                <!-- -->
-                                                <select name="action" style="width: auto; height: auto" class="form-control" onchange="comprobarVisibilidad()">
+                                                <select name="action" style="width: auto; height: auto" class="form-control">
                                                     {% for action, options in batchactions %}
                                                         <option value="{{ action }}">{{ options.label }}</option>
                                                     {% endfor %}

@@ -31,6 +31,7 @@ class PermisoUserAdmin extends Admin {
                 ->addIdentifier('password', null, array('label' => 'Contraseña'))
                 ->addIdentifier('user', null, array('label' => 'Usuario'))
                 ->add('permisos')
+                ->add('perms')
                 ->add('_action', 'actions', array(
                     'label' => 'Acciones',
                     'actions' => array(
@@ -48,7 +49,7 @@ class PermisoUserAdmin extends Admin {
     protected function configureFormFields(FormMapper $formMapper) {
 
         $formMapper
-                ->add('permisos')
+                ->add('permisos', 'hidden')
                 ->add('user', 'entity', array(
                     'class' => 'ApplicationSonataUserBundle:User',
                     'label' => 'Usuario',
@@ -62,8 +63,7 @@ class PermisoUserAdmin extends Admin {
                     'mapped' => false,
                     'by_reference' => false,
                     'label' => 'Permisos',
-                    'attr' => array('inline' => true)
-                ))
+                    'attr' => array('inline' => true)))
         ;
     }
 
@@ -110,7 +110,5 @@ class PermisoUserAdmin extends Admin {
 
         $this->preUpdate($permiso);
     }
-    
-    
 
 }

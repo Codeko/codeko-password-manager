@@ -46,10 +46,10 @@ class PermisoCategoriaGrupoAdmin extends Admin {
      */
     protected function configureFormFields(FormMapper $formMapper) {
         $formMapper
-                //->add('permisos')
+                ->add('permisos', 'hidden')
                 ->add('grupo', 'entity', array(
-                    'label' => 'Grupo',
                     'class' => 'ApplicationSonataUserBundle:Group',
+                    'label' => 'Grupo',
                     'required' => true
                 ))
                 ->add('perms', 'choice', array(
@@ -60,8 +60,7 @@ class PermisoCategoriaGrupoAdmin extends Admin {
                     'mapped' => false,
                     'by_reference' => false,
                     'label' => 'Permisos',
-                    'attr' => array('inline' => true)
-                ))
+                    'attr' => array('inline' => true)))
         ;
     }
 

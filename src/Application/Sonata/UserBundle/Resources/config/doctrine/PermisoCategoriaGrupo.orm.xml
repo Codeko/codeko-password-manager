@@ -4,7 +4,7 @@
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>
         </id>
-        <field name="permisos" type="integer" column="permisos"/>
+        <field name="permisos" type="integer" column="permisos" nullable="true" />
         <many-to-one field="grupo" target-entity="Application\Sonata\UserBundle\Entity\Group" inversed-by="permisos">
             <join-column name="grupo_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
