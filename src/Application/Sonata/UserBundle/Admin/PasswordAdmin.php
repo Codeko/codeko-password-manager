@@ -156,8 +156,8 @@ class PasswordAdmin extends Admin {
         $listMapper
                 ->add('files', null, array('label' => 'Archivos', 'associated_property' => 'getName'))
                 //Permisos en vista/////////////////////////////////////////////////////
-                ->add('permisosUser', null, array('label' => 'Permisos Usuarios'))
-                ->add('permisosGrupo', null, array('label' => 'Permisos Grupos'))
+//                ->add('permisosUser', null, array('label' => 'Permisos Usuarios'))
+//                ->add('permisosGrupo', null, array('label' => 'Permisos Grupos'))
                 ////////////////////////////////////////////////////////////////////////
                 ->add('_action', 'actions', array(
                     'actions' => array(
@@ -286,7 +286,7 @@ class PasswordAdmin extends Admin {
                     'allow_add' => true,
                     'allow_delete' => true,
                     'required' => false,
-                    'label' => 'Permisos de grupo',
+                    'label' => 'Permisos de grupo',                   
                     'by_reference' => false))
                 ->end()
                 ->end()
@@ -314,7 +314,7 @@ class PasswordAdmin extends Admin {
         return $instance;
     }
 
-    public function preUpdate($pass) {
+    public function preUpdate($pass) {       
         if (substr($pass->getUrl(), 0, 4) !== 'http' && $pass->getUrl() !== null) {
             $url = $pass->getUrl();
             $pass->setUrl('http://' . $url);
@@ -325,7 +325,7 @@ class PasswordAdmin extends Admin {
         } else {
             $pass->setPassword($this->getConfigurationPool()->getContainer()->get('nzo_url_encryptor')->encrypt($pass->getPassword()));
         }
-
+        
         $this->getModelManager()->getEntityManager('Application\Sonata\UserBundle\Entity\Password')->persist($pass);
         $this->getModelManager()->getEntityManager('Application\Sonata\UserBundle\Entity\Password')->flush();
 
@@ -362,7 +362,7 @@ class PasswordAdmin extends Admin {
                 throw new ModelManagerException('Debe disponer de permisos de lectura para poder escribir/editar');
             }
         }
-
+        
         $form2 = $this->getForm()->get('permisosGrupo');
         for ($i = 0; $i < $form2->count(); $i++) {
             $escr = $form2[$i]->get('perms')[0]->getData();
@@ -409,7 +409,7 @@ class PasswordAdmin extends Admin {
 
         $this->preUpdate($pass);
     }
-
+    
     public function getBatchActions() {
         $actions = parent::getBatchActions();
 
