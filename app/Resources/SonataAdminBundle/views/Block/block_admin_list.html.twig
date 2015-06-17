@@ -33,10 +33,12 @@
                                                 <div class="btn-group">
                                                     {% if admin.hasroute('create') and admin.isGranted('CREATE') %}
                                                         {% if admin.subClasses is empty %}
+                                                            {% if admin.label != 'media' %}
                                                             <a class="btn btn-link btn-flat" href="{{ admin.generateUrl('create')}}">
                                                                 <i class="fa fa-plus-circle"></i>
                                                                 {% trans from 'SonataAdminBundle' %}link_add{% endtrans %} 
                                                             </a>
+                                                            {% endif %}
                                                         {% else %}
                                                             <a class="btn btn-link btn-flat dropdown-toggle" data-toggle="dropdown" href="#">
                                                                 <i class="fa fa-plus-circle"></i>
