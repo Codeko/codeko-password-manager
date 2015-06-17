@@ -135,8 +135,6 @@ class PermisoCategoriaUserAdminController extends CRUDController {
 //    }
 
     /**
-     * To keep backwards compatibility with older Sonata Admin code.
-     *
      * @internal
      */
     private function resolveRequest(Request $request = null) {

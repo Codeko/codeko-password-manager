@@ -117,7 +117,7 @@ class PasswordController extends Controller {
     }
 
     public function showAction($id = null, Request $request = null) {
-
+        
         $request = $this->resolveRequest($request);
         $id = $request->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
@@ -134,7 +134,7 @@ class PasswordController extends Controller {
                     'elements' => $this->admin->getShow(),
                         ), null, $request);
     }
-
+    
     protected function getActiveUser() {
         return $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
     }
@@ -215,7 +215,7 @@ class PasswordController extends Controller {
 
             $this->validateCsrfToken('sonata.delete', $request);
             $objectName = $this->admin->toString($object);
-
+            
             try {
 
                 $this->admin->delete($object);
@@ -290,14 +290,10 @@ class PasswordController extends Controller {
             $this->addFlash('sonata_flash_error', 'flash_batch_delete_error');
         }
 
-        return new RedirectResponse($this->admin->generateUrl(
-                        'list', array('filter' => $this->admin->getFilterParameters())
-        ));
+        return new RedirectResponse($this->admin->generateUrl('list', array('filter' => $this->admin->getFilterParameters())));
     }
 
     /**
-     * To keep backwards compatibility with older Sonata Admin code.
-     *
      * @internal
      */
     private function resolveRequest(Request $request = null) {
