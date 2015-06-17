@@ -329,7 +329,7 @@ class Password {
      * 
      */
 
-    public function addCategory(Category $category) {
+    public function addCategory($category) {
         $category->addPassword($this);
         $this->category[] = $category;
     }
@@ -338,7 +338,7 @@ class Password {
      * 
      */
 
-    public function removeCategory(Category $category) {
+    public function removeCategory($category) {
         $this->category->removeElement($category);
         $category->removePassword($this);
     }
@@ -393,7 +393,7 @@ class Password {
      * 
      */
 
-    public function addFile(Media $file) {
+    public function addFile($file) {
         $file->setPassword($this);
         $file->setPropietario($this);
         $this->files->add($file);
@@ -405,7 +405,7 @@ class Password {
      * 
      */
 
-    public function removeFile(Media $file) {
+    public function removeFile($file) {
         $this->files->removeElement($file);
         $file->setPassword(null);
         $file->setPropietario(null);
@@ -458,7 +458,7 @@ class Password {
      * 
      */
 
-    public function addPermisosUser(PermisoUser $permiso) {
+    public function addPermisosUser($permiso) {
         $permiso->setPassword($this);
         $this->permisosUser[] = $permiso;
         return $this;
@@ -468,7 +468,7 @@ class Password {
      * 
      */
 
-    public function removePermisosUser(PermisoUser $permiso) {
+    public function removePermisosUser($permiso) {
         $this->permisosUser->removeElement($permiso);
         $permiso->setPassword(null);
         $permiso->setUser(null);
@@ -503,7 +503,7 @@ class Password {
      * 
      */
 
-    public function addPermisosGrupo(PermisoGrupo $permiso) {
+    public function addPermisosGrupo($permiso) {
         $permiso->setPassword($this);
         $this->permisosGrupo[] = $permiso;
         return $this;
@@ -513,7 +513,7 @@ class Password {
      * 
      */
 
-    public function removePermisosGrupo(PermisoGrupo $permiso) {
+    public function removePermisosGrupo($permiso) {
         $this->permisosGrupo->removeElement($permiso);
         $permiso->setPassword(null);
         $permiso->setGrupo(null);
