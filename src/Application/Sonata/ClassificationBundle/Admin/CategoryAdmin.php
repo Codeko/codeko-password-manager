@@ -72,10 +72,15 @@ class CategoryAdmin extends Admin {
         return $instance;
     }
 
+    protected function getActiveUser() {
+        return $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
+    }
+
     /**
      * {@inheritdoc}
      */
     protected function configureFormFields(FormMapper $formMapper) {
+        $user = $this->getActiveUser();
 
         $formMapper
                 ->tab('General')
@@ -99,32 +104,41 @@ class CategoryAdmin extends Admin {
 
         $formMapper->end()
                 ->with('Options', array('class' => 'col-md-6'))
-                ->add('enabled', null, array('required' => false))
-                ->add('position', 'integer', array('required' => false, 'data' => 0))
-                ->end()
-                ->end()
-                // PERMISOS 
-                ->tab('Permisos')
-                ->with('Permisos de Usuario', array('class' => 'col-md-6'))
-                ->add('permisosUser', 'collection', array(
-                    'type' => new PermisoCategoriaUserType(),
-                    'allow_add' => true,
-                    'allow_delete' => true,
-                    'required' => false,
-                    'label' => 'Permisos de usuario',
-                    'by_reference' => false))
-                ->end()
-                ->with('Permisos de Grupo', array('class' => 'col-md-6'))
-                ->add('permisosGrupo', 'collection', array(
-                    'type' => new PermisoCategoriaGrupoType(),
-                    'allow_add' => true,
-                    'allow_delete' => true,
-                    'required' => false,
-                    'label' => 'Permisos de grupo',
-                    'by_reference' => false))
-                ->end()
-                ->end()
-        ;
+                ->add('enabled', null, array('required' => false, 'data' => true))
+                ->end();
+        if ($user->isSuperAdmin()) {
+            $formMapper->end();
+            $formMapper
+                    ->tab('Permisos')
+                    ->with('Permisos de Usuario', array('class' => 'col-md-6'))
+                    ->add('permisosUser', 'collection', array(
+                        'type' => new PermisoCategoriaUserType(),
+                        'allow_add' => true,
+                        'allow_delete' => true,
+                        'required' => false,
+                        'label' => 'Permisos de usuario',
+                        'by_reference' => false))
+                    ->end()
+                    ->with('Permisos de Grupo', array('class' => 'col-md-6'))
+                    ->add('permisosGrupo', 'collection', array(
+                        'type' => new PermisoCategoriaGrupoType(),
+                        'allow_add' => true,
+                        'allow_delete' => true,
+                        'required' => false,
+                        'label' => 'Permisos de grupo',
+                        'by_reference' => false))
+                    ->end()
+                    ->end();
+        } else {
+            $formMapper
+                    ->with('Permisos de Usuario', array('class' => 'invisible'))
+                    ->add('permisosUser', 'collection')
+                    ->end()
+                    ->with('Permisos de Grupo', array('class' => 'invisible'))
+                    ->add('permisosGrupo', 'collection')
+                    ->end()
+                    ->end();
+        }
     }
 
     /**
@@ -149,15 +163,19 @@ class CategoryAdmin extends Admin {
      */
     protected function configureListFields(ListMapper $listMapper) {
         unset($this->listModes['mosaic']);
+        $user = $this->getActiveUser();
+
         $listMapper
                 ->addIdentifier('name')
                 ->add('slug')
                 ->add('description')
                 ->add('enabled', null, array('editable' => true))
-                ->add('position')
-                ->add('parent')
-                ->add('permisosUser', null, array('label' => 'Permisos de Usuarios'))
-                ->add('permisosGrupo', null, array('label' => 'Permisos de Grupos'))
+                ->add('parent');
+        if ($user->isSuperAdmin()) {
+            $listMapper
+                    ->add('permisosUser', null, array('label' => 'Permisos de Usuarios'))
+                    ->add('permisosGrupo', null, array('label' => 'Permisos de Grupos'));
+        }
         ;
     }
 

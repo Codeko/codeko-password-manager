@@ -30,7 +30,7 @@ class PermisoCategoriaUserAdmin extends Admin {
                 ->addIdentifier('categoria', null, array('label' => 'Categoría'))
                 ->addIdentifier('user', null, array('label' => 'Usuario'))
                 ->add('permisos')
-                ->add('perms')
+//                ->add('perms')
                 ->add('_action', 'actions', array(
                     'label' => 'Acciones',
                     'actions' => array(

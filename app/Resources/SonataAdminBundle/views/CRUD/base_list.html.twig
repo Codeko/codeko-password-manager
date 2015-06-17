@@ -17,7 +17,7 @@
         <div class="col-xs-12 col-md-12">
         {% endif %}
         {% if admin.hasRoute('batch') %}
-            <form action="{{ admin.generateUrl('batch', {'filter': admin.filterParameters})}}" method="POST" >
+            <form action="{{ admin.generateUrl('batch', {'filter': admin.filterParameters})}}" method="POST" onsubmit="comprobarAllElements()">
                 <input type="hidden" name="_sonata_csrf_token" value="{{ csrf_token }}">
             {% endif %}
             <div class="box box-primary" {% if admin.datagrid.pager.lastPage == 1 %}style="margin-bottom: 100px;"{% endif %}>
@@ -124,15 +124,12 @@
                                                                             ;
                                                                 })
                                                                 .trigger('ifChanged');
-
-                                                        $('div input.allElements').on('ifChanged', function () {
-                                                            if ($('div input.allElements').is(':checked') === true) {
-                                                                $('.checkboxId').prop('checked', true);
-                                                            } else {
-                                                                $('.checkboxId').removeAttr('checked');
-                                                            }
-                                                        });
                                                     });
+                                                    function comprobarAllElements() {
+                                                        if ($('div input.allElements').is(':checked') === true) {
+                                                            $('.checkboxId').prop('checked', true);
+                                                        }
+                                                    }
                                                 {% endblock %}
                                             </script>
                                             {% block batch_actions %}

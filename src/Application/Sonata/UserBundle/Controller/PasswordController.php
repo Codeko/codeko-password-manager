@@ -24,7 +24,7 @@ class PasswordController extends Controller {
 
                 if ($target === null) {
                     $this->addFlash('sonata_flash_error', 'No se selecciono ningun elemento');
-                    return new RedirectResponse($this->admin->generateUrl('list', array('filter' => $this->admin->getFilterParameters())));
+                    return new RedirectResponse($this->admin->generateUrl('list'));
                 }
 
                 $passOrigen = $target->getPassword();
@@ -68,7 +68,8 @@ class PasswordController extends Controller {
         }
 
         if (false === $this->get('security.context')->isGranted('ROLE_EDITAR_ENTIDAD', $object)) {
-            throw new AccessDeniedException('No tienes permiso para editar esta contraseña');
+            $this->addFlash('sonata_flash_error', 'No tienes permiso para acceder a esa url');
+            return new RedirectResponse($this->container->get('router')->generate('admin_sonata_user_password_list'));
         }
 
         if (false === $this->admin->isGranted('EDIT', $object)) {
@@ -129,7 +130,7 @@ class PasswordController extends Controller {
     }
 
     public function showAction($id = null, Request $request = null) {
-
+        
         $request = $this->resolveRequest($request);
         $id = $request->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
@@ -146,7 +147,7 @@ class PasswordController extends Controller {
                     'elements' => $this->admin->getShow(),
                         ), null, $request);
     }
-
+    
     protected function getActiveUser() {
         return $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
     }
@@ -215,7 +216,8 @@ class PasswordController extends Controller {
         }
 
         if (false === $this->get('security.context')->isGranted('ROLE_BORRAR_ENTIDAD', $object)) {
-            throw new AccessDeniedException('No tienes permiso para borrar esta contraseña');
+            $this->addFlash('sonata_flash_error', 'No tienes permiso para borrar esta clave');
+            return new RedirectResponse($this->container->get('router')->generate('admin_sonata_user_password_list'));
         }
 
         if (false === $this->admin->isGranted('DELETE', $object)) {
@@ -226,7 +228,7 @@ class PasswordController extends Controller {
 
             $this->validateCsrfToken('sonata.delete', $request);
             $objectName = $this->admin->toString($object);
-
+            
             try {
 
                 $this->admin->delete($object);
@@ -291,23 +293,20 @@ class PasswordController extends Controller {
                 if ($mensaje) {
                     $this->addFlash('sonata_flash_success', 'Elementos han sido eliminados');
                 }
+                return new RedirectResponse($this->admin->generateUrl('list'));
             } else {
                 $this->addFlash('sonata_flash_error', 'No se selecciono ningun elemento');
-                return new RedirectResponse($this->admin->generateUrl('list', array('filter' => $this->admin->getFilterParameters())));
+                return new RedirectResponse($this->admin->generateUrl('list'));
             }
         } catch (ModelManagerException $e) {
             $this->handleModelManagerException($e);
             $this->addFlash('sonata_flash_error', 'flash_batch_delete_error');
         }
 
-        return new RedirectResponse($this->admin->generateUrl(
-                        'list', array('filter' => $this->admin->getFilterParameters())
-        ));
+        return new RedirectResponse($this->admin->generateUrl('list', array('filter' => $this->admin->getFilterParameters())));
     }
 
     /**
-     * To keep backwards compatibility with older Sonata Admin code.
-     *
      * @internal
      */
     private function resolveRequest(Request $request = null) {

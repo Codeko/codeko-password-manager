@@ -31,7 +31,7 @@ class PermisoUserAdmin extends Admin {
                 ->addIdentifier('password', null, array('label' => 'Contraseña'))
                 ->addIdentifier('user', null, array('label' => 'Usuario'))
                 ->add('permisos')
-                ->add('perms')
+//                ->add('perms')
                 ->add('_action', 'actions', array(
                     'label' => 'Acciones',
                     'actions' => array(
