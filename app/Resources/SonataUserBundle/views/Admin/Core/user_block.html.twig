@@ -4,6 +4,7 @@
         {% set _logout_uri        = url('sonata_user_admin_security_logout') %}
         {% set _logout_text       = 'user_block_logout'|trans({}, 'SonataUserBundle') %}
         {% set _profile_uri       = sonata_user.userAdmin.isGranted('SHOW', app.user) ? sonata_user.userAdmin.generateUrl('show', {id: sonata_user.userAdmin.id(app.user)}) : sonata_user.userAdmin.generateUrl('show', {id: sonata_user.userAdmin.id(app.user)}) %}
+        {% set _profile_uri_edit       = sonata_user.userAdmin.isGranted('EDIT', app.user) ? sonata_user.userAdmin.generateUrl('edit', {id: sonata_user.userAdmin.id(app.user)}) : sonata_user.userAdmin.generateUrl('edit', {id: sonata_user.userAdmin.id(app.user)}) %}
         {% set _profile_text      = 'user_block_profile'|trans({}, 'SonataUserBundle') %}
         {% set _user_image        = asset('bundles/applicationsonatauser/images/llave.png') %}
 
@@ -17,7 +18,7 @@
             {% if _user_image %}
                 <img src="{{ _user_image }}" alt="Avatar" class="avatarPrincipal img-circle" />
             {% endif %}
-            <p><a href="{{ _profile_uri }}" style="color:white;">{{ app.user }}</a></p>
+            <p><a href="{{ _profile_uri_edit }}" style="color:white;">{{ app.user }}</a></p>
         </li>
 
         <li class="user-footer">
