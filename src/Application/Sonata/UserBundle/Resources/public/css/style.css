@@ -44,6 +44,10 @@
     opacity:0;
 }
 
+.skin-black .main-sidebar, .skin-black .left-side, .skin-black .wrapper {
+    background: none repeat scroll 0% 0% #262626;
+}
+
 .invisible {
     display: none ! important;
 }
@@ -52,9 +56,15 @@ root {
     display: block;
 }
 
-/*.main-header {
-    box-shadow: 0px 0px 8px #e1e1e1 !important;
-}*/
+div.sonata-tree__item {
+    border-radius: 3px; 
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;  
+}
+
+a.sonata-tree__item__edit {
+    text-decoration: none !important;
+}
 
 .sonata-tree__item.is-active {
     border: 1px solid #4CAE4C;
@@ -71,6 +81,7 @@ ul.sonata-tree {
 .avatarPrincipal {
     border: 0px !important;
     opacity: 0.9;
+    background: white;
 }
 
 th, td {
