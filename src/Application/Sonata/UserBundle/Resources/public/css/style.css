@@ -44,6 +44,10 @@
     opacity:0;
 }
 
+.skin-black .main-sidebar, .skin-black .left-side, .skin-black .wrapper {
+    background: none repeat scroll 0% 0% #262626;
+}
+
 .invisible {
     display: none ! important;
 }
