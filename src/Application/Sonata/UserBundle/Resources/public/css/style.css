@@ -67,6 +67,7 @@ ul.sonata-tree {
 .avatarPrincipal {
     border: 0px !important;
     opacity: 0.9;
+    background: white;
 }
 
 th, td {
