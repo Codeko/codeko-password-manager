@@ -52,6 +52,16 @@ root {
     display: block;
 }
 
+div.sonata-tree__item {
+    border-radius: 3px; 
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;  
+}
+
+a.sonata-tree__item__edit {
+    text-decoration: none !important;
+}
+
 .sonata-tree__item.is-active {
     border: 1px solid #4CAE4C;
 }
