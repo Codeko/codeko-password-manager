@@ -30,9 +30,22 @@ class PasswordController extends Controller {
                 $passOrigen = $target->getPassword();
                 $passDecript = $this->get('nzo_url_encryptor')->decrypt($passOrigen);
                 $clonedObject = clone $target;
+                $clonedObject->setPermisosUser(array());
+                $clonedObject->setPermisosGrupo(array());
+                $permsUser = $target->getPermisosUser();
+                foreach($permsUser as $perm){
+                    $clonedPerm = clone $perm;
+                    $clonedObject->addPermisosUser($clonedPerm);
+                }
+                $permsGrupo = $target->getPermisosGrupo();
+                foreach($permsGrupo as $perm){
+                    $clonedPerm = clone $perm;
+                    $clonedObject->addPermisosGrupo($clonedPerm);
+                }
                 $clonedObject->setPassword($passDecript);
                 $clonedObject->setUser($user);
                 $clonedObject->setTitulo($target->getTitulo() . " (Copia)");
+
                 $this->admin->create($clonedObject);
             }
             $this->addFlash('sonata_flash_success', 'Elementos han sido duplicados');
