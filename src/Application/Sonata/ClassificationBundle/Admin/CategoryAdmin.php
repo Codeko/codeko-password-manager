@@ -103,7 +103,7 @@ class CategoryAdmin extends Admin {
         }
 
         $formMapper->end()
-                ->with('Options', array('class' => 'col-md-6'))
+                ->with('Opciones', array('class' => 'col-md-6'))
                 ->add('enabled', null, array('required' => false, 'data' => true))
                 ->end();
         if ($user->isSuperAdmin()) {
@@ -132,10 +132,22 @@ class CategoryAdmin extends Admin {
         } else {
             $formMapper
                     ->with('Permisos de Usuario', array('class' => 'invisible'))
-                    ->add('permisosUser', 'collection')
+                    ->add('permisosUser', 'collection', array(
+                        'type' => new PermisoCategoriaUserType(),
+                        'allow_add' => true,
+                        'allow_delete' => true,
+                        'required' => false,
+                        'label' => 'Permisos de usuario', 
+                        'by_reference' => false))
                     ->end()
                     ->with('Permisos de Grupo', array('class' => 'invisible'))
-                    ->add('permisosGrupo', 'collection')
+                    ->add('permisosGrupo', 'collection', array(
+                        'type' => new PermisoCategoriaGrupoType(),
+                        'allow_add' => true,
+                        'allow_delete' => true,
+                        'required' => false,
+                        'label' => 'Permisos de grupo',
+                        'by_reference' => false))
                     ->end()
                     ->end();
         }

@@ -14,9 +14,7 @@
                     {% if element.description is not empty %}
                         &nbsp;&nbsp;-&nbsp;&nbsp;<i class="text-muted"></i><i class="text-muted">{{ element.description }}</i>
                         {% endif %}
-
                 </div>
-
                 {% if element.children|length %}
                     {{ _self.navigate_child(element.children, admin, false, depth + 1) }}
                 {% endif %}
