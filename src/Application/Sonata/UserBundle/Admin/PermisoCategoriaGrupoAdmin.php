@@ -7,6 +7,8 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 class PermisoCategoriaGrupoAdmin extends Admin {
 
@@ -62,6 +64,43 @@ class PermisoCategoriaGrupoAdmin extends Admin {
                     'label' => 'Permisos',
                     'attr' => array('inline' => true)))
         ;
+        $formMapper->getFormBuilder()->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            $permiso = $event->getData();
+            $form = $event->getForm();
+
+            // check if the Product object is "new"
+            // If no data is passed to the form, the data is "null".
+            // This should be considered a new "Product"
+            if (!$permiso || null === $permiso->getId()) {
+                
+            } else {
+                if ($permiso->getPermisos() == 11) {
+                    $form->add('perms', 'choice', array(
+                        'choices' => array('1' => 'Escritura', '2' => 'Lectura'),
+                        'multiple' => true,
+                        'expanded' => true,
+                        'required' => false,
+                        'mapped' => false,
+                        'by_reference' => false,
+                        'data' => ['1', '2'],
+                        'label' => 'Permisos',
+                        'attr' => array('inline' => true)
+                    ));
+                } else if ($permiso->getPermisos() == 10) {
+                    $form->add('perms', 'choice', array(
+                        'choices' => array('1' => 'Escritura', '2' => 'Lectura'),
+                        'multiple' => true,
+                        'expanded' => true,
+                        'required' => false,
+                        'mapped' => false,
+                        'by_reference' => false,
+                        'data' => ['2'],
+                        'label' => 'Permisos',
+                        'attr' => array('inline' => true)
+                    ));
+                }
+            }
+        });
     }
 
     /**
