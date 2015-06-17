@@ -116,7 +116,7 @@ class CategoryAdmin extends Admin {
                         'allow_add' => true,
                         'allow_delete' => true,
                         'required' => false,
-                        'label' => 'Permisos de usuario',
+                        'label' => 'Permisos de usuario', 
                         'by_reference' => false))
                     ->end()
                     ->with('Permisos de Grupo', array('class' => 'col-md-6'))
