@@ -377,8 +377,8 @@ class CRUDController extends Controller {
         }
 
         if (false === $this->get('security.context')->isGranted('ROLE_EDITAR_USUARIO', $object)) {
-//Controlar Voters
-            throw new AccessDeniedException('No eres el propietario para editar este usuario');
+            $this->addFlash('sonata_flash_error', 'No tienes permiso para acceder a esa url');
+            return new RedirectResponse($this->container->get('router')->generate('admin_sonata_user_password_list'));
         }
 
         if (false === $this->admin->isGranted('EDIT', $object)) {
@@ -581,7 +581,7 @@ class CRUDController extends Controller {
                             ), null, $request);
         }
 
-// execute the action, batchActionXxxxx
+// execute the action, batchAction
         $finalAction = sprintf('batchAction%s', ucfirst($camelizedAction));
         if (!is_callable(array($this, $finalAction))) {
             throw new \RuntimeException(sprintf('A `%s::%s` method must be callable', get_class($this), $finalAction));

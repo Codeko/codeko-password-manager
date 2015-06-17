@@ -80,7 +80,7 @@ class PermisoCategoriaUser {
      * 
      */
 
-    function setCategoria(Category $categoria) {
+    function setCategoria($categoria) {
         $this->categoria = $categoria;
     }
 
@@ -88,7 +88,7 @@ class PermisoCategoriaUser {
      * 
      */
 
-    function setUser(User $user) {
+    function setUser($user) {
         $this->user = $user;
     }
 
@@ -97,7 +97,13 @@ class PermisoCategoriaUser {
      */
 
     public function __toString() {
-        return '(' . $this->getCategoria() . ')(' . $this->getUser() . ')(' . $this->getPermisos() . ')' ? : 'n/a';
+        if ($this->getPermisos() == 10) {
+            return $this->getUser() . ' [Ver]';
+        } else if ($this->getPermisos() == 11) {
+            return $this->getUser() . ' [Ver/Modificar]';
+        } else {
+            return $this->getUser() . ' [n/a]';
+        }
     }
 
 }

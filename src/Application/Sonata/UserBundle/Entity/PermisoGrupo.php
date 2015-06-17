@@ -44,7 +44,7 @@ class PermisoGrupo {
      * @param $grupo
      * @return PermisoGrupo
      */
-    public function setGrupo(Group $grupo) {
+    public function setGrupo($grupo) {
         $this->grupo = $grupo;
 
         return $this;
@@ -65,7 +65,7 @@ class PermisoGrupo {
      * @param Password $password
      * @return PermisoGrupo
      */
-    public function setPassword(Password $password) {
+    public function setPassword($password) {
         $this->password = $password;
 
         return $this;
@@ -106,7 +106,13 @@ class PermisoGrupo {
      */
 
     public function __toString() {
-        return '(' . $this->getPassword() . ')(' . $this->getGrupo() . ')(' . $this->getPermisos() . ')' ? : 'n/a';
+        if ($this->getPermisos() == 10) {
+            return $this->getGrupo() . ' [Ver]';
+        } else if ($this->getPermisos() == 11) {
+            return $this->getGrupo() . ' [Ver/Modificar]';
+        } else {
+            return $this->getGrupo() . ' [n/a]';
+        }
     }
 
 }

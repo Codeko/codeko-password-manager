@@ -51,6 +51,8 @@ class AppKernel extends Kernel {
             new Nzo\UrlEncryptorBundle\NzoUrlEncryptorBundle(),
             // Comprobando fortaleza contraseñas
             new Rollerworks\Bundle\PasswordStrengthBundle\RollerworksPasswordStrengthBundle(),
+            // Mopa Bootstrap
+            new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             // BUNDLES PROPIOS
             new Application\Sonata\AdminBundle\ApplicationSonataAdminBundle(),
             new Application\Sonata\TimelineBundle\ApplicationSonataTimelineBundle(), // easy extends integration

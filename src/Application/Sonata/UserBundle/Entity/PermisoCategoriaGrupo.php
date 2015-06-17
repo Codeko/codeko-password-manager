@@ -80,7 +80,7 @@ class PermisoCategoriaGrupo {
      * 
      */
 
-    function setCategoria(Category $categoria) {
+    function setCategoria($categoria) {
         $this->categoria = $categoria;
     }
 
@@ -88,7 +88,7 @@ class PermisoCategoriaGrupo {
      * 
      */
 
-    function setGrupo(Group $grupo) {
+    function setGrupo($grupo) {
         $this->grupo = $grupo;
     }
 
@@ -97,7 +97,13 @@ class PermisoCategoriaGrupo {
      */
 
     public function __toString() {
-        return '(' . $this->getCategoria() . ')(' . $this->getGrupo() . ')(' . $this->getPermisos() . ')' ? : 'n/a';
+        if ($this->getPermisos() == 10) {
+            return $this->getGrupo() . ' [Ver]';
+        } else if ($this->getPermisos() == 11) {
+            return $this->getGrupo() . ' [Ver/Modificar]';
+        } else {
+            return $this->getGrupo() . ' [n/a]';
+        }
     }
 
 }

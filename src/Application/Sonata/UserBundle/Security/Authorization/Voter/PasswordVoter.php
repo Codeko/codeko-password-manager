@@ -4,8 +4,9 @@ namespace Application\Sonata\UserBundle\Security\Authorization\Voter;
 
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Application\Sonata\UserBundle\Security\Permits\Permits;
 
-class PasswordVoter implements VoterInterface {
+class PasswordVoter extends Permits implements VoterInterface {
 
     const VERPASSWORD = 'ROLE_LISTAR_ENTIDAD';
     const EDITARPASSWORD = 'ROLE_EDITAR_ENTIDAD';
@@ -39,20 +40,32 @@ class PasswordVoter implements VoterInterface {
             }
 
             $vote = VoterInterface::ACCESS_DENIED;
+            $user = $token->getUser();
+            $iduser = $user->getId();
 
             if ($attribute === 'ROLE_EDITAR_ENTIDAD' || $attribute === 'ROLE_BORRAR_ENTIDAD') {
-                $user = $token->getUser();
-                $iduser = $user->getId();
+
                 $idpasswordPropietario = $object->getUser()->getId();
+                $contraseñaId = $object->getId();
+                $IdsPassEscritura = $this->getWritePermits($iduser);
+                $tamañoPassEscritura = count($IdsPassEscritura);
 
                 if (!$user->isSuperAdmin()) {
 
                     /* @var $idpasswordPropietario type */
                     if ($idpasswordPropietario != $iduser) {
                         $vote = VoterInterface::ACCESS_DENIED;
-                        return $vote;
+                    } else {
+                        $vote = VoterInterface::ACCESS_GRANTED;
                     }
-                    $vote = VoterInterface::ACCESS_GRANTED;
+
+                    //Comprobar permisos de escritura
+                    for ($i = 0; $i < $tamañoPassEscritura; $i++) {
+                        if ($IdsPassEscritura[$i] == $contraseñaId) {
+                            $vote = VoterInterface::ACCESS_GRANTED;
+                        }
+                    }
+
                     return $vote;
                 } else {
                     $vote = VoterInterface::ACCESS_GRANTED;
@@ -61,17 +74,16 @@ class PasswordVoter implements VoterInterface {
             }
 
             if ($attribute === 'ROLE_EDITAR_MULTIMEDIA' || $attribute === 'ROLE_BORRAR_MULTIMEDIA') {
-                $user = $token->getUser();
-                $iduser = $user->getId();
-                $idpasswordPropietario = $object->getPassword()->getUser()->getId();
 
+                $idpasswordPropietario = $object->getPropietario()->getId();
                 if (!$user->isSuperAdmin()) {
                     if ($idpasswordPropietario != $iduser) {
                         $vote = VoterInterface::ACCESS_DENIED;
                         return $vote;
+                    } else {
+                        $vote = VoterInterface::ACCESS_GRANTED;
+                        return $vote;
                     }
-                    $vote = VoterInterface::ACCESS_GRANTED;
-                    return $vote;
                 } else {
                     $vote = VoterInterface::ACCESS_GRANTED;
                     return $vote;
@@ -79,8 +91,7 @@ class PasswordVoter implements VoterInterface {
             }
 
             if ($attribute === 'ROLE_EDITAR_USUARIO') {
-                $user = $token->getUser();
-                $iduser = $user->getId();
+
                 $idUsuarioPropietario = $object->getId();
 
                 if (!$user->isSuperAdmin()) {
@@ -96,25 +107,6 @@ class PasswordVoter implements VoterInterface {
                     return $vote;
                 }
             }
-
-//            if ($attribute === 'ROLE_LISTAR_ENTIDAD') {
-//                $user = $token->getUser();
-//                $iduser = $user->getId();
-//                $idpasswordPropietario = $object->getUser()->getId();
-//
-//                if (!$user->isSuperAdmin()) {
-//
-//                    if ($idpasswordPropietario != $iduser) {
-//                        $vote = VoterInterface::ACCESS_DENIED;
-//                        return $vote;
-//                    }
-//                    $vote = VoterInterface::ACCESS_GRANTED;
-//                    return $vote;
-//                } else {
-//                    $vote = VoterInterface::ACCESS_GRANTED;
-//                    return $vote;
-//                }
-//            }
         }
 
         return $vote;

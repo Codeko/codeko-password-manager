@@ -117,6 +117,8 @@ class User extends BaseUser {
 
     public function removePermisos(PermisoUser $permiso) {
         $this->permisos->removeElement($permiso);
+        $permiso->setPassword(null);
+        $permiso->setUser(null);
     }
 
 }

@@ -51,7 +51,7 @@ class PermisoUser {
      * 
      */
 
-    function setPassword(Password $password) {
+    function setPassword($password) {
         $this->password = $password;
     }
 
@@ -59,7 +59,7 @@ class PermisoUser {
      * 
      */
 
-    function setUser(User $user) {
+    function setUser($user) {
         $this->user = $user;
     }
 
@@ -98,7 +98,13 @@ class PermisoUser {
      */
 
     public function __toString() {
-        return '(' . $this->getPassword() . ')(' . $this->getUser() . ')(' . $this->getPermisos() . ')' ? : 'n/a';
+        if($this->getPermisos()==10){
+            return $this->getUser() . ' [Ver]';
+        } else if($this->getPermisos()==11) {
+            return $this->getUser() . ' [Ver/Modificar]';
+        } else {
+            return $this->getUser() . ' [n/a]';
+        }
     }
 
 }

@@ -29,17 +29,14 @@ class CoreController extends Controller
     /**
      * @return \Sonata\AdminBundle\Admin\Pool
      */
-    protected function getAdminPool()
-    {
+    protected function getAdminPool() {
         return $this->container->get('sonata.admin.pool');
     }
 
     /**
      * @return \Application\Sonata\AdminBundle\Search\SearchHandler
      */
-    protected function getSearchHandler()
-    {
-//        return $this->get('application.sonata.adminbundle.search.handler');
+    protected function getSearchHandler() {
         return $this->get('sonata.admin.search.handler');
     }
 
@@ -48,8 +45,7 @@ class CoreController extends Controller
      *
      * @return string
      */
-    protected function getBaseTemplate(Request $request = null)
-    {
+    protected function getBaseTemplate(Request $request = null) {
         // to be BC
         if (null === $request) {
             $request = $this->getRequest();
@@ -67,8 +63,7 @@ class CoreController extends Controller
      *
      * @return Response
      */
-    public function dashboardAction(Request $request)
-    {
+    public function dashboardAction(Request $request) {
         $blocks = array(
             'top'    => array(),
             'left'   => array(),
@@ -85,7 +80,7 @@ class CoreController extends Controller
             'base_template'   => $this->getBaseTemplate($request),
             'admin_pool'      => $this->container->get('sonata.admin.pool'),
             'blocks'          => $blocks,
-            'animate_logo'    => 1,
+            'animate_logo'    => true,
         ));
     }
 
@@ -99,8 +94,7 @@ class CoreController extends Controller
      *
      * @throws \RuntimeException
      */
-    public function searchAction(Request $request)
-    {
+    public function searchAction(Request $request) {
         if ($request->get('admin') && $request->isXmlHttpRequest()) {
 
             try {

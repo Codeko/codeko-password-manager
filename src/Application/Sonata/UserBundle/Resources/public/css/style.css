@@ -34,6 +34,16 @@
     width: 100%;
 }
 
+#clipboardStyle {
+    position:absolute;
+    margin: -22px 0px 0px -8px;
+    width:25px;
+    overflow:hidden;
+    height:25px;
+    z-index:1000;
+    opacity:0;
+}
+
 .invisible {
     display: none ! important;
 }
@@ -61,6 +71,11 @@ ul.sonata-tree {
 th, td {
     vertical-align: middle !important;
 }
+
+.label-disabled {
+    background-color: grey !important;
+}
+
 
 .skin-black .sidebar > .sidebar-menu > li > a:hover, .skin-black .sidebar > .sidebar-menu > li.active > a {
     border-left-color: #4CAE4C !important;
