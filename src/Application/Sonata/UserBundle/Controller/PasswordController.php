@@ -33,12 +33,12 @@ class PasswordController extends Controller {
                 $clonedObject->setPermisosUser(array());
                 $clonedObject->setPermisosGrupo(array());
                 $permsUser = $target->getPermisosUser();
-                foreach($permsUser as $perm){
+                foreach ($permsUser as $perm) {
                     $clonedPerm = clone $perm;
                     $clonedObject->addPermisosUser($clonedPerm);
                 }
                 $permsGrupo = $target->getPermisosGrupo();
-                foreach($permsGrupo as $perm){
+                foreach ($permsGrupo as $perm) {
                     $clonedPerm = clone $perm;
                     $clonedObject->addPermisosGrupo($clonedPerm);
                 }
@@ -130,10 +130,11 @@ class PasswordController extends Controller {
     }
 
     public function showAction($id = null, Request $request = null) {
-        
+
         $request = $this->resolveRequest($request);
         $id = $request->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
+        $user = $this->get('security.context')->getToken()->getUser();
 
         if (!$object) {
             throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
@@ -141,13 +142,22 @@ class PasswordController extends Controller {
 
         $this->admin->setSubject($object);
 
-        return $this->render($this->admin->getTemplate('show'), array(
-                    'action' => 'show',
-                    'object' => $object,
-                    'elements' => $this->admin->getShow(),
-                        ), null, $request);
+        if ($user->isSuperAdmin()) {
+            return $this->render($this->admin->getTemplate('show'), array(
+                        'action' => 'show',
+                        'object' => $object,
+                        'elements' => $this->admin->getShow(),
+                        'editable' => 1,
+                            ), null, $request);
+        } else {
+            return $this->render($this->admin->getTemplate('show'), array(
+                        'action' => 'show',
+                        'object' => $object,
+                        'elements' => $this->admin->getShow(),
+                            ), null, $request);
+        }
     }
-    
+
     protected function getActiveUser() {
         return $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
     }
@@ -228,7 +238,7 @@ class PasswordController extends Controller {
 
             $this->validateCsrfToken('sonata.delete', $request);
             $objectName = $this->admin->toString($object);
-            
+
             try {
 
                 $this->admin->delete($object);

@@ -8,15 +8,13 @@
                 <div class="sonata-tree__item"{% if depth < 2 %} data-treeview-toggled{% endif %}>
                     {% if element.parent or root %}<i class="fa fa-caret-right" data-treeview-toggler></i>{% endif %}
                     <a class="sonata-tree__item__edit" href="{{ admin.generateObjectUrl('edit', element) }}">
-                     {% if element.enabled %}{{ element.name }}<span class="label label-success" style="margin-left:15px;"><i class="fa fa-check"></i> {{ admin.trans('active', {}, admin.translationDomain) }}</span>{% endif %}
-                    {% if not element.enabled %}{{ element.name }}<span class="label label-danger" style="margin-left:15px;"><i class="fa fa-times"> {{ admin.trans('disabled', {}, admin.translationDomain) }}</i></span>{% endif %}
+                        {% if element.enabled %}{{ element.name }}<span class="label label-success" style="margin-left:15px;"><i class="fa fa-check"></i> {{ admin.trans('active', {}, admin.translationDomain) }}</span>{% endif %}
+                        {% if not element.enabled %}{{ element.name }}<span class="label label-danger" style="margin-left:15px;"><i class="fa fa-times"></i> {{ admin.trans('disabled', {}, admin.translationDomain) }}</span>{% endif %}
                     </a>
                     {% if element.description is not empty %}
                         &nbsp;&nbsp;-&nbsp;&nbsp;<i class="text-muted"></i><i class="text-muted">{{ element.description }}</i>
-                    {% endif %}
-                    
+                        {% endif %}
                 </div>
-
                 {% if element.children|length %}
                     {{ _self.navigate_child(element.children, admin, false, depth + 1) }}
                 {% endif %}

@@ -236,7 +236,7 @@ class CRUDController extends Controller {
 
         if ($request->get('_route') != 'admin_sonata_user_tipopass_list') {
             if (!$user->isSuperAdmin()) {
-                throw new AccessDeniedException();
+                return new RedirectResponse($this->container->get('router')->generate('default'));
             }
         }
 
