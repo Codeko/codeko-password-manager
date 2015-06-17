@@ -52,10 +52,6 @@ root {
     display: block;
 }
 
-/*.main-header {
-    box-shadow: 0px 0px 8px #e1e1e1 !important;
-}*/
-
 .sonata-tree__item.is-active {
     border: 1px solid #4CAE4C;
 }

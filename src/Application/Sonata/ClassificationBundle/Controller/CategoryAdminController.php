@@ -31,7 +31,7 @@ class CategoryAdminController extends Controller {
      */
     public function listAction(Request $request = null) {
         $user = $this->admin->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
-        
+
         if (!$request->get('filter') && !$request->get('filters')) {
             return new RedirectResponse($this->admin->generateUrl('tree'));
         }
@@ -49,7 +49,7 @@ class CategoryAdminController extends Controller {
         $formView = $datagrid->getForm()->createView();
 
         $this->get('twig')->getExtension('form')->renderer->setTheme($formView, $this->admin->getFilterTheme());
-        
+
         if ($user->isSuperAdmin()) {
             return $this->render($this->admin->getTemplate('list'), array(
                         'action' => 'list',

@@ -47,23 +47,19 @@
             {% endif %}
 
             {% set locale = app.request.locale %}
-            {# localize moment #}
             {% if locale[:2] != 'en' %}
                 <script src="{{ asset('bundles/sonatacore/vendor/moment/locale/' ~ locale|replace({'_':'-'}) ~ '.js') }}"></script>
             {% endif %}
 
-            {# localize select2 #}
             {% if admin_pool is defined and admin_pool.getOption('use_select2') %}
             {% if locale == 'pt' %}{% set locale = 'pt_PT' %}{% endif %}
 
-            {# omit default EN locale #}
             {% if locale[:2] != 'en' %}
                 <script src="{{ asset('bundles/sonatacore/vendor/select2/select2_locale_' ~ locale|replace({'_':'-'}) ~ '.js') }}"></script>
             {% endif %}
         {% endif %}
 
         {% if admin_pool is defined and admin_pool.getOption('use_bootlint') %}
-            {# Bootlint - https://github.com/twbs/bootlint#in-the-browser #}
             <script type="text/javascript">
                 javascript:(function () {
                     var s = document.createElement("script");
@@ -76,7 +72,6 @@
             </script>
         {% endif %}
 
-        {# TRADUCIENDO ROL USUARIO #}
         {% if admin is defined %}
             {% if admin.getClass() ends with 'Group' or 'User' %}
                 <script>

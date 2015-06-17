@@ -8,7 +8,6 @@
         {% endfor %}
 
         {% if display %}
-            {# OCULTANDO BLOQUE MEDIA #}
             {% if group.label != 'sonata_classification' %}               
                 <div class="box">
                     <div class="box-header">
@@ -16,8 +15,8 @@
                             <i class="fa fa-users"></i>
                         {% elseif group.label == 'Password Manager' %}
                             <i class="fa fa-key"></i>
-                        {% elseif group.label == 'Administración de Permisos' %}
-                            <i class="fa fa-key"></i>
+                        {% elseif group.label == 'Administración de permisos' %}
+                            <i class="fa fa-sliders"></i>
                         {% endif %}    
                         <h3 class="box-title">{{ group.label|trans({}, group.label_catalogue) }}</h3>
                     </div>
