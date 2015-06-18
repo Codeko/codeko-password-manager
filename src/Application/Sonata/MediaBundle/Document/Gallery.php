@@ -21,8 +21,8 @@ use Sonata\MediaBundle\Document\BaseGallery as BaseGallery;
  *
  * @author <yourname> <youremail>
  */
-class Gallery extends BaseGallery
-{
+class Gallery extends BaseGallery {
+
     /**
      * @var integer $id
      */
@@ -33,8 +33,8 @@ class Gallery extends BaseGallery
      *
      * @return integer $id
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
+
 }

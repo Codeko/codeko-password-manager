@@ -5,7 +5,6 @@ namespace Application\Sonata\UserBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Hackzilla\Bundle\PasswordGeneratorBundle\Form\Type\OptionType;
 
 class PasswordType extends AbstractType {
 

@@ -2,7 +2,6 @@
 
 namespace Application\Sonata\UserBundle\Entity;
 
-
 /**
  * TipoPass
  */
@@ -89,4 +88,5 @@ class TipoPass {
     public function __toString() {
         return $this->getNombre() ? : 'n/a';
     }
+
 }

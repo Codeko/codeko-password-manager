@@ -24,6 +24,11 @@ sonata_block:
         sonata.admin.block.search_result:
             contexts: [admin]
             
+        sonata.media.block.media:
+            
+        sonata.admin.block.stats:
+            contexts:   [admin]
+            
     exception:
         default:
             filter:                     debug_only

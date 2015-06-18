@@ -1,20 +1,22 @@
-{% if admin.hasRoute('create') and admin.isGranted('CREATE')%}
-    {% if admin.subClasses is empty %}
-        {% if datagrid is defined %}
-            <a class="sonata-action-element" href="{{ admin.generateUrl('create') }}{% if 'password' in app.request.attributes.get('_route') %}?idCat={% if datagrid.values['category']['value'] is defined %}{{ datagrid.values['category']['value'] }}{% else %}1{% endif %}{% endif %}">
-                <i class="fa fa-plus-circle"></i>
-                {{ 'link_action_create'|trans({}, 'SonataAdminBundle') }}</a>
-            {% endif %}
-        {% else %}
-        <li class="divider" role="presentation"></li>
-            {% for subclass in admin.subclasses|keys %} 
-            <li>
-                <a href="{{ admin.generateUrl('create', {'subclass': subclass}) }}">                  
+{% spaceless %}
+    {% if admin.hasRoute('create') and admin.isGranted('CREATE')%}
+        {% if admin.subClasses is empty %}
+            {% if datagrid is defined %}
+                <a class="sonata-action-element" href="{{ admin.generateUrl('create') }}{% if 'password' in app.request.attributes.get('_route') %}?idCat={% if datagrid.values['category']['value'] is defined %}{{ datagrid.values['category']['value'] }}{% else %}1{% endif %}{% endif %}">
                     <i class="fa fa-plus-circle"></i>
-                    {{ 'link_action_create'|trans({}, 'SonataAdminBundle') }} {{ subclass|trans({}, admin.translationdomain) }}
-                </a>
-            </li>
-        {% endfor %}
-        <li class="divider" role="presentation"></li>
+                    {{ 'link_action_create'|trans({}, 'SonataAdminBundle') }}</a>
+                {% endif %}
+            {% else %}
+            <li class="divider" role="presentation"></li>
+                {% for subclass in admin.subclasses|keys %} 
+                <li>
+                    <a href="{{ admin.generateUrl('create', {'subclass': subclass}) }}">                  
+                        <i class="fa fa-plus-circle"></i>
+                        {{ 'link_action_create'|trans({}, 'SonataAdminBundle') }} {{ subclass|trans({}, admin.translationdomain) }}
+                    </a>
+                </li>
+            {% endfor %}
+            <li class="divider" role="presentation"></li>
+            {% endif %}
         {% endif %}
-    {% endif %}
+    {% endspaceless %}

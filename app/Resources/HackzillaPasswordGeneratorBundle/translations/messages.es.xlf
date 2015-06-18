@@ -39,7 +39,6 @@
                 <target>Dummies</target>
             </trans-unit>
 
-
             <!-- Options -->
             <trans-unit id="100">
                 <source>OPTION_HOW_MANY_PASSWORDS</source>
@@ -96,7 +95,6 @@
                 <target>Longitud máxima de palabra</target>
             </trans-unit>
 
-
             <!-- Buttons -->
             <trans-unit id="200">
                 <source>BUTTON_GENERATE</source>
@@ -107,13 +105,11 @@
                 <target>Resetear</target>
             </trans-unit>
 
-
             <!-- Labels -->
             <trans-unit id="300">
                 <source>LABEL_CITATION</source>
                 <target>citation</target>
             </trans-unit>
-
 
             <!-- Errors -->
             <trans-unit id="500">

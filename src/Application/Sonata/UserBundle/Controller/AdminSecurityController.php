@@ -16,13 +16,12 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use FOS\UserBundle\Model\UserInterface;
 
-class AdminSecurityController extends ContainerAware
-{
+class AdminSecurityController extends ContainerAware {
+
     /**
      * {@inheritdoc}
      */
-    public function loginAction()
-    {
+    public function loginAction() {
         $user = $this->container->get('security.context')->getToken()->getUser();
 
         if ($user instanceof UserInterface) {
@@ -53,10 +52,7 @@ class AdminSecurityController extends ContainerAware
         }
         // last username entered by the user
         $lastUsername = (null === $session) ? '' : $session->get(SecurityContext::LAST_USERNAME);
-
-        $csrfToken = $this->container->has('form.csrf_provider')
-            ? $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate')
-            : null;
+        $csrfToken = $this->container->has('form.csrf_provider') ? $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate') : null;
 
         if ($this->container->get('security.context')->isGranted('ROLE_ADMIN')) {
             $refererUri = $request->server->get('HTTP_REFERER');
@@ -64,13 +60,13 @@ class AdminSecurityController extends ContainerAware
             return new RedirectResponse($refererUri && $refererUri != $request->getUri() ? $refererUri : $this->container->get('router')->generate('sonata_admin_dashboard'));
         }
 
-        return $this->container->get('templating')->renderResponse('SonataUserBundle:Admin:Security/login.html.'.$this->container->getParameter('fos_user.template.engine'), array(
-                'last_username' => $lastUsername,
-                'error'         => $error,
-                'csrf_token'    => $csrfToken,
-                'base_template' => $this->container->get('sonata.admin.pool')->getTemplate('layout'),
-                'admin_pool'    => $this->container->get('sonata.admin.pool')
-            ));
+        return $this->container->get('templating')->renderResponse('SonataUserBundle:Admin:Security/login.html.' . $this->container->getParameter('fos_user.template.engine'), array(
+                    'last_username' => $lastUsername,
+                    'error' => $error,
+                    'csrf_token' => $csrfToken,
+                    'base_template' => $this->container->get('sonata.admin.pool')->getTemplate('layout'),
+                    'admin_pool' => $this->container->get('sonata.admin.pool')
+        ));
     }
 
     /**
@@ -88,13 +84,12 @@ class AdminSecurityController extends ContainerAware
 //        return $this->container->get('templating')->renderResponse($template, $data);
 //    }
 
-    public function checkAction()
-    {
+    public function checkAction() {
         throw new \RuntimeException('You must configure the check path to be handled by the firewall using form_login in your security firewall configuration.');
     }
 
-    public function logoutAction()
-    {
+    public function logoutAction() {
         throw new \RuntimeException('You must activate the logout in your security firewall configuration.');
     }
+
 }

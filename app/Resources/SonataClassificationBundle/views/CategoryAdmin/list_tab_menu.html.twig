@@ -1,5 +1,6 @@
 {{ knp_menu_render(admin.sidemenu(action), {'currentClass' : 'active'}, 'list') }}
-<p>
+{% spaceless %}
+    <p>
     <div class="btn-group">
         <a type="button" class="btn {% if mode == 'list' %}btn-info active{% else %}btn-default{% endif %}" href="{{ admin.generateUrl('list', { 'filter': { 'context': { 'value': current_category is defined ? current_category.context.id|default('') : '' }}}) }}">
             <i class="fa fa-list"></i> {{ 'classification.list_mode'|trans({}, 'SonataClassificationBundle') }}
@@ -9,3 +10,4 @@
         </a>       
     </div>
 </p>
+{% endspaceless %}

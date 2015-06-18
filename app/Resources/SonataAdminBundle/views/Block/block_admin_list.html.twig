@@ -1,75 +1,90 @@
 {% extends sonata_block.templates.block_base %}
 
 {% block block %}
-    {% for group in groups %}
-        {% set display = (group.roles is empty or is_granted('ROLE_SUPER_ADMIN') ) %}
-        {% for role in group.roles if not display %}
-            {% set display = is_granted(role)%}
-        {% endfor %}
+    {% spaceless %}
+        {% for group in groups %}
+            {% set display = (group.roles is empty or is_granted('ROLE_SUPER_ADMIN') ) %}
+            {% for role in group.roles if not display %}
+                {% set display = is_granted(role)%}
+            {% endfor %}
 
-        {% if display %}
-            {% if group.label != 'sonata_classification' %}               
-                <div class="box">
-                    <div class="box-header">
-                        {% if group.label == 'Usuarios' %}
-                            <i class="fa fa-users"></i>
-                        {% elseif group.label == 'Password Manager' %}
-                            <i class="fa fa-key"></i>
-                        {% elseif group.label == 'Administración de permisos' %}
-                            <i class="fa fa-sliders"></i>
-                        {% endif %}    
-                        <h3 class="box-title">{{ group.label|trans({}, group.label_catalogue) }}</h3>
-                    </div>
-                    <div class="box-body">
-                        <table class="table table-hover">
-                            <tbody>
-                                {% for admin in group.items %}
-                                    {% if admin.hasroute('create') and admin.isGranted('CREATE') or admin.hasroute('list') and admin.isGranted('LIST') %}
-                                        <tr>                                           
-                                            <td class="sonata-ba-list-label" width="40%">
-                                                {{ admin.label|trans({}, admin.translationdomain) }} 
-                                            </td>
-                                            <td>
-                                                <div class="btn-group">
-                                                    {% if admin.hasroute('create') and admin.isGranted('CREATE') %}
-                                                        {% if admin.subClasses is empty %}
-                                                            {% if admin.label != 'media' %}
-                                                            <a class="btn btn-link btn-flat" href="{{ admin.generateUrl('create')}}">
-                                                                <i class="fa fa-plus-circle"></i>
-                                                                {% trans from 'SonataAdminBundle' %}link_add{% endtrans %} 
-                                                            </a>
+            {% if display %}
+                {% if group.label != 'sonata_classification' %}               
+                    <div class="box">
+                        <div class="box-header">
+                            {% if group.label == 'Usuarios' %}
+                                <i class="fa fa-users"></i>
+                            {% elseif group.label == 'Password Manager' %}
+                                <i class="fa fa-key"></i>
+                            {% elseif group.label == 'Administración de permisos' %}
+                                <i class="fa fa-sliders"></i>
+                            {% endif %}    
+                            <h3 class="box-title">{{ group.label|trans({}, group.label_catalogue) }}</h3>
+                            <div class="box-tools pull-right">
+                                <button class="btn btn-box-tool" id="min" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                                <button class="btn btn-box-tool" data-widget="remove">
+                                    <i class="fa fa-times"></i>
+                                </button>      
+                            </div>
+                        </div>
+
+                        <div class="box-body">
+                            <table class="table table-hover">
+                                <tbody>
+                                    {% for admin in group.items %}
+                                        {% if admin.label != 'media' %}
+                                            {% if admin.hasroute('create') and admin.isGranted('CREATE') or admin.hasroute('list') and admin.isGranted('LIST') %}
+                                                <tr>                                           
+                                                    <td class="sonata-ba-list-label" width="40%">
+                                                        {{ admin.label|trans({}, admin.translationdomain) }} 
+                                                    </td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            {% if admin.hasroute('create') and admin.isGranted('CREATE') %}
+                                                                {% if admin.subClasses is empty %}
+
+                                                                    <a class="btn btn-link btn-flat" href="{{ admin.generateUrl('create')}}">
+                                                                        <i class="fa fa-plus-circle"></i>
+                                                                        {% trans from 'SonataAdminBundle' %}link_add{% endtrans %} 
+                                                                    </a>
+
+                                                                {% else %}
+                                                                    <a class="btn btn-link btn-flat dropdown-toggle" data-toggle="dropdown" href="#">
+                                                                        <i class="fa fa-plus-circle"></i>
+                                                                        {% trans from 'SonataAdminBundle' %}link_add{% endtrans %}
+                                                                        <span class="caret"></span>
+                                                                    </a>
+                                                                    <ul class="dropdown-menu">
+                                                                        {% for subclass in admin.subclasses|keys %}
+                                                                            <li>
+                                                                                <a href="{{ admin.generateUrl('create', {'subclass': subclass}) }}">{{ subclass|trans({}, admin.translationdomain) }}</a>
+                                                                            </li>
+                                                                        {% endfor %}
+                                                                    </ul>
+                                                                {% endif %}
                                                             {% endif %}
-                                                        {% else %}
-                                                            <a class="btn btn-link btn-flat dropdown-toggle" data-toggle="dropdown" href="#">
-                                                                <i class="fa fa-plus-circle"></i>
-                                                                {% trans from 'SonataAdminBundle' %}link_add{% endtrans %}
-                                                                <span class="caret"></span>
-                                                            </a>
-                                                            <ul class="dropdown-menu">
-                                                                {% for subclass in admin.subclasses|keys %}
-                                                                    <li>
-                                                                        <a href="{{ admin.generateUrl('create', {'subclass': subclass}) }}">{{ subclass|trans({}, admin.translationdomain) }}</a>
-                                                                    </li>
-                                                                {% endfor %}
-                                                            </ul>
-                                                        {% endif %}
-                                                    {% endif %}
-                                                    {% if admin.hasroute('list') and admin.isGranted('LIST') %}
-                                                        <a class="btn btn-link btn-flat" href="{{ admin.generateUrl('list')}}">
-                                                            <i class="glyphicon glyphicon-list"></i>
-                                                            {% trans from 'SonataAdminBundle' %}link_list{% endtrans -%}
-                                                        </a>
-                                                    {% endif %}
-                                                </div>
-                                            </td>
+                                                            {% if group.label != 'Password Manager' %}
+                                                                {% if admin.hasroute('list') and admin.isGranted('LIST') %}
+                                                                    <a class="btn btn-link btn-flat" href="{{ admin.generateUrl('list')}}">
+                                                                        <i class="glyphicon glyphicon-list"></i>
+                                                                        {% trans from 'SonataAdminBundle' %}link_list{% endtrans -%}
+                                                                    </a>
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        </div>
+                                                    </td>
+                                                {% endif %}
+                                            </tr>
                                         {% endif %}
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
+                {% endif %}
             {% endif %}
-        {% endif %}
-    {% endfor %}
+        {% endfor %}
+    {% endspaceless %}
 {% endblock %}

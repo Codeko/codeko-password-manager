@@ -36,14 +36,13 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
  * @author Sebastiaan Stok <s.stok@rollerscapes.net>
  * @author Shouvik Chatterjee <mailme@shouvik.net>
  */
-class PasswordStrengthValidator extends ConstraintValidator
-{
+class PasswordStrengthValidator extends ConstraintValidator {
+
     /**
      * @param string                      $password
      * @param PasswordStrength|Constraint $constraint
      */
-    public function validate($password, Constraint $constraint)
-    {
+    public function validate($password, Constraint $constraint) {
         if (null === $password || '' === $password) {
             return;
         }
@@ -53,15 +52,14 @@ class PasswordStrengthValidator extends ConstraintValidator
         }
 
         $password = (string) $password;
-
         $passwordStrength = 0;
         $passLength = strlen($password);
 
         if ($passLength < $constraint->minLength) {
             if ($this->context instanceof ExecutionContextInterface) {
                 $this->context->buildViolation($constraint->message)
-                    ->setParameters(array('{{ length }}' => $constraint->minLength))
-                    ->addViolation();
+                        ->setParameters(array('{{ length }}' => $constraint->minLength))
+                        ->addViolation();
             } else {
                 $this->context->addViolation($constraint->message, array('{{ length }}' => $constraint->minLength));
             }
@@ -89,15 +87,15 @@ class PasswordStrengthValidator extends ConstraintValidator
         }
 
         // No decrease strength on weak combinations
-
         if ($passwordStrength < $constraint->minStrength) {
             if ($this->context instanceof ExecutionContextInterface) {
                 $this->context->buildViolation($constraint->message)
-                    ->setParameters(array('{{ length }}' => $constraint->minLength))
-                    ->addViolation();
+                        ->setParameters(array('{{ length }}' => $constraint->minLength))
+                        ->addViolation();
             } else {
                 $this->context->addViolation($constraint->message, array('{{ length }}' => $constraint->minLength));
             }
         }
     }
+
 }

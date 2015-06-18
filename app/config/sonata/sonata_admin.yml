@@ -14,33 +14,78 @@ sonata_admin:
         edit:    SonataAdminBundle:CRUD:edit.html.twig
         preview: SonataAdminBundle:CRUD:preview.html.twig
         search:              SonataAdminBundle:Core:search.html.twig
-        search_result_block: SonataAdminBundle:Block:block_search_result.html.twig       
+        search_result_block: SonataAdminBundle:Block:block_search_result.html.twig     
         
  #   security:
         #handler: sonata.admin.security.handler.role
     dashboard:
-        blocks:
-            # display two dashboard blocks             
+        blocks:            
             -
                 position: left
-                class: col-md-12
+                class: col-lg-8
                 type: sonata.admin.block.admin_list
+     
+            -
+                class:    col-lg-3 col-xs-6
+                position: top
+                type:     sonata.admin.block.stats
+                settings:
+                    code: password.pass.servicio
+                    icon: fa-key
+                    text: CONTRASEÑAS
+                    color: bg-green
+                    filters:
+                        status: { type: 3, value: 0 } 
+                        # 3 => NumberType::TYPE_EQUAL  
+            
+            -
+                class:    col-lg-3 col-xs-6
+                position: top
+                type:     sonata.admin.block.stats
+                settings:
+                    code:  sonata.classification.admin.category
+                    icon:  fa-sitemap
+                    text:  CATEGORÍAS
+                    color: bg-olive
+                    filters:
+                        status: { type: 3, value: 0 } 
+                        # 3 => NumberType::TYPE_EQUAL
+            
+            -
+                class:    col-lg-3 col-xs-6
+                position: top
+                type:     sonata.admin.block.stats
+                settings:
+                    code: application_sonata_user.admin.tipo_pass
+                    icon: fa-tags
+                    text: TIPOS DE CONTRASEÑA
+                    color: bg-orange
+                    filters:
+                        status: { type: 3, value: 0 } 
+                        # 3 => NumberType::TYPE_EQUAL     
+                
+            -
+                class:    col-lg-3 col-xs-6
+                position: top
+                type:     sonata.admin.block.stats
+                settings:
+                    code: sonata.media.admin.media
+                    icon: fa-file
+                    text: ARCHIVOS MULTIMEDIA
+                    color: bg-yellow
+                    filters:
+                        status: { type: 3, value: 0 } 
+                        # 3 => NumberType::TYPE_EQUAL  
                 
             -   
                 position: right
+                class: col-lg-4
                 type: sonata.timeline.block.timeline
                 settings: 
                     context: SONATA_ADMIN
-                    max_per_page: 12      
+                    max_per_page: 11      
                                 
         groups:
-            Users:
-                label: Usuarios
-                items:
-                    - sonata.user.admin.user
-                    - sonata.user.admin.group
-                roles: [ROLE_SUPER_ADMIN ]
-                
             Password Manager:
                 label: Password Manager
                 items:
@@ -50,6 +95,13 @@ sonata_admin:
                     - sonata.media.admin.media
 
                 roles: [ROLE_USER]
+                
+            Users:
+                label: Usuarios
+                items:
+                    - sonata.user.admin.user
+                    - sonata.user.admin.group
+                roles: [ROLE_SUPER_ADMIN ]       
                 
             Permisos:
                 label: Administración de permisos

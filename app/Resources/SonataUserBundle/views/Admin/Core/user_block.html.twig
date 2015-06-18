@@ -13,22 +13,23 @@
             {% set _logout_uri  = url(sonata_user.impersonating.route, sonata_user.impersonating.parameters| merge({'_switch_user': '_exit'})) %}
             {% set _logout_text = '(exit)' %}
         {% endif %}
+        {% spaceless %}
+            <li class="user-header {{ _bg_class }}">
+                {% if _user_image %}
+                    <img src="{{ _user_image }}" alt="Avatar" class="avatarPrincipal img-circle" />
+                {% endif %}
+                <p><a href="{{ _profile_uri_edit }}" style="color:white;">{{ app.user }}</a></p>
+            </li>
 
-        <li class="user-header {{ _bg_class }}">
-            {% if _user_image %}
-                <img src="{{ _user_image }}" alt="Avatar" class="avatarPrincipal img-circle" />
-            {% endif %}
-            <p><a href="{{ _profile_uri_edit }}" style="color:white;">{{ app.user }}</a></p>
-        </li>
+            <li class="user-footer">
+                <div class="pull-left">
+                    <a href="{{ _profile_uri }}" class="btn btn-default btn-flat"><i class="fa fa-user"></i> {{ _profile_text }}</a>
+                </div>
 
-        <li class="user-footer">
-            <div class="pull-left">
-                <a href="{{ _profile_uri }}" class="btn btn-default btn-flat"><i class="fa fa-user"></i> {{ _profile_text }}</a>
-            </div>
-
-            <div class="pull-right">
-                <a href="{{ _logout_uri }}" class="btn btn-default btn-flat"><i class="fa fa-sign-out fa-fw"></i> {{ _logout_text }}</a>
-            </div>
-        </li>
+                <div class="pull-right">
+                    <a href="{{ _logout_uri }}" class="btn btn-default btn-flat"><i class="fa fa-sign-out fa-fw"></i> {{ _logout_text }}</a>
+                </div>
+            </li>
+        {% endspaceless %}
     {% endif %}
 {% endblock %}

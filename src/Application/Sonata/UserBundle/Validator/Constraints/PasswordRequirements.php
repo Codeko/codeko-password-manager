@@ -16,17 +16,17 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @Annotation
  */
-class PasswordRequirements extends Constraint
-{
+class PasswordRequirements extends Constraint {
+
     public $tooShortMessage = 'Su contraseña debe tener al menos {{length}} caracteres.';
     public $missingLettersMessage = 'Su contraseña debe incluir al menos una letra.';
     public $requireCaseDiffMessage = 'Su contraseña debe incluir letras mayúsculas y minúsculas.';
     public $missingNumbersMessage = 'Su contraseña debe incluir al menos un número.';
     public $missingSpecialCharacterMessage = 'Su contraseña debe contener al menos un caracter especial.';
-
     public $minLength = 4;
     public $requireLetters = false;
     public $requireCaseDiff = false;
     public $requireNumbers = false;
     public $requireSpecialCharacter = false;
+
 }

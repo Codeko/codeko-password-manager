@@ -59,7 +59,6 @@ class PasswordVoter extends Permits implements VoterInterface {
                         $vote = VoterInterface::ACCESS_GRANTED;
                     }
 
-                    //Comprobar permisos de escritura
                     for ($i = 0; $i < $tamañoPassEscritura; $i++) {
                         if ($IdsPassEscritura[$i] == $contraseñaId) {
                             $vote = VoterInterface::ACCESS_GRANTED;

@@ -3,7 +3,6 @@
 namespace Application\Sonata\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * PermisoUser
  */
@@ -98,9 +97,9 @@ class PermisoUser {
      */
 
     public function __toString() {
-        if($this->getPermisos()==10){
+        if ($this->getPermisos() == 10) {
             return $this->getUser() . ' [Ver]';
-        } else if($this->getPermisos()==11) {
+        } else if ($this->getPermisos() == 11) {
             return $this->getUser() . ' [Ver/Modificar]';
         } else {
             return $this->getUser() . ' [n/a]';

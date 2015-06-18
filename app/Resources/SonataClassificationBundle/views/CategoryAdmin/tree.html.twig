@@ -2,25 +2,27 @@
 
 {% import _self as tree %}
 {% macro navigate_child(collection, admin, root, depth) %}
-    <ul{% if root %} class="sonata-tree sonata-tree--toggleable js-treeview"{% endif %}>
-        {% for element in collection %}
-            <li class="sonata-ba-list-field" objectId="{{ element.id }}">
-                <div class="sonata-tree__item"{% if depth < 2 %} data-treeview-toggled{% endif %}>
-                    {% if element.parent or root %}<i class="fa fa-caret-right" data-treeview-toggler></i>{% endif %}
-                    <a class="sonata-tree__item__edit" href="{{ admin.generateObjectUrl('edit', element) }}">
-                        {% if element.enabled %}{{ element.name }}<span class="label label-success" style="margin-left:15px;"><i class="fa fa-check"></i> {{ admin.trans('active', {}, admin.translationDomain) }}</span>{% endif %}
-                        {% if not element.enabled %}{{ element.name }}<span class="label label-danger" style="margin-left:15px;"><i class="fa fa-times"></i> {{ admin.trans('disabled', {}, admin.translationDomain) }}</span>{% endif %}
-                    </a>
-                    {% if element.description is not empty %}
-                        &nbsp;&nbsp;-&nbsp;&nbsp;<i class="text-muted"></i><i class="text-muted">{{ element.description }}</i>
-                        {% endif %}
-                </div>
-                {% if element.children|length %}
-                    {{ _self.navigate_child(element.children, admin, false, depth + 1) }}
-                {% endif %}
-            </li>
-        {% endfor %}
-    </ul>
+    {% spaceless %}
+        <ul{% if root %} class="sonata-tree sonata-tree--toggleable js-treeview"{% endif %}>
+            {% for element in collection %}
+                <li class="sonata-ba-list-field" objectId="{{ element.id }}">
+                    <div class="sonata-tree__item"{% if depth < 2 %} data-treeview-toggled{% endif %}>
+                        {% if element.parent or root %}<i class="fa fa-caret-right" data-treeview-toggler></i>{% endif %}
+                        <a class="sonata-tree__item__edit" href="{{ admin.generateObjectUrl('edit', element) }}">
+                            {% if element.enabled %}{{ element.name }}<span class="label label-success" style="margin-left:15px;"><i class="fa fa-check"></i> {{ admin.trans('active', {}, admin.translationDomain) }}</span>{% endif %}
+                            {% if not element.enabled %}{{ element.name }}<span class="label label-danger" style="margin-left:15px;"><i class="fa fa-times"></i> {{ admin.trans('disabled', {}, admin.translationDomain) }}</span>{% endif %}
+                        </a>
+                        {% if element.description is not empty %}
+                            &nbsp;&nbsp;-&nbsp;&nbsp;<i class="text-muted"></i><i class="text-muted">{{ element.description }}</i>
+                            {% endif %}
+                    </div>
+                    {% if element.children|length %}
+                        {{ _self.navigate_child(element.children, admin, false, depth + 1) }}
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endspaceless %}
 {% endmacro %}
 
 {% block tab_menu %}
@@ -32,42 +34,44 @@
 {% endblock %}
 
 {% block list_table %}
-    <div class="col-xs-12 col-md-12">
-        <div class="box box-primary">
-            <div class="box-header">
-                <h1 class="box-title">
-                    {{ admin.trans('tree_catalog_title', {}, admin.translationdomain) }}
-                    {% if not app.request.get('hide_context') %}
-                        <div class="btn-group">                            
-                            <ul class="dropdown-menu" role="menu">
-                                {% for category in root_categories %}
-                                    <li>
-                                        <a href="{{ admin.generateUrl('tree', { 'context': category.context.id }) }}">
-                                            {% if current_context and category.context.id == current_context.id %}
-                                                <span class="pull-right">
-                                                    <i class="fa fa-check"></i>
-                                                </span>
-                                            {% endif %}
-                                            {{ category.name }}
-                                        </a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    {% endif %}
-                </h1>
-            </div>
-            <div class="box-content">
-                {{ tree.navigate_child([main_category], admin, true, 0) }}
-            </div>
-            <div>
-                <span class="btn-group" style="padding: 10px">
-                    <a class="btn btn-success btn-sm sonata-ba-action" href="{{ admin.generateUrl('create') }}">
-                        <i class="fa fa-plus-circle"></i>
-                        {{ 'link_action_create'|trans({}, 'SonataAdminBundle') }}
-                    </a>
-                </span>
+    {% spaceless %}
+        <div class="col-xs-12 col-md-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h1 class="box-title">
+                        {{ admin.trans('tree_catalog_title', {}, admin.translationdomain) }}
+                        {% if not app.request.get('hide_context') %}
+                            <div class="btn-group">                            
+                                <ul class="dropdown-menu" role="menu">
+                                    {% for category in root_categories %}
+                                        <li>
+                                            <a href="{{ admin.generateUrl('tree', { 'context': category.context.id }) }}">
+                                                {% if current_context and category.context.id == current_context.id %}
+                                                    <span class="pull-right">
+                                                        <i class="fa fa-check"></i>
+                                                    </span>
+                                                {% endif %}
+                                                {{ category.name }}
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                    </h1>
+                </div>
+                <div class="box-content">
+                    {{ tree.navigate_child([main_category], admin, true, 0) }}
+                </div>
+                <div>
+                    <span class="btn-group" style="padding: 10px">
+                        <a class="btn btn-success btn-sm sonata-ba-action" href="{{ admin.generateUrl('create') }}">
+                            <i class="fa fa-plus-circle"></i>
+                            {{ 'link_action_create'|trans({}, 'SonataAdminBundle') }}
+                        </a>
+                    </span>
+                </div>
             </div>
         </div>
-    </div>
+    {% endspaceless %}
 {% endblock %}

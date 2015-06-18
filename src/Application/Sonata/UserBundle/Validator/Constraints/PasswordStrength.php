@@ -16,8 +16,8 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @Annotation
  */
-class PasswordStrength extends Constraint
-{
+class PasswordStrength extends Constraint {
+
     public $message = 'Contraseña demasiado débil';
     public $minLength = 4;
     public $minStrength = 1;
@@ -25,13 +25,12 @@ class PasswordStrength extends Constraint
     /**
      * {@inheritDoc}
      */
-    public function getDefaultOption()
-    {
+    public function getDefaultOption() {
         return 'minStrength';
     }
 
-    public function getRequiredOptions()
-    {
+    public function getRequiredOptions() {
         return array('minStrength');
     }
+
 }

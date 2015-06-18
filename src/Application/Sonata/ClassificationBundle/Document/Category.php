@@ -21,13 +21,12 @@ use Sonata\ClassificationBundle\Document\BaseCategory as BaseCategory;
  *
  * @author <yourname> <youremail>
  */
-class Category extends BaseCategory
-{
+class Category extends BaseCategory {
+
     /**
      * @var integer $id
      */
     protected $id;
-    
     protected $parent_id;
 
     /**
@@ -35,7 +34,6 @@ class Category extends BaseCategory
      *
      * @return integer $id
      */
-    
     public function getParent_id() {
         return $this->parent_id;
     }
@@ -43,13 +41,14 @@ class Category extends BaseCategory
     public function setParent_id($parent_id) {
         $this->parent_id = $parent_id;
     }
+
     /**
      * Get id
      *
      * @return integer $id
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
+
 }

@@ -21,8 +21,8 @@ use Sonata\MediaBundle\PHPCR\BaseMedia as BaseMedia;
  *
  * @author <yourname> <youremail>
  */
-class Media extends BaseMedia
-{
+class Media extends BaseMedia {
+
     /**
      * @var integer $id
      */
@@ -33,8 +33,8 @@ class Media extends BaseMedia
      *
      * @return integer $id
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
+
 }
