@@ -60,14 +60,8 @@
         {% endspaceless %}
     {% endblock %}
 </td>
-
 {% block field_compare %}
     {% spaceless %}
-        {% if(value_compare is defined) %}
-            <td>
-                {% set value = value_compare %}
-                {{ block('field') }}
-            </td>
-        {% endif %}
+        {% if(value_compare is defined) %} <td>{% set value = value_compare %} {{ block('field') }}</td> {% endif %}
     {% endspaceless %}
 {% endblock %}

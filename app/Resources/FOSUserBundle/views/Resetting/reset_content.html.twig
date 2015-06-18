@@ -5,8 +5,7 @@
             <section class="cuerpoFormulario">
                 <h2 class="form-signin-heading"><img id="headerLogo" src="{{ asset('bundles/applicationsonatauser/images/headerLogo.png') }}"/></h2>    
                     {{ form_widget(form) }}
-                <div class="checkbox">               
-                </div>
+                <div class="checkbox"></div>
                 {% if invalid_username is defined %}
                     <div id="login-error" class="alert alert-danger">
                         <p>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}, 'FOSUserBundle') }}</p>
@@ -17,7 +16,6 @@
             </section>          
         </form>
     </main>
-
     <script type="text/javascript">
         function cargarInput() {
             contraseña1 = document.getElementById("fos_user_resetting_form_new_first");

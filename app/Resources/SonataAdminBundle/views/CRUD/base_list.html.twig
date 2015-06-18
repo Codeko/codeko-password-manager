@@ -153,9 +153,7 @@
                                 </div>
                                 <div class="pull-right">
 
-                                    {% if no_action is defined and no_action %}
-                                        &nbsp; 
-                                    {% else %}        
+                                    {% if no_action is defined and no_action %} &nbsp; {% else %}        
                                         <span class="btn-group" style="padding: 10px;margin-right:10px;">
                                             <a class="btn btn-success btn-sm sonata-ba-action" href="{{ admin.generateUrl('create') }}{% if 'password' in app.request.attributes.get('_route') %}?idCat={% if datagrid.values['category']['value'] is defined %}{{ datagrid.values['category']['value'] }}{% else %}1{% endif %}{% endif %}">
                                                 <i class="fa fa-plus-circle"></i>
@@ -175,8 +173,7 @@
                                                 {% for format in admin.getExportFormats() %}
                                                     <li>
                                                         <a href="{{ admin.generateUrl('export', admin.modelmanager.paginationparameters(admin.datagrid, 0) + {'format' : format}) }}">
-                                                            <i class="glyphicon glyphicon-download"></i>
-                                                            {{ format|upper }}
+                                                            <i class="glyphicon glyphicon-download"></i> {{ format|upper }}
                                                         </a>
                                                     <li>
                                                     {% endfor %}

@@ -78,6 +78,10 @@ ul.sonata-tree {
     margin-right: 0px !important;
 }
 
+.sonata-tree--small .sonata-tree__item__edit {
+    font-size: 13px !important;
+}
+
 .avatarPrincipal {
     border: 0px !important;
     opacity: 0.9;

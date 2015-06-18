@@ -2,30 +2,23 @@
 {% spaceless %}
     {% block actions %}
     {% endblock %}
-
     {% block side_menu %}
     {% endblock %}
-
     {% block formactions %}
         <button class="btn btn-success" type="submit" name="btn_preview_approve">
-            <i class="glyphicon glyphicon-ok"></i>
-            {{ 'btn_preview_approve'|trans({}, 'SonataAdminBundle') }}
+            <i class="glyphicon glyphicon-ok"></i> {{ 'btn_preview_approve'|trans({}, 'SonataAdminBundle') }}
         </button>
         <button class="btn btn-danger" type="submit" name="btn_preview_decline">
-            <i class="glyphicon glyphicon-remove"></i>
-            {{ 'btn_preview_decline'|trans({}, 'SonataAdminBundle') }}
+            <i class="glyphicon glyphicon-remove"></i> {{ 'btn_preview_decline'|trans({}, 'SonataAdminBundle') }}
         </button>
     {% endblock %}
-
     {% block preview %}
         <div class="sonata-ba-view">
             {% for name, view_group in admin.showgroups %}
                 <table class="table table-bordered">
                     {% if name %}
                         <tr class="sonata-ba-view-title">
-                            <td colspan="2">
-                                {{ admin.trans(name) }}
-                            </td>
+                            <td colspan="2"> {{ admin.trans(name) }} </td>
                         </tr>
                     {% endif %}
 
@@ -40,15 +33,8 @@
             {% endfor %}
         </div>
     {% endblock %}
-
     {% block form %}
-        <div class="sonata-preview-form-container">
-            {{ parent() }}
-        </div>
-        <style>
-            .sonata-preview-form-container .row {
-                display: none;
-            };
-        </style>
+        <div class="sonata-preview-form-container"> {{ parent() }} </div>
+        <style> .sonata-preview-form-container .row { display: none; }; </style>
     {% endblock %}
 {% endspaceless %}

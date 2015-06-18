@@ -3,14 +3,8 @@
 {% block fos_user_content %}
     {% spaceless %}
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %} 
-            <style>
-                body{
-                    background: #eeeeee !important;
-                }
-            </style>
-            <script>
-                window.location.href = "{{ path('default') }}";
-            </script>
+            <style> body{ background: #eeeeee !important; } </style>
+            <script>window.location.href = "{{ path('default') }}";</script>
         {% endif %}
     {% endspaceless %}
     {% include "FOSUserBundle:Resetting:reset_content.html.twig" %}

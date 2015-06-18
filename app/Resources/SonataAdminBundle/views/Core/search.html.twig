@@ -1,28 +1,22 @@
 {% extends base_template %}
-
 {% block title %}{{ 'title_search_results'|trans({'%query%': query}, 'SonataAdminBundle') }}{% endblock%}
 {% block breadcrumb %}{% endblock %}
 {% block content %}
     {% spaceless %}
         <h1>{{ 'title_search_results'|trans({'%query%': query}, 'SonataAdminBundle') }}</h1>
-
         {% if query is defined and query is not sameas(false) %}
             {% set count = 0 %}
             <div class="row">
-
                 {% for group in groups %}
                     {% set display = (group.roles is empty or is_granted('ROLE_SUPER_ADMIN') ) %}
                     {% for role in group.roles if not display %}
                         {% set display = is_granted(role)%}
                     {% endfor %}
-
                     {% if display %}
                         {% for admin in group.items %}
                             {% if count % 3 == 0 %}
                             </div><div class="row">
-
                             {% endif %}
-
                             {% set count = count + 1 %}
                             {% if admin.hasroute('create') and admin.isGranted('CREATE') or admin.hasroute('list') and admin.isGranted('LIST') %}
                                 {{ sonata_block_render({

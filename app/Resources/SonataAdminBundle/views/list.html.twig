@@ -2,9 +2,7 @@
 {% macro navigate_child(collection, admin, root, current_category, depth) %}
     {% spaceless %}
         {% if root and collection|length == 0 %}
-            <div>
-                <p class="bg-warning">{{ admin.trans('warning_no_category', {}, admin.translationdomain) }}</p>
-            </div>
+            <div><p class="bg-warning">{{ admin.trans('warning_no_category', {}, admin.translationdomain) }}</p></div>
         {% endif %}
         <ul{% if root %} class="sonata-tree sonata-tree--small js-treeview sonata-tree--toggleable"{% endif %}>
             {% for element in collection %}

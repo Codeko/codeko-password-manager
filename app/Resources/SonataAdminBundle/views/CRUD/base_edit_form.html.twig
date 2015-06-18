@@ -1,9 +1,7 @@
 {% block form %}
     {% spaceless %}
         {{ sonata_block_render_event('sonata.admin.edit.form.top', { 'admin': admin, 'object': object }) }}
-
         {% set url = admin.id(object) is not null ? 'edit' : 'create' %}
-
         {% if not admin.hasRoute(url)%}
             <div>
                 {{ "form_not_available"|trans({}, "SonataAdminBundle") }}
@@ -19,8 +17,7 @@
                     });
                 </script>
                 <button type="button" class="btn btn-warning" id='botonPass' data-toggle="modal" data-target="#myModal" style='margin-top: 6px; display: none;'>
-                    <i class="fa fa-key fa-spin"></i>
-                    {{ 'Generar contraseña' }}
+                    <i class="fa fa-key fa-spin"></i> {{ 'Generar contraseña' }}
                 </button>
             {% endif %}
             {% if 'Password' in admin.getClass() %}
@@ -47,9 +44,7 @@
                 {% if not admin_pool.getOption('html5_validate') %}novalidate="novalidate"{% endif %}
                 >
                 {% if form.vars.errors|length > 0 %}
-                    <div class="sonata-ba-form-error">
-                        {{ form_errors(form) }}
-                    </div>
+                    <div class="sonata-ba-form-error"> {{ form_errors(form) }} </div>
                 {% endif %}
 
                 {% block sonata_pre_fieldsets %}
@@ -72,10 +67,7 @@
                                             <div class="tab-pane fade{% if loop.first %} in active{% endif %}" id="tab_{{ admin.uniqid }}_{{ loop.index }}">
                                                 <div class="box-body  container-fluid">
                                                     <div class="sonata-ba-collapsed-fields">
-                                                        {% if form_tab.description != false %}
-                                                            <p>{{ form_tab.description|raw }}</p>
-                                                        {% endif %}
-
+                                                        {% if form_tab.description != false %}<p>{{ form_tab.description|raw }}</p>{% endif %}
                                                         {{ form_helper.render_groups(admin, form, form_tab['groups'], has_tab) }}
                                                     </div>
                                                 </div>
@@ -88,13 +80,10 @@
                             {% endif %}
                         </div>
                     {% endblock %}
-
                     {% block sonata_post_fieldsets %}
                     </div>
                 {% endblock %}
-
                 {{ form_rest(form) }}
-
                 {% block formactions %}
                     <div class="well well-small form-actions">
                         {% block sonata_form_actions %}
@@ -107,8 +96,7 @@
                             {% else %}                                                    
                                 {% if admin.supportsPreviewMode %}
                                     <button class="btn btn-info persist-preview" name="btn_preview" type="submit">
-                                        <i class="fa fa-eye"></i>
-                                        {{ 'btn_preview'|trans({}, 'SonataAdminBundle') }}
+                                        <i class="fa fa-eye"></i> {{ 'btn_preview'|trans({}, 'SonataAdminBundle') }}
                                     </button>          
                                 {% endif %}
                                 {% if admin.id(object) is not null %}
@@ -141,7 +129,6 @@
                 {% endblock formactions %}
             </form>       
         {% endif%}
-
         {{ sonata_block_render_event('sonata.admin.edit.form.bottom', { 'admin': admin, 'object': object }) }}
     {% endspaceless %}
 {% endblock %}

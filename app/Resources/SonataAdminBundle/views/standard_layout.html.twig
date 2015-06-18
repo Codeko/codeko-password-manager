@@ -10,9 +10,7 @@
 {% set _actions              = block('actions') %}
 {% set _navbar_title         = block('navbar_title') %}
 {% set _list_filters_actions = block('list_filters_actions') %}
-
-{% spaceless %}
-    <!DOCTYPE html>
+{% spaceless %}<!DOCTYPE html>
     <html {% block html_attributes %}class="no-js"{% endblock %}>
         <head>
             <link rel="shortcut icon" type="image/x-icon" href="{{ asset('bundles/applicationsonatauser/images/favicon.ico') }}" />
@@ -31,14 +29,8 @@
             <link href="{{ asset('bundles/applicationsonatauser/css/style.css') }}" rel="stylesheet">
             {% block javascripts %}
                 <script>
-                    window.SONATA_CONFIG = {
-                        CONFIRM_EXIT: {% if admin_pool is defined and admin_pool.getOption('confirm_exit') %}true{% else %}false{% endif %},
-                        USE_SELECT2: {% if admin_pool is defined and admin_pool.getOption('use_select2') %}true{% else %}false{% endif %},
-                        USE_ICHECK: {% if admin_pool is defined and admin_pool.getOption('use_icheck') %}true{% else %}false{% endif %}
-                    };
-                    window.SONATA_TRANSLATIONS = {
-                        CONFIRM_EXIT: '{{ 'confirm_exit'|trans({}, 'SonataAdminBundle')|escape('js') }}'
-                    };
+                    window.SONATA_CONFIG = {CONFIRM_EXIT: {% if admin_pool is defined and admin_pool.getOption('confirm_exit') %}true{% else %}false{% endif %}, USE_SELECT2: {% if admin_pool is defined and admin_pool.getOption('use_select2') %}true {% else %}false{% endif %}, USE_ICHECK: {% if admin_pool is defined and admin_pool.getOption('use_icheck') %}true {% else %}false{% endif %}};
+                    window.SONATA_TRANSLATIONS = {CONFIRM_EXIT: '{{ 'confirm_exit'|trans({}, 'SonataAdminBundle')|escape('js') }}'};
                 </script>
 
                 {% if admin_pool is defined %}
@@ -91,24 +83,7 @@
 
         <title>
             {% block sonata_head_title %}
-                Password Manager
-
-                {% if _title is not empty %}
-                    - {{ _title|raw }}
-                {% else %}
-                    {% if action is defined %}
-                        -
-                        {% for menu in admin.breadcrumbs(action) %}
-                            {% if not loop.first %}
-                                {%  if loop.index != 2 %}
-                                    &gt;
-                                {% endif %}
-
-                                {{ menu.label }}
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
-                {% endif%}
+                Password Manager {% if _title is not empty %} - {{ _title|raw }} {% else %} {% if action is defined %} - {% for menu in admin.breadcrumbs(action) %} {% if not loop.first %} {%  if loop.index != 2 %} &gt; {% endif %} {{ menu.label }} {% endif %}{% endfor %} {% endif %} {% endif%}
             {% endblock %}
         </title>
     </head>
@@ -326,5 +301,4 @@
         {% endblock sonata_wrapper %}
     </div>
 </body>
-</html>
-{% endspaceless %}
+</html>{% endspaceless %}
