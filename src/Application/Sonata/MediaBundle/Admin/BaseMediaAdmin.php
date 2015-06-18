@@ -59,7 +59,7 @@ abstract class BaseMediaAdmin extends Admin {
      * {@inheritdoc}
      */
     protected function configureListFields(ListMapper $listMapper) {
-        unset($this->listModes['mosaic']);
+        unset($this->listModes['list']);
         $listMapper
                 ->addIdentifier('name')
                 ->add('description')

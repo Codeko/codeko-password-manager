@@ -1,47 +1,49 @@
-<main class="container">
-    <form class="form-signin bounceIn animated fos_user_resetting_reset" action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="post">
-        <header class="decoracionCabecera"></header>
-        <section class="cuerpoFormulario">
-            <h2 class="form-signin-heading"><img id="headerLogo" src="{{ asset('bundles/applicationsonatauser/images/headerLogo.png') }}"/></h2>    
-                {{ form_widget(form) }}
-            <div class="checkbox">               
-            </div>
-            {% if invalid_username is defined %}
-                <div id="login-error" class="alert alert-danger">
-                    <p>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}, 'FOSUserBundle') }}</p>
+{% spaceless %}
+    <main class="container">
+        <form class="form-signin bounceIn animated fos_user_resetting_reset" action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="post">
+            <header class="decoracionCabecera"></header>
+            <section class="cuerpoFormulario">
+                <h2 class="form-signin-heading"><img id="headerLogo" src="{{ asset('bundles/applicationsonatauser/images/headerLogo.png') }}"/></h2>    
+                    {{ form_widget(form) }}
+                <div class="checkbox">               
                 </div>
-            {% endif %}
-            <button class="btn btn-lg btn-success btn-block" type="submit">{{ 'resetting.reset.submit'|trans({}, 'FOSUserBundle') }}</button>
-            <div class="nuevoUsuario"></div>
-        </section>          
-    </form>
-</main>
+                {% if invalid_username is defined %}
+                    <div id="login-error" class="alert alert-danger">
+                        <p>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}, 'FOSUserBundle') }}</p>
+                    </div>
+                {% endif %}
+                <button class="btn btn-lg btn-success btn-block" type="submit">{{ 'resetting.reset.submit'|trans({}, 'FOSUserBundle') }}</button>
+                <div class="nuevoUsuario"></div>
+            </section>          
+        </form>
+    </main>
 
-<script type="text/javascript">
-    function cargarInput() {
-        contraseña1 = document.getElementById("fos_user_resetting_form_new_first");
-        contraseña2 = document.getElementById("fos_user_resetting_form_new_second");
-        contraseña1.placeholder = "Nueva contraseña";
-        contraseña1.classList.add("form-control");
-        contraseña2.placeholder = "Repita la contraseña";
-        contraseña2.classList.add("form-control");
-    }
-
-    function comprobarClaves() {
-        clave1 = document.getElementById("fos_user_resetting_form_new_first");
-        clave2 = document.getElementById("fos_user_resetting_form_new_second");
-
-        if (clave1.value === clave2.value) {
-            return true;
-        } else {
-            clave1.focus();
-            clave1.value = "";
-            clave2.value = "";
-            clave1.placeholder = "Las contraseñas no coinciden";
-            clave2.placeholder = "Las contraseñas no coinciden";
-            return false;
+    <script type="text/javascript">
+        function cargarInput() {
+            contraseña1 = document.getElementById("fos_user_resetting_form_new_first");
+            contraseña2 = document.getElementById("fos_user_resetting_form_new_second");
+            contraseña1.placeholder = "Nueva contraseña";
+            contraseña1.classList.add("form-control");
+            contraseña2.placeholder = "Repita la contraseña";
+            contraseña2.classList.add("form-control");
         }
-    }
 
-    cargarInput();
-</script>
+        function comprobarClaves() {
+            clave1 = document.getElementById("fos_user_resetting_form_new_first");
+            clave2 = document.getElementById("fos_user_resetting_form_new_second");
+
+            if (clave1.value === clave2.value) {
+                return true;
+            } else {
+                clave1.focus();
+                clave1.value = "";
+                clave2.value = "";
+                clave1.placeholder = "Las contraseñas no coinciden";
+                clave2.placeholder = "Las contraseñas no coinciden";
+                return false;
+            }
+        }
+
+        cargarInput();
+    </script>
+{% endspaceless %}

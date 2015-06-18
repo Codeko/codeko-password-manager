@@ -4,6 +4,7 @@
 {% set xEditableType = field_description.type|sonata_xeditable_type %}
 
 {% block field %}
+    {% spaceless %}
     {% if field_description.options.usuario_activo is defined %}
         {% if object.user == field_description.options.usuario_activo %} 
             {% spaceless %}
@@ -70,6 +71,7 @@
             {% endif %}
         {% endspaceless %}
     {% endif %}
+    {% endspaceless %}
 {% endblock %}
 
 {% if isEditable and xEditableType %}

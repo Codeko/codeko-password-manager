@@ -1,32 +1,36 @@
 {% import _self as tree %}
 {% macro navigate_child(collection, admin, root, current_category, depth) %}
-    {% if root and collection|length == 0 %}
-        <div>
-            <p class="bg-warning">{{ admin.trans('warning_no_category', {}, admin.translationdomain) }}</p>
-        </div>
-    {% endif %}
-    <ul{% if root %} class="sonata-tree sonata-tree--small js-treeview sonata-tree--toggleable"{% endif %}>
-        {% for element in collection %}
-            <li>
-                <div class="sonata-tree__item{% if element.id == current_category %} is-active{% endif %}"{% if depth < 2 %} data-treeview-toggled{% endif %}>
-                    {% if element.parent or root %}<i class="fa fa-caret-right" data-treeview-toggler></i>{% endif %}
-                    <div style="width:100%;height:100%;cursor:pointer;" onclick="location.href = '{{ url(app.request.attributes.get('_route'), app.request.query.all|merge({'filter[category][value]': element.id})) }}'">
-                        <a class="sonata-tree__item__edit" href="{{ url(app.request.attributes.get('_route'), app.request.query.all|merge({'filter[category][value]': element.id})) }}">{{ element.name }}</a>
+    {% spaceless %}
+        {% if root and collection|length == 0 %}
+            <div>
+                <p class="bg-warning">{{ admin.trans('warning_no_category', {}, admin.translationdomain) }}</p>
+            </div>
+        {% endif %}
+        <ul{% if root %} class="sonata-tree sonata-tree--small js-treeview sonata-tree--toggleable"{% endif %}>
+            {% for element in collection %}
+                <li>
+                    <div class="sonata-tree__item{% if element.id == current_category %} is-active{% endif %}"{% if depth < 2 %} data-treeview-toggled{% endif %}>
+                        {% if element.parent or root %}<i class="fa fa-caret-right" data-treeview-toggler></i>{% endif %}
+                        <div style="width:100%;height:100%;cursor:pointer;" onclick="location.href = '{{ url(app.request.attributes.get('_route'), app.request.query.all|merge({'filter[category][value]': element.id})) }}'">
+                            <a class="sonata-tree__item__edit" href="{{ url(app.request.attributes.get('_route'), app.request.query.all|merge({'filter[category][value]': element.id})) }}">{{ element.name }}</a>
+                        </div>
                     </div>
-                </div>
-                {% if element.children|length %}
-                    {{ _self.navigate_child(element.children, admin, false, current_category, depth + 1) }}
-                {% endif %}
-            </li>
-        {% endfor %}
-    </ul>
+                    {% if element.children|length %}
+                        {{ _self.navigate_child(element.children, admin, false, current_category, depth + 1) }}
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endspaceless %}
 {% endmacro %}
 {% block list_table %}
-    <div class="col-xs-12 col-md-3">
-        {% if datagrid.values['category']['value'] is defined %}
-            {{ tree.navigate_child([root_category], admin, true, datagrid.values['category']['value'], 1) }}
-        {% else %}
-            {{ tree.navigate_child([root_category], admin, true, 1, 1) }}
-        {% endif %}
-    </div>
+    {% spaceless %}
+        <div class="col-xs-12 col-md-3">
+            {% if datagrid.values['category']['value'] is defined %}
+                {{ tree.navigate_child([root_category], admin, true, datagrid.values['category']['value'], 1) }}
+            {% else %}
+                {{ tree.navigate_child([root_category], admin, true, 1, 1) }}
+            {% endif %}
+        </div>
+    {% endspaceless %}
 {% endblock %}

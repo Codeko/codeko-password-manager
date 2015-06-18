@@ -2,129 +2,130 @@
     {{ form_start(form) }}
     {{ form_errors(form) }}
     {{ form_rest(form) }}
+    {% spaceless %}
+        <script>
+            var labels = document.getElementsByTagName('label');
 
-    <script>
-        var labels = document.getElementsByTagName('label');
+            for (var i = 0; i < labels.length; i++) {
+                labels[i].style.paddingRight = "15px";
+            }
 
-        for (var i = 0; i < labels.length; i++) {
-            labels[i].style.paddingRight = "15px";
-        }
+            $('label[for="segment_count"]').removeClass('optional');
+            $('label[for="segment_length"]').removeClass('optional');
+            $('label[for="segment_count"] > span').text('');
+            $('label[for="segment_length"] > span').text('');
+            $('label.optional').hide(true);
 
-        $('label[for="segment_count"]').removeClass('optional');
-        $('label[for="segment_length"]').removeClass('optional');
-        $('label[for="segment_count"] > span').text('');
-        $('label[for="segment_length"] > span').text('');
-        $('label.optional').hide(true);
+            if (!$("span[label_catalogue='SonataAdminBundle']")) {
+                $('span').text('');
+            }
 
-        if (!$("span[label_catalogue='SonataAdminBundle']")) {
-            $('span').text('');
-        }
+            // GENERANDO PASS
+            $(document).ready(function () {
+                // process the form
+                $('.btn-reset-test').click(function (event) {
+                    $('input[name=quantity]').val(5);
+                    $('.icheckbox_flat-blue').addClass('checked');
+                    $('input[type=checkbox]').attr('checked', true);
+                    $('input[name=symbols]').parent().removeClass('checked');
+                    $('input[name=segment_count]').val(1);
+                    $('input[name=segment_length]').val(6);
 
-        // GENERANDO PASS
-        $(document).ready(function () {
-            // process the form
-            $('.btn-reset-test').click(function (event) {
-                $('input[name=quantity]').val(5);
-                $('.icheckbox_flat-blue').addClass('checked');
-                $('input[type=checkbox]').attr('checked', true);
-                $('input[name=symbols]').parent().removeClass('checked');
-                $('input[name=segment_count]').val(1);
-                $('input[name=segment_length]').val(6);
+                    event.preventDefault();
+                    event.stopPropagation();
+                });
 
-                event.preventDefault();
-                event.stopPropagation();
-            });
+                $('#prueba form').one("submit", function (event) {
+                    var formData = {
+                        'quantity': $('input[name=quantity]').val(),
+                        'segment_count': $('input[name=segment_count]').val(),
+                        'segment_length': $('input[name=segment_length]').val()
+                    };
 
-            $('#prueba form').one("submit", function (event) {
-                var formData = {
-                    'quantity': $('input[name=quantity]').val(),
-                    'segment_count': $('input[name=segment_count]').val(),
-                    'segment_length': $('input[name=segment_length]').val()
-                };
-
-                if ($('input[name=uppercase]').parent().hasClass("checked")) {
-                    formData['uppercase'] = '1';
-                }
-                ;
-                if ($('input[name=lowercase]').parent().hasClass("checked")) {
-                    formData['lowercase'] = '1';
-                }
-                ;
-                if ($('input[name=numbers]').parent().hasClass("checked")) {
-                    formData['numbers'] = '1';
-                }
-                ;
-                if ($('input[name=symbols]').parent().hasClass("checked")) {
-                    formData['symbols'] = '1';
-                }
-                ;
-                if ($('input[name=avoid_similar]').parent().hasClass("checked")) {
-                    formData['avoid_similar'] = '1';
-                }
-                ;
-
-                $.ajax({
-                    type: 'GET',
-                    url: '{{path('hackzilla_password_generator_hybrid_form')}}',
-                    data: formData,
-                    success: function (msg) {
-                        $("#passTemp").html(msg);
-                        recogerPass();
-                    },
-                    error: function (msg) {
-                        $("#passTemp").html(msg);
+                    if ($('input[name=uppercase]').parent().hasClass("checked")) {
+                        formData['uppercase'] = '1';
                     }
-                })
-                        .done(function (data) {
-                        });
-                event.preventDefault();
-                event.stopPropagation();
+                    ;
+                    if ($('input[name=lowercase]').parent().hasClass("checked")) {
+                        formData['lowercase'] = '1';
+                    }
+                    ;
+                    if ($('input[name=numbers]').parent().hasClass("checked")) {
+                        formData['numbers'] = '1';
+                    }
+                    ;
+                    if ($('input[name=symbols]').parent().hasClass("checked")) {
+                        formData['symbols'] = '1';
+                    }
+                    ;
+                    if ($('input[name=avoid_similar]').parent().hasClass("checked")) {
+                        formData['avoid_similar'] = '1';
+                    }
+                    ;
+
+                    $.ajax({
+                        type: 'GET',
+                        url: '{{path('hackzilla_password_generator_hybrid_form')}}',
+                        data: formData,
+                        success: function (msg) {
+                            $("#passTemp").html(msg);
+                            recogerPass();
+                        },
+                        error: function (msg) {
+                            $("#passTemp").html(msg);
+                        }
+                    })
+                            .done(function (data) {
+                            });
+                    event.preventDefault();
+                    event.stopPropagation();
+                });
             });
-        });
-    </script>
+        </script>
 
-    <div id="passTemp" style="display:none;"></div>
+        <div id="passTemp" style="display:none;"></div>
 
-    <script>
-        function recogerPass() {
-            $('#marco').css('display', 'block');
-            $('.passwords').html($('#passTemp').find('#marco').html());
-            $("#passTemp").html("");
-        }
+        <script>
+            function recogerPass() {
+                $('#marco').css('display', 'block');
+                $('.passwords').html($('#passTemp').find('#marco').html());
+                $("#passTemp").html("");
+            }
 
-        function selectPass(pass) {
-            $(".campoPass").val(pass);
-            $("#myModal").modal('hide');
-        }
-    </script>
+            function selectPass(pass) {
+                $(".campoPass").val(pass);
+                $("#myModal").modal('hide');
+            }
+        </script>
 
-    <div class="passwords modal-body" id="marco" style="display:hidden">
-        {% if passwords is not null %}
-            <h4>{{ "HEADING_PASSWORDS"|trans }}</h4>
-        {% endif %}
-        <div>
-            <ul>
-                {% for password in passwords -%}
-                    <li><a href="#" onclick="selectPass('{{ password }}');">{{ password }}</a></li>
-                {% endfor %}
-            </ul>
+        <div class="passwords modal-body" id="marco" style="display:hidden">
+            {% if passwords is not null %}
+                <h4>{{ "HEADING_PASSWORDS"|trans }}</h4>
+            {% endif %}
+            <div>
+                <ul>
+                    {% for password in passwords -%}
+                        <li><a href="#" onclick="selectPass('{{ password }}');">{{ password }}</a></li>
+                        {% endfor %}
+                </ul>
+            </div>
         </div>
-    </div>
 
-    <div class="modal-footer actions">
-        <input type="submit" class="btn btn-success" value="{{ 'BUTTON_GENERATE'|trans }}">
-        <input type="reset" class="btn btn-danger btn-reset-test" value="{{ 'BUTTON_RESET'|trans }}">       
-    </div>
-    {{ form_end(form) }}
+        <div class="modal-footer actions">
+            <input type="submit" class="btn btn-success" value="{{ 'BUTTON_GENERATE'|trans }}">
+            <input type="reset" class="btn btn-danger btn-reset-test" value="{{ 'BUTTON_RESET'|trans }}">       
+        </div>
+        {{ form_end(form) }}
 
-    {% if error %}
-        <div class="alert alert-warning" role="alert">
-            <strong>{{ 'ERROR_HEADING'|trans }}</strong>&nbsp;
-            {%- if error == 'CharactersNotFoundException' %}
-            {{ 'ERROR_CHARACTERS_NOT_FOUND_EXCEPTION'|trans }}.
-        {% else %}
-            {{ 'ERROR_UNKNOWN'|trans }}.
-        {% endif -%}
-    </div>
-    {% endif %}
-        {% endblock form %}
+        {% if error %}
+            <div class="alert alert-warning" role="alert">
+                <strong>{{ 'ERROR_HEADING'|trans }}</strong>&nbsp;
+                {%- if error == 'CharactersNotFoundException' %}
+                {{ 'ERROR_CHARACTERS_NOT_FOUND_EXCEPTION'|trans }}.
+            {% else %}
+                {{ 'ERROR_UNKNOWN'|trans }}.
+            {% endif -%}
+        </div>
+        {% endif %}
+            {% endspaceless %}
+                {% endblock form %}

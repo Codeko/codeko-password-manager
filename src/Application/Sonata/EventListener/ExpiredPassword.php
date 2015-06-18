@@ -28,7 +28,7 @@ class ExpiredPassword {
 
     public function onCheckExpired(GetResponseEvent $event) {
 
-        if (($this->security_context->getToken() ) && ( $this->security_context->isGranted('IS_AUTHENTICATED_FULLY') )) {
+        if (($this->security_context->getToken()) && ($this->security_context->isGranted('IS_AUTHENTICATED_FULLY'))) {
 
             $route_name = $event->getRequest()->get('_route');
 

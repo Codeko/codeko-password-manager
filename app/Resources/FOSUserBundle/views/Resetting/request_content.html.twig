@@ -1,22 +1,24 @@
-<main class="container">
-    <form class="form-signin bounceIn animated fos_user_resetting_request" action="{{ path('fos_user_resetting_send_email') }}" method="post">
-        <header class="decoracionCabecera"></header>
-        <section class="cuerpoFormulario">
-            <h2 class="form-signin-heading"><img id="headerLogo" src="{{ asset('bundles/applicationsonatauser/images/headerLogo.png') }}"/></h2>    
-            <input type="text" id="inputUsuario username" class="form-control" name="username" placeholder="{{ 'resetting.request.username'|trans({}, 'FOSUserBundle') }} / {{ 'form.email'|trans({}, 'FOSUserBundle') }}" maxlength="30" title="Introduzca un nombre de usuario" alt = "Nombre de usuario" required>
-            <div class="checkbox">               
-            </div>
-            {% if invalid_username is defined %}
-                <div id="login-error" class="alert alert-danger">
-                    <p>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}, 'FOSUserBundle') }}</p>
+{% spaceless %}
+    <main class="container">
+        <form class="form-signin bounceIn animated fos_user_resetting_request" action="{{ path('fos_user_resetting_send_email') }}" method="post">
+            <header class="decoracionCabecera"></header>
+            <section class="cuerpoFormulario">
+                <h2 class="form-signin-heading"><img id="headerLogo" src="{{ asset('bundles/applicationsonatauser/images/headerLogo.png') }}"/></h2>    
+                <input type="text" id="inputUsuario username" class="form-control" name="username" placeholder="{{ 'resetting.request.username'|trans({}, 'FOSUserBundle') }} / {{ 'form.email'|trans({}, 'FOSUserBundle') }}" maxlength="30" title="Introduzca un nombre de usuario" alt = "Nombre de usuario" required>
+                <div class="checkbox">               
                 </div>
-            {% endif %}
-            <button class="btn btn-lg btn-success btn-block" type="submit">{{ 'resetting.request.submit'|trans({}, 'FOSUserBundle') }}</button>
-            <div class="nuevoUsuario">
-                <ul class="nav nav-pills">
-                    <li><a href="{{ path('login') }}">Volver atrás</a></li>
-                </ul>
-            </div>
-        </section>          
-    </form>
-</main>
+                {% if invalid_username is defined %}
+                    <div id="login-error" class="alert alert-danger">
+                        <p>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}, 'FOSUserBundle') }}</p>
+                    </div>
+                {% endif %}
+                <button class="btn btn-lg btn-success btn-block" type="submit">{{ 'resetting.request.submit'|trans({}, 'FOSUserBundle') }}</button>
+                <div class="nuevoUsuario">
+                    <ul class="nav nav-pills">
+                        <li><a href="{{ path('login') }}">Volver atrás</a></li>
+                    </ul>
+                </div>
+            </section>          
+        </form>
+    </main>
+{% endspaceless %}
