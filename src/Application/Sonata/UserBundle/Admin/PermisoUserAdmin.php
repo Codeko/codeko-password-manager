@@ -52,6 +52,11 @@ class PermisoUserAdmin extends Admin {
 
         $formMapper
                 ->add('permisos', 'hidden')
+                ->add('password', 'entity', array(
+                    'class' => 'ApplicationSonataUserBundle:Password',
+                    'label' => 'Contraseña',
+                    'required' => true
+                ))
                 ->add('user', 'entity', array(
                     'class' => 'ApplicationSonataUserBundle:User',
                     'label' => 'Usuario',

@@ -269,7 +269,7 @@ class PasswordAdmin extends Admin {
                 ->end()
                 ->end();
         // SECCIÓN PERMISOS 
-        if ($user == $this->getSubject()->getUser()) {
+        if ($user == $this->getSubject()->getUser() || $user->isSuperAdmin()) {
             $formMapper->tab('Permisos')
                     ->with('Permisos de Usuario', array('class' => 'col-md-6'))
                     ->add('permisosUser', 'collection', array(
