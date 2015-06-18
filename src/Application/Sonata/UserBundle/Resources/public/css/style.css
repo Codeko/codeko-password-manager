@@ -92,21 +92,6 @@ th, td {
     vertical-align: middle !important;
 }
 
-.alert-expired {
-    margin-top: -19px;
-    opacity: 1;
-    background: none repeat scroll 0% 0% #FFF;
-    z-index: 0;
-    border-radius: 0px; 
-    -moz-border-radius: 0px;
-    -webkit-border-radius: 0px;
-}
-
-.alert-expired:hover {
-    background-color: grey;
-    z-index: 10000;
-}
-
 .label-disabled {
     background-color: grey !important;
 }
