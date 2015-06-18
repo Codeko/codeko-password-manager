@@ -51,6 +51,11 @@ class PermisoGrupoAdmin extends Admin {
         $formMapper
                 //->add('permisos')
                 ->add('permisos','hidden')
+                ->add('password', 'entity', array(
+                    'class' => 'ApplicationSonataUserBundle:Password',
+                    'label' => 'Contraseña',
+                    'required' => true
+                ))
                 ->add('grupo', 'entity', array(
                     'label' => 'Grupo',
                     'class' => 'ApplicationSonataUserBundle:Group',

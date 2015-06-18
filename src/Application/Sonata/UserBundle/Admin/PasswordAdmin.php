@@ -267,29 +267,30 @@ class PasswordAdmin extends Admin {
                     'required' => false
                 ))
                 ->end()
-                ->end()
-                // SECCIÓN PERMISOS 
-                ->tab('Permisos')
-                ->with('Permisos de Usuario', array('class' => 'col-md-6'))
-                ->add('permisosUser', 'collection', array(
-                    'type' => new PermisoUserType(),
-                    'allow_add' => true,
-                    'allow_delete' => true,
-                    'required' => false,
-                    'label' => 'Permisos de usuario',
-                    'by_reference' => false))
-                ->end()
-                ->with('Permisos de Grupo', array('class' => 'col-md-6'))
-                ->add('permisosGrupo', 'collection', array(
-                    'type' => new PermisoGrupoType(),
-                    'allow_add' => true,
-                    'allow_delete' => true,
-                    'required' => false,
-                    'label' => 'Permisos de grupo',
-                    'by_reference' => false))
-                ->end()
-                ->end()
-        ;
+                ->end();
+        // SECCIÓN PERMISOS 
+        if ($user == $this->getSubject()->getUser() || $user->isSuperAdmin()) {
+            $formMapper->tab('Permisos')
+                    ->with('Permisos de Usuario', array('class' => 'col-md-6'))
+                    ->add('permisosUser', 'collection', array(
+                        'type' => new PermisoUserType(),
+                        'allow_add' => true,
+                        'allow_delete' => true,
+                        'required' => false,
+                        'label' => 'Permisos de usuario',
+                        'by_reference' => false))
+                    ->end()
+                    ->with('Permisos de Grupo', array('class' => 'col-md-6'))
+                    ->add('permisosGrupo', 'collection', array(
+                        'type' => new PermisoGrupoType(),
+                        'allow_add' => true,
+                        'allow_delete' => true,
+                        'required' => false,
+                        'label' => 'Permisos de grupo',
+                        'by_reference' => false))
+                    ->end()
+                    ->end();
+        }
     }
 
     public function getNewInstance() {
