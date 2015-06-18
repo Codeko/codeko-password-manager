@@ -1,65 +1,45 @@
-<td class="sonata-ba-list-field sonata-ba-list-field-{{ field_description.type }}" objectId="{{ admin.id(object) }}">
-    {% set route = field_description.options.route.name|default(null) %}
-    {% set action = route == 'show' ? 'VIEW' : route|upper %}
-
-    {% if
-        field_description.options.identifier is defined
-        and route
-        and action
-        and admin.hasRoute(route)
-        and admin.isGranted(action, action in ['VIEW', 'EDIT'] ? object : null)
-    %}
-    {%- block field %}
-
-    {% if field_description.options.usuario_activo is defined %}
-        {% if object.user == field_description.options.usuario_activo %}
-            <a class="sonata-link-identifier" href="{{ admin.generateObjectUrl(route, object, field_description.options.route.parameters) }}">
-                {{ value }}
-            </a>
-        {% else %}
-            {% if field_description.options.permisos_edicion is defined %}
-                {% if field_description.options.tam_permisos_edicion > 0 %}
-
-                    {% set arrayPermisos = field_description.options.permisos_edicion %}
-                    {% set idEditables = [] %}
-
-                    {% for id in arrayPermisos %}
-                        {% if id == object.id %}
-                            {% set idEditables = idEditables|merge([object.id]) %} 
+{% spaceless %}
+    <td class="sonata-ba-list-field sonata-ba-list-field-{{ field_description.type }}" objectId="{{ admin.id(object) }}">
+        {% set route = field_description.options.route.name|default(null) %}
+        {% set action = route == 'show' ? 'VIEW' : route|upper %}
+        {% if field_description.options.identifier is defined and route and action and admin.hasRoute(route) and admin.isGranted(action, action in ['VIEW', 'EDIT'] ? object : null) %}
+            {%- block field %}
+            {% if field_description.options.usuario_activo is defined %}
+                {% if object.user == field_description.options.usuario_activo %}
+                    <a class="sonata-link-identifier" href="{{ admin.generateObjectUrl(route, object, field_description.options.route.parameters) }}">{{ value }}</a>
+                {% else %}
+                    {% if field_description.options.permisos_edicion is defined %}
+                        {% if field_description.options.tam_permisos_edicion > 0 %}
+                            {% set arrayPermisos = field_description.options.permisos_edicion %}
+                            {% set idEditables = [] %}
+                            {% for id in arrayPermisos %}
+                                {% if id == object.id %}
+                                    {% set idEditables = idEditables|merge([object.id]) %} 
+                                {% endif %}
+                            {% endfor %}
+                            {% if object.id in idEditables %}
+                                <a class="sonata-link-identifier" href="{{ admin.generateObjectUrl(route, object, field_description.options.route.parameters) }}">{{ value }}</a>
+                            {% else %}
+                                <span style="cursor:default;" title="No tienes permiso de edición sobre esta contraseña" class="sonata-link-identifier">{{ value }}</span> 
+                            {% endif %}
                         {% endif %}
-                    {% endfor %}
-
-                    {% if object.id in idEditables %}
-                        <a class="sonata-link-identifier" href="{{ admin.generateObjectUrl(route, object, field_description.options.route.parameters) }}">
-                            {{ value }}
-                        </a>
-                    {% else %}
-                        <span style="cursor:default;" title="No tienes permiso de edición sobre esta contraseña" class="sonata-link-identifier">
-                            {{ value }}
-                        </span> 
-                    {% endif %}
-
-                {% endif %}
-            {% endif %}              
-        {% endif %} 
-    {% else %}
-        <a class="sonata-link-identifier" href="{{ admin.generateObjectUrl(route, object, field_description.options.route.parameters) }}">
-            {{ value }}
-        </a>
-    {% endif %}
-
-    {% endblock -%}
-        {% else %}
-            {% set isEditable = field_description.options.editable is defined and field_description.options.editable and admin.isGranted('EDIT', object) %}
-            {% set xEditableType = field_description.type|sonata_xeditable_type %}
-
-            {% if isEditable and xEditableType %}
-                {% set url = path('sonata_admin_set_object_field_value', { 'context': 'list', 'field': field_description.name, 'objectId': admin.id(object), 'code': admin.code(object) }|merge(admin.getPersistentParameters|default([])) )  %}
-                <span {% block field_span_attributes %}class="x-editable" data-type="{{ xEditableType }}" data-value="{{ value }}" data-title="{{ field_description.label|trans({}, field_description.translationDomain) }}" data-pk="{{ admin.id(object) }}" data-url="{{ url }}" {% endblock %}>
-                    {{ block('field') }}
-                </span>
+                    {% endif %}              
+                {% endif %} 
             {% else %}
-                {{ block('field') }}
+                <a class="sonata-link-identifier" href="{{ admin.generateObjectUrl(route, object, field_description.options.route.parameters) }}">{{ value }}</a>
             {% endif %}
-            {% endif %}
-            </td>
+
+            {% endblock -%}
+                {% else %}
+                    {% set isEditable = field_description.options.editable is defined and field_description.options.editable and admin.isGranted('EDIT', object) %}
+                    {% set xEditableType = field_description.type|sonata_xeditable_type %}
+
+                    {% if isEditable and xEditableType %}
+                        {% set url = path('sonata_admin_set_object_field_value', { 'context': 'list', 'field': field_description.name, 'objectId': admin.id(object), 'code': admin.code(object) }|merge(admin.getPersistentParameters|default([])) )  %}
+                        <span {% block field_span_attributes %}class="x-editable" data-type="{{ xEditableType }}" data-value="{{ value }}" data-title="{{ field_description.label|trans({}, field_description.translationDomain) }}" data-pk="{{ admin.id(object) }}" data-url="{{ url }}" {% endblock %}>{{ block('field') }}</span>
+                    {% else %}
+                        {{ block('field') }}
+                    {% endif %}
+                    {% endif %}
+                    </td>
+                    {% endspaceless %}
