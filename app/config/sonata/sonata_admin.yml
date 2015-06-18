@@ -59,7 +59,7 @@ sonata_admin:
                     code: application_sonata_user.admin.tipo_pass
                     icon: fa-tags
                     text: TIPOS DE CONTRASEÑA
-                    color: bg-lime
+                    color: bg-orange
                     filters:
                         status: { type: 3, value: 0 } 
                         # 3 => NumberType::TYPE_EQUAL     
