@@ -20,7 +20,16 @@
                                 <i class="fa fa-sliders"></i>
                             {% endif %}    
                             <h3 class="box-title">{{ group.label|trans({}, group.label_catalogue) }}</h3>
+                            <div class="box-tools pull-right">
+                                <button class="btn btn-box-tool" id="min" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                                <button class="btn btn-box-tool" data-widget="remove">
+                                    <i class="fa fa-times"></i>
+                                </button>      
+                            </div>
                         </div>
+
                         <div class="box-body">
                             <table class="table table-hover">
                                 <tbody>
@@ -56,12 +65,14 @@
                                                                     </ul>
                                                                 {% endif %}
                                                             {% endif %}
-                                                            {#{% if admin.hasroute('list') and admin.isGranted('LIST') %}
-                                                                <a class="btn btn-link btn-flat" href="{{ admin.generateUrl('list')}}">
-                                                                    <i class="glyphicon glyphicon-list"></i>
-                                                                    {% trans from 'SonataAdminBundle' %}link_list{% endtrans -%}
-                                                                </a>
-                                                            {% endif %}#}
+                                                            {% if group.label != 'Password Manager' %}
+                                                                {% if admin.hasroute('list') and admin.isGranted('LIST') %}
+                                                                    <a class="btn btn-link btn-flat" href="{{ admin.generateUrl('list')}}">
+                                                                        <i class="glyphicon glyphicon-list"></i>
+                                                                        {% trans from 'SonataAdminBundle' %}link_list{% endtrans -%}
+                                                                    </a>
+                                                                {% endif %}
+                                                            {% endif %}
                                                         </div>
                                                     </td>
                                                 {% endif %}
