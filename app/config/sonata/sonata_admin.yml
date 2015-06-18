@@ -14,7 +14,7 @@ sonata_admin:
         edit:    SonataAdminBundle:CRUD:edit.html.twig
         preview: SonataAdminBundle:CRUD:preview.html.twig
         search:              SonataAdminBundle:Core:search.html.twig
-        search_result_block: SonataAdminBundle:Block:block_search_result.html.twig       
+        search_result_block: SonataAdminBundle:Block:block_search_result.html.twig     
         
  #   security:
         #handler: sonata.admin.security.handler.role
@@ -25,6 +25,57 @@ sonata_admin:
                 position: left
                 class: col-md-12
                 type: sonata.admin.block.admin_list
+     
+            -
+                class:    col-lg-3 col-xs-6
+                position: top
+                type:     sonata.admin.block.stats
+                settings:
+                    code: password.pass.servicio
+                    icon: fa-key
+                    text: Ver contraseñas
+                    color: bg-green
+                    filters:
+                        status: { type: 3, value: 0 } 
+                        # 3 => NumberType::TYPE_EQUAL  
+            
+            -
+                class:    col-lg-3 col-xs-6
+                position: top
+                type:     sonata.admin.block.stats
+                settings:
+                    code:  sonata.classification.admin.category
+                    icon:  fa-sitemap
+                    text:  Ver categorías
+                    color: bg-red
+                    filters:
+                        status: { type: 3, value: 0 } 
+                        # 3 => NumberType::TYPE_EQUAL
+            
+            -
+                class:    col-lg-3 col-xs-6
+                position: top
+                type:     sonata.admin.block.stats
+                settings:
+                    code: application_sonata_user.admin.tipo_pass
+                    icon: fa-tags
+                    text: Ver tipos de contraseña
+                    filters:
+                        status: { type: 3, value: 0 } 
+                        # 3 => NumberType::TYPE_EQUAL     
+                
+            -
+                class:    col-lg-3 col-xs-6
+                position: top
+                type:     sonata.admin.block.stats
+                settings:
+                    code: sonata.media.admin.media
+                    icon: fa-file
+                    text: Ver archivos
+                    color: bg-yellow
+                    filters:
+                        status: { type: 3, value: 0 } 
+                        # 3 => NumberType::TYPE_EQUAL  
                 
             -   
                 position: right
