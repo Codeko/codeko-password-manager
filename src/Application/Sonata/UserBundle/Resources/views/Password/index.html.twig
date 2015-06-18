@@ -21,39 +21,39 @@
             </tr>
         </thead>
         <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('managePass_show', { 'id': entity.id }) }}">{{ entity.titulo }}</a></td>
-                <td>{{ entity.nombreUsuario }}</td>
-                <td>{{ entity.url }}</td>
-                <td>{{ entity.password }}</td>
-                <td>{{ entity.comentario }}</td>
-                <td>{% if entity.fechaExpira %}{{ entity.fechaExpira|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.fechaCreacion %}{{ entity.fechaCreacion|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.fechaModificacion %}{{ entity.fechaModificacion|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.fechaUltimoAcceso %}{{ entity.fechaUltimoAcceso|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.tipoPassword }}</td>
-                <td>{{ entity.id }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('managePass_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('managePass_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
-        {% endfor %}
+            {% for entity in entities %}
+                <tr>
+                    <td><a href="{{ path('managePass_show', { 'id': entity.id }) }}">{{ entity.titulo }}</a></td>
+                    <td>{{ entity.nombreUsuario }}</td>
+                    <td>{{ entity.url }}</td>
+                    <td>{{ entity.password }}</td>
+                    <td>{{ entity.comentario }}</td>
+                    <td>{% if entity.fechaExpira %}{{ entity.fechaExpira|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{% if entity.fechaCreacion %}{{ entity.fechaCreacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{% if entity.fechaModificacion %}{{ entity.fechaModificacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{% if entity.fechaUltimoAcceso %}{{ entity.fechaUltimoAcceso|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{{ entity.tipoPassword }}</td>
+                    <td>{{ entity.id }}</td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a href="{{ path('managePass_show', { 'id': entity.id }) }}">show</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('managePass_edit', { 'id': entity.id }) }}">edit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 
-        <ul>
+    <ul>
         <li>
             <a href="{{ path('managePass_new') }}">
                 Create a new entry
             </a>
         </li>
     </ul>
-    {% endblock %}
+{% endblock %}

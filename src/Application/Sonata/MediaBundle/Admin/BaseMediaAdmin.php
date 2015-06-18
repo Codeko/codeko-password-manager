@@ -23,11 +23,8 @@ abstract class BaseMediaAdmin extends Admin {
 
     protected $pool;
     protected $categoryManager;
-
     public $supportsPreviewMode = true;
-    
-    //Necesitamos idPropietario en la entidad "Media"
-    
+
     public function createQuery($context = 'list') {
         $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
         $idUser = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser()->getId();
@@ -41,7 +38,7 @@ abstract class BaseMediaAdmin extends Admin {
         } else {
             $query = parent::createQuery($context);
         }
-        
+
         return $query;
     }
 
@@ -54,9 +51,7 @@ abstract class BaseMediaAdmin extends Admin {
      */
     public function __construct($code, $class, $baseControllerName, Pool $pool, CategoryManagerInterface $categoryManager) {
         parent::__construct($code, $class, $baseControllerName);
-
         $this->pool = $pool;
-
         $this->categoryManager = $categoryManager;
     }
 
@@ -89,9 +84,7 @@ abstract class BaseMediaAdmin extends Admin {
         }
 
         $formMapper->add('providerName', 'hidden');
-
         $formMapper->getFormBuilder()->addModelTransformer(new ProviderDataTransformer($this->pool, $this->getClass()), true);
-
         $provider = $this->pool->getProvider($media->getProviderName());
 
         if ($media->getId()) {
@@ -131,8 +124,6 @@ abstract class BaseMediaAdmin extends Admin {
         $providers = $this->pool->getProvidersByContext($context);
         $provider = $this->getRequest()->get('provider');
 
-        // if the context has only one provider, set it into the request
-        // so the intermediate provider selection is skipped
         if (count($providers) == 1 && null === $provider) {
             $provider = array_shift($providers)->getName();
             $this->getRequest()->query->set('provider', $provider);
@@ -190,7 +181,6 @@ abstract class BaseMediaAdmin extends Admin {
      */
     public function getObjectMetadata($object) {
         $provider = $this->pool->getProvider($object->getProviderName());
-
         $url = $provider->generatePublicUrl($object, $provider->getFormatName($object, 'admin'));
 
         return new Metadata($object->getName(), $object->getDescription(), $url);

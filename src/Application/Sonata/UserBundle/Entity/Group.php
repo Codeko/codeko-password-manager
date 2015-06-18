@@ -71,7 +71,7 @@ class Group extends BaseGroup {
     public function removePermisos(PermisoGrupo $permiso) {
         $this->permisos->removeElement($permiso);
         $permiso->setPassword(null);
-        $permiso->setGrupo(null);       
+        $permiso->setGrupo(null);
     }
 
 }

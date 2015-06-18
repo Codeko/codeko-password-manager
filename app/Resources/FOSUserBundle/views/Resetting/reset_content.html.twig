@@ -12,9 +12,7 @@
                 </div>
             {% endif %}
             <button class="btn btn-lg btn-success btn-block" type="submit">{{ 'resetting.reset.submit'|trans({}, 'FOSUserBundle') }}</button>
-            <div class="nuevoUsuario">
-                
-            </div>
+            <div class="nuevoUsuario"></div>
         </section>          
     </form>
 </main>
@@ -23,7 +21,6 @@
     function cargarInput() {
         contraseña1 = document.getElementById("fos_user_resetting_form_new_first");
         contraseña2 = document.getElementById("fos_user_resetting_form_new_second");
-
         contraseña1.placeholder = "Nueva contraseña";
         contraseña1.classList.add("form-control");
         contraseña2.placeholder = "Repita la contraseña";

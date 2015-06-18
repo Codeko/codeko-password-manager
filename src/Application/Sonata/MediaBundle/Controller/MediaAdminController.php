@@ -90,10 +90,8 @@ class MediaAdminController extends Controller {
         }
 
         $datagrid = $this->admin->getDatagrid();
-
         $filters = $request->get('filter');
 
-        // set the default context
         if (!$filters || !array_key_exists('context', $filters)) {
             $context = $this->admin->getPersistentParameter('context', $this->get('sonata.media.pool')->getDefaultContext());
         } else {
@@ -101,8 +99,6 @@ class MediaAdminController extends Controller {
         }
 
         $datagrid->setValue('context', null, $context);
-
-        // retrieve the main category for the tree view
         $category = $this->container->get('sonata.classification.manager.category')->getRootCategory($context);
 
         if (!$filters) {
@@ -123,8 +119,6 @@ class MediaAdminController extends Controller {
         }
 
         $formView = $datagrid->getForm()->createView();
-
-        // set the theme for the current Admin Form
         $this->get('twig')->getExtension('form')->renderer->setTheme($formView, $this->admin->getFilterTheme());
 
         return $this->render($this->admin->getTemplate('list'), array(
@@ -167,9 +161,7 @@ class MediaAdminController extends Controller {
         }
 
         if ($this->getRestMethod($request) === 'DELETE') {
-            // check the csrf token
             $this->validateCsrfToken('sonata.delete', $request);
-
             $objectName = $this->admin->toString($object);
 
             try {
@@ -221,9 +213,7 @@ class MediaAdminController extends Controller {
      */
     public function editAction($id = null, Request $request = null) {
         $request = $this->resolveRequest($request);
-        // the key used to lookup the template
         $templateKey = 'edit';
-
         $id = $request->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
 
@@ -232,7 +222,6 @@ class MediaAdminController extends Controller {
         }
 
         if (false === $this->get('security.context')->isGranted('ROLE_EDITAR_MULTIMEDIA', $object)) {
-            //Controlar Voters
             throw new AccessDeniedException('No eres el propietario para editar este archivo');
         }
 
@@ -255,7 +244,6 @@ class MediaAdminController extends Controller {
         if ($form->isSubmitted()) {
             $isFormValid = $form->isValid();
 
-            // persist if the form was valid and if in preview mode the preview was approved
             if ($isFormValid && (!$this->isInPreviewMode($request) || $this->isPreviewApproved($request))) {
                 try {
                     $object = $this->admin->update($object);

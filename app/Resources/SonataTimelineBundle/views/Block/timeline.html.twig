@@ -25,7 +25,7 @@
                                 {% set subject = entry.getComponent('subject') %}
                                 {% set target = entry.getComponent('target') %}
                                 {% set target_text_component = entry.getComponent('target_text') %}
-                                
+
                                 {% if subject.data %}
                                     {% set subject_text = sonata_timeline_generate_link(subject, entry) %}
                                 {% else %}
@@ -60,4 +60,3 @@
         </div>
     {% endif %}   
 {% endblock %}
-    

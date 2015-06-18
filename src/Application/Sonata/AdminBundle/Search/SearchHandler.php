@@ -10,7 +10,6 @@
  */
 
 namespace Application\Sonata\AdminBundle\Search;
-//namespace Sonata\AdminBundle\Search;
 
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Admin\Pool;
@@ -45,21 +44,19 @@ class SearchHandler {
      */
     public function search(AdminInterface $admin, $term, $page = 0, $offset = 20) {
         $datagrid = $admin->getDatagrid();
-
         $found = false;
 
         foreach ($datagrid->getFilters() as $name => $filter) {
             /** @var $filter FilterInterface */
             if ($filter->getOption('global_search', false)) {
                 $filter->setCondition(FilterInterface::CONDITION_AND);
-
-                if($filter->getFormName()=='titulo') {
+                    if ($filter->getFormName() == 'titulo') {
                     $datagrid->setValue('titulo', null, $term);
                 }
-                 if($filter->getFormName()=='name') {
+                if ($filter->getFormName() == 'name') {
                     $datagrid->setValue('name', null, $term);
                 }
-                 if($filter->getFormName()=='nombre') {
+                if ($filter->getFormName() == 'nombre') {
                     $datagrid->setValue('nombre', null, $term);
                 }
                 $found = true;
@@ -71,7 +68,6 @@ class SearchHandler {
         }
 
         $datagrid->buildPager();
-
         $pager = $datagrid->getPager();
         $pager->setPage($page);
         $pager->setMaxPerPage($offset);

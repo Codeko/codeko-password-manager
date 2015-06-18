@@ -87,13 +87,11 @@ class PasswordAdmin extends Admin {
         }
 
         $this->loaded['routes'] = true;
-
         $this->routes = new RouteCollection(
                 $this->getBaseCodeRoute(), $this->getBaseRouteName(), $this->getBaseRoutePattern(), $this->getBaseControllerName()
         );
 
         $this->routeBuilder->build($this, $this->routes);
-
         $this->configureRoutes($this->routes);
 
         foreach ($this->getExtensions() as $extension) {
@@ -332,8 +330,7 @@ class PasswordAdmin extends Admin {
         if (count($pass->getCategory()) === 0) {
             $pass->addCategory($this->getConfigurationPool()->getContainer()->get('doctrine')->getRepository('Application\Sonata\ClassificationBundle\Entity\Category')->find(1));
         }
-
-// PERMISOS USER 
+        // PERMISOS USER 
         $form = $this->getForm()->get('permisosUser');
 
         if ($form->count() > 0) {
@@ -366,7 +363,7 @@ class PasswordAdmin extends Admin {
             }
         }
 
-// PERMISOS GRUPOS 
+        // PERMISOS GRUPOS 
         $form2 = $this->getForm()->get('permisosGrupo');
 
         if ($form2->count() > 0) {
@@ -406,12 +403,12 @@ class PasswordAdmin extends Admin {
     }
 
     public function prePersist($pass) {
-// AÑADIENDO HTTP DELANTE DE URL
+    // AÑADIENDO HTTP DELANTE DE URL
         if (substr($pass->getUrl(), 0, 4) !== 'http' && $pass->getUrl() !== null) {
             $url = $pass->getUrl();
             $pass->setUrl('http://' . $url);
         }
-// CATEGORIA DEFAULT SI NO SE SELECCIONA NINGUNA EN EL FORMULARIO
+    // CATEGORIA DEFAULT SI NO SE SELECCIONA NINGUNA EN EL FORMULARIO
         if (count($pass->getCategory()) === 0) {
             $pass->addCategory($this->getConfigurationPool()->getContainer()->get('doctrine')->getRepository('Application\Sonata\ClassificationBundle\Entity\Category')->find(1));
         }
@@ -419,9 +416,9 @@ class PasswordAdmin extends Admin {
     }
 
     public function getBatchActions() {
-// retrieve the default (currently only the delete action) actions
+    // retrieve the default (currently only the delete action) actions
         $actions = parent::getBatchActions();
-// check user permissions
+    // check user permissions
         $actions['clone'] = [
             'label' => 'Duplicar',
             'ask_confirmation' => false, // If true, a confirmation will be asked before performing the action

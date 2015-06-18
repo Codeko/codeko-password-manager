@@ -52,17 +52,17 @@
         </tbody>
     </table>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('managePass') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('managePass_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('managePass') }}">
+                Back to the list
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('managePass_edit', { 'id': entity.id }) }}">
+                Edit
+            </a>
+        </li>
+        <li>{{ form(delete_form) }}</li>
+    </ul>
 {% endblock %}

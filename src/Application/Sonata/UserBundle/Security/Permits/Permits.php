@@ -48,7 +48,7 @@ class Permits {
     protected function getConnection() {
         return $GLOBALS['kernel']->getContainer()->get('doctrine')->getManager()->getConnection();
     }
-    
+
     protected function getActiveUser() {
         return $GLOBALS['kernel']->getContainer()->get('security.context')->getToken()->getUser();
     }

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata project.
  *
@@ -13,8 +14,8 @@ namespace Applicaation\Sonata\MediaBundle\Model;
 use Imagine\Image\Box;
 use Symfony\Component\Validator\ExecutionContextInterface;
 
-abstract class Media implements MediaInterface
-{
+abstract class Media implements MediaInterface {
+
     /**
      * @var string $name
      */
@@ -109,9 +110,7 @@ abstract class Media implements MediaInterface
      * @var datetime $created_at
      */
     protected $createdAt;
-
     protected $binaryContent;
-
     protected $previousProviderReference;
 
     /**
@@ -123,17 +122,14 @@ abstract class Media implements MediaInterface
      * @var integer $size
      */
     protected $size;
-
     protected $galleryHasMedias;
 
-    public function prePersist()
-    {
+    public function prePersist() {
         $this->setCreatedAt(new \DateTime);
         $this->setUpdatedAt(new \DateTime);
     }
 
-    public function preUpdate()
-    {
+    public function preUpdate() {
         $this->setUpdatedAt(new \DateTime);
     }
 
@@ -141,22 +137,20 @@ abstract class Media implements MediaInterface
      * @static
      * @return array
      */
-    public static function getStatusList()
-    {
+    public static function getStatusList() {
         return array(
-            self::STATUS_OK          => 'ok',
-            self::STATUS_SENDING     => 'sending',
-            self::STATUS_PENDING     => 'pending',
-            self::STATUS_ERROR       => 'error',
-            self::STATUS_ENCODING    => 'encoding',
+            self::STATUS_OK => 'ok',
+            self::STATUS_SENDING => 'sending',
+            self::STATUS_PENDING => 'pending',
+            self::STATUS_ERROR => 'error',
+            self::STATUS_ENCODING => 'encoding',
         );
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setBinaryContent($binaryContent)
-    {
+    public function setBinaryContent($binaryContent) {
         $this->previousProviderReference = $this->providerReference;
         $this->providerReference = null;
         $this->binaryContent = $binaryContent;
@@ -165,24 +159,21 @@ abstract class Media implements MediaInterface
     /**
      * {@inheritdoc}
      */
-    public function resetBinaryContent()
-    {
+    public function resetBinaryContent() {
         $this->binaryContent = null;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getBinaryContent()
-    {
+    public function getBinaryContent() {
         return $this->binaryContent;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getMetadataValue($name, $default = null)
-    {
+    public function getMetadataValue($name, $default = null) {
         $metadata = $this->getProviderMetadata();
 
         return isset($metadata[$name]) ? $metadata[$name] : $default;
@@ -191,8 +182,7 @@ abstract class Media implements MediaInterface
     /**
      * {@inheritdoc}
      */
-    public function setMetadataValue($name, $value)
-    {
+    public function setMetadataValue($name, $value) {
         $metadata = $this->getProviderMetadata();
         $metadata[$name] = $value;
         $this->setProviderMetadata($metadata);
@@ -201,8 +191,7 @@ abstract class Media implements MediaInterface
     /**
      * {@inheritdoc}
      */
-    public function unsetMetadataValue($name)
-    {
+    public function unsetMetadataValue($name) {
         $metadata = $this->getProviderMetadata();
         unset($metadata[$name]);
         $this->setProviderMetadata($metadata);
@@ -211,394 +200,346 @@ abstract class Media implements MediaInterface
     /**
      * {@inheritdoc}
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setDescription($description)
-    {
+    public function setDescription($description) {
         $this->description = $description;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getDescription()
-    {
+    public function getDescription() {
         return $this->description;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setEnabled($enabled)
-    {
+    public function setEnabled($enabled) {
         $this->enabled = $enabled;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getEnabled()
-    {
+    public function getEnabled() {
         return $this->enabled;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setProviderName($providerName)
-    {
+    public function setProviderName($providerName) {
         $this->providerName = $providerName;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getProviderName()
-    {
+    public function getProviderName() {
         return $this->providerName;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setProviderStatus($providerStatus)
-    {
+    public function setProviderStatus($providerStatus) {
         $this->providerStatus = $providerStatus;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getProviderStatus()
-    {
+    public function getProviderStatus() {
         return $this->providerStatus;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setProviderReference($providerReference)
-    {
+    public function setProviderReference($providerReference) {
         $this->providerReference = $providerReference;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getProviderReference()
-    {
+    public function getProviderReference() {
         return $this->providerReference;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setProviderMetadata(array $providerMetadata = array())
-    {
+    public function setProviderMetadata(array $providerMetadata = array()) {
         $this->providerMetadata = $providerMetadata;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getProviderMetadata()
-    {
+    public function getProviderMetadata() {
         return $this->providerMetadata;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setWidth($width)
-    {
+    public function setWidth($width) {
         $this->width = $width;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getWidth()
-    {
+    public function getWidth() {
         return $this->width;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setHeight($height)
-    {
+    public function setHeight($height) {
         $this->height = $height;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getHeight()
-    {
+    public function getHeight() {
         return $this->height;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setLength($length)
-    {
+    public function setLength($length) {
         $this->length = $length;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getLength()
-    {
+    public function getLength() {
         return $this->length;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setCopyright($copyright)
-    {
+    public function setCopyright($copyright) {
         $this->copyright = $copyright;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getCopyright()
-    {
+    public function getCopyright() {
         return $this->copyright;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setAuthorName($authorName)
-    {
+    public function setAuthorName($authorName) {
         $this->authorName = $authorName;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getAuthorName()
-    {
+    public function getAuthorName() {
         return $this->authorName;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setContext($context)
-    {
+    public function setContext($context) {
         $this->context = $context;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getContext()
-    {
+    public function getContext() {
         return $this->context;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setCdnIsFlushable($cdnIsFlushable)
-    {
+    public function setCdnIsFlushable($cdnIsFlushable) {
         $this->cdnIsFlushable = $cdnIsFlushable;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getCdnIsFlushable()
-    {
+    public function getCdnIsFlushable() {
         return $this->cdnIsFlushable;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setCdnFlushIdentifier($cdnFlushIdentifier)
-    {
+    public function setCdnFlushIdentifier($cdnFlushIdentifier) {
         $this->cdnFlushIdentifier = $cdnFlushIdentifier;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getCdnFlushIdentifier()
-    {
+    public function getCdnFlushIdentifier() {
         return $this->cdnFlushIdentifier;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setCdnFlushAt(\DateTime $cdnFlushAt = null)
-    {
+    public function setCdnFlushAt(\DateTime $cdnFlushAt = null) {
         $this->cdnFlushAt = $cdnFlushAt;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getCdnFlushAt()
-    {
+    public function getCdnFlushAt() {
         return $this->cdnFlushAt;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setUpdatedAt(\DateTime $updatedAt = null)
-    {
+    public function setUpdatedAt(\DateTime $updatedAt = null) {
         $this->updatedAt = $updatedAt;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getUpdatedAt()
-    {
+    public function getUpdatedAt() {
         return $this->updatedAt;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setCreatedAt(\DateTime $createdAt = null)
-    {
+    public function setCreatedAt(\DateTime $createdAt = null) {
         $this->createdAt = $createdAt;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getCreatedAt()
-    {
+    public function getCreatedAt() {
         return $this->createdAt;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setContentType($contentType)
-    {
+    public function setContentType($contentType) {
         $this->contentType = $contentType;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getContentType()
-    {
+    public function getContentType() {
         return $this->contentType;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getExtension()
-    {
+    public function getExtension() {
         return pathinfo($this->getProviderReference(), PATHINFO_EXTENSION);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setSize($size)
-    {
+    public function setSize($size) {
         $this->size = $size;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getSize()
-    {
+    public function getSize() {
         return $this->size;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setCdnStatus($cdnStatus)
-    {
+    public function setCdnStatus($cdnStatus) {
         $this->cdnStatus = $cdnStatus;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getCdnStatus()
-    {
+    public function getCdnStatus() {
         return $this->cdnStatus;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getBox()
-    {
+    public function getBox() {
         return new Box($this->width, $this->height);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function __toString()
-    {
-        return $this->getName() ?: 'n/a';
+    public function __toString() {
+        return $this->getName() ? : 'n/a';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setGalleryHasMedias($galleryHasMedias)
-    {
+    public function setGalleryHasMedias($galleryHasMedias) {
         $this->galleryHasMedias = $galleryHasMedias;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getGalleryHasMedias()
-    {
+    public function getGalleryHasMedias() {
         return $this->galleryHasMedias;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getPreviousProviderReference()
-    {
+    public function getPreviousProviderReference() {
         return $this->previousProviderReference;
     }
 
     /**
      * @param ExecutionContextInterface $context
      */
-    public function isStatusErroneous(ExecutionContextInterface $context)
-    {
+    public function isStatusErroneous(ExecutionContextInterface $context) {
         if ($this->getBinaryContent() && $this->getProviderStatus() == self::STATUS_ERROR) {
             $context->addViolationAt('binaryContent', 'invalid', array(), null);
         }
     }
+
 }

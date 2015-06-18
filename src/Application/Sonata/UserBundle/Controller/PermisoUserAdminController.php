@@ -39,7 +39,7 @@ class PermisoUserAdminController extends CRUDController {
             return new RedirectResponse($this->container->get('router')->generate('admin_sonata_user_password_list'));
         }
     }
-    
+
     public function editAction($id = null, Request $request = null) {
         $request = $this->resolveRequest($request);
         $user = $this->get('security.context')->getToken()->getUser();

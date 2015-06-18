@@ -10,6 +10,8 @@
 {% set _actions              = block('actions') %}
 {% set _navbar_title         = block('navbar_title') %}
 {% set _list_filters_actions = block('list_filters_actions') %}
+{% set _user_image        = asset('bundles/applicationsonatauser/images/llave.png') %}
+{% set _profile_uri       = sonata_user.userAdmin.isGranted('SHOW', app.user) ? sonata_user.userAdmin.generateUrl('show', {id: sonata_user.userAdmin.id(app.user)}) : sonata_user.userAdmin.generateUrl('show', {id: sonata_user.userAdmin.id(app.user)}) %}
 
 <!DOCTYPE html>
 <html {% block html_attributes %}class="no-js"{% endblock %}>
@@ -111,7 +113,8 @@
         {% endblock %}
     </title>
 </head>
-<body {% block body_attributes %}class="sonata-bc skin-black fixed"{% endblock %}>
+<body {% block body_attributes %}class="sonata-bc fixed"{% endblock %}>
+{#<body {% block body_attributes %}class="skin-green fixed"{% endblock %}>#}
     {% block sonata_header %}
         <header class="main-header">
             {% block sonata_header_noscript_warning %}
@@ -202,6 +205,18 @@
             <aside class="main-sidebar">
                 <section class="sidebar">
                     {% block sonata_side_nav %}
+                        <div class="user-panel">
+                            <div class="pull-right image">
+                                <img class="img-circle" alt="User Image" src="{{ _user_image }}">
+                            </div>
+                            <div class="pull-right info">
+                                <p>{{app.user.username|capitalize}}</p>
+                                <a href="{{ _profile_uri }}">
+                                    <i class="fa fa-circle text-success"></i>
+                                    Online
+                                </a>
+                            </div>
+                        </div>
                         {% block sonata_sidebar_search %}
                             {% if app.security.token or is_granted('ROLE_SONATA_ADMIN') %}
                                 <form action="{{ url('sonata_admin_search') }}" method="GET" class="sidebar-form" style="margin-top: 16px;" role="search">

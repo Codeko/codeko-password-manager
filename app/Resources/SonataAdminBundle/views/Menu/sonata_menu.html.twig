@@ -9,13 +9,11 @@
 {% block item %}
     {% if item.name != 'sonata_classification' %}       
         {%- if item.displayed %}
-        {#- check role of the group #}
         {%- set display = (item.getExtra('roles') is empty or is_granted('ROLE_SUPER_ADMIN') ) %}
         {%- for role in item.getExtra('roles') if not display %}
         {%- set display = is_granted(role) %}
         {%- endfor %}
         {%- endif %}
-
         {%- if item.displayed and display|default %}
         {%- set active = false %}
         {%- if item.getExtra('active') is not empty and item.getExtra('active') %}

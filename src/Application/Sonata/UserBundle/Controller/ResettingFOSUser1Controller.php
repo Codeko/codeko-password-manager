@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,11 +9,9 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Application\Sonata\UserBundle\Controller;
 
 use Application\Sonata\UserBundle\Controller\ResettingController;
-
 
 /**
  * Class ResettingFOSUser1Controller
@@ -21,7 +20,6 @@ use Application\Sonata\UserBundle\Controller\ResettingController;
  *
  * @author Hugo Briand <briand@ekino.com>
  */
-class ResettingFOSUser1Controller extends ResettingController
-{
-
+class ResettingFOSUser1Controller extends ResettingController {
+    
 }

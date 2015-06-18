@@ -21,8 +21,8 @@ use Sonata\MediaBundle\PHPCR\BaseGalleryHasMedia as BaseGalleryHasMedia;
  *
  * @author <yourname> <youremail>
  */
-class GalleryHasMedia extends BaseGalleryHasMedia
-{
+class GalleryHasMedia extends BaseGalleryHasMedia {
+
     /**
      * @var integer $id
      */
@@ -33,8 +33,8 @@ class GalleryHasMedia extends BaseGalleryHasMedia
      *
      * @return integer $id
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
+
 }

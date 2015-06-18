@@ -19,7 +19,6 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 class GroupAdmin extends Admin {
 
     public $supportsPreviewMode = true;
-    
     protected $formOptions = array(
         'validation_groups' => 'Registration'
     );

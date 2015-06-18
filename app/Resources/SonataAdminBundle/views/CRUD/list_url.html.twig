@@ -1,37 +1,34 @@
 {% extends admin.getTemplate('base_list_field') %}
 
 {% block field %}
-{% spaceless %}
-    {% if value is empty %}
-        -
-    {% else %}
-        {% if field_description.options.url is defined %}
-            {# target url is string #}
-            {% set url_address = field_description.options.url %}
-        {% elseif field_description.options.route is defined and field_description.options.route.name not in ['edit', 'show'] %}
-            {# target url is Symfony route #}
-            {% set parameters = field_description.options.route.parameters|default([]) %}
-
-            {# route with paramter related to object ID #}
-            {% if field_description.options.route.identifier_parameter_name is defined %}
-                {% set parameters = parameters|merge({(field_description.options.route.identifier_parameter_name):(admin.normalizedidentifier(object))}) %}
-            {% endif %}
-
-            {% if field_description.options.route.absolute|default(false) %}
-                {% set url_address = url(field_description.options.route.name, parameters) %}
-            {% else %}
-                {% set url_address = path(field_description.options.route.name, parameters) %}
-            {% endif %}
+    {% spaceless %}
+        {% if value is empty %}
+            -
         {% else %}
-            {# value is url #}
-            {% set url_address = value %}
-        {% endif %}
+            {% if field_description.options.url is defined %}
+                {% set url_address = field_description.options.url %}
+            {% elseif field_description.options.route is defined and field_description.options.route.name not in ['edit', 'show'] %}
+                {% set parameters = field_description.options.route.parameters|default([]) %}
 
-        {% if field_description.options.hide_protocol|default(false) %}
-            {% set value = value|replace({'http://': '', 'https://': ''}) %}
-        {% endif %}
+                {% if field_description.options.route.identifier_parameter_name is defined %}
+                    {% set parameters = parameters|merge({(field_description.options.route.identifier_parameter_name):(admin.normalizedidentifier(object))}) %}
+                {% endif %}
 
-        <a target="_BLANK" href="{{ url_address }}">{{ value }}</a>
-    {% endif %}
-{% endspaceless %}
+                {% if field_description.options.route.absolute|default(false) %}
+                    {% set url_address = url(field_description.options.route.name, parameters) %}
+                {% else %}
+                    {% set url_address = path(field_description.options.route.name, parameters) %}
+                {% endif %}
+            {% else %}
+
+                {% set url_address = value %}
+            {% endif %}
+
+            {% if field_description.options.hide_protocol|default(false) %}
+                {% set value = value|replace({'http://': '', 'https://': ''}) %}
+            {% endif %}
+
+            <a target="_BLANK" href="{{ url_address }}">{{ value }}</a>
+        {% endif %}
+    {% endspaceless %}
 {% endblock %}
