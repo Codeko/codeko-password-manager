@@ -55,12 +55,14 @@
                                                                 </ul>
                                                             {% endif %}
                                                         {% endif %}
-                                                        {#{% if admin.hasroute('list') and admin.isGranted('LIST') %}
-                                                            <a class="btn btn-link btn-flat" href="{{ admin.generateUrl('list')}}">
-                                                                <i class="glyphicon glyphicon-list"></i>
-                                                                {% trans from 'SonataAdminBundle' %}link_list{% endtrans -%}
-                                                            </a>
-                                                        {% endif %}#}
+                                                        {% if group.label != 'Password Manager' %}
+                                                            {% if admin.hasroute('list') and admin.isGranted('LIST') %}
+                                                                <a class="btn btn-link btn-flat" href="{{ admin.generateUrl('list')}}">
+                                                                    <i class="glyphicon glyphicon-list"></i>
+                                                                    {% trans from 'SonataAdminBundle' %}link_list{% endtrans -%}
+                                                                </a>
+                                                            {% endif %}
+                                                        {% endif %}
                                                     </div>
                                                 </td>
                                             {% endif %}
