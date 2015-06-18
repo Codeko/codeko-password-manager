@@ -9,7 +9,7 @@
                     <input class="btn btn-lg btn-success btn-block" type="submit" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}"></input>
                 </div>
                 <div class="nuevoUsuario">
-                <button class="btn btn-lg btn-success btn-block" type="button" onclick="window.location.href = '{{ path('fos_user_change_password') }}'">Editar contraseña</button>
+                    <button class="btn btn-lg btn-success btn-block" type="button" onclick="window.location.href = '{{ path('fos_user_change_password') }}'">Editar contraseña</button>
                 </div>
                 <div class="nuevoUsuario">
                     <ul class="nav nav-pills">
@@ -26,7 +26,6 @@
         usuario = document.getElementById("fos_user_profile_form_username");
         email = document.getElementById("fos_user_profile_form_email");
         contraseña = document.getElementById("fos_user_profile_form_current_password");
-
         usuario.classList.add("form-control");
         email.classList.add("form-control");
         contraseña.classList.add("form-control");

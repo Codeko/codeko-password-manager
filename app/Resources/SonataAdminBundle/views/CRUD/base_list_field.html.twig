@@ -1,15 +1,3 @@
-{#
-
-This file is part of the Sonata package.
-
-(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
-
-For the full copyright and license information, please view the LICENSE
-file that was distributed with this source code.
-
-#}
-
-
 <td class="sonata-ba-list-field sonata-ba-list-field-{{ field_description.type }}" objectId="{{ admin.id(object) }}">
     {% set route = field_description.options.route.name|default(null) %}
     {% set action = route == 'show' ? 'VIEW' : route|upper %}
@@ -31,7 +19,7 @@ file that was distributed with this source code.
         {% else %}
             {% if field_description.options.permisos_edicion is defined %}
                 {% if field_description.options.tam_permisos_edicion > 0 %}
-                    
+
                     {% set arrayPermisos = field_description.options.permisos_edicion %}
                     {% set idEditables = [] %}
 
@@ -74,5 +62,4 @@ file that was distributed with this source code.
                 {{ block('field') }}
             {% endif %}
             {% endif %}
-
             </td>

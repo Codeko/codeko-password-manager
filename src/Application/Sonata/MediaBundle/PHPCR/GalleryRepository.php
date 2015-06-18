@@ -21,7 +21,6 @@ use Sonata\MediaBundle\PHPCR\BaseGalleryRepository;
  *
  * @author <yourname> <youremail>
  */
-class GalleryRepository extends BaseGalleryRepository
-{
-
+class GalleryRepository extends BaseGalleryRepository {
+    
 }

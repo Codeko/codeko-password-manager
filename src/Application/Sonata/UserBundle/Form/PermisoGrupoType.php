@@ -52,7 +52,7 @@ class PermisoGrupoType extends AbstractType {
                         'required' => false,
                         'mapped' => false,
                         'by_reference' => false,
-                        'data' => ['1','2'],
+                        'data' => ['1', '2'],
                         'label' => 'Permisos',
                         'attr' => array('inline' => true)
                     ));

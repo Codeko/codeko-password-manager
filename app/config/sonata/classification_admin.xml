@@ -20,6 +20,7 @@
                     <argument key="list">SonataClassificationBundle:CategoryAdmin:list.html.twig</argument>
                 </argument>
             </call>
+            
         </service>
     </services>
 

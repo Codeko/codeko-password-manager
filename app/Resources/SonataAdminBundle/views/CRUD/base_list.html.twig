@@ -105,10 +105,10 @@
                             {% if not app.request.isXmlHttpRequest %}
                                 <div class="pull-left">
                                     {% if admin.hasRoute('batch') and batchactions|length > 0 %}
-                                        {% if borrarDisable is defined and borrarDisable %}{% else %}
-                                            {% block batch %}
-                                                <script>
-                                                    {% block batch_javascript %}
+                                    {% if borrarDisable is defined and borrarDisable %}{% else %}
+                                        {% block batch %}
+                                            <script>
+                                                {% block batch_javascript %}
                                                     jQuery(document).ready(function ($) {
                                                         $('#list_batch_checkbox').on('ifChanged', function () {
                                                             $(this)
@@ -131,77 +131,77 @@
                                                             $('.checkboxId').prop('checked', true);
                                                         }
                                                     }
-                                                    {% endblock %}
-                                                </script>
-                                                {% block batch_actions %}
-                                                    <label class="checkbox" for="{{ admin.uniqid }}_all_elements">
-                                                        <input type="checkbox" name="all_elements" class="allElements" id="{{ admin.uniqid }}_all_elements">
-                                                        {{ 'all_elements'|trans({}, 'SonataAdminBundle') }}
-                                                        ({{ admin.datagrid.pager.nbresults }})
-                                                    </label>
-                                                    <select name="action" style="width: auto; height: auto" class="form-control">
-                                                        {% for action, options in batchactions %}
-                                                            <option value="{{ action }}">{{ options.label }}</option>
-                                                        {% endfor %}
-                                                    </select>
                                                 {% endblock %}
-                                                <input type="submit" class="btn btn-small btn-primary" value="{{ 'btn_batch'|trans({}, 'SonataAdminBundle') }}">
-                                            {% endblock %}
-                                        {% endif %}
-                                    {% endif %}
-                                </div>
-                                <div class="pull-right">
-
-                                    {% if no_action is defined and no_action %}
-                                        &nbsp; 
-                                    {% else %}        
-                                        <span class="btn-group" style="padding: 10px;margin-right:10px;">
-                                            <a class="btn btn-success btn-sm sonata-ba-action" href="{{ admin.generateUrl('create') }}{% if 'password' in app.request.attributes.get('_route') %}?idCat={% if datagrid.values['category']['value'] is defined %}{{ datagrid.values['category']['value'] }}{% else %}1{% endif %}{% endif %}">
-                                                <i class="fa fa-plus-circle"></i>
-                                                {{ 'link_action_create'|trans({}, 'SonataAdminBundle') }}
-                                            </a>
-                                        </span>
-                                    {% endif %}
-
-                                    {% if admin.hasRoute('export') and admin.isGranted("EXPORT") and admin.getExportFormats()|length %}
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                                <i class="glyphicon glyphicon-export"></i>
-                                                {{ "label_export_download"|trans({}, "SonataAdminBundle") }}
-                                                <span class="caret"></span>
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                {% for format in admin.getExportFormats() %}
-                                                    <li>
-                                                        <a href="{{ admin.generateUrl('export', admin.modelmanager.paginationparameters(admin.datagrid, 0) + {'format' : format}) }}">
-                                                            <i class="glyphicon glyphicon-download"></i>
-                                                            {{ format|upper }}
-                                                        </a>
-                                                    <li>
+                                            </script>
+                                            {% block batch_actions %}
+                                                <label class="checkbox" for="{{ admin.uniqid }}_all_elements">
+                                                    <input type="checkbox" name="all_elements" class="allElements" id="{{ admin.uniqid }}_all_elements">
+                                                    {{ 'all_elements'|trans({}, 'SonataAdminBundle') }}
+                                                    ({{ admin.datagrid.pager.nbresults }})
+                                                </label>
+                                                <select name="action" style="width: auto; height: auto" class="form-control">
+                                                    {% for action, options in batchactions %}
+                                                        <option value="{{ action }}">{{ options.label }}</option>
                                                     {% endfor %}
-                                            </ul>
-                                        </div>
-                                        &nbsp;-&nbsp;
+                                                </select>
+                                            {% endblock %}
+                                            <input type="submit" class="btn btn-small btn-primary" value="{{ 'btn_batch'|trans({}, 'SonataAdminBundle') }}">
+                                        {% endblock %}
                                     {% endif %}
-                                    {% block pager_results %}
-                                        {% include admin.getTemplate('pager_results') %}
-                                    {% endblock %}
-                                </div>
-                            {% endif %}
-                        </div>
-                        {% block pager_links %}
-                            {% if admin.datagrid.pager.haveToPaginate() %}
-                                <hr/>
-                                {% include admin.getTemplate('pager_links') %}
-                            {% endif %}
-                        {% endblock %}
+                                {% endif %}
+                            </div>
+                            <div class="pull-right">
+
+                                {% if no_action is defined and no_action %}
+                                    &nbsp; 
+                                {% else %}        
+                                    <span class="btn-group" style="padding: 10px;margin-right:10px;">
+                                        <a class="btn btn-success btn-sm sonata-ba-action" href="{{ admin.generateUrl('create') }}{% if 'password' in app.request.attributes.get('_route') %}?idCat={% if datagrid.values['category']['value'] is defined %}{{ datagrid.values['category']['value'] }}{% else %}1{% endif %}{% endif %}">
+                                            <i class="fa fa-plus-circle"></i>
+                                            {{ 'link_action_create'|trans({}, 'SonataAdminBundle') }}
+                                        </a>
+                                    </span>
+                                {% endif %}
+
+                                {% if admin.hasRoute('export') and admin.isGranted("EXPORT") and admin.getExportFormats()|length %}
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                            <i class="glyphicon glyphicon-export"></i>
+                                            {{ "label_export_download"|trans({}, "SonataAdminBundle") }}
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            {% for format in admin.getExportFormats() %}
+                                                <li>
+                                                    <a href="{{ admin.generateUrl('export', admin.modelmanager.paginationparameters(admin.datagrid, 0) + {'format' : format}) }}">
+                                                        <i class="glyphicon glyphicon-download"></i>
+                                                        {{ format|upper }}
+                                                    </a>
+                                                <li>
+                                                {% endfor %}
+                                        </ul>
+                                    </div>
+                                    &nbsp;-&nbsp;
+                                {% endif %}
+                                {% block pager_results %}
+                                    {% include admin.getTemplate('pager_results') %}
+                                {% endblock %}
+                            </div>
+                        {% endif %}
                     </div>
-                {% endif %}
-            {% endblock %}
-        </div>
-        {% if admin.hasRoute('batch') %}
-        </form>
-    {% endif %}
+                    {% block pager_links %}
+                        {% if admin.datagrid.pager.haveToPaginate() %}
+                            <hr/>
+                            {% include admin.getTemplate('pager_links') %}
+                        {% endif %}
+                    {% endblock %}
+                </div>
+            {% endif %}
+        {% endblock %}
+    </div>
+    {% if admin.hasRoute('batch') %}
+    </form>
+{% endif %}
 </div>
 {% endblock %}
 {% block list_filters_actions %}

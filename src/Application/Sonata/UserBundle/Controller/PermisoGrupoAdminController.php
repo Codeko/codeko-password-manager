@@ -39,7 +39,7 @@ class PermisoGrupoAdminController extends CRUDController {
             return new RedirectResponse($this->container->get('router')->generate('admin_sonata_user_password_list'));
         }
     }
-    
+
     public function editAction($id = null, Request $request = null) {
         $request = $this->resolveRequest($request);
         $user = $this->get('security.context')->getToken()->getUser();
@@ -113,7 +113,6 @@ class PermisoGrupoAdminController extends CRUDController {
             }
 
             $view = $form->createView();
-
             $this->get('twig')->getExtension('form')->renderer->setTheme($view, $this->admin->getFormTheme());
 
             return $this->render($this->admin->getTemplate($templateKey), array(

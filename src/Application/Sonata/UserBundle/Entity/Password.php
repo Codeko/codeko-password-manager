@@ -2,11 +2,11 @@
 
 namespace Application\Sonata\UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Application\Sonata\UserBundle\Validator\Constraints as RollerworksPassword;
 use Doctrine\ORM\Mapping as ORM;
 use Application\Sonata\ClassificationBundle\Entity\Category;
 use Application\Sonata\MediaBundle\Entity\Media;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Password

@@ -15,7 +15,6 @@ use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Sonata\AdminBundle\Form\Type\Filter\ChoiceType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Page Admin Controller

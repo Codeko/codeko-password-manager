@@ -43,7 +43,7 @@ class PermisoCategoriaUserAdminController extends CRUDController {
     public function editAction($id = null, Request $request = null) {
         $request = $this->resolveRequest($request);
         $user = $this->get('security.context')->getToken()->getUser();
-        
+
         if ($user->isSuperAdmin()) {
             $templateKey = 'edit';
 
@@ -113,7 +113,6 @@ class PermisoCategoriaUserAdminController extends CRUDController {
             }
 
             $view = $form->createView();
-
             $this->get('twig')->getExtension('form')->renderer->setTheme($view, $this->admin->getFormTheme());
 
             return $this->render($this->admin->getTemplate($templateKey), array(

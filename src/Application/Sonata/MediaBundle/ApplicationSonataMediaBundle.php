@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the <name> project.
  *
@@ -20,13 +21,13 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  *
  * @author <yourname> <youremail>
  */
-class ApplicationSonataMediaBundle extends Bundle
-{
+class ApplicationSonataMediaBundle extends Bundle {
+
     /**
      * {@inheritdoc}
      */
-    public function getParent()
-    {
+    public function getParent() {
         return 'SonataMediaBundle';
     }
+
 }

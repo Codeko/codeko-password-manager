@@ -21,8 +21,8 @@ use Sonata\UserBundle\Document\BaseUser as BaseUser;
  *
  * @author <yourname> <youremail>
  */
-class User extends BaseUser
-{
+class User extends BaseUser {
+
     /**
      * @var integer $id
      */
@@ -33,8 +33,8 @@ class User extends BaseUser
      *
      * @return integer $id
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
+
 }

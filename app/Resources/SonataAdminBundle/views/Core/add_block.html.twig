@@ -4,7 +4,6 @@
 
     {% for group in admin_pool.dashboardgroups %}
         {% set display_group = false %}
-
         {% for admin in group.items if display_group == false %}
             {% if admin.hasRoute('create') and admin.isGranted('CREATE') %}
                 {% set display_group = true %}
@@ -20,8 +19,8 @@
     {% set column_count = 1 %}
 
     <div class="dropdown-menu multi-column dropdown-add"
-        {% if column_count > 1 %}style="width: {{ column_count*140 }}px;"{% endif %}
-            >
+         {% if column_count > 1 %}style="width: {{ column_count*140 }}px;"{% endif %}
+         >
         {% for group in groups|reverse %}
             {% if group.label != 'sonata_classification' %}
                 {% set display = (group.roles is empty or is_granted('ROLE_SONATA_ADMIN') ) %}
@@ -35,39 +34,37 @@
                         {% if loop.first %}
                             <div class="container-fluid">
                                 <div class="row">
-                        {% else %}
-                            </ul>
-                        {% endif %}
+                                {% else %}
+                                    </ul>
+                                {% endif %}
+                                <ul class="dropdown-menu{% if column_count > 1 %} col-md-{{ (12/column_count)|round }}{% endif %}">
+                                {% endif %}
 
-                        <ul class="dropdown-menu{% if column_count > 1 %} col-md-{{ (12/column_count)|round }}{% endif %}">
-                    {% endif %}
-
-                    {% if loop.index0 % items_per_column != 0 %}
-                        <li role="presentation" class="divider"></li>
-                    {% endif %}
-                    <li role="presentation" class="dropdown-header">
-                        {{ group.icon|raw }}
-                        {{ group.label|trans({}, group.label_catalogue) }}    
-
-                    </li>
-
-                    {% for admin in group.items %}
-                        {% if admin.hasRoute('create') and admin.isGranted('CREATE') %}
-                            {% if admin.subClasses is empty %}
-                                <li role="presentation">
-                                    <a role="menuitem" tabindex="-1" href="{{ admin.generateUrl('create')}}">{{ admin.label|trans({}, admin.translationdomain) }}</a>
+                                {% if loop.index0 % items_per_column != 0 %}
+                                    <li role="presentation" class="divider"></li>
+                                    {% endif %}
+                                <li role="presentation" class="dropdown-header">
+                                    {{ group.icon|raw }}
+                                    {{ group.label|trans({}, group.label_catalogue) }}    
                                 </li>
-                            {% else %}
-                                {% for subclass in admin.subclasses|keys %}
-                                    <li role="presentation">
-                                        <a role="menuitem" tabindex="-1" href="{{ admin.generateUrl('create', {'subclass': subclass}) }}">{{ subclass|trans({}, admin.translationdomain) }}</a>
-                                    </li>
-                                {% endfor %}
-                            {% endif %}
-                        {% endif %}
-                    {% endfor %}
 
-                    {% if loop.last %}
+                                {% for admin in group.items %}
+                                    {% if admin.hasRoute('create') and admin.isGranted('CREATE') %}
+                                        {% if admin.subClasses is empty %}
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="{{ admin.generateUrl('create')}}">{{ admin.label|trans({}, admin.translationdomain) }}</a>
+                                            </li>
+                                        {% else %}
+                                            {% for subclass in admin.subclasses|keys %}
+                                                <li role="presentation">
+                                                    <a role="menuitem" tabindex="-1" href="{{ admin.generateUrl('create', {'subclass': subclass}) }}">{{ subclass|trans({}, admin.translationdomain) }}</a>
+                                                </li>
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if loop.last %}
                                 </ul>
                             </div>
                         </div>

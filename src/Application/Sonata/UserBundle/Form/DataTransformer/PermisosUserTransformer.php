@@ -3,13 +3,13 @@
 namespace Application\Sonata\UserBundle\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
-use Symfony\Component\Form\Exception\TransformationFailedException;
+
+//use Symfony\Component\Form\Exception\TransformationFailedException;
 //use Symfony\Component\Form\Extension\Core\ObjectChoiceList;
 //use Doctrine\Common\Persistence\ObjectManager;
 //use Application\Sonata\UserBundle\Entity\PermisoUser;
 
 class PermisosUserTransformer implements DataTransformerInterface {
-
     /*
      * 
      */

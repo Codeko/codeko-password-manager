@@ -21,7 +21,6 @@ use Sonata\MediaBundle\PHPCR\BaseMediaRepository;
  *
  * @author <yourname> <youremail>
  */
-class MediaRepository extends BaseMediaRepository
-{
-
+class MediaRepository extends BaseMediaRepository {
+    
 }
