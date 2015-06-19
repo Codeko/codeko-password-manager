@@ -1,0 +1,80 @@
+{% block fos_user_content %}
+    {% spaceless %}
+        {% if session is defined %}
+            {% for type, messages in app.session.flashbag.all() %}
+                {% for message in messages %}
+                    <div class="flash-{{ type }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %} 
+            <style>
+                body{
+                    background: #eeeeee !important;
+                }
+            </style>
+            <script>
+                window.location.href = "{{ url('sonata_admin_redirect') }}";
+            </script>
+        {% endif %}
+
+        <script type="text/javascript">
+            function cargarInput() {
+                usuario = document.getElementById("sonata_user_registration_form_username");
+                email = document.getElementById("sonata_user_registration_form_email");
+                contraseña1 = document.getElementById("sonata_user_registration_form_plainPassword_first");
+                contraseña2 = document.getElementById("sonata_user_registration_form_plainPassword_second");
+
+                usuario.placeholder = "Nombre de usuario";
+                usuario.classList.add("form-control");
+                email.placeholder = "Email";
+                email.classList.add("form-control");
+                contraseña1.placeholder = "Contraseña";
+                contraseña1.classList.add("form-control");
+                contraseña2.placeholder = "Repita la contraseña";
+                contraseña2.classList.add("form-control");
+            }
+
+            function comprobarClaves() {
+                clave1 = document.getElementById("sonata_user_registration_form_plainPassword_first");
+                clave2 = document.getElementById("sonata_user_registration_form_plainPassword_second");
+
+                if (clave1.value === clave2.value) {
+                    return true;
+                } else {
+                    clave1.focus();
+                    clave1.value = "";
+                    clave2.value = "";
+                    clave1.placeholder = "Las contraseñas no coinciden";
+                    clave2.placeholder = "Las contraseñas no coinciden";
+                    return false;
+                }
+            }
+
+        </script>
+
+        <main class="container">
+            <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register form-signin bounceIn animated" onsubmit="return comprobarClaves()">
+                <header class="decoracionCabecera"></header>
+                <section class="cuerpoFormulario">
+                    <h2 class="form-signin-heading"><img id="headerLogo" src="{{ asset('bundles/applicationsonatauser/images/headerLogo.png') }}"/></h2>
+                    <h3>Registro de usuario</h3>   
+                    {{ form_widget(form) }}
+                    <div class="checkbox"></div>
+                    <input class="btn btn-lg btn-success btn-block" type="submit" value="Registrar">
+                    <div class="nuevoUsuario">
+                        <ul class="nav nav-pills">
+                            <li><a href="{{ path('login') }}">Volver al login</a></li>
+                        </ul>
+                    </div>
+                </section>
+            </form>
+        </main>
+        <script type="text/javascript">
+            cargarInput();
+        </script> 
+    {% endspaceless %}
+{% endblock fos_user_content %}

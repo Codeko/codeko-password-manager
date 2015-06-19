@@ -1,0 +1,184 @@
+# Group
+group:
+    edit:
+        submit: Actualizar grupo
+    show:
+        name: Nombre de grupo
+    new:
+        submit: Crear grupo
+    flash:
+        updated: El grupo ha sido actualizado
+        created: El grupo ha sido creado
+        deleted: El grupo ha sido borrado
+
+# Varios
+"Bad credentials.": Nombre de usuario o Contraseña inválidos
+"You are already logged in": Ya se encuentra logueado
+"Latest Actions": Últimas acciones
+
+# Security
+error:
+    ocurred: Se ha producido un error
+
+security:
+    login:
+        username: "Nombre de usuario"
+        password: "Contraseña:"
+        remember_me: Recordar
+        submit: Entrar
+        forgot: ¿Olvidó su contraseña?
+
+# Profile
+profile:
+    show:
+        username: Nombre de usuario
+        email: Email
+    edit:
+        submit: Actualizar usuario
+    flash:
+        updated: El perfil ha sido actualizado
+
+# Password change
+change_password:
+    submit: Cambiar contraseña
+    flash:
+        success: La contraseña se ha cambiado con éxito
+
+# Registration
+registration:
+    check_email: Se ha enviado un email a %email%. Contiene un enlace de activación que debes presionar para activar tu cuenta.
+    confirmed: Felicidades %username%, tu cuenta está ahora confirmada.
+    back: Volver a la página original.
+    submit: Registrar
+    flash:
+        user_created: El usuario se ha creado satisfactoriamente
+    email:
+        subject: Bienvenido %username%!
+        message: |
+            Hola %username%!
+
+            Para completar la validación de tu cuenta - por favor visita %confirmationUrl%
+
+            Atentamente,
+            el Equipo.
+
+# Password resetting
+resetting:
+    password_already_requested: La contraseña para este usuario ya fue solicitada dentro de las últimas 24 horas.
+    check_email: Un email ha sido enviado a %email%. Contiene un enlace de activación que deberá presionar para restablecer su contraseña.
+    request:
+        invalid_username: El usuario o dirección de correo "%username%" no existe.
+        username: "Nombre de usuario"
+        submit: Restablecer contraseña
+    reset:
+        submit: Cambiar contraseña
+    flash:
+        success: La contraseña se ha cambiado con éxito
+    email:
+        subject: CODEKO PASSWORD MANAGER - Reestablecer contraseña para %username%
+        message : |
+            Hola %username%!
+
+            Para restablecer su contraseña por favor visite el siguiente enlace: %confirmationUrl%
+
+            Atentamente,
+            Codeko Password Manager.
+
+# Global strings
+layout:
+    logout: Salir
+    login: Entrar
+    register: Registrar
+    logged_in_as: Identificado como %username%
+
+# Form field labels
+form:
+    group_name: "Nombre de grupo:"
+    username: "Nombre de usuario"
+    email: "Email"
+    current_password: "Contraseña actual:"
+    password: "Contraseña:"
+    password_confirmation: "Repita la contraseña:"
+    new_password: "Nueva contraseña:"
+    new_password_confirmation: "Repita la contraseña:"
+
+# Codigos error HTML
+"Continue": Continuar
+"Switching Protocols": Conmutando protocolos
+"Processing": Procesando
+"Success": Éxito
+"OK": OK
+"Created": Creado
+"Accepted": Aceptada
+"Non-Authoritative Information": Información no autoritativa
+"No Content": Sin contenido
+"Reset Content": Recargar contenido
+"Partial Content": Contenido parcial
+"Multi-Status": Estado múltiple
+"Already Reported": Ya ha sido reportado
+"IM Used": He sido usado
+"Multiple Choices": Múltiples opciones
+"Moved Permanently": Movido permanentemente
+"Found": Encontrado
+"See Other": Vea otra
+"Not Modified": No modificado
+"Use Proxy": Utilice un proxy
+"Switch Proxy": Cambie de proxy
+"Temporary Redirect": Redirección temporal
+"Permanent Redirect": Redirección permanente
+"Bad Request": Solicitud incorrecta
+"Unauthorized": No autorizado
+"Payment Required": Pago requerido
+"Forbidden": Prohibido
+"Not Found": No encontrado
+"Method Not Allowed": Método no permitido
+"Not Acceptable": No aceptable
+"Proxy Authentication Required": Autenticación Proxy requerida
+"Request Timeout": Tiempo de espera agotado
+"Conflict": Conflicto
+"Gone": Ya no disponible
+"Length Required": Requiere longitud
+"Precondition Failed": Falló precondición
+"Request Entity Too Large": Solicitud demasiado larga
+"Request-URI Too Long": URI demasiado larga
+"Unsupported Media Type": Tipo de medio no soportado
+"Requested Range Not Satisfiable": Rango solicitado no disponible
+"Expectation Failed": Falló expectativa
+"I'm a teapot": Soy una tetera
+"Authentication Timeout": Tiempo de autenticación superado
+"Method Failure": Fallo del método
+"Enhance Your Calm": Paciencia
+"Unprocessable Entity": Entidad no procesable
+"Locked": Bloqueado
+"Failed Dependency": Fallo de dependencias
+"Upgrade Required": Actualización requerida
+"Precondition Required": Precondición requerida
+"Too Many Requests": Demasiadas peticiones
+"Request Header Fields Too Large": Petición de campos de cabecera demasiado largos
+"Login Timeout": Tiempo de logueo superado
+"No Response": Sin respuesta
+"Retry With": Reintente con
+"Blocked by Windows Parental Controls": Bloqueado por el control parental de Windows
+"Unavailable For Legal Reasons": No disponible por razones legales
+"Redirect": Redireccionar
+"Request Header Too Large": Petición de cabecera demasiado larga
+"Cert Error": Error de certificado
+"No Cert": Sin certificado
+"HTTP to HTTPS": HTTP a HTTPS
+"Token expired/invalid": Token expirado/inválido
+"Client Closed Request": Petición de cliente cerrada
+"Token required": Token requerido
+"Internal Server Error": Error interno del servidor
+"Not Implemented": No implementado
+"Bad Gateway": Puerta de enlace incorrecta
+"Service Unavailable": Servicio no disponible
+"Gateway Timeout": Tiempo de puerta de enlace superado
+"HTTP Version Not Supported": Version de HTTP no soportada
+"Variant Also Negotiates": Variante también negocia
+"Insufficient Storage": Almacenamiento insuficiente
+"Loop Detected": Bucle detectado
+"Bandwidth Limit Exceeded": Limite de ancho de banda excedido
+"Not Extended": No extendido
+"Network Authentication Required": Autenticación en red requerida
+"Network read timeout error": Error de tiempo de lectura de red superado 
+"Network connect timeout error": Error de tiempo de conexión de red superado 

@@ -1,0 +1,109 @@
+security:
+    
+    # http://symfony.com/doc/current/book/security.html#encoding-the-user-s-password
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+        FOS\UserBundle\Model\UserInterface: sha512
+        Application\Sonata\UserBundle\Entity\Password: 
+            algorithm: sha512
+            encode_as_base64: false
+            iterations: 1
+
+    acl:
+        connection: default
+        
+    # http://symfony.com/doc/current/book/security.html#hierarchical-roles
+    role_hierarchy:
+        ROLE_USER:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_SONATA_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    providers:
+        in_memory:
+            memory:
+                users:
+                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+                    admin: { password: adminpass, roles: [ 'ROLE_SUPER_ADMIN' ] }
+                    pepe: { password: pepe, roles: [ 'ROLE_USER' ] }
+                    
+        fos_userbundle:
+            id: fos_user.user_provider.username_email    
+
+    # the main part of the security, where you can set up firewalls
+    # for specific sections of your app
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        # -> custom firewall for the admin area of the URL
+        admin:
+            pattern:            .*
+            context:            user
+            form_login:
+                provider:       fos_userbundle
+                csrf_provider:  form.csrf_provider
+                login_path:     /login
+                use_forward:    false
+                check_path:     /login_check
+                failure_path:   /login
+                default_target_path: /
+            logout:
+                path:           /logout
+                target:         /login
+            anonymous:          true
+            switch_user:        true
+            #switch_user: { role: ROLE_ADMIN, parameter: _want_to_be_this_user }
+            
+        # default login area for standard users
+
+        # This firewall is used to handle the public login area
+        # This part is handled by the FOS User Bundle
+        main:
+            pattern:             .*
+            context:            user
+            form_login:
+                provider:       fos_userbundle
+                csrf_provider: form.csrf_provider
+                login_path:     /login
+                use_forward:    false
+                check_path:     /login_check
+                failure_path:   /login
+                default_target_path: /
+                always_use_default_target_path: true
+                #use_referer:        true
+                #target_path_parameter: redirect_url
+            logout:             
+                path: /logout
+                target: /login
+            anonymous:          true 
+            switch_user:        false
+            #switch_user: { role: ROLE_ADMIN, parameter: _want_to_be_this_user }
+
+    # with these settings you can restrict or allow access for different parts
+    # of your application based on roles, ip, host or methods
+    # http://symfony.com/doc/current/cookbook/security/access_control.html
+    access_control:
+        # URL of FOSUserBundle which need to be available to anonymous users
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/_error, role: IS_AUTHENTICATED_ANONYMOUSLY }
+                
+        #
+        - { path: ^/registro, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/profile, role: [ROLE_ADMIN, ROLE_USER, ROLE_SONATA_ADMIN]}
+
+        # Admin login page needs to be access without credential
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        # Secured part of the site
+        # This config requires being logged for the whole site and having the admin role for the admin part.
+        # Change these rules to adapt them to your needs
+        - { path: ^/profile/.*, role: [ROLE_ADMIN, ROLE_USER, ROLE_SONATA_ADMIN]}
+        - { path: ^/, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN, ROLE_USER] }
+        - { path: ^/.*, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN, ROLE_USER] }
+     
+    

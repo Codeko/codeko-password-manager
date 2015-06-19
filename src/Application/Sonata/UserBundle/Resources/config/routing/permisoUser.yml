@@ -1,0 +1,30 @@
+permisoUser:
+    path:     /
+    defaults: { _controller: "ApplicationSonataUserBundle:PermisoUser:index" }
+
+permisoUser_show:
+    path:     /{id}/show
+    defaults: { _controller: "ApplicationSonataUserBundle:PermisoUser:show" }
+
+permisoUser_new:
+    path:     /new
+    defaults: { _controller: "ApplicationSonataUserBundle:PermisoUser:new" }
+
+permisoUser_create:
+    path:     /create
+    defaults: { _controller: "ApplicationSonataUserBundle:PermisoUser:create" }
+    methods:  POST
+
+permisoUser_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ApplicationSonataUserBundle:PermisoUser:edit" }
+
+permisoUser_update:
+    path:     /{id}/update
+    defaults: { _controller: "ApplicationSonataUserBundle:PermisoUser:update" }
+    methods:  [POST, PUT]
+
+permisoUser_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ApplicationSonataUserBundle:PermisoUser:delete" }
+    methods:  [POST, DELETE]

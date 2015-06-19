@@ -1,0 +1,58 @@
+admin:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix: /
+
+_sonata_admin:
+    resource: .
+    type:     sonata_admin 
+
+## Security Routes
+default:
+    pattern:   /
+
+login:
+    pattern: /login
+    defaults: { _controller: SonataUserBundle:AdminSecurity:login }    
+
+fos_user_security:
+    resource: "@SonataUserBundle/Resources/config/routing/admin_security.xml"
+
+fos_user_resetting:
+    resource: "@SonataUserBundle/Resources/config/routing/sonata_resetting_1.xml"
+    prefix: /resetting
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+
+fos_user_register:
+    resource: "@SonataUserBundle/Resources/config/routing/sonata_registration_1.xml"
+    prefix: /registro
+        
+sonata_admin_search:
+    path: /search
+    defaults: {_controller: SonataAdminBundle:Core:search}
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /profile 
+
+# REVISAR SUPLANTACION
+#sonata_user_impersonating:
+#    pattern:  /
+#    defaults: { _controller: SonataPageBundle:Page:catchAll } 
+    
+# PASSWORD GENERATOR
+hackzilla_password_generator:
+    resource: "@HackzillaPasswordGeneratorBundle/Resources/config/routing.yml"
+    prefix:   /passgen
+    
+# SONATA MEDIA (FILES)
+gallery:
+    resource: '@SonataMediaBundle/Resources/config/routing/gallery.xml'
+    prefix: /media/gallery
+
+media:
+    resource: '@SonataMediaBundle/Resources/config/routing/media.xml'
+    prefix: /media
+

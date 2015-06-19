@@ -1,0 +1,30 @@
+permisoGrupo:
+    path:     /
+    defaults: { _controller: "ApplicationSonataUserBundle:PermisoGrupo:index" }
+
+permisoGrupo_show:
+    path:     /{id}/show
+    defaults: { _controller: "ApplicationSonataUserBundle:PermisoGrupo:show" }
+
+permisoGrupo_new:
+    path:     /new
+    defaults: { _controller: "ApplicationSonataUserBundle:PermisoGrupo:new" }
+
+permisoGrupo_create:
+    path:     /create
+    defaults: { _controller: "ApplicationSonataUserBundle:PermisoGrupo:create" }
+    methods:  POST
+
+permisoGrupo_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ApplicationSonataUserBundle:PermisoGrupo:edit" }
+
+permisoGrupo_update:
+    path:     /{id}/update
+    defaults: { _controller: "ApplicationSonataUserBundle:PermisoGrupo:update" }
+    methods:  [POST, PUT]
+
+permisoGrupo_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ApplicationSonataUserBundle:PermisoGrupo:delete" }
+    methods:  [POST, DELETE]

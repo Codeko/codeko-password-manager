@@ -1,0 +1,88 @@
+parameters:
+    security.acl.permission.map.class: Sonata\AdminBundle\Security\Acl\Permission\AdminPermissionMap
+
+services:
+      
+    password.pass.servicio:
+      class: Application\Sonata\UserBundle\Admin\PasswordAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, group: Password Manager, label: Contraseñas, icon: fa-key }
+      arguments: [null, Application\Sonata\UserBundle\Entity\Password, ApplicationSonataUserBundle:Password]
+    
+    application_sonata_user.admin.tipo_pass:
+        class: Application\Sonata\UserBundle\Admin\TipoPassAdmin
+        arguments: [~, Application\Sonata\UserBundle\Entity\TipoPass, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Password Manager, label: TipoPass}
+      
+    security.access.password_voter:
+      class:      Application\Sonata\UserBundle\Security\Authorization\Voter\PasswordVoter
+      public:     false
+      tags:
+         - { name: security.voter }
+         
+    sonata.classification.admin.tag:
+      abstract: true
+      public: false
+      
+    sonata.classification.admin.collection:
+      abstract: true
+      public: false    
+      
+    gedmo.listener.timestampable:
+        class: Gedmo\Timestampable\TimestampableListener
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        calls:
+            - [ setAnnotationReader, [ @annotation_reader ] ]
+            
+    kernel.listener.expired_password:
+        class: Application\Sonata\EventListener\ExpiredPassword
+        arguments: [@router, @security.context, @session, @doctrine.orm.entity_manager]
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onCheckExpired, priority: 1 } 
+            
+    sonata.adminbundle.search.handler:
+        class: Application\Sonata\AdminBundle\Search\SearchHandler
+        arguments:
+        -  @sonata.admin.pool
+        
+    sonata.admin.block.search_result:
+        class: Application\Sonata\AdminBundle\Search\AdminSearchBlockService
+        tags:
+            - { name: sonata.block }
+        arguments:
+            - sonata.admin.block.search_result
+            - @templating
+            - @sonata.admin.pool
+            - @sonata.adminbundle.search.handler    
+            
+    application_sonata_user.admin.permiso_user:
+        class: Application\Sonata\UserBundle\Admin\PermisoUserAdmin
+        arguments: [~, Application\Sonata\UserBundle\Entity\PermisoUser, ApplicationSonataUserBundle:PermisoUserAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: PermisoUser}
+
+    application_sonata_user.admin.permiso_grupo:
+        class: Application\Sonata\UserBundle\Admin\PermisoGrupoAdmin
+        arguments: [~, Application\Sonata\UserBundle\Entity\PermisoGrupo, ApplicationSonataUserBundle:PermisoGrupoAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: PermisoGrupo}
+
+    application_sonata_user.admin.permiso_categoria_user:
+        class: Application\Sonata\UserBundle\Admin\PermisoCategoriaUserAdmin
+        arguments: [~, Application\Sonata\UserBundle\Entity\PermisoCategoriaUser, ApplicationSonataUserBundle:PermisoCategoriaUserAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: PermisoCategoriaUser}
+
+    application_sonata_user.admin.permiso_categoria_grupo:
+        class: Application\Sonata\UserBundle\Admin\PermisoCategoriaGrupoAdmin
+        arguments: [~, Application\Sonata\UserBundle\Entity\PermisoCategoriaGrupo, ApplicationSonataUserBundle:PermisoCategoriaGrupoAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: PermisoCategoriaGrupo}
+
+    
+imports:
+    - { resource: sonata/classification_admin.xml }
+    - { resource: sonata/doctrine_orm_admin.xml }
+    

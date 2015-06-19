@@ -1,0 +1,67 @@
+{% spaceless %}
+    {% if block('name') == 'Sexo' %}
+        <script>
+            $(document).ready(function () {
+                $('th').each(function () {
+                    var cellText = $(this).html();
+                    if (cellText === 'Sexo') {
+                        if ($(this).parent().children('td').html().contains('f')) {
+                            $(this).parent().children('td').html('Mujer');
+                        } else if ($(this).parent().children('td').html().contains('m')) {
+                            $(this).parent().children('td').html('Hombre');
+                        } else if ($(this).parent().children('td').html().contains('u')) {
+                            $(this).parent().children('td').html('Desconocido');
+                        }
+                        stopPropagation();
+                    }
+                });
+            });
+        </script>
+    {% endif %}
+{% endspaceless %}
+{% spaceless %}
+    <th{% if(is_diff|default(false)) %} class="diff"{% endif %}>{% block name %}{{ admin.trans(field_description.label, {}, field_description.translationDomain) }}{% endblock %}</th>
+    <td>
+    {% endspaceless %}
+    {% block field %}
+        {% spaceless %}
+            {% if block('name') == 'Contraseña' %}
+                {% if field_description.options.safe %}
+                    <div class="btn-group" id="botonCampoContraseña" style="margin-right:12px;cursor:pointer;"><a class="view_link" title="Mostrar"><i class="glyphicon glyphicon-zoom-in"> <span style="color:black">-</span> </i></a></div><input type="password" id="campoContraseña" size="100%" style="border:0px;background:none;" readonly/>
+                {% else %}
+                    <div class="btn-group" id="botonCampoContraseña" style="margin-right:12px;cursor:pointer;"><a class="view_link" title="Mostrar"><i class="glyphicon glyphicon-zoom-in"> <span style="color:black">-</span> </i></a></div><input type="password" id="campoContraseña" size="100%" style="border:0px;background:none;" readonly/>
+                {% endif %}
+                <script>
+                    $(document).ready(function () {
+                        $('#botonCampoContraseña').click(function () {
+                            if ($('#campoContraseña').hasClass('botonPulsado')) {
+                                $('#campoContraseña').attr('type', 'password');
+                                $('#campoContraseña').toggleClass('botonPulsado');
+                            } else {
+                                $('#campoContraseña').attr('type', 'text');
+                                $('#campoContraseña').toggleClass('botonPulsado');
+                            }
+                        });
+                        $('input#campoContraseña').val('{{ value|nl2br|urldecrypt }}');
+                        $('input#campoContraseña').val('{{ value|nl2br|urldecrypt }}');
+                    });
+                </script>
+            {% else %}
+                {% if field_description.options.safe %}
+                    {{ value|raw }}
+                {% else %}
+                    {% if field_description.options.safe %}
+                        {{ value|raw }}
+                    {% else %}               
+                        {{ value|nl2br }}
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        {% endspaceless %}
+    {% endblock %}
+</td>
+{% block field_compare %}
+    {% spaceless %}
+        {% if(value_compare is defined) %} <td>{% set value = value_compare %} {{ block('field') }}</td> {% endif %}
+    {% endspaceless %}
+{% endblock %}

@@ -1,0 +1,24 @@
+sonata_user:
+    security_acl: true
+    manager_type: orm 
+    # can be orm or mongodb
+    google_authenticator:
+        enabled: true
+        # REVISAR
+        server:  yourserver.com
+        
+    profile:    
+    # Profile Form (firstname, lastname, etc ...)
+        form:
+            type:               sonata_user_profile
+            handler:            sonata.user.profile.form.handler.default
+            name:               sonata_user_profile_form
+            validation_groups:  [Profile]
+
+    admin:
+        user:
+            class: Application\Sonata\UserBundle\Admin\Model\UserAdmin  
+        group:
+            class: Application\Sonata\UserBundle\Admin\Model\GroupAdmin  
+            
+#    impersonating_route: sonata_user_impersonating

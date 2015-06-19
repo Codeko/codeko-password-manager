@@ -1,0 +1,8 @@
+application_sonata_user_tipopass:
+    resource: "@ApplicationSonataUserBundle/Resources/config/routing/tipopass.yml"
+    prefix:   /tipopass
+
+application_sonata_user_permisouser:
+    resource: "@ApplicationSonataUserBundle/Resources/config/routing/permisoUser.yml"
+    prefix:   /permisoUser
+

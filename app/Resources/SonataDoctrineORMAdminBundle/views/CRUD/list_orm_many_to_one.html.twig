@@ -1,0 +1,24 @@
+{% extends admin.getTemplate('base_list_field') %}
+{% block field %}
+    {% spaceless %}
+        {% if value %}
+            {% if field_description.options.usuario_activo is defined %}
+                {% if field_description.options.usuario_activo == value|render_relation_element(field_description) %}
+                    {% if field_description.hasAssociationAdmin and field_description.associationadmin.hasRoute('edit') and field_description.associationadmin.isGranted('EDIT') %}
+                        <a href="{{ field_description.associationadmin.generateObjectUrl(field_description.options.route.name, value, field_description.options.route.parameters) }}">{{ value|render_relation_element(field_description) }}</a>
+                    {% else %}
+                        <span style="cursor:default;">{{ value|render_relation_element(field_description) }}</span>
+                    {% endif %}
+                {% else %}
+                    <span style="cursor:default;">{{ value|render_relation_element(field_description) }}</span>
+                {% endif %}
+            {% else %}
+                {% if field_description.hasAssociationAdmin and field_description.associationadmin.hasRoute('edit') and field_description.associationadmin.isGranted('EDIT') %}
+                    <a href="{{ field_description.associationadmin.generateObjectUrl(field_description.options.route.name, value, field_description.options.route.parameters) }}">{{ value|render_relation_element(field_description) }}</a>
+                {% else %}
+                    <span style="cursor:default;">{{ value|render_relation_element(field_description) }}</span>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    {% endspaceless %}
+{% endblock %}

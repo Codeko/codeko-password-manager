@@ -1,0 +1,80 @@
+{% extends admin.getTemplate('base_list_field') %}
+{% set isEditable = field_description.options.editable is defined and field_description.options.editable and admin.isGranted('EDIT', object) %}
+{% set xEditableType = field_description.type|sonata_xeditable_type %}
+{% block field %}
+    {% spaceless %}
+        {% if field_description.options.usuario_activo is defined %}
+            {% if object.user == field_description.options.usuario_activo %} 
+                {% spaceless %}
+                    {% if value %} 
+                        <span class="label label-success">{%- trans from 'SonataAdminBundle' %}label_type_yes{% endtrans -%}</span>
+                    {% else %}
+                        <span class="label label-danger">{%- trans from 'SonataAdminBundle' %}label_type_no{% endtrans -%}</span>
+                    {% endif %}
+                {% endspaceless %}
+            {% else %}
+                {% if field_description.options.permisos_edicion is defined %}
+                    {% if field_description.options.tam_permisos_edicion > 0 %}
+                        {% set arrayPermisos = field_description.options.permisos_edicion %}
+                        {% set idEditables = [] %}
+
+                        {% for id in arrayPermisos %}
+                            {% if id == object.id %}
+                                {% set idEditables = idEditables|merge([object.id]) %} 
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if object.id in idEditables %}
+                            {% spaceless %}
+                                {% if value %}
+                                    <span disabled class="label label-success">{%- trans from 'SonataAdminBundle' %}label_type_yes{% endtrans -%}</span>  
+                                {% else %}
+                                    <span disabled class="label label-danger">{%- trans from 'SonataAdminBundle' %}label_type_no{% endtrans -%}</span>
+                                {% endif %}
+                            {% endspaceless %}
+                        {% else %}
+                            {% spaceless %}
+                                {% set isEditable = 0 %}
+                                {% set xEditableType = 0 %}
+                                {% if value %}
+                                    <span style="cursor:default;" title="No tienes permiso de edición sobre esta contraseña" class="label label-disabled deshabilitado">{%- trans from 'SonataAdminBundle' %}label_type_yes{% endtrans -%}</span>
+                                {% else %}
+                                    <span style="cursor:default;" class="label label-disabled deshabilitado" title="No tienes permiso de edición sobre esta contraseña" >{%- trans from 'SonataAdminBundle' %}label_type_no{% endtrans -%}</span>
+                                {% endif %}
+                                <script>
+                                    var evento = $('span span.deshabilitado').parent();
+                                    $(function () {
+                                        evento.removeClass();
+                                        evento.attr("data-url", "");
+                                        evento.attr("data-source", "");
+                                        evento.attr("data-type", "");
+                                        evento.attr("data-value", "");
+                                        evento.attr("data-pk", "");
+                                        evento.attr("data-title", "");
+                                        evento.off('click');
+                                    });
+                                </script>
+                            {% endspaceless %}
+                        {% endif %}
+                    {% endif %}
+                {% endif %}              
+            {% endif %} 
+        {% else %}
+            {% spaceless %}
+                {% if value %}
+                    <p class="label label-success">{%- trans from 'SonataAdminBundle' %}label_type_yes{% endtrans -%}</p>
+                {% else %}
+                    <p class="label label-danger">{%- trans from 'SonataAdminBundle' %}label_type_no{% endtrans -%}</p>
+                {% endif %}
+            {% endspaceless %}
+        {% endif %}
+    {% endspaceless %}
+{% endblock %}
+{% if isEditable and xEditableType %}
+    {% block field_span_attributes %}
+        {% spaceless %}
+            {{ parent() }}
+            data-source="[{value: 0, text: '{%- trans from 'SonataAdminBundle' %}label_type_no{% endtrans -%}'},{value: 1, text: '{%- trans from 'SonataAdminBundle' %}label_type_yes{% endtrans -%}'}]"
+        {% endspaceless %}
+    {% endblock %}
+{% endif %}

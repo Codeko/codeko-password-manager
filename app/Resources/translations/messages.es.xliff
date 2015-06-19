@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="SonataAdminBundle.en.xliff" >
+        <body>
+            <trans-unit id="Password List">
+                <source>Password List</source>
+                <target>Contraseñas</target>
+            </trans-unit>
+            <trans-unit id="Categoria Pass List">
+                <source>Categoria Pass List</source>
+                <target>Categorías</target>
+            </trans-unit>
+            <trans-unit id="gender_unknown">
+                <source>gender_unknown</source>
+                <target>Desconocido</target>
+            </trans-unit>
+            <trans-unit id="date_range_start">
+                <source>date_range_start</source>
+                <target>Desde</target>
+            </trans-unit>
+            <trans-unit id="date_range_end">
+                <source>date_range_end</source>
+                <target>Hasta</target>
+            </trans-unit>
+            <trans-unit id="Username Pass">
+                <source>Username Pass</source>
+                <target>Usuario</target>
+            </trans-unit>
+            <trans-unit id="Category">
+                <source>Category</source>
+                <target>Categoria(s)</target>
+            </trans-unit>
+            <trans-unit id="User">
+                <source>User</source>
+                <target>Propietario</target>
+            </trans-unit>
+            <trans-unit id="Action">
+                <source>Action</source>
+                <target></target>
+            </trans-unit>
+            <trans-unit id="Enabled">
+                <source>Enabled</source>
+                <target>Habilitado</target>
+            </trans-unit>
+            <trans-unit id="Category Enabled">
+                <source>Category Enabled</source>
+                <target>Cat.Habilitada</target>
+            </trans-unit>
+            <trans-unit id="active">
+                <source>active</source>
+                <target>Activo</target>
+            </trans-unit>
+            <trans-unit id="disabled">
+                <source>disabled</source>
+                <target>Deshabilitado</target>
+            </trans-unit>
+            <trans-unit id="TipoPass">
+                <source>TipoPass</source>
+                <target>Tipos de contraseñas</target>
+            </trans-unit>
+            <trans-unit id="Tipo Pass List">
+                <source>Tipo Pass List</source>
+                <target>Tipos de contraseñas</target>
+            </trans-unit>
+            <trans-unit id="PermisoUser">
+                <source>PermisoUser</source>
+                <target>Permisos de usuario (Contraseñas)</target>
+            </trans-unit>
+            <trans-unit id="PermisoGrupo">
+                <source>PermisoGrupo</source>
+                <target>Permisos de grupo (Contraseñas)</target>
+            </trans-unit>
+            <trans-unit id="Permiso User List">
+                <source>Permiso User List</source>
+                <target>Permisos de Usuario (Contraseñas)</target>
+            </trans-unit>
+            <trans-unit id="Permiso Grupo List">
+                <source>Permiso Grupo List</source>
+                <target>Permisos de Grupo (Contraseñas)</target>
+            </trans-unit>
+            <trans-unit id="PermisoCategoriaUser">
+                <source>PermisoCategoriaUser</source>
+                <target>Permisos de usuario (Categorías)</target>
+            </trans-unit>
+            <trans-unit id="PermisoCategoriaGrupo">
+                <source>PermisoCategoriaGrupo</source>
+                <target>Permisos de grupo (Categorías)</target>
+            </trans-unit>
+            <trans-unit id="Permiso Categoria User List">
+                <source>Permiso Categoria User List</source>
+                <target>Permisos de Usuario (Categorías)</target>
+            </trans-unit>
+            <trans-unit id="Permiso Categoria Grupo List">
+                <source>Permiso Categoria Grupo List</source>
+                <target>Permisos de Grupo (Categorías)</target>
+            </trans-unit>
+            <trans-unit id="users">
+                <source>users</source>
+                <target>Usuarios</target>
+            </trans-unit>
+            <trans-unit id="groups">
+                <source>groups</source>
+                <target>Grupos</target>
+            </trans-unit>
+            <trans-unit id="label_categories">
+                <source>label_categories</source>
+                <target>Categorías</target>
+            </trans-unit>
+            <trans-unit id="media">
+                <source>media</source>
+                <target>Multimedia</target>
+            </trans-unit>
+            <trans-unit id="ROLE_USER:">
+                <source>ROLE_USER:</source>
+                <target>Usuario común (Sin privilegios)</target>
+            </trans-unit>
+            <trans-unit id="ROLE_ADMIN: ROLE_USER">
+                <source>ROLE_ADMIN: ROLE_USER</source>
+                <target>Administrador (Privilegios de usuario)</target>
+            </trans-unit>
+            <trans-unit id="ROLE_SUPER_ADMIN: ROLE_USER, ROLE_ADMIN, ROLE_SONATA_ADMIN, ROLE_ALLOWED_TO_SWITCH">
+                <source>ROLE_SUPER_ADMIN: ROLE_USER, ROLE_ADMIN, ROLE_SONATA_ADMIN, ROLE_ALLOWED_TO_SWITCH</source>
+                <target>Super Administrador (Todos los privilegios</target>
+            </trans-unit>
+            <trans-unit id="ROLE_SONATA_ADMIN">
+                <source>ROLE_SONATA_ADMIN</source>
+                <target>Administrador Sonata (Privilegios especiales administración)</target>
+            </trans-unit>
+            <trans-unit id="ROLE_ALLOWED_TO_SWITCH">
+                <source>ROLE_ALLOWED_TO_SWITCH</source>
+                <target>Puede suplantar usuario(s)</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

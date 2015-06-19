@@ -1,0 +1,9 @@
+{% extends 'SonataAdminBundle:CRUD:base_list.html.twig' %}
+
+{% block list_table %}
+    {% spaceless %}
+        <div class="col-xs-12 col-md-12">
+            {{ parent() }}
+        </div>
+    {% endspaceless %}
+{% endblock %}
