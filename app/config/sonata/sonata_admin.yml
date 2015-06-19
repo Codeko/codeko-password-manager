@@ -22,7 +22,7 @@ sonata_admin:
         blocks:            
             -
                 position: left
-                class: col-lg-8
+                class: col-lg-12
                 type: sonata.admin.block.admin_list
      
             -
@@ -79,7 +79,7 @@ sonata_admin:
                 
             -   
                 position: right
-                class: col-lg-4
+                class: col-lg-12
                 type: sonata.timeline.block.timeline
                 settings: 
                     context: SONATA_ADMIN

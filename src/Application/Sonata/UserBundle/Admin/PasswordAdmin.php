@@ -267,8 +267,31 @@ class PasswordAdmin extends Admin {
                 ->end()
                 ->end();
         // SECCIÓN PERMISOS 
-        if ($user == $this->getSubject()->getUser() || $user->isSuperAdmin()) {
-            $formMapper->tab('Permisos')
+        if (method_exists($this->getSubject(), 'getUser')) {
+            if ($user == $this->getSubject()->getUser() || $user->isSuperAdmin()) {
+                $formMapper->tab('Permisos')
+                        ->with('Permisos de Usuario', array('class' => 'col-md-6'))
+                        ->add('permisosUser', 'collection', array(
+                            'type' => new PermisoUserType(),
+                            'allow_add' => true,
+                            'allow_delete' => true,
+                            'required' => false,
+                            'label' => 'Permisos de usuario',
+                            'by_reference' => false))
+                        ->end()
+                        ->with('Permisos de Grupo', array('class' => 'col-md-6'))
+                        ->add('permisosGrupo', 'collection', array(
+                            'type' => new PermisoGrupoType(),
+                            'allow_add' => true,
+                            'allow_delete' => true,
+                            'required' => false,
+                            'label' => 'Permisos de grupo',
+                            'by_reference' => false))
+                        ->end()
+                        ->end();
+            }
+        } else {
+            $formMapper->tab('Permisos', array('class' => 'invisible'))
                     ->with('Permisos de Usuario', array('class' => 'col-md-6'))
                     ->add('permisosUser', 'collection', array(
                         'type' => new PermisoUserType(),
@@ -403,12 +426,12 @@ class PasswordAdmin extends Admin {
     }
 
     public function prePersist($pass) {
-    // AÑADIENDO HTTP DELANTE DE URL
+        // AÑADIENDO HTTP DELANTE DE URL
         if (substr($pass->getUrl(), 0, 4) !== 'http' && $pass->getUrl() !== null) {
             $url = $pass->getUrl();
             $pass->setUrl('http://' . $url);
         }
-    // CATEGORIA DEFAULT SI NO SE SELECCIONA NINGUNA EN EL FORMULARIO
+        // CATEGORIA DEFAULT SI NO SE SELECCIONA NINGUNA EN EL FORMULARIO
         if (count($pass->getCategory()) === 0) {
             $pass->addCategory($this->getConfigurationPool()->getContainer()->get('doctrine')->getRepository('Application\Sonata\ClassificationBundle\Entity\Category')->find(1));
         }
@@ -416,9 +439,9 @@ class PasswordAdmin extends Admin {
     }
 
     public function getBatchActions() {
-    // retrieve the default (currently only the delete action) actions
+        // retrieve the default (currently only the delete action) actions
         $actions = parent::getBatchActions();
-    // check user permissions
+        // check user permissions
         $actions['clone'] = [
             'label' => 'Duplicar',
             'ask_confirmation' => false, // If true, a confirmation will be asked before performing the action
