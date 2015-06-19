@@ -234,40 +234,143 @@ class PasswordAdmin extends Admin {
     protected function configureFormFields(FormMapper $formMapper) {
         $user = $this->getActiveUser();
 
-        $formMapper
-                ->tab('General')
-                ->with('Contraseña:', array('class' => 'col-md-6'))
-                ->add('titulo');
-        if ($user->isSuperAdmin()) {
-            $formMapper->add('user', null, array('required' => true));
-        }
-        $formMapper
-                ->add('usernamePass', null, array('required' => false))
-                ->add('url', null, array('required' => false))
-                ->add('plainPassword', 'password', array('label' => 'Contraseña',
-                    'required' => false,
-                    'attr' => array('class' => 'campoPass')
-                ))
-                ->add('comentario', 'textarea', array('required' => false))
-                ->add('fechaExpira', 'sonata_type_datetime_picker', array('required' => false))
-                ->end()
-                ->with('Categorias y tipos', array('class' => 'col-md-6'))
-                ->add('category', 'sonata_type_model', array('label' => 'Categorias', 'expanded' => false, 'by_reference' => false, 'multiple' => true, 'required' => false))
-                ->add('tipoPassword', 'sonata_type_model', array('required' => false))
-                ->add('enabled', null, array('required' => false, 'data' => true))
-                ->end()
-                ->with('Archivos', array('class' => 'col-md-6'))
-                ->add('files', 'sonata_type_model', array(
-                    'label' => 'Archivos',
-                    'by_reference' => false,
-                    'multiple' => true,
-                    'expanded' => true,
-                    'required' => false
-                ))
-                ->end()
-                ->end();
-        // SECCIÓN PERMISOS 
-        if ($user == $this->getSubject()->getUser() || $user->isSuperAdmin()) {
+        if (method_exists($this->getSubject(), 'getUser')) {
+            if ($user == $this->getSubject()->getUser() || $user->isSuperAdmin()) {
+                $formMapper
+                        ->tab('General')
+                        ->with('Contraseña:', array('class' => 'col-md-6'))
+                        ->add('titulo');
+                if ($user->isSuperAdmin()) {
+                    $formMapper->add('user', null, array('required' => true));
+                }
+                $formMapper
+                        ->add('usernamePass', null, array('required' => false))
+                        ->add('url', null, array('required' => false))
+                        ->add('plainPassword', 'password', array('label' => 'Contraseña',
+                            'required' => false,
+                            'attr' => array('class' => 'campoPass')
+                        ))
+                        ->add('comentario', 'textarea', array('required' => false))
+                        ->add('fechaExpira', 'sonata_type_datetime_picker', array('required' => false))
+                        ->end()
+                        ->with('Categorias y tipos', array('class' => 'col-md-6'))
+                        ->add('category', 'sonata_type_model', array('label' => 'Categorias', 'expanded' => false, 'by_reference' => false, 'multiple' => true, 'required' => false))
+                        ->add('tipoPassword', 'sonata_type_model', array('required' => false))
+                        ->add('enabled', null, array('required' => false, 'data' => true))
+                        ->end()
+                        ->with('Archivos', array('class' => 'col-md-6'))
+                        ->add('files', 'sonata_type_model', array(
+                            'label' => 'Archivos',
+                            'by_reference' => false,
+                            'multiple' => true,
+                            'expanded' => true,
+                            'required' => false
+                        ))
+                        ->end()->end();
+                $formMapper->tab('Permisos')
+                        ->with('Permisos de Usuario', array('class' => 'col-md-6'))
+                        ->add('permisosUser', 'collection', array(
+                            'type' => new PermisoUserType(),
+                            'allow_add' => true,
+                            'allow_delete' => true,
+                            'required' => false,
+                            'label' => 'Permisos de usuario',
+                            'by_reference' => false))
+                        ->end()
+                        ->with('Permisos de Grupo', array('class' => 'col-md-6'))
+                        ->add('permisosGrupo', 'collection', array(
+                            'type' => new PermisoGrupoType(),
+                            'allow_add' => true,
+                            'allow_delete' => true,
+                            'required' => false,
+                            'label' => 'Permisos de grupo',
+                            'by_reference' => false))
+                        ->end()
+                        ->end();
+            } else {
+                $formMapper
+                        ->tab('General')
+                        ->with('Contraseña:', array('class' => 'col-md-6'))
+                        ->add('titulo');
+                if ($user->isSuperAdmin()) {
+                    $formMapper->add('user', null, array('required' => true));
+                }
+                $formMapper
+                        ->add('usernamePass', null, array('required' => false))
+                        ->add('url', null, array('required' => false))
+                        ->add('plainPassword', 'password', array('label' => 'Contraseña',
+                            'required' => false,
+                            'attr' => array('class' => 'campoPass')
+                        ))
+                        ->add('comentario', 'textarea', array('required' => false))
+                        ->add('fechaExpira', 'sonata_type_datetime_picker', array('required' => false))
+                        ->end()
+                        ->with('Categorias y tipos', array('class' => 'col-md-6'))
+                        ->add('category', 'sonata_type_model', array('label' => 'Categorias', 'expanded' => false, 'by_reference' => false, 'multiple' => true, 'required' => false))
+                        ->add('tipoPassword', 'sonata_type_model', array('required' => false))
+                        ->add('enabled', null, array('required' => false, 'data' => true))
+                        ->end()
+                        ->with('Archivos', array('class' => 'col-md-6'))
+                        ->add('files', 'sonata_type_model', array(
+                            'label' => 'Archivos',
+                            'by_reference' => false,
+                            'multiple' => true,
+                            'expanded' => true,
+                            'required' => false
+                        ))
+                        ->end()
+                        ->with('Permisos de Usuario', array('class' => 'invisible'))
+                        ->add('permisosUser', 'collection', array(
+                            'type' => new PermisoUserType(),
+                            'allow_add' => true,
+                            'allow_delete' => true,
+                            'required' => false,
+                            'label' => 'Permisos de usuario',
+                            'by_reference' => false))
+                        ->end()
+                        ->with('Permisos de Grupo', array('class' => 'invisible'))
+                        ->add('permisosGrupo', 'collection', array(
+                            'type' => new PermisoGrupoType(),
+                            'allow_add' => true,
+                            'allow_delete' => true,
+                            'required' => false,
+                            'label' => 'Permisos de grupo',
+                            'by_reference' => false))
+                        ->end()
+                        ->end();
+            }
+        } else {
+            $formMapper
+                    ->tab('General')
+                    ->with('Contraseña:', array('class' => 'col-md-6'))
+                    ->add('titulo');
+            if ($user->isSuperAdmin()) {
+                $formMapper->add('user', null, array('required' => true));
+            }
+            $formMapper
+                    ->add('usernamePass', null, array('required' => false))
+                    ->add('url', null, array('required' => false))
+                    ->add('plainPassword', 'password', array('label' => 'Contraseña',
+                        'required' => false,
+                        'attr' => array('class' => 'campoPass')
+                    ))
+                    ->add('comentario', 'textarea', array('required' => false))
+                    ->add('fechaExpira', 'sonata_type_datetime_picker', array('required' => false))
+                    ->end()
+                    ->with('Categorias y tipos', array('class' => 'col-md-6'))
+                    ->add('category', 'sonata_type_model', array('label' => 'Categorias', 'expanded' => false, 'by_reference' => false, 'multiple' => true, 'required' => false))
+                    ->add('tipoPassword', 'sonata_type_model', array('required' => false))
+                    ->add('enabled', null, array('required' => false, 'data' => true))
+                    ->end()
+                    ->with('Archivos', array('class' => 'col-md-6'))
+                    ->add('files', 'sonata_type_model', array(
+                        'label' => 'Archivos',
+                        'by_reference' => false,
+                        'multiple' => true,
+                        'expanded' => true,
+                        'required' => false
+                    ))
+                    ->end()->end();
             $formMapper->tab('Permisos')
                     ->with('Permisos de Usuario', array('class' => 'col-md-6'))
                     ->add('permisosUser', 'collection', array(
@@ -403,12 +506,12 @@ class PasswordAdmin extends Admin {
     }
 
     public function prePersist($pass) {
-    // AÑADIENDO HTTP DELANTE DE URL
+        // AÑADIENDO HTTP DELANTE DE URL
         if (substr($pass->getUrl(), 0, 4) !== 'http' && $pass->getUrl() !== null) {
             $url = $pass->getUrl();
             $pass->setUrl('http://' . $url);
         }
-    // CATEGORIA DEFAULT SI NO SE SELECCIONA NINGUNA EN EL FORMULARIO
+        // CATEGORIA DEFAULT SI NO SE SELECCIONA NINGUNA EN EL FORMULARIO
         if (count($pass->getCategory()) === 0) {
             $pass->addCategory($this->getConfigurationPool()->getContainer()->get('doctrine')->getRepository('Application\Sonata\ClassificationBundle\Entity\Category')->find(1));
         }
@@ -416,9 +519,9 @@ class PasswordAdmin extends Admin {
     }
 
     public function getBatchActions() {
-    // retrieve the default (currently only the delete action) actions
+        // retrieve the default (currently only the delete action) actions
         $actions = parent::getBatchActions();
-    // check user permissions
+        // check user permissions
         $actions['clone'] = [
             'label' => 'Duplicar',
             'ask_confirmation' => false, // If true, a confirmation will be asked before performing the action

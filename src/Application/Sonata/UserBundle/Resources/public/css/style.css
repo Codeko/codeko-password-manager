@@ -92,6 +92,18 @@ th, td {
     vertical-align: middle !important;
 }
 
+/*.skin-green .main-header .navbar {
+    background-color: #54a854 !important;
+}*/
+
+.breadcrumb > .active {
+    color: white !important;
+}
+
+.breadcrumb > li + li::before {
+    color: white !important;
+}
+
 .label-disabled {
     background-color: grey !important;
 }

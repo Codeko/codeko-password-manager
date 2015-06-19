@@ -138,7 +138,7 @@
                                                     <label class="checkbox" for="{{ admin.uniqid }}_all_elements">
                                                         <input type="checkbox" name="all_elements" class="allElements" id="{{ admin.uniqid }}_all_elements">
                                                         {{ 'all_elements'|trans({}, 'SonataAdminBundle') }}
-                                                        ({{ admin.datagrid.pager.nbresults }})
+                                                        ({{ admin.datagrid.pager.nbresults }})&nbsp;&nbsp;
                                                     </label>
                                                     <select name="action" style="width: auto; height: auto" class="form-control">
                                                         {% for action, options in batchactions %}
@@ -182,7 +182,7 @@
                                         &nbsp;-&nbsp;
                                     {% endif %}
                                     {% block pager_results %}
-                                        {% include admin.getTemplate('pager_results') %}
+                                       {% include admin.getTemplate('pager_results') %}
                                     {% endblock %}
                                 </div>
                             {% endif %}
